@@ -1,6 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const https = require('https')
+const cors = require('cors')
 
 const authCheckMiddleware = require('../middleware/auth-check')
 
@@ -8,13 +9,13 @@ const authCheckMiddleware = require('../middleware/auth-check')
 // api routes
 // ------------------------------------------------------------------
 
-router.get('/profile', authCheckMiddleware(), (req, res) => {
+router.get('/profile', cors(), authCheckMiddleware(), (req, res) => {
     var user = req.session.passport
     //console.log(user)
     res.json(user)
 })
 
-router.get('/profile/image', authCheckMiddleware(), (req, res) => {
+router.get('/profile/image', cors(), authCheckMiddleware(), (req, res) => {
     var user = req.session.passport
 
     https.request({

@@ -42,7 +42,7 @@ const strategy = new OIDCStrategy(
         clientID: process.env.MICROSOFT_GRAPH_CLIENT_ID,
         responseType: 'code id_token',
         responseMode: 'form_post',
-        redirectUrl: 'http://localhost:8080/auth/microsoft/callback',
+        redirectUrl: 'http://localhost:8081/auth/microsoft/callback',
         allowHttpForRedirectUrl: true,
         clientSecret: process.env.MICROSOFT_GRAPH_CLIENT_SECRET,
         validateIssuer: false,
@@ -90,12 +90,13 @@ const strategy = new OIDCStrategy(
                         })
                     }).end()*/
 
+                    /*
                     client.connect()
 
                     client.query('SELECT NOW()', (err, res) => {
                         console.log(err, res)
                         client.end()
-                    })
+                    })*/
                     
                     //console.log(`ISS: ${iss}`)
                     //console.log(`SUB: ${sub}`)

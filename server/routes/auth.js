@@ -2,6 +2,8 @@ const express = require('express')
 const router = new express.Router()
 const passport = require('passport')
 
+const cors = require('cors')
+
 // const authCheckMiddleware = require("../middleware/auth-check")
 
 
@@ -12,7 +14,8 @@ router.get('/login', (req, res) => {
 
 
 // Get login MSFT
-router.get('/microsoft',
+router.get('/microsoft', 
+    cors(),
     function(req, res, next) {
         passport.authenticate('azuread-openidconnect',
             {
@@ -30,6 +33,7 @@ router.get('/microsoft',
 
 // Callback
 router.get('/microsoft/callback',
+    cors(),
     function(req, res, next) {
         passport.authenticate('azuread-openidconnect',
             {
@@ -47,6 +51,7 @@ router.get('/microsoft/callback',
 
 // Callback POST
 router.post('/microsoft/callback',
+    cors(),
     function(req, res, next) {
         passport.authenticate('azuread-openidconnect',
             {
@@ -63,6 +68,7 @@ router.post('/microsoft/callback',
 
 
 router.get('/microsoft/avatar',
+    cors(),
     function(req, res, next) {
         passport.authenticate('azuread-openidconnect',
             {
@@ -81,7 +87,7 @@ router.get('/microsoft/avatar',
 
 
 // Logout
-router.get('/logout', function(req, res) {
+router.get('/logout', cors(), function(req, res) {
     req.session.destroy(function(err) {
         req.logOut()
         res.redirect('/')

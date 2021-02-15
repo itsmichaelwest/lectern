@@ -8,11 +8,10 @@ const session = require('express-session')
 
 require('dotenv').config()
 
-const serverPort = require('./config').serverPort
 const sessionSecret = require('./config').jwtSecret
 const cookieSettings = require('./config').cookieSettings
 
-const port = process.env.PORT || serverPort
+const port = 8081
 
 const errorHandlingMiddleware = require('./middleware/error')
 
@@ -21,7 +20,7 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(session({ secret: sessionSecret, cookie: cookieSettings }))
+app.use(session({ secret: sessionSecret, cookie: cookieSettings, resave: true, saveUninitialized: true }))
 
 const path = require('path')
 
@@ -54,5 +53,5 @@ app.use('/vapi', videoRoutes)
 app.use(errorHandlingMiddleware())
 
 app.listen(port, () => {
-    console.log('App available on PORT: ' + port)
+    console.log('App available on PORT: ' + 8081)
 })
