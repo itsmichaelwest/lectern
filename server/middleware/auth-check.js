@@ -1,12 +1,11 @@
+var path = require('path')
+
 function authCheckMiddleware () {
   return function (req, res, next) {
     if (req.isAuthenticated()) {
       next()
     } else {
-      next({
-        status: 401,
-        message: 'Error: User not logged in.'
-      })
+      res.status(401).sendFile(path.join(__dirname + '/401.html'))
     }
   }
 }
