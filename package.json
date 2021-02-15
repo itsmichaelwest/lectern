@@ -1,0 +1,79 @@
+{
+  "name": "cs39440-project",
+  "author": {
+    "name": "Michael West",
+    "email": "maw86@aber.ac.uk"
+  },
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^6.1.1",
+    "@microsoft/microsoft-graph-client": "^2.2.1",
+    "@tailwindcss/postcss7-compat": "^2.0.3",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "autoprefixer": "^9",
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "cookie": "^0.4.1",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "express-session": "^1.15.4",
+    "ffmpeg": "^0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "jsonwebtoken": "^7.4.1",
+    "moment": "^2.18.1",
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.11.15",
+    "morgan": "^1.8.2",
+    "passport": "^0.3.2",
+    "passport-azure-ad": "^4.3.0",
+    "passport-azure-ad-oauth2": "0.0.4",
+    "pg": "^8.5.1",
+    "postcss": "^7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.2",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "tedious": "^11.0.3",
+    "web-vitals": "^1.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "cross-env": "^5.1.0",
+    "css-loader": "^0.28.4",
+    "file-loader": "^0.11.2",
+    "nodemon": "^1.12.1",
+    "style-loader": "^0.18.2"
+  },
+  "scripts": {
+    "start": "yarn run build && (cd server && node index.js)",
+    "start-react-standalone": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
