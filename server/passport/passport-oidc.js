@@ -16,9 +16,14 @@ const client = new Client({
     port: 5433,
 })
 
+var url
 
-if (process.env.NODE_ENV !== 'production')
-  require('dotenv').config()
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+    url = 'http://localhost:8080'
+} else {
+    url = 'https://au-cs39440-dumb-test.azurewebsites.net'
+}
 
 
 var users = []
@@ -42,7 +47,7 @@ const strategy = new OIDCStrategy(
         clientID: process.env.MICROSOFT_GRAPH_CLIENT_ID,
         responseType: 'code id_token',
         responseMode: 'form_post',
-        redirectUrl: 'http://localhost:8080/auth/microsoft/callback',
+        redirectUrl: `${url}/auth/microsoft/callback`,
         allowHttpForRedirectUrl: true,
         clientSecret: process.env.MICROSOFT_GRAPH_CLIENT_SECRET,
         validateIssuer: false,

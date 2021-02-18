@@ -20,12 +20,12 @@ The scripts available are:
 ### `yarn dev`
 
 This will first start up the development server, followed by the client.\
-Open [http://localhost:8080](http://localhost:8080) to view the app in the browser.
+Open [http://localhost:8081](http://localhost:8081) to view the app in the browser.
 
 ### `yarn server-dev`
 
 Starts up the development server only. Useful for debugging new routes and API calls.\
-Open [http://localhost:8081](http://localhost:8081) to view the server in the browser.
+Open [http://localhost:8080](http://localhost:8080) to view the server in the browser.
 
 ### `yarn client-dev`
 
@@ -41,4 +41,4 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ### `yarn start`
 Builds the app in production mode, and then starts the server. Since the app is pre-built, hot-reload is not available.\
-Open [http://localhost:8081](http://localhost:8081) to view the web app in the browser.
+Open [http://localhost:8080](http://localhost:8080) to view the web app in the browser.

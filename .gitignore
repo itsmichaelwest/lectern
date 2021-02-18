@@ -25,3 +25,8 @@ yarn-error.log*
 # env
 .env
 server/.env
+
+#vscode
+.vscode
+.deployment
+/docs

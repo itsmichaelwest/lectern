@@ -11,7 +11,7 @@ require('dotenv').config()
 const sessionSecret = require('./config').jwtSecret
 const cookieSettings = require('./config').cookieSettings
 
-const port = 8081
+const port = 8080
 
 const errorHandlingMiddleware = require('./middleware/error')
 
@@ -28,30 +28,31 @@ app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
 
 app.use(express.static('./server/static/'))
-//app.use(express.static('./client/src/'))
-
-/*
-app.use('/app', (req, res, next) => {
-    res.sendFile(path.join(__dirname, "..", "build", "index.html"));
-});
-*/
 
 require('./passport/passport')(passport)
 
 app.use(passport.initialize())
 app.use(passport.session())
 
+// Authentication API
 const authRoutes = require('./routes/auth')
 app.use('/auth', authRoutes)
 
-const apiRoutes = require('./routes/api')
-app.use('/api', apiRoutes)
+// Misc API routes, often for one-off things.
+const miscRoutes = require('./routes/misc')
+app.use('/api/v1', miscRoutes)
 
-const videoRoutes = require('./video/video-api')
-app.use('/vapi', videoRoutes)
+// Video API, see API.md
+const videoApi = require('./routes/video')
+app.use('/api/v1/video', videoApi)
+
+// Comment API, see API.md
+const commentApi = require('./routes/comments')
+app.use('/api/v1/comments', commentApi)
+
+
 
 app.use(errorHandlingMiddleware())
-
 app.listen(port, () => {
     console.log('App available on PORT: ' + 8081)
 })
