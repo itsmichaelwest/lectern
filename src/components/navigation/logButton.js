@@ -14,7 +14,7 @@ export default class LogButton extends Component {
 
     componentWillMount () {
         axios
-        .get(config.apiUrl + '/api/profile')
+        .get(config.apiUrl + '/auth/user')
         .then(response => {
             this.setState({
                 displayName: response.data.user.displayName,

@@ -39,18 +39,24 @@ const authRoutes = require('./routes/auth')
 app.use('/auth', authRoutes)
 
 // Misc API routes, often for one-off things.
-const miscRoutes = require('./routes/misc')
+const miscRoutes = require('./routes/_misc')
 app.use('/api/v1', miscRoutes)
 
-// Video API, see API.md
+// Video API
 const videoApi = require('./routes/video')
 app.use('/api/v1/video', videoApi)
 
-// Comment API, see API.md
-const commentApi = require('./routes/comments')
+// Comment API
+const commentApi = require('./routes/comment')
 app.use('/api/v1/comments', commentApi)
 
+// Channel API
+//const channelApi = require('./routes/channel')
+//app.use('/api/v1/channel', channelApi)
 
+// User API
+//const userApi = require('./routes/user')
+//app.use('/api/v1/user', userApi)
 
 app.use(errorHandlingMiddleware())
 app.listen(port, () => {

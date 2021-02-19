@@ -1,6 +1,7 @@
 # CS39440 Major Project
 
-This project focuses on creating a video platform with timestamped comments and potentially other interactive media. It is in an early stage, with most work focusing on scaffolding the basic UI components.
+This project focuses on creating a video platform with timestamped comments and potentially other interactive media. 
+It is in an early stage, with most work focusing on scaffolding the basic UI components.
 
 ## Getting started
 
@@ -11,9 +12,22 @@ You'll need [Node.js](https://nodejs.org/download/) installed.
 
 What you'll do next depends on if you want to run the website in development mode or server a production build.
 
+## Directory structure
+
+|Directory|Contains|
+|-|-|
+|config|Configuration files for Webpack and other build processes. The files in this directory are in the process of being cleaned up, they are mostly boilerplate ejected by react-scripts.|
+|docs|Misc docs and info files. Content is WIP and subject to change.|
+|public|Files to be made available by the HTTP server.|
+|scripts|Build scripts. Mostly boilerplate ejected by react-scripts.|
+|server|Server source, can be operated independently.|
+|src|Client source, can be operated independently but relies heavily on server component."|
+
 ## Development
 
-The development build utilizes hot reload on both the client and server, facilitating an smoother development workflow. You can also choose to run either side independently, though since the client/server are heavily dependent on each other, I recommend using the combined development mode.
+The development build utilizes hot reload on both the client and server, facilitating an smoother development workflow. 
+You can also choose to run either side independently, though since the client/server are heavily dependent on each other, 
+I recommend using the combined development mode.
 
 The scripts available are:
 
@@ -29,7 +43,8 @@ Open [http://localhost:8080](http://localhost:8080) to view the server in the br
 
 ### `yarn client-dev`
 
-Starts just the client in hot reload mode. Useful for light debugging of the client UI, but not much else as it relies on API calls to the server.\
+Starts just the client in hot reload mode. Useful for light debugging of the client UI, but not much else as it relies 
+on API calls to the server.\
 Will open at the same URL as `yarn dev`.
 
 ## Production

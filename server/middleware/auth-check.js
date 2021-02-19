@@ -5,7 +5,7 @@ function authCheckMiddleware () {
     if (req.isAuthenticated()) {
       next()
     } else {
-      res.status(401).sendFile(path.join(__dirname + '/401.html'))
+      res.send(401)
     }
   }
 }

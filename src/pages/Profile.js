@@ -20,7 +20,7 @@ export default class Profile extends Component {
     console.log(`**(Profile) Loading user details from the server...`)
 
     axios
-      .get(config.apiUrl + '/api/profile')
+      .get(config.apiUrl + '/auth/user')
       .then(response => {
         console.log(`**(Profile) User is logged...`)
         console.log(response)

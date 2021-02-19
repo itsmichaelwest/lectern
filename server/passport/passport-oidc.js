@@ -20,7 +20,7 @@ var url
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
-    url = 'http://localhost:8080'
+    url = `http://localhost:${process.env.PORT}`
 } else {
     url = 'https://au-cs39440-dumb-test.azurewebsites.net'
 }

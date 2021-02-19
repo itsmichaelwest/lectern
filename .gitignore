@@ -24,9 +24,12 @@ yarn-error.log*
 
 # env
 .env
-server/.env
+.env
 
 #vscode
 .vscode
 .deployment
 /docs
+
+#webstorm
+.idea

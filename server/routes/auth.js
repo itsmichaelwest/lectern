@@ -65,6 +65,13 @@ router.post('/microsoft/callback',
 )
 
 
+// Get user information
+router.get('/user', cors(), authCheckMiddleware(), (req, res) => {
+    var user = req.session.passport
+    res.json(user)
+})
+
+
 // Logout, check the user is actually logged in first though.
 router.get('/logout', cors(), authCheckMiddleware(), function(req, res) {
     req.session.destroy(function(err) {
