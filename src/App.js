@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import Sidebar from './components/sidebar/Sidebar'
+import Video from './pages/Video'
 
 export default class App extends Component {
   render () {
@@ -23,6 +24,7 @@ export default class App extends Component {
             <Route path="/page1" component={Page1} />
             <Route path="/page2" component={Page2} />
             <Route path="/login" component={Login} />
+            <Route path="/video/:videoId" component={Video} />
             <Route component={NotFound} />
           </Switch>
         </HashRouter>

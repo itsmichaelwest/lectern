@@ -1,20 +1,4 @@
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
-const cookieParser = require('cookie-parser')
-
-const express = require('express')
-const router = new express.Router()
-
-const https = require('https')
-
-const { Pool, Client } = require('pg')
-
-const client = new Client({
-    user: process.env.POSTGRES_SQL_USERNAME,
-    host: 'localhost',
-    database: 'cs394-test',
-    password: process.env.POSTGRES_SQL_PASSWORD,
-    port: 5433,
-})
 
 var url
 
@@ -77,36 +61,6 @@ const strategy = new OIDCStrategy(
                 if (!user) {
                     // "Auto-registration"
                     users.push(profile);
-
-                    // Get the profile photo?
-                    /*
-                    let profilePhoto
-                    https.request({
-                        hostname: 'graph.microsoft.com',
-                        path: '/v1.0/me/photo/$value',
-                        port: 443,
-                        method: 'GET',
-                        headers: {Authorization: 'Bearer' + accessToken, Accept: 'application/json'}
-                    },(rs) => {
-                        console.log('HTTPS Response Status: ', rs.statusCode)
-                        console.log('HTTPS Response Headers: ', rs.headers)
-                        rs.on('data', (d) => {
-                            profilePhoto = d
-                        })
-                    }).end()*/
-
-                    /*
-                    client.connect()
-
-                    client.query('SELECT NOW()', (err, res) => {
-                        console.log(err, res)
-                        client.end()
-                    })*/
-                    
-                    //console.log(`ISS: ${iss}`)
-                    //console.log(`SUB: ${sub}`)
-                    //console.log(`ACCESSTOKEN: ${accessToken}`)
-                    //console.log(`REFRESHTOKEN: ${refreshToken}`)
                     return done(null, profile);
                 }
                 return done(null, user);
@@ -114,12 +68,5 @@ const strategy = new OIDCStrategy(
         });
     }
 )
-
-
-function addUserToDatabase() {
-    const request = new Request(
-        
-    )
-}
 
 module.exports = strategy

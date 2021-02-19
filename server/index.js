@@ -8,7 +8,6 @@ const session = require('express-session')
 
 require('dotenv').config()
 
-const sessionSecret = require('./config').jwtSecret
 const cookieSettings = require('./config').cookieSettings
 
 const port = 8080
@@ -16,11 +15,11 @@ const port = 8080
 const errorHandlingMiddleware = require('./middleware/error')
 
 app.use(morgan('dev'))
-app.use(cookieParser())
+app.use(cookieParser('foo'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(session({ secret: sessionSecret, cookie: cookieSettings, resave: true, saveUninitialized: true }))
+
 
 const path = require('path')
 
@@ -31,6 +30,7 @@ app.use(express.static('./server/static/'))
 
 require('./passport/passport')(passport)
 
+app.use(session({ secret: 'foo', cookie: cookieSettings, resave: true, saveUninitialized: true }))
 app.use(passport.initialize())
 app.use(passport.session())
 

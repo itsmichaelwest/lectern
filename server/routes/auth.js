@@ -73,7 +73,7 @@ router.get('/user', cors(), authCheckMiddleware(), (req, res) => {
 
 
 // Logout, check the user is actually logged in first though.
-router.get('/logout', cors(), authCheckMiddleware(), function(req, res) {
+router.get('/logout', authCheckMiddleware(), function(req, res) {
     req.session.destroy(function(err) {
         req.logOut()
         res.redirect('/')

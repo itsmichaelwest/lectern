@@ -16,11 +16,11 @@ export default class Profile extends Component {
     }
   }
 
-  componentWillMount () {
+  componentDidMount () {
     console.log(`**(Profile) Loading user details from the server...`)
-
+    
     axios
-      .get(config.apiUrl + '/auth/user')
+      .get(`${config.apiUrl}/auth/user`, {withCredentials: true})
       .then(response => {
         console.log(`**(Profile) User is logged...`)
         console.log(response)
@@ -51,9 +51,9 @@ export default class Profile extends Component {
         <p>E-mail: {loginName}</p>
         <p>ID: {id}</p>
         <br />
-        <button onClick={logoutUser}>
+        <a href="/auth/logout">
             Logout
-        </button>
+        </a>
       </div>
     )
   }

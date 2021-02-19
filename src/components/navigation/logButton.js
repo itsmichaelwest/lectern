@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
 import config from '../../config'
 
@@ -12,9 +11,13 @@ export default class LogButton extends Component {
         }
     }
 
-    componentWillMount () {
+    componentDidMount () {
+        this.checkLogin()
+    }
+
+    checkLogin() {
         axios
-        .get(config.apiUrl + '/auth/user')
+        .get(`${config.apiUrl}/auth/user`, {withCredentials: true})
         .then(response => {
             this.setState({
                 displayName: response.data.user.displayName,
@@ -22,7 +25,9 @@ export default class LogButton extends Component {
             })
         })
         .catch(err => {
-            console.log(err)
+            this.setState({
+                isLogged: false
+            })
         })
     }
 
