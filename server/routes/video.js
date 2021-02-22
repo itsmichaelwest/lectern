@@ -22,4 +22,9 @@ router.get('/:videoId/download', authCheckMiddleware(), (req, res) => {
     res.send(video.download(req.params.videoId))
 })
 
+
+router.post('/upload', authCheckMiddleware(), (req, res) => {
+    res.send(video.insert)
+})
+
 module.exports = router
