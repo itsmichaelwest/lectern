@@ -42,20 +42,11 @@ export default class Profile extends Component {
         )
         console.log(err)
         localStorage.removeItem('user')
-        window.location.href = '/#/login'
+        window.location.replace('/#/login')
         })
     }
 
     render () {
-        const MyLoader = () => (
-            <ContentLoader viewBox="0 0 380 70">
-                {/* Only SVG shapes */}    
-                <rect x="0" y="0" rx="5" ry="5" width="70" height="70" />
-                <rect x="80" y="17" rx="4" ry="4" width="300" height="13" />
-                <rect x="80" y="40" rx="3" ry="3" width="250" height="10" />
-            </ContentLoader>
-        )
-
         const { displayName, loginName, id, provider } = this.state
         return (
             <>
@@ -63,9 +54,8 @@ export default class Profile extends Component {
                 <title>Upload Video | CS394</title>
             </Helmet>
             <div>
-                <MyLoader />
                 <h1 className="text-2xl font-bold mb-8">Upload Video</h1>
-                <div className="w-full md:w-3/5 h-64 my-8 rounded-xl border border-yellow-500 hover:border-yellow-700 hover:bg-gray-100 hover:shadow-lg transition-all">
+                <div className="w-full md:w-3/5 h-64 my-8 rounded-xl border border-yellow-500 hover:bg-yellow-500 hover:text-white transition-all">
                     <FileDrop
                         className="w-full h-full"
                         targetClassName="flex items-center w-full h-full"

@@ -11,7 +11,7 @@ export default class Home extends Component {
         <title>Home | CS394</title>
       </Helmet>
       <div>
-        <div class="flex flex-row">
+        <div className="flex flex-row">
           <div className="flex-initial">
             <Sidebar/>
           </div>
