@@ -15,20 +15,22 @@ import Upload from './pages/Upload'
 export default class App extends Component {
   render () {
     return (
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6">
+      <div>
         <Navigation/>
-        <HashRouter>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/page1" component={Page1} />
-            <Route path="/page2" component={Page2} />
-            <Route path="/login" component={Login} />
-            <Route path="/video/:videoId" component={Video} />
-            <Route path="/upload" component={Upload} />
-            <Route component={NotFound} />
-          </Switch>
-        </HashRouter>
+        <div className="container max-w-7xl mx-auto px-4 sm:px-6">
+          <HashRouter>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/page1" component={Page1} />
+              <Route path="/page2" component={Page2} />
+              <Route path="/login" component={Login} />
+              <Route path="/video/:videoId" component={Video} />
+              <Route path="/upload" component={Upload} />
+              <Route component={NotFound} />
+            </Switch>
+          </HashRouter>
+        </div>
         <Footer/>
       </div>
     )

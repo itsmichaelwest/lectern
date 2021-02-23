@@ -7,9 +7,14 @@ export default class Sidebar extends Component {
     render() {
         return (
             <>
-            <div className="w-64">
+            <div>
                 <SidebarLink/>
-                
+                <SidebarLink/>
+                <SidebarLink/>
+                <SidebarLink/>
+                <SidebarLink/>
+                <SidebarLink/>
+                <SidebarLink/>
             </div>
             </>
         )

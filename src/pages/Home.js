@@ -11,14 +11,18 @@ export default class Home extends Component {
         <title>Home | CS394</title>
       </Helmet>
       <div>
-        <div className="flex flex-row">
-          <div className="flex-initial">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div className="col-span-3">
             <Sidebar/>
           </div>
-          <div className="flex flex-col">
+          <div className="col-span-9 flex flex-col">
             <h3 className="text-2xl font-bold mb-2">Home</h3>
-            <Link className="text-yellow-600 hover:text-yellow-900" to='/profile'>Your profile (should only work if logged)</Link>
-            <Link className="text-yellow-600 hover:text-yellow-900" to='/upload'>Upload page (should only work if logged)</Link>
+            <p>
+              No user data is logged from this session. This site is for testing purposes only.
+            </p>
+            <Link className="max-w-max text-yellow-600 hover:text-yellow-900" to='/profile'>Your profile</Link>
+            <Link className="max-w-max text-yellow-600 hover:text-yellow-900" to='/upload'>Upload page</Link>
+            <Link className="max-w-max text-yellow-600 hover:text-yellow-900" to='/video/123'>Video page</Link>
           </div>
         </div>
       </div>
