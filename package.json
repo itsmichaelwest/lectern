@@ -52,11 +52,14 @@
     "style-loader": "^0.18.2"
   },
   "scripts": {
-    "start": "yarn run build && (cd server && node index.js)",
-    "start-react-standalone": "craco start",
+    "start": "yarn run build && (node ./server/index.js)",
+    "dev": "concurrently \"yarn server-dev\" \"yarn client-dev\"",
+    "dev-no-server-refresh": "concurrently \"yarn server\" \"yarn client-dev\"",
+    "server": "node ./server/index.js",
+    "server-dev": "nodemon ./server/index.js",
+    "client-dev": "craco start",
     "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
+    "test": "craco test"
   },
   "eslintConfig": {
     "extends": [

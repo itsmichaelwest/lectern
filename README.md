@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# CS39440 Major Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project focuses on creating a video platform with timestamped comments and potentially other interactive media. 
+It is in an early stage, with most work focusing on scaffolding the basic UI components.
 
-## Available Scripts
+## Getting started
 
-In the project directory, you can run:
+You'll need [Node.js](https://nodejs.org/download/) installed.
 
-### `yarn start`
+1. Clone this repository.
+2. Run `yarn` to install dependencies.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+What you'll do next depends on if you want to run the website in development mode or server a production build.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Directory structure
 
-### `yarn test`
+|Directory|Contains|
+|-|-|
+|config|Configuration files for Webpack and other build processes. The files in this directory are in the process of being cleaned up, they are mostly boilerplate ejected by react-scripts.|
+|docs|Misc docs and info files. Content is WIP and subject to change.|
+|public|Files to be made available by the HTTP server.|
+|scripts|Build scripts. Mostly boilerplate ejected by react-scripts.|
+|server|Server source, can be operated independently.|
+|src|Client source, can be operated independently but relies heavily on server component."|
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Development
 
+The development build utilizes hot reload on both the client and server, facilitating an smoother development workflow. 
+You can also choose to run either side independently, though since the client/server are heavily dependent on each other, 
+I recommend using the combined development mode.
+
+The scripts available are:
+
+### `yarn dev`
+
+This will first start up the development server, followed by the client.\
+Open [http://localhost:8081](http://localhost:8081) to view the app in the browser.
+
+### `yarn dev-no-server-refresh`
+Starts up the development server without `nodemon` and therefore server hot reload will be disabled.\
+Open [http://localhost:8081](http://localhost:8081) to view the app in the browser.
+
+### `yarn server-dev`
+
+Starts up the development server only. Useful for debugging new routes and API calls.\
+Open [http://localhost:8080](http://localhost:8080) to view the server in the browser.
+
+### `yarn client-dev`
+
+Starts just the client in hot reload mode. Useful for light debugging of the client UI, but not much else as it relies 
+on API calls to the server.\
+Will open at the same URL as `yarn dev`.
+
+## Production
+
+There are two scripts available for production settings:
 ### `yarn build`
-
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `yarn server`
+Starts the server in production mode.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `yarn start`
+Builds the app in production mode, and then starts the server. Since the app is pre-built, hot-reload is not available.\
+Open [http://localhost:8080](http://localhost:8080) to view the web app in the browser.
