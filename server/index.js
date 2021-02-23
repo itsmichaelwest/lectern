@@ -30,7 +30,11 @@ app.use(express.static('./server/static/'))
 
 require('./passport/passport')(passport)
 
-app.use(session({ secret: 'foo', cookie: cookieSettings, resave: true, saveUninitialized: true }))
+app.use(session({ 
+    secret: 'foo', 
+    cookie: cookieSettings, 
+    resave: true, saveUninitialized: true 
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -58,7 +62,13 @@ app.use('/api/v1/comments', commentApi)
 //const userApi = require('./routes/user')
 //app.use('/api/v1/user', userApi)
 
+// If path not defined in any of the above routes, serve index.html
+// from the build folder.
+app.get('/*', function(req,res) {
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+});
+
 app.use(errorHandlingMiddleware())
 app.listen(port, () => {
-    console.log('App available on PORT: ' + 8081)
+    console.log('App available on PORT: ' + port)
 })
