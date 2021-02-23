@@ -1,20 +1,18 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-import config from '../config'
 
 import LogButton from './navigation/logButton'
 
 export default class Navigation extends Component {
     render() {
         return (
-            <header className="relative mb-8 shadow-sm">
+            <header className="sticky top-0 bg-white mb-8 shadow-sm">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6">
-                    <div className="flex justify-between items-center py-6 md:space-x-10">
+                    <div className="flex justify-between items-center py-4 md:space-x-10">
                         <div className="flex-1 justify-start">
-                            <a href="/" className="group text-base font-medium">
+                            <Link to="/" className="group text-base font-medium">
                                 CS39440 <span className="text-yellow-600 group-hover:text-yellow-900 font-bold">β</span>
-                            </a>
+                            </Link>
                         </div>
                         <div>
                             <form>

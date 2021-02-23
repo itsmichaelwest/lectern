@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
     url = `http://localhost:${process.env.PORT}`
 } else {
-    url = 'https://au-cs39440-dumb-test.azurewebsites.net'
+    url = 'https://az-mmp.michaelwe.st'
 }
 
 
@@ -31,7 +31,7 @@ const strategy = new OIDCStrategy(
         clientID: process.env.MICROSOFT_GRAPH_CLIENT_ID,
         responseType: 'code id_token',
         responseMode: 'form_post',
-        redirectUrl: `${url}/auth/microsoft/callback`,
+        redirectUrl: `https://az-mmp.michaelwe.st/auth/microsoft/callback`,
         allowHttpForRedirectUrl: true,
         clientSecret: process.env.MICROSOFT_GRAPH_CLIENT_SECRET,
         validateIssuer: false,

@@ -36,6 +36,10 @@ The scripts available are:
 This will first start up the development server, followed by the client.\
 Open [http://localhost:8081](http://localhost:8081) to view the app in the browser.
 
+### `yarn dev-no-server-refresh`
+Starts up the development server without `nodemon` and therefore server hot reload will be disabled.\
+Open [http://localhost:8081](http://localhost:8081) to view the app in the browser.
+
 ### `yarn server-dev`
 
 Starts up the development server only. Useful for debugging new routes and API calls.\
@@ -53,6 +57,9 @@ There are two scripts available for production settings:
 ### `yarn build`
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
+
+### `yarn server`
+Starts the server in production mode.
 
 ### `yarn start`
 Builds the app in production mode, and then starts the server. Since the app is pre-built, hot-reload is not available.\

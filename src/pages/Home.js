@@ -16,7 +16,7 @@ export default class Home extends Component {
             <Sidebar/>
           </div>
           <div className="col-span-9 flex flex-col">
-            <h3 className="text-2xl font-bold mb-2">Home</h3>
+            <h1 className="text-2xl font-bold mb-2">Home</h1>
             <p>
               No user data is logged from this session. This site is for testing purposes only.
             </p>

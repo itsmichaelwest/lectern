@@ -70,5 +70,5 @@ app.get('/*', function(req,res) {
 
 app.use(errorHandlingMiddleware())
 app.listen(port, () => {
-    console.log('App available on PORT: ' + port)
+    console.log('Server is available on PORT: ' + port)
 })

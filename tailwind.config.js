@@ -13,5 +13,7 @@ module.exports = {
       textAlign: ['hover', 'focus'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
