@@ -32,7 +32,7 @@ export default class Profile extends Component {
             })
             .catch(() => {
                 localStorage.removeItem('user')
-                window.location.replace('/#/login')
+                window.location.replace('/login')
             })
     }
 

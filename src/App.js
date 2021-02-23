@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HashRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Route, Switch } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Profile from './pages/Profile'
@@ -18,7 +18,7 @@ export default class App extends Component {
       <div>
         <Navigation/>
         <div className="container max-w-7xl mx-auto px-4 sm:px-6">
-          <HashRouter>
+          <BrowserRouter>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/profile" component={Profile} />
@@ -29,7 +29,7 @@ export default class App extends Component {
               <Route path="/upload" component={Upload} />
               <Route component={NotFound} />
             </Switch>
-          </HashRouter>
+          </BrowserRouter>
         </div>
         <Footer/>
       </div>
