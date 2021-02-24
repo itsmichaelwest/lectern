@@ -1,55 +1,87 @@
-const { Connection } = require('tedious')
+var sql = require('mssql')
 
 const config = {
-    authentication: {
-        options: {
-            userName: process.env.MS_SQL_USERNAME,
-            password: process.env.MS_SQL_PASSWORD
-        },
-        type: 'default'
-    },
-    server: 'au-cs39440-test-database-srv1.database.windows.net',
-    options: {
-        database: 'au-cs39440-test-database',
-        encrypt: true
-    }
+    user: `${process.env.AZ_DATABASE_USERNAME}`,
+    password: `${process.env.AZ_DATABASE_PASSWORD}`,
+    server: `${process.env.AZ_DATABASE_URL}`, // You can use 'localhost\\instance' to connect to named instance
+    database: `${process.env.AZ_DATABASE_DB}`,
 }
 
-const connection = new Connection(config)
+function addUser(profile, refreshToken) {
+    console.log(`PROFILE: ${profile}`)
+    console.log(`EMAIL: ${profile._raw.email}`)
 
-connection.on('connect', err => {
-    if (err) {
-        console.error(err.message)
-    }
-})
+    sql.connect(config, function(err) {
+        if (err) {
+            console.log(err)
+            throw err
+        } else {
+            var request = new sql.Request()
 
-module.exports = connection
-
-/*
-function queryDatabase() {
-    console.log('Reading rows from table')
-
-    // Read all rows from table
-    const request = new Request(
-        `SELECT TOP 20 pc.Name as CategoryName,
-                    p.name as ProductName
-        FROM [SalesLT].[ProductCategory] pc
-        JOIN [SalesLT].[Product] p ON pc.productcategoryid = p.productcategoryid`,
-        (err, rowCount) => {
-            if (err) {
-                console.error(err.message);
-            } else {
-                console.log(`${rowCount} row(s) returned`);
-            }
+            request.query(`SELECT * FROM [dbo].[users] WHERE userId='${profile.oid}';`, function(err, result) {
+                if (err) {
+                    console.error(err)
+                    throw err
+                } else {
+                    // User is not in database
+                    if (result.recordset[0].userId !== profile.oid) {
+                        console.log('User is not in, adding...')
+                        request.query(`INSERT INTO [dbo].[users] (userId, refreshToken, userName, userEmail) VALUES ('${profile.oid}', '${refreshToken}', '${profile.displayName}', 'test@test.com')`, function(err) {
+                            if (err) {
+                                console.log(err)
+                            }
+                        });
+                    } else {
+                        console.log('User is in database')
+                    }
+                }
+            })
         }
-    );
-
-    request.on("row", columns => {
-        columns.forEach(column => {
-        console.log("%s\t%s", column.metadata.colName, column.value);
-        });
-    });
-
-    connection.execSql(request);
+    })
 }
-*/
+
+
+function getUser(oid, callback) {
+    const pool = new sql.ConnectionPool(config);
+    const request = new sql.Request(pool);
+
+    try {
+        pool.connect(function() {
+            request.query(`SELECT * FROM [dbo].[users] WHERE userId='${oid}';`, function(err, res) {
+                if (err) {
+                    callback(err)
+                } else {
+                    callback(false, res.recordset[0])
+                }
+            })
+        })
+    } catch (error) {
+        console.error(error)
+        callback(error)
+    }
+}
+
+
+function getUserRefreshToken(oid, callback) {
+    const pool = new sql.ConnectionPool(config);
+    const request = new sql.Request(pool);
+
+    try {
+        pool.connect(function() {
+            request.query(`SELECT * FROM [dbo].[users] WHERE userId='${oid}';`, function(err, res) {
+                if (err) {
+                    callback(err)
+                } else {
+                    callback(false, res.recordset[0].refreshToken)
+                }
+            })
+        })
+    } catch (error) {
+        console.error(error)
+        callback(error)
+    }
+}
+
+module.exports.add = addUser
+module.exports.get = getUser
+module.exports.refresh = getUserRefreshToken

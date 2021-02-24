@@ -9,21 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
     url = 'https://az-mmp.michaelwe.st'
 }
 
-
-var users = []
-
-
-var findByOid = function(oid, fn) {
-    for (var i = 0, len = users.length; i < len; i++) {
-        var user = users[i]
-        console.log('we are using user: ', user)
-        if (user.oid === oid) {
-            return fn(null, user)
-        }
-    }
-    return fn(null, null);
-}
-
+const SQL = require('../database/sql')
 
 const strategy = new OIDCStrategy(
     {
@@ -31,7 +17,7 @@ const strategy = new OIDCStrategy(
         clientID: process.env.MICROSOFT_GRAPH_CLIENT_ID,
         responseType: 'code id_token',
         responseMode: 'form_post',
-        redirectUrl: `https://az-mmp.michaelwe.st/auth/microsoft/callback`,
+        redirectUrl: `http://localhost:8080/auth/microsoft/callback`,
         allowHttpForRedirectUrl: true,
         clientSecret: process.env.MICROSOFT_GRAPH_CLIENT_SECRET,
         validateIssuer: false,
@@ -54,17 +40,8 @@ const strategy = new OIDCStrategy(
         }
         // asynchronous verification, for effect...
         process.nextTick(function () {
-            findByOid(profile.oid, function(err, user) {
-                if (err) {
-                    return done(err);
-                }
-                if (!user) {
-                    // "Auto-registration"
-                    users.push(profile);
-                    return done(null, profile);
-                }
-                return done(null, user);
-            });
+            SQL.add(profile, refreshToken)
+            return done(null, profile);
         });
     }
 )

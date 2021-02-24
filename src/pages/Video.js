@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import config from '../config'
-import VideoPlayer from '../components/VideoPlayer'
-import VideoComments from '../components/VideoComments'
+import VideoPlayer from '../components/video/VideoPlayer'
+import VideoComments from '../components/video/VideoComments'
+import VideoInformation from '../components/video/VideoInformation'
 
 export default class Video extends Component {
     constructor (props) {
@@ -44,8 +45,15 @@ export default class Video extends Component {
                     <VideoPlayer/>
                     <VideoComments/>
                 </div>
-                <h1 className="text-3xl font-bold my-2">This is the video title</h1>
-                <p>This is a description area.</p>
+                <VideoInformation 
+                    id={videoId}
+                    title="Test" 
+                    description="Test" 
+                    views="1234"
+                    date="1234"
+                    channelName="BOB"
+                    subscribers="2145"
+                />
             </div>
         )
     }
