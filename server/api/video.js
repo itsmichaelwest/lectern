@@ -1,11 +1,11 @@
-const video = require('../database/video')
+//const video = require('../database/video')
 
 /**
  * Scaffold video API
  */
 function getAllVideos() {
     console.log(`Returning ALL videos`)
-    return video.getAllVideos()
+    return true
 }
 
 function getVideo(videoId) {

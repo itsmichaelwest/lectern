@@ -13,6 +13,12 @@ export default class Video extends Component {
     }
 
     componentDidMount () {
+        const params = this.props.match.params
+        
+        this.setState({
+            channelId: params.channelId
+        })
+        /*
         console.log(`**(Channel) Loading video details from the server...`)
 
         const params = this.props.match.params
@@ -29,7 +35,7 @@ export default class Video extends Component {
             console.log(
                 `**(Channel) User is not logged.`
             )
-        })
+        })*/
     }
 
     render () {

@@ -5,6 +5,7 @@ import config from '../config'
 import VideoPlayer from '../components/video/VideoPlayer'
 import VideoComments from '../components/video/VideoComments'
 import VideoInformation from '../components/video/VideoInformation'
+import { Helmet } from 'react-helmet'
 
 export default class Video extends Component {
     constructor (props) {
@@ -39,6 +40,10 @@ export default class Video extends Component {
         const { videoId } = this.state
 
         return (
+            <>
+            <Helmet>
+                <title>{`${videoId} | CS394`}</title>
+            </Helmet>
             <div>
                 <p>Video ID: {videoId}</p>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
@@ -55,6 +60,7 @@ export default class Video extends Component {
                     subscribers="2145"
                 />
             </div>
+            </>
         )
     }
 }
