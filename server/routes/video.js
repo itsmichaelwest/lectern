@@ -27,4 +27,13 @@ router.post('/upload', authCheckMiddleware(), (req, res) => {
     res.send(video.insert)
 })
 
+
+router.post('/:videoId/like', authCheckMiddleware(), (req, res) => {
+    res.send(video.like(req.params.videoId))
+})
+
+router.delete('/:videoId/like', authCheckMiddleware(), (req, res) => {
+    res.send(video.unlike(req.params.videoId))
+})
+
 module.exports = router

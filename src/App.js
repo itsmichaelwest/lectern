@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import Video from './pages/Video'
+import Channel from './pages/Channel'
 import Upload from './pages/Upload'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 
@@ -26,6 +27,7 @@ export default class App extends Component {
             <Route path="/page2" component={Page2} />
             <Route path="/login" component={Login} />
             <Route path="/video/:videoId" component={Video} />
+            <Route path="/channel/:channelId" component={Channel} />
             <Route path="/upload" component={Upload} />
             <Route path="/privacy" component={PrivacyPolicy} />
             <Route component={NotFound} />

@@ -26,8 +26,21 @@ function deleteVideo(videoId) {
     return true
 }
 
+function likeVideo(videoId) {
+    console.log(`LIKE video ${videoId}`)
+    return true
+}
+
+function unlikeVideo(videoId) {
+    console.log(`UNLIKE video ${videoId}`)
+    return true
+}
+
+
 module.exports.all = getAllVideos
 module.exports.get = getVideo
 module.exports.download = downloadVideo
 module.exports.insert = insertVideo
 module.exports.delete = deleteVideo
+module.exports.like = likeVideo
+module.exports.unlike = unlikeVideo

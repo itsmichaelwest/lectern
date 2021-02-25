@@ -1,6 +1,6 @@
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
 
-var url
+let url
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
@@ -17,13 +17,13 @@ const strategy = new OIDCStrategy(
         clientID: process.env.MICROSOFT_GRAPH_CLIENT_ID,
         responseType: 'code id_token',
         responseMode: 'form_post',
-        redirectUrl: `http://localhost:8080/auth/microsoft/callback`,
+        redirectUrl: `${url}/auth/microsoft/callback`,
         allowHttpForRedirectUrl: true,
         clientSecret: process.env.MICROSOFT_GRAPH_CLIENT_SECRET,
         validateIssuer: false,
         issuer: null,
         passReqToCallback: false,
-        scope: ['email', 'offline_access', 'openid', 'profile', 'User.Read'],
+        scope: ['openid', 'offline_access', 'email', 'profile', 'User.Read'],
         loggingLevel: 'info',
         nonceLifetime: null,
         nonceMaxAmount: 5,

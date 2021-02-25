@@ -23,6 +23,7 @@
     "bfj": "^7.0.2",
     "body-parser": "^1.17.2",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "connect-azuretables": "^1.0.20",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.5",
     "css-loader": "4.3.0",

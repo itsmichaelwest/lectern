@@ -5,12 +5,18 @@ const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const AzureTablesStoreFactory = require('connect-azuretables')(session)
 
 require('dotenv').config()
 
 const cookieSettings = require('./config').cookieSettings
 
 const port = 8080
+
+var azOptions = {
+    logger: console.log,
+    errorLogger: console.log
+};
 
 const errorHandlingMiddleware = require('./middleware/error')
 
@@ -31,9 +37,11 @@ app.use(express.static('./server/static/'))
 require('./passport/passport')(passport)
 
 app.use(session({ 
-    secret: 'foo', 
+    secret: 'keyboard cat', 
     cookie: cookieSettings, 
-    resave: true, saveUninitialized: true 
+    resave: true, 
+    saveUninitialized: true,
+    store: AzureTablesStoreFactory.create(azOptions)
 }))
 app.use(passport.initialize())
 app.use(passport.session())

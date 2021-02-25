@@ -58,7 +58,7 @@ export default class Video extends Component {
                     </button>
                 </div>
                 <div>
-                    <Link className="font-bold">
+                    <Link to="/channel/987" className="font-bold">
                         {this.props.channelName}
                     </Link>
                     <p>

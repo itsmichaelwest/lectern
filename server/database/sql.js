@@ -3,14 +3,11 @@ var sql = require('mssql')
 const config = {
     user: `${process.env.AZ_DATABASE_USERNAME}`,
     password: `${process.env.AZ_DATABASE_PASSWORD}`,
-    server: `${process.env.AZ_DATABASE_URL}`, // You can use 'localhost\\instance' to connect to named instance
+    server: `${process.env.AZ_DATABASE_URL}`,
     database: `${process.env.AZ_DATABASE_DB}`,
 }
 
 function addUser(profile, refreshToken) {
-    console.log(`PROFILE: ${profile}`)
-    console.log(`EMAIL: ${profile._raw.email}`)
-
     sql.connect(config, function(err) {
         if (err) {
             console.log(err)
@@ -23,16 +20,13 @@ function addUser(profile, refreshToken) {
                     console.error(err)
                     throw err
                 } else {
-                    // User is not in database
-                    if (result.recordset[0].userId !== profile.oid) {
-                        console.log('User is not in, adding...')
-                        request.query(`INSERT INTO [dbo].[users] (userId, refreshToken, userName, userEmail) VALUES ('${profile.oid}', '${refreshToken}', '${profile.displayName}', 'test@test.com')`, function(err) {
+                    // Check if user is in the database, query will be undefined if not present.
+                    if (typeof result.recordset[0] === 'undefined') {
+                        request.query(`INSERT INTO [dbo].[users] (userId, refreshToken, userName, userEmail) VALUES ('${profile.oid}', '${refreshToken}', '${profile.displayName}', '${profile._json.email}')`, function(err) {
                             if (err) {
                                 console.log(err)
                             }
                         });
-                    } else {
-                        console.log('User is in database')
                     }
                 }
             })
