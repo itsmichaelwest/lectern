@@ -15,7 +15,8 @@ const port = 8080
 
 var azOptions = {
     logger: console.log,
-    errorLogger: console.log
+    errorLogger: console.log,
+    sessionTimeOut: 60
 };
 
 const errorHandlingMiddleware = require('./middleware/error')
