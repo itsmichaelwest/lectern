@@ -1,5 +1,5 @@
 const sql = require('mssql')
-const config = require('./sqlConfig')
+const config = require('../sqlConfig')
 
 function addUser(profile, refreshToken) {
     sql.connect(config, function(err) {

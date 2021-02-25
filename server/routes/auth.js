@@ -144,11 +144,6 @@ router.get('/user', authCheckMiddleware(), (req, res) => {
 })
 
 
-router.get('/user/profile2', authCheckMiddleware(), (req, res) => {
-    const page = require('../jsx/jsxProfile')
-    res.send(page)
-})
-
 // Logout, check the user is actually logged in first though.
 router.get('/logout', authCheckMiddleware(), function(req, res) {
     req.session.destroy(function(err) {

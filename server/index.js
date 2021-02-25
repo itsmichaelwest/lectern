@@ -1,69 +1,65 @@
 const express = require('express')
 const app = express()
 const passport = require('passport')
+require('./passport/passport')(passport)
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const AzureTablesStoreFactory = require('connect-azuretables')(session)
 const cors = require('cors')
-
-require('dotenv').config()
-
+const fileUpload = require('express-fileupload')
 const cookieSettings = require('./config').cookieSettings
-
-const port = 8080
-
-var azOptions = {
-    logger: console.log,
-    errorLogger: console.log,
-    sessionTimeOut: 60
-};
-
 const errorHandlingMiddleware = require('./middleware/error')
+const path = require('path')
 
-app.use(morgan('dev'))
 app.use(cookieParser('foo'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static('uploads'));
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/',
+    createParentPath: true,
+    debug: true
+}))
+app.use(errorHandlingMiddleware())
 
-
-
-const path = require('path')
+// Debug options
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+    app.use(morgan('dev'))
+    app.use(cors({origin: 'http://localhost:8080' , credentials :  true}))
+}
 
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
-
 app.use(express.static('./server/static/'))
-
-require('./passport/passport')(passport)
 
 app.use(session({ 
     secret: 'keyboard cat', 
     cookie: cookieSettings, 
     resave: true, 
     saveUninitialized: true,
-    store: AzureTablesStoreFactory.create(azOptions)
+    store: AzureTablesStoreFactory.create({
+        logger: console.log,
+        errorLogger: console.log,
+        sessionTimeOut: 60
+    })
 }))
 
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(cors({origin: 'http://localhost:8080' , credentials :  true}))
 
-// Authentication API
+
+// Routes
 const authRoutes = require('./routes/auth')
 app.use('/auth', authRoutes)
 
-// Misc API routes, often for one-off things.
-const miscRoutes = require('./routes/_misc')
-app.use('/api/v1', miscRoutes)
-
-// Video API
 const videoApi = require('./routes/video')
 app.use('/api/v1/video', videoApi)
 
-// Comment API
 const commentApi = require('./routes/comment')
 app.use('/api/v1/comments', commentApi)
 
@@ -81,7 +77,7 @@ app.get('/*', function(req,res) {
     res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
-app.use(errorHandlingMiddleware())
-app.listen(port, () => {
-    console.log('Server is available on PORT: ' + port)
+// Server
+app.listen(8080, () => {
+    console.log('Server is available on PORT: ' + 8080)
 })

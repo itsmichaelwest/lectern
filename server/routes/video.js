@@ -23,8 +23,37 @@ router.get('/:videoId/download', authCheckMiddleware(), (req, res) => {
 })
 
 
-router.post('/upload', authCheckMiddleware(), (req, res) => {
-    res.send(video.insert)
+router.post('/upload', authCheckMiddleware(), async (req, res) => {
+    try {
+        if(!req.files) {
+            res.send({
+                status: false,
+                message: 'No file uploaded'
+            })
+        } else {
+            let video = req.files.video
+
+            video.mv('./uploads/' + video.name)
+
+            console.log(`NAME: ${video.name}`)
+            console.log(`MIMETYPE: ${video.mimetype}`)
+            console.log(`SIZE: ${video.size}`)
+
+            res.send({
+                status: true,
+                message: 'File uploaded',
+                data: {
+                    name: video.name,
+                    mimetype: video.mimetype,
+                    size: video.size
+                }
+            })
+        }
+    } catch (err) {
+        console.error(err)
+        res.status(500).send(err)
+    }
+    //res.send(video.insert)
 })
 
 
