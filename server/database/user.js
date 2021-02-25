@@ -1,11 +1,5 @@
-var sql = require('mssql')
-
-const config = {
-    user: `${process.env.AZ_DATABASE_USERNAME}`,
-    password: `${process.env.AZ_DATABASE_PASSWORD}`,
-    server: `${process.env.AZ_DATABASE_URL}`,
-    database: `${process.env.AZ_DATABASE_DB}`,
-}
+const sql = require('mssql')
+const config = require('./sqlConfig')
 
 function addUser(profile, refreshToken) {
     sql.connect(config, function(err) {
@@ -76,6 +70,9 @@ function getUserRefreshToken(oid, callback) {
     }
 }
 
-module.exports.add = addUser
-module.exports.get = getUser
-module.exports.refresh = getUserRefreshToken
+
+module.exports = {
+    addUser,
+    getUser,
+    getUserRefreshToken
+}

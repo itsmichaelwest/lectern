@@ -2,7 +2,7 @@ const express = require('express')
 const router = new express.Router()
 const passport = require('passport')
 const authCheckMiddleware = require('../middleware/auth-check')
-const sql = require('../database/sql')
+const sql = require('../database/user')
 const querystring = require('querystring')
 const request = require('request')
 
@@ -109,7 +109,7 @@ router.get('/microsoft/avatar', authCheckMiddleware(), (req, res) => {
 
 // Get access token from Microsoft
 function getAccessToken(user, callback) {
-    sql.refresh(user, (err, data) => {
+    sql.getUserRefreshToken(user, (err, data) => {
         const requestData = querystring.stringify({
             'client_id': `${process.env.MICROSOFT_GRAPH_CLIENT_ID}`,
             'refresh_token': `${data}`,
@@ -143,6 +143,11 @@ router.get('/user', authCheckMiddleware(), (req, res) => {
     res.json(req.session.passport)
 })
 
+
+router.get('/user/profile2', authCheckMiddleware(), (req, res) => {
+    const page = require('../jsx/jsxProfile')
+    res.send(page)
+})
 
 // Logout, check the user is actually logged in first though.
 router.get('/logout', authCheckMiddleware(), function(req, res) {

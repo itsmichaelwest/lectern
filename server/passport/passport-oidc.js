@@ -1,15 +1,5 @@
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
-
-let url
-
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
-    url = `http://localhost:${process.env.PORT}`
-} else {
-    url = 'https://az-mmp.michaelwe.st'
-}
-
-const SQL = require('../database/sql')
+const user = require('../database/user')
 
 const strategy = new OIDCStrategy(
     {
@@ -40,7 +30,7 @@ const strategy = new OIDCStrategy(
         }
         // asynchronous verification, for effect...
         process.nextTick(function () {
-            SQL.add(profile, refreshToken)
+            user.addUser(profile, refreshToken)
             return done(null, profile);
         });
     }
