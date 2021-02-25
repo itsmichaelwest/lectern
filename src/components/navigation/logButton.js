@@ -18,10 +18,11 @@ export default class LogButton extends Component {
 
     checkLogin() {
         axios
-        .get(`${config.apiUrl}/auth/user`, {withCredentials: true})
+        .get(`${config.apiUrl}/auth/microsoft/graph`, {withCredentials: true})
         .then(response => {
+            console.log(response)
             this.setState({
-                displayName: response.data.user.displayName,
+                displayName: `${response.data.givenName} ${response.data.surname}`,
                 isLogged: true
             })
         })

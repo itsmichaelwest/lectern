@@ -2,6 +2,8 @@ import { React, Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
+import config from '../config'
+
 export default class Footer extends Component {
     render() {
         return (
@@ -16,7 +18,7 @@ export default class Footer extends Component {
                             <Link to="/privacy" className="mr-4 text-yellow-600 hover:text-yellow-900">
                                 Privacy policy
                             </Link>
-                            This site is a work in progress.
+                            This site is a work in progress. Build {config.version}_{config.branch}.
                         </p>
                     </div>
 

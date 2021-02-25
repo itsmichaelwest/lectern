@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const AzureTablesStoreFactory = require('connect-azuretables')(session)
+const cors = require('cors')
 
 require('dotenv').config()
 
@@ -44,8 +45,11 @@ app.use(session({
     saveUninitialized: true,
     store: AzureTablesStoreFactory.create(azOptions)
 }))
+
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.use(cors({origin: 'http://localhost:8080' , credentials :  true}))
 
 // Authentication API
 const authRoutes = require('./routes/auth')

@@ -17,7 +17,7 @@ const strategy = new OIDCStrategy(
         clientID: process.env.MICROSOFT_GRAPH_CLIENT_ID,
         responseType: 'code id_token',
         responseMode: 'form_post',
-        redirectUrl: `${url}/auth/microsoft/callback`,
+        redirectUrl: `http://localhost:8081/auth/microsoft/callback`,
         allowHttpForRedirectUrl: true,
         clientSecret: process.env.MICROSOFT_GRAPH_CLIENT_SECRET,
         validateIssuer: false,

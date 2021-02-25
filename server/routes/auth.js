@@ -1,7 +1,6 @@
 const express = require('express')
 const router = new express.Router()
 const passport = require('passport')
-const cors = require('cors')
 const authCheckMiddleware = require('../middleware/auth-check')
 const sql = require('../database/sql')
 const querystring = require('querystring')
@@ -14,18 +13,14 @@ router.get('/login', (req, res) => {
 
 
 // Get login MSFT
-router.get('/microsoft', 
-    cors(),
-    function(req, res, next) {
-        passport.authenticate('azuread-openidconnect',
-            {
-                response: res,
-                failureRedirect: '/'
-            }
-        )(req, res, next)
+router.get('/microsoft', (req, res, next) => {
+    passport.authenticate('azuread-openidconnect',
+        {
+            response: res,
+            failureRedirect: '/'
+        })(req, res, next)
     },
     function(req, res) {
-        console.log('Login was called')
         res.redirect('/')
     }
 )
@@ -33,7 +28,6 @@ router.get('/microsoft',
 
 // Callback
 router.get('/microsoft/callback',
-    cors(),
     function(req, res, next) {
         passport.authenticate('azuread-openidconnect',
             {
@@ -43,7 +37,6 @@ router.get('/microsoft/callback',
         )(req, res, next)
     },
     function(req, res) {
-        console.log('We received a return from AzureAd')
         res.redirect('/')
     }
 )
@@ -51,7 +44,6 @@ router.get('/microsoft/callback',
 
 // Callback POST
 router.post('/microsoft/callback',
-    cors(),
     function(req, res, next) {
         passport.authenticate('azuread-openidconnect',
             {
@@ -61,46 +53,34 @@ router.post('/microsoft/callback',
         )(req, res, next)
     },
     function(req, res) {
-        console.log('We received a return from AzureAD')
         res.redirect('/')
     }
 )
 
 
-// Get user information
-router.get('/user', cors(), authCheckMiddleware(), (req, res) => {
-    var user = req.session.passport
-    res.json(user)
+// Retrieves an access token for use in Microsoft Graph API calls
+router.get('/microsoft/token', authCheckMiddleware(), (req, res) => {
+    getAccessToken(req.session.passport.user.oid, (err, token) => {
+        res.send(token)
+    })
 })
 
 
-// Retrieves an access token for use in Microsoft Graph API calls
-router.get('/microsoft/token', cors(), authCheckMiddleware(), (req, res) => {
-    sql.refresh(req.session.passport.user.oid, (err, data) => {
-        const requestData = querystring.stringify({
-            'client_id': `${process.env.MICROSOFT_GRAPH_CLIENT_ID}`,
-            'refresh_token': `${data}`,
-            'grant_type': 'refresh_token',
-            'client_secret': `${process.env.MICROSOFT_GRAPH_CLIENT_SECRET}`
-        })
-
-        const requestLength = requestData.length
-
+// Retrieves Microsoft Graph user information
+router.get('/microsoft/graph', authCheckMiddleware(), (req, res) => {
+    getAccessToken(req.session.passport.user.oid, (err, token) => {
         request({
             headers: {
-                'Content-Length': requestLength,
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Authorization': `Bearer ${token}`
             },
-            uri: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
-            body: requestData,
-            method: 'POST'
+            uri: 'https://graph.microsoft.com/v1.0/me',
+            method: 'GET'
         }, (err, subRes, body) => {
             if (err) {
                 console.error(err)
                 throw err
             } else {
-                var data = JSON.parse(body);
-                res.send(data.access_token)
+                res.status(200).send(JSON.parse(body))
             }
         })
     })
@@ -108,7 +88,7 @@ router.get('/microsoft/token', cors(), authCheckMiddleware(), (req, res) => {
 
 
 // Test call to check access token, get a profile picture from graph
-router.get('/microsoft/avatar', cors(), authCheckMiddleware(), (req, res) => {
+router.get('/microsoft/avatar', authCheckMiddleware(), (req, res) => {
     getAccessToken(req.session.passport.user.oid, (err, token) => {
         request({
             headers: {
@@ -127,18 +107,7 @@ router.get('/microsoft/avatar', cors(), authCheckMiddleware(), (req, res) => {
     })
 })
 
-
-// Logout, check the user is actually logged in first though.
-router.get('/logout', authCheckMiddleware(), function(req, res) {
-    req.session.destroy(function(err) {
-        req.logOut()
-        res.redirect('/')
-    })
-})
-
-module.exports = router
-
-
+// Get access token from Microsoft
 function getAccessToken(user, callback) {
     sql.refresh(user, (err, data) => {
         const requestData = querystring.stringify({
@@ -167,3 +136,20 @@ function getAccessToken(user, callback) {
         })
     })
 }
+
+
+// Get user information
+router.get('/user', authCheckMiddleware(), (req, res) => {
+    res.json(req.session.passport)
+})
+
+
+// Logout, check the user is actually logged in first though.
+router.get('/logout', authCheckMiddleware(), function(req, res) {
+    req.session.destroy(function(err) {
+        req.logOut()
+        res.redirect('/')
+    })
+})
+
+module.exports = router
