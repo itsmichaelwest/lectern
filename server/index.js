@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const app = express()
 const passport = require('passport')
@@ -25,12 +27,8 @@ app.use(fileUpload({
 }))
 app.use(errorHandlingMiddleware())
 
-// Debug options
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
-    app.use(morgan('dev'))
-    app.use(cors({origin: 'http://localhost:8080' , credentials :  true}))
-}
+app.use(morgan('dev'))
+app.use(cors({origin: 'http://localhost:8080' , credentials :  true}))
 
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));

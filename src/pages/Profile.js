@@ -17,15 +17,14 @@ export default class Profile extends Component {
 
     componentDidMount () {
         axios
-        .get(`${config.apiUrl}/auth/microsoft/graph`, {withCredentials: true})
+        .get(`${config.apiUrl}/auth/user`, {withCredentials: true})
         .then(response => {
             console.log(`**(Profile) User is logged...`)
-            console.log(response)
             this.setState({
                 auth: true,
-                loginName: response.data.mail,
-                displayName: response.data.displayName,
-                id: response.data.id
+                loginName: response.data.passport.user._json.email,
+                displayName: response.data.passport.user.displayName,
+                id: response.data.passport.user.oid
             })
         })
         .catch(err => {

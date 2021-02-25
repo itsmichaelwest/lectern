@@ -6,7 +6,7 @@ import LogButton from './navigation/logButton'
 export default class Navigation extends Component {
     render() {
         return (
-            <header className="sticky top-0 bg-white mb-8 shadow-sm">
+            <header className="sticky top-0 bg-white bg-opacity-90 mb-8 shadow-sm z-10">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6">
                     <div className="flex justify-between items-center py-4 md:space-x-10">
                         <div className="flex-1 justify-start">

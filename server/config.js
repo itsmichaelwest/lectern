@@ -2,7 +2,7 @@
 var config = {
   jwtSecret: process.env.APP_SESSION_SECRET || 'big Secret',
   cookieSettings: {
-    maxAge: 360000
+    maxAge: 2592000000
   },
   serverPort: process.env.PORT || 8081
 }

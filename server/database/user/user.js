@@ -1,22 +1,22 @@
 const sql = require('mssql')
 const config = require('../sqlConfig')
 
-function addUser(profile, refreshToken) {
-    sql.connect(config, function(err) {
+function addUser(profile) {
+    sql.connect(config, (err) => {
         if (err) {
             console.log(err)
             throw err
         } else {
             var request = new sql.Request()
 
-            request.query(`SELECT * FROM [dbo].[users] WHERE userId='${profile.oid}';`, function(err, result) {
+            request.query(`SELECT * FROM [dbo].[users] WHERE userId='${profile.oid}';`, (err, result) => {
                 if (err) {
                     console.error(err)
                     throw err
                 } else {
                     // Check if user is in the database, query will be undefined if not present.
                     if (typeof result.recordset[0] === 'undefined') {
-                        request.query(`INSERT INTO [dbo].[users] (userId, refreshToken, userName, userEmail) VALUES ('${profile.oid}', '${refreshToken}', '${profile.displayName}', '${profile._json.email}')`, function(err) {
+                        request.query(`INSERT INTO [dbo].[users] (userId, userName, userEmail) VALUES ('${profile.oid}', '${profile.displayName}', '${profile._json.email}')`, (err) => {
                             if (err) {
                                 console.log(err)
                             }
