@@ -139,6 +139,13 @@ router.get('/user', authCheckMiddleware(), (req, res) => {
     res.json(req.session)
 })
 
+router.get('/destroy', authCheckMiddleware(), (req, res) => {
+    sql.destroyUser(req.session.passport.user.oid, () => {
+        req.logOut()
+        res.redirect('/')
+    })
+})
+
 
 // Logout, check the user is actually logged in first though.
 router.get('/logout', authCheckMiddleware(), function(req, res) {

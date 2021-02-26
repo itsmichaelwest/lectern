@@ -71,8 +71,30 @@ function getUserRefreshToken(oid, callback) {
 }
 
 
+function destroyUser(oid, callback) {
+    const pool = new sql.ConnectionPool(config)
+    const request = new sql.Request(pool)
+
+    try {
+        pool.connect(() => {
+            request.query(`DELETE FROM [dbo].[users] WHERE userId='${oid}'`, (err, res) => {
+                if (err) {
+                    callback(err)
+                } else {
+                    callback(false, true)
+                }
+            })
+        })
+    } catch(error) {
+        console.error(error)
+        callback(error)
+    }
+}
+
+
 module.exports = {
     addUser,
     getUser,
-    getUserRefreshToken
+    getUserRefreshToken,
+    destroyUser
 }

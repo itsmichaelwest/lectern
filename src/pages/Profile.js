@@ -80,6 +80,9 @@ function LoggedIn(state) {
             <a href="/auth/logout" className="mt-4 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-yellow-600 hover:bg-yellow-700">
                 Sign out
             </a>
+            <a href="/auth/destroy" className="ml-2 mt-4 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700">
+                Delete my data
+            </a>
         </div>
     )
 }
