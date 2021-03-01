@@ -8,7 +8,7 @@ export default class PrivacyPolicy extends Component {
             <Helmet>
                 <title>Privacy Policy | CS394</title>
             </Helmet>
-            <div className="prose">
+            <div className="prose-sm">
             <h1>Privacy Policy</h1>
                 <p className="italic">
                     Last updated: February 2021

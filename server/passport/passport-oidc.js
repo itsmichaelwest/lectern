@@ -2,13 +2,15 @@ const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
 const user = require('../database/user/user')
 const request = require('request')
 
+const url = process.env.AUTH_REDIRECT_URL || 'https://az-mmp.michaelwe.st'
+
 const strategy = new OIDCStrategy(
     {
         identityMetadata: 'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
         clientID: process.env.MICROSOFT_GRAPH_CLIENT_ID,
         responseType: 'code id_token',
         responseMode: 'form_post',
-        redirectUrl: `http://localhost:8081/auth/microsoft/callback`,
+        redirectUrl: `${url}/auth/microsoft/callback`,
         allowHttpForRedirectUrl: true,
         clientSecret: process.env.MICROSOFT_GRAPH_CLIENT_SECRET,
         validateIssuer: false,
