@@ -15,7 +15,7 @@ export default class Footer extends Component {
                             © 2021
                         </p>
                         <p className="float-right">
-                            <Link to="/privacy" className="mr-4 text-yellow-600 hover:text-yellow-900">
+                            <Link to="/privacy" className="mr-4 text-primary-600 hover:text-primary-900">
                                 Privacy policy
                             </Link>
                             This site is a work in progress. Build {config.version}_{config.branch}.

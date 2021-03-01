@@ -27,9 +27,9 @@ export default class Profile extends Component {
                     <div className="mx-auto w-2/5">
                     </div>
                     <h1 className="text-6xl font-bold mt-16 mb-8">Upload Video</h1>
-                    <p>By uploading a video, you agree to the <Link className="text-yellow-600 hover:text-yellow-900">Terms of Service</Link>.</p>
+                    <p>By uploading a video, you agree to the <Link className="text-primary-600 hover:text-primary-900">Terms of Service</Link>.</p>
                 </div>
-                <div className="w-full md:w-3/5 h-64 mx-auto my-8 rounded-xl border-2 border-dashed border-yellow-500 hover:border-yellow-700 hover:bg-gray-100 transition-all">
+                <div className="w-full md:w-3/5 h-64 mx-auto my-8 rounded-xl border-2 border-dashed border-primary-500 hover:border-primary-700 hover:bg-gray-100 transition-all">
                     <FileDrop
                         className="w-full h-full"
                         targetClassName="flex items-center w-full h-full"

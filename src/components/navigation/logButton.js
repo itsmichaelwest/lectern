@@ -44,7 +44,7 @@ export default class LogButton extends Component {
         if (!this.state.isLogged) {
             return (
                 <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                    <Link to="/login" className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-base font-medium text-white bg-yellow-600 hover:bg-yellow-700">
+                    <Link to="/login" className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-base font-medium text-white bg-primary-600 hover:bg-primary-700">
                         Sign in
                     </Link>
                 </div>
@@ -52,7 +52,7 @@ export default class LogButton extends Component {
         } else {
             return (
                 <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                    <button onClick={this.showMenu.bind(this)} className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-base font-medium text-gray-400 border-gray-400 hover:border-yellow-700 hover:text-yellow-700 cursor-pointer">
+                    <button onClick={this.showMenu.bind(this)} className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-base font-medium text-gray-400 border-gray-400 hover:border-primary-700 hover:text-primary-700 cursor-pointer">
                         {this.state.displayName}
                     </button>
                     {AccountMenu(this.state)}

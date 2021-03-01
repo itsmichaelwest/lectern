@@ -17,9 +17,9 @@ export default class Home extends Component {
           </div>
           <div className="col-span-9 flex flex-col">
             <h1 className="text-2xl font-bold mb-2">Home</h1>
-            <Link className="max-w-max text-yellow-600 hover:text-yellow-900" to='/profile'>Your profile</Link>
-            <Link className="max-w-max text-yellow-600 hover:text-yellow-900" to='/upload'>Upload page</Link>
-            <Link className="max-w-max text-yellow-600 hover:text-yellow-900" to='/video/123'>Video page</Link>
+            <Link className="max-w-max text-primary-600 hover:text-primary-900" to='/profile'>Your profile</Link>
+            <Link className="max-w-max text-primary-600 hover:text-primary-900" to='/upload'>Upload page</Link>
+            <Link className="max-w-max text-primary-600 hover:text-primary-900" to='/video/123'>Video page</Link>
           </div>
         </div>
       </div>
