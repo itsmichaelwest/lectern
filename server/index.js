@@ -28,7 +28,10 @@ app.use(fileUpload({
 app.use(errorHandlingMiddleware())
 
 app.use(morgan('dev'))
-app.use(cors({origin: 'http://localhost:8080' , credentials :  true}))
+
+if (process.env.NODE_ENV === 'development') {
+    app.use(cors({origin: 'http://localhost:8080' , credentials :  true}))
+}
 
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
@@ -40,8 +43,6 @@ app.use(session({
     resave: true, 
     saveUninitialized: true,
     store: AzureTablesStoreFactory.create({
-        logger: console.log,
-        errorLogger: console.log,
         sessionTimeOut: 60
     })
 }))
