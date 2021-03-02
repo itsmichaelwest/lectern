@@ -4,7 +4,7 @@ import axios from 'axios'
 import config from '../../config'
 
 import Design from '../../designSystem'
-import Thumbnail from '../../components/thumbnail'
+import Thumbnail from '../../components/atoms/video/Thumbnail'
 
 export default class Channel extends Component {
     constructor (props) {

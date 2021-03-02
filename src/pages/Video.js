@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
 import config from '../config'
-import VideoPlayer from '../components/video/VideoPlayer'
-import VideoComments from '../components/video/VideoComments'
-import VideoInformation from '../components/video/VideoInformation'
+import VideoPlayer from '../components/atoms/video/VideoPlayer'
+import VideoComments from '../components/atoms/video/VideoComments'
+import VideoInformation from '../components/atoms/video/VideoInformation'
 import { Helmet } from 'react-helmet'
 
 export default class Video extends Component {

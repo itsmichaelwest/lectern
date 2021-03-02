@@ -72,7 +72,7 @@ app.use('/api/v1/comments', commentApi)
 
 // If path not defined in any of the above routes, serve index.html
 // from the build folder.
-app.get('/*', function(req,res) {
+app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 

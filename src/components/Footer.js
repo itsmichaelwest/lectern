@@ -1,7 +1,5 @@
 import { React, Component } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-
 import config from '../config'
 
 export default class Footer extends Component {
@@ -21,7 +19,6 @@ export default class Footer extends Component {
                             This site is a work in progress. Build {config.version}_{config.branch}.
                         </p>
                     </div>
-
                 </div>
             </footer>
             </>

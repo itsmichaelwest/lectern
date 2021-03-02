@@ -7,7 +7,14 @@ function uploadVideo() {
             console.log(err)
             throw err
         } else {
-            new sql.Request().query(`INSERT INTO [dbo].[video] etc etc;`, (err, result) => {
+            new sql.Request().query(
+                `
+                INSERT INTO [dbo].[video] 
+                (id, url, audio, privacy, language, uploader, rating, description)
+                VALUES
+                ('');
+                `, 
+                (err, result) => {
                 if (err) {
                     console.error(err)
                     throw err

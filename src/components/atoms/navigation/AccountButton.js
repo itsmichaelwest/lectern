@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import config from '../../config'
-export default class LogButton extends Component {
+import config from '../../../config'
+
+export default class AccountButton extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
@@ -43,6 +44,7 @@ export default class LogButton extends Component {
             this.setState({
                 isLogged: false
             })
+            console.error(err)
         })
     }
 
@@ -52,13 +54,18 @@ export default class LogButton extends Component {
             setTimeout(() => this.setState({
                 menuSelected: true
             }), 1);
-            
         } else {
             this.setState({
                 menuSelected: false
             })
             setTimeout(() => this.setVisible(false), 650);
         }
+    }
+
+    hideMenu = () => {
+        this.setState({
+            menuSelected: false
+        })
     }
 
     setVisible(state) {
@@ -71,12 +78,6 @@ export default class LogButton extends Component {
                 displayNone: true
             })
         }
-    }
-
-    hideMenu = () => {
-        this.setState({
-            menuSelected: false
-        })
     }
 
     render() {

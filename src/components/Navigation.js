@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import LogButton from './navigation/logButton'
+import AccountButton from './atoms/navigation/AccountButton'
 
 export default class Navigation extends Component {
     render() {
@@ -19,7 +19,7 @@ export default class Navigation extends Component {
                                 <input type="text" placeholder="Search for videos" id="navSearchBox" className="px-4 py-2 mx-auto text-sm rounded-md border border-gray-300 hover:border-gray-700 focus:border-primary-600 outline-none w-48 sm:w-64 lg:w-96 transition-all text-center hover:text-left focus:text-left hover:bg-gray-50 focus:bg-gray-50" />
                             </form>
                         </div>
-                        <LogButton/>
+                        <AccountButton/>
                     </div>
                 </div>
             </header>
