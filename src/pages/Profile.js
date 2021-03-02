@@ -105,14 +105,13 @@ function LoggedOut(props) {
 function LoggedIn(state, toggleDestroyModal) {
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-8">User Profile</h1>
-            <p>Name: {state.displayName}</p>
-            <p>E-mail: {state.loginName}</p>
-            <p>ID: {state.id}</p>
-            <div className="mt-4">
-                <a href="/auth/logout" className="inline-block rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-primary-500">
-                    Sign out
-                </a>
+            <h1 className="text-3xl font-bold mb-4 text-center">
+                Hello, {state.displayName}
+            </h1>
+            <p className="text-center">
+                E-mail: {state.loginName}
+            </p>
+            <div className="mt-4 mx-auto w-max">
                 <button onClick={toggleDestroyModal} className="ml-2 inline-block rounded-md border border-red-500 shadow-sm px-4 py-2 bg-red-600 text-sm font-medium text-gray-100 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500">
                     Delete my data
                 </button>

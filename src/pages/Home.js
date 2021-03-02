@@ -11,16 +11,11 @@ export default class Home extends Component {
         <title>Home | CS394</title>
       </Helmet>
       <div>
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          <div className="col-span-3">
-            <Sidebar/>
-          </div>
-          <div className="col-span-9 flex flex-col">
-            <h1 className="text-2xl font-bold mb-2">Home</h1>
-            <Link className="max-w-max text-primary-600 hover:text-primary-900" to='/profile'>Your profile</Link>
-            <Link className="max-w-max text-primary-600 hover:text-primary-900" to='/upload'>Upload page</Link>
-            <Link className="max-w-max text-primary-600 hover:text-primary-900" to='/video/123'>Video page</Link>
-          </div>
+        <h1 className="text-2xl font-bold mb-2">Feed</h1>
+        <div className="flex flex-col">
+          <Link className="max-w-max text-primary-600 hover:text-primary-900" to='/profile'>Your profile</Link>
+          <Link className="max-w-max text-primary-600 hover:text-primary-900" to='/upload'>Upload page</Link>
+          <Link className="max-w-max text-primary-600 hover:text-primary-900" to='/video/123'>Video page</Link>
         </div>
       </div>
       </>
