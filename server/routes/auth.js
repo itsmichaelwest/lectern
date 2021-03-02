@@ -135,7 +135,7 @@ function getAccessToken(req, callback) {
 
 
 // Get user information
-router.get('/user', (req, res) => {
+router.get('/user', authCheckMiddleware(), (req, res) => {
     if (req.isAuthenticated()) {
         res.json(req.session)
     }

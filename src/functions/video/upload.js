@@ -1,12 +1,9 @@
 import config from '../../config'
 import axios from 'axios'
 
-export default function uploadVideo(files) {
-    console.log('Uploading file to storage')
-
+export default function uploadVideo(files, event) {
     var body = new FormData();
-    body.append('video', files)
-
+    body.append('video', files[0])
     axios({
         method: 'post',
         url: `${config.apiUrl}/api/v1/video/upload`,

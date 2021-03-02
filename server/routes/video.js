@@ -18,12 +18,12 @@ router.get('/:videoId', authCheckMiddleware(), (req, res) => {
 
 
 // Download video
-router.get('/:videoId/download', authCheckMiddleware(), (req, res) => {
-    res.send(video.download(req.params.videoId))
+router.get('/download/:videoId', authCheckMiddleware(), (req, res) => {
+    res.download(`./server/uploads/${req.params.videoId}`)
 })
 
 
-router.post('/upload', authCheckMiddleware(), async (req, res) => {
+router.post('/upload', authCheckMiddleware(), (req, res) => {
     try {
         if(!req.files) {
             res.send({
@@ -33,7 +33,7 @@ router.post('/upload', authCheckMiddleware(), async (req, res) => {
         } else {
             let video = req.files.video
 
-            video.mv('./uploads/' + video.name)
+            video.mv('./server/uploads/' + video.name)
 
             console.log(`NAME: ${video.name}`)
             console.log(`MIMETYPE: ${video.mimetype}`)
