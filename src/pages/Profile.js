@@ -3,6 +3,7 @@ import axios from 'axios'
 import config from '../config'
 import { Helmet } from 'react-helmet'
 import ContentLoader from 'react-content-loader'
+import Dialog from '../components/Dialog'
 export default class Profile extends Component {
     constructor (props) {
             super(props)
@@ -11,7 +12,8 @@ export default class Profile extends Component {
                 auth: false,
                 loginName: null,
                 displayName: null,
-                id: null
+                id: null,
+                showDestroyModal: false
             }
     }
 
@@ -34,11 +36,22 @@ export default class Profile extends Component {
         })
     }
 
+    toggleDestroyModal = () => {
+        console.log('Create dialog')
+        this.setState({
+            showDestroyModal: !this.state.showDestroyModal
+        });
+    }
+
+    destroyUser = () => {
+        window.location.replace('/auth/destroy')
+    }
+
     render () {
         const isAuth = this.state.auth
         let page
         if (isAuth)
-            page = LoggedIn(this.state)
+            page = LoggedIn(this.state, this.toggleDestroyModal)
         else
             page = LoggedOut
 
@@ -48,6 +61,25 @@ export default class Profile extends Component {
                 <title>User Profile | CS394</title>
             </Helmet>
             <div>
+                <Dialog onClose={this.toggleDestroyModal} show={this.state.showDestroyModal} destroyUser={this.destroyUser}>
+                    <h4 className="font-bold text-lg">
+                        Delete my data
+                    </h4>
+                    <p className="my-2">
+                        Delete all your data from CS394? This will remove:
+                    </p>
+                    <ul className="pl-4 list-disc">
+                        <li>Your public profile</li>
+                        <li>Any videos you have uploaded</li>
+                        <li>Comments you have posted on videos</li>
+                    </ul>
+                    <p className="my-2">
+                        You will be logged out. You can de-authorize CS394 from your account provider by following these instructions:
+                    </p>
+                    <p className="my-2">
+                        an instruction lol
+                    </p>
+                </Dialog>
                 {page}
             </div>
             </>
@@ -70,7 +102,7 @@ function LoggedOut(props) {
     )
 }
 
-function LoggedIn(state) {
+function LoggedIn(state, toggleDestroyModal) {
     return (
         <div>
             <h1 className="text-2xl font-bold mb-8">User Profile</h1>
@@ -81,9 +113,9 @@ function LoggedIn(state) {
                 <a href="/auth/logout" className="inline-block rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-primary-500">
                     Sign out
                 </a>
-                <a href="/auth/destroy" className="ml-2 inline-block rounded-md border border-red-500 shadow-sm px-4 py-2 bg-red-600 text-sm font-medium text-gray-100 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500">
+                <button onClick={toggleDestroyModal} className="ml-2 inline-block rounded-md border border-red-500 shadow-sm px-4 py-2 bg-red-600 text-sm font-medium text-gray-100 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500">
                     Delete my data
-                </a>
+                </button>
             </div>
         </div>
     )
