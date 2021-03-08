@@ -1,6 +1,5 @@
 const msRestNodeAuth = require('@azure/ms-rest-nodeauth')
 const { AzureMediaServices } = require('@azure/arm-mediaservices')
-const { AzureMediaServicesOptions } = require('@azure/arm-mediaservices/esm/models')
 
 async function list() {
     // Copy the samples.env file and rename it to .env first, then populate it's values with the values obtained 

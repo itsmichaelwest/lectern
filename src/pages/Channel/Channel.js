@@ -5,6 +5,7 @@ import config from '../../config'
 
 import Design from '../../designSystem'
 import Thumbnail from '../../components/atoms/video/Thumbnail'
+import { Helmet } from 'react-helmet'
 
 export default class Channel extends Component {
     constructor (props) {
@@ -48,6 +49,10 @@ export default class Channel extends Component {
         const { channelName, channelDescription, channelSubscribers } = this.state
 
         return (
+            <>
+            <Helmet>
+                <title>Channel | Lectern</title>
+            </Helmet>
             <div>
                 <div className="bg-green-600 rounded">
                     <div className="flex flex-row items-center relative p-8">
@@ -76,6 +81,7 @@ export default class Channel extends Component {
                     </div>
                 </div>
             </div>
+            </>
         )
     }
 }

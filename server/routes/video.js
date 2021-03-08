@@ -2,6 +2,7 @@ const express = require('express')
 const router = new express.Router()
 const https = require('https')
 const videoApi = require('../api/video')
+const fs = require('fs')
 
 const authCheckMiddleware = require('../middleware/auth-check')
 
@@ -31,17 +32,9 @@ router.post('/upload', authCheckMiddleware(), (req, res) => {
                 message: 'No file uploaded'
             })
         } else {
-            let video = req.files.video
+            const video = req.files.video
 
-            console.log(video)
-
-            video.mv('./server/uploads/' + video.name)
-
-            console.log(`NAME: ${video.name}`)
-            console.log(`MIMETYPE: ${video.mimetype}`)
-            console.log(`SIZE: ${video.size}`)
-
-            videoApi.add(video)
+            videoApi.add(req.files.video)
 
             res.send({
                 status: true,
@@ -58,11 +51,6 @@ router.post('/upload', authCheckMiddleware(), (req, res) => {
         res.status(500).send(err)
     }
     //res.send(video.insert)
-})
-
-router.get('/upload/test', (req, res) => {
-    const AddToBlob = require('../storage/addToBlob')
-    AddToBlob.upload()
 })
 
 

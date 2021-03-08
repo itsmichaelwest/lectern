@@ -11,7 +11,7 @@ export default class Navigation extends Component {
                     <div className="flex justify-between items-center py-4 md:space-x-10">
                         <div className="flex-initial justify-start">
                             <Link to="/" className="group text-base font-medium">
-                                CS39440 <span className="text-primary-600 group-hover:text-primary-900 font-bold">β</span>
+                                Lectern <span className="text-primary-600 group-hover:text-primary-900 font-bold">β</span>
                             </Link>
                         </div>
                         <div className="self-center">

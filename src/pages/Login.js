@@ -12,7 +12,7 @@ export default class Login extends Component {
         return (
             <>
             <Helmet>
-                <title>Log in | CS394</title>
+                <title>Sign in | Lectern</title>
             </Helmet>
             <div className="max-w-md mx-auto my-auto">
                 <h1 className="text-xl font-bold mb-4">

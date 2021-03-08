@@ -7,7 +7,7 @@ import ContentLoader from 'react-content-loader'
 import { FileDrop } from 'react-file-drop'
 import { Formik } from 'formik'
 import Design from '../designSystem'
-import UploadVideo from '../functions/video/upload'
+import UploadVideo from '../functions/video/Upload'
 export default class Profile extends Component {
     constructor(props) {
         super(props)
@@ -36,7 +36,7 @@ export default class Profile extends Component {
         return (
             <>
             <Helmet>
-                <title>Upload Video | CS394</title>
+                <title>Upload Video | Lectern</title>
             </Helmet>
             <div>
                 {this.state.auth

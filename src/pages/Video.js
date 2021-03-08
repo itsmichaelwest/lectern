@@ -53,10 +53,9 @@ export default class Video extends Component {
         return (
             <>
             <Helmet>
-                <title>{`${videoId} | CS394`}</title>
+                <title>{`${videoId} | Lectern`}</title>
             </Helmet>
             <div>
-                <p>Video ID: {videoId}</p>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
                     <VideoPlayer/>
                     <VideoComments/>

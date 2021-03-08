@@ -58,7 +58,7 @@ export default class Profile extends Component {
         return (
             <>
             <Helmet>
-                <title>User Profile | CS394</title>
+                <title>Your Profile | Lectern</title>
             </Helmet>
             <div>
                 <Dialog onClose={this.toggleDestroyModal} show={this.state.showDestroyModal} destroyUser={this.destroyUser}>

@@ -6,7 +6,7 @@ export default class PrivacyPolicy extends Component {
         return (
             <>
             <Helmet>
-                <title>Privacy Policy | CS394</title>
+                <title>Privacy Policy | Lectern</title>
             </Helmet>
             <div className="prose-sm">
             <h1>Privacy Policy</h1>
