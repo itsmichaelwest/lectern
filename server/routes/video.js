@@ -7,13 +7,13 @@ const authCheckMiddleware = require('../middleware/auth-check')
 
 // Get all videos. Not recommended.
 router.get('/allVideos', authCheckMiddleware(), (req, res) => {
-    res.send(video.all())
+    res.send(videoApi.all())
 })
 
 
 // Get information about the video of [videoId]. 
 router.get('/:videoId', authCheckMiddleware(), (req, res) => {
-    res.send(video.get(req.params.videoId))
+    res.send(videoApi.get(req.params.videoId))
 })
 
 
@@ -67,11 +67,11 @@ router.get('/upload/test', (req, res) => {
 
 
 router.post('/:videoId/like', authCheckMiddleware(), (req, res) => {
-    res.send(video.like(req.params.videoId))
+    res.send(videoApi.like(req.params.videoId))
 })
 
 router.delete('/:videoId/like', authCheckMiddleware(), (req, res) => {
-    res.send(video.unlike(req.params.videoId))
+    res.send(videoApi.unlike(req.params.videoId))
 })
 
 module.exports = router

@@ -1,11 +1,13 @@
 //const video = require('../database/video')
-const addToBlob = require('../storage/addToBlob')
+//const addToBlob = require('../storage/addToBlob')
+const listVideos = require('../storage/listFiles.js')
 
 /**
  * Scaffold video API
  */
 function getAllVideos() {
     console.log(`Returning ALL videos`)
+    listVideos()
     return true
 }
 
@@ -22,7 +24,8 @@ function downloadVideo(videoId) {
 function insertVideo(videoFile) {
     console.log(videoFile)
     console.log(`Inserting new video`)
-    return addToBlob.upload(videoFile)
+    return true
+    //return addToBlob.upload(videoFile)
 }
 
 function deleteVideo(videoId) {
