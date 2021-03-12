@@ -33,7 +33,7 @@ export default class PrivacyPolicy extends Component {
 
                 <p>We use the information we collect in various ways, including to:</p>
 
-                <ul>
+                <ul className="list-disc">
                 <li>Provide, operate, and maintain our webste</li>
                 <li>Improve, personalize, and expand our webste</li>
                 <li>Understand and analyze how you use our webste</li>
@@ -72,7 +72,7 @@ export default class PrivacyPolicy extends Component {
                 <h2>CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
 
                 <p>Under the CCPA, among other rights, California consumers have the right to:</p>
-                <ul>
+                <ul className="list-disc">
                 <li>Request that a business that collects a consumer's personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.</li>
                 <li>Request that a business delete any personal data about the consumer that a business has collected.</li>
                 <li>Request that a business that sells a consumer's personal data, not sell the consumer's personal data.</li>
@@ -82,7 +82,7 @@ export default class PrivacyPolicy extends Component {
                 <h2>GDPR Data Protection Rights</h2>
 
                 <p>We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:</p>
-                <ul>
+                <ul className="list-disc">
                 <li>The right to access – You have the right to request copies of your personal data. We may charge you a small fee for this service.</li>
                 <li>The right to rectification – You have the right to request that we correct any information you believe is inaccurate. You also have the right to request that we complete the information you believe is incomplete.</li>
                 <li>The right to erasure – You have the right to request that we erase your personal data, under certain conditions.</li>
