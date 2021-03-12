@@ -24,33 +24,10 @@ router.get('/download/:videoId', authCheckMiddleware(), (req, res) => {
 })
 
 
-router.post('/upload', authCheckMiddleware(), (req, res) => {
-    try {
-        if(!req.files) {
-            res.send({
-                status: false,
-                message: 'No file uploaded'
-            })
-        } else {
-            const video = req.files.video
-
-            videoApi.add(req.files.video)
-
-            res.send({
-                status: true,
-                message: 'File uploaded',
-                data: {
-                    name: video.name,
-                    mimetype: video.mimetype,
-                    size: video.size
-                }
-            })
-        }
-    } catch (err) {
-        console.error(err)
-        res.status(500).send(err)
-    }
-    //res.send(video.insert)
+router.post('/upload', authCheckMiddleware(), async (req, res) => {
+    const upload = require('../storage/uploadFile')
+    const result = await upload.prepareAssetAndBlockBlob(req.body.fileName)
+    res.json(result)
 })
 
 

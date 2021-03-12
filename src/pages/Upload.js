@@ -9,7 +9,8 @@ export default class Profile extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            uploadStatus: false
+            uploadStatus: false,
+            selectedFile: null
         }
     }
 
@@ -29,6 +30,16 @@ export default class Profile extends Component {
         })
     }
 
+    handleFileSelection = event => {
+        this.setState({
+            selectedFile: event.target.files[0]
+        })
+    }
+
+    handleUploadPress = () => {
+        UploadVideo(this.state.selectedFile)
+    }
+
     render () {
         return (
             <>
@@ -43,6 +54,8 @@ export default class Profile extends Component {
                         <h1 className="text-6xl font-bold mt-16 mb-8">Upload Video</h1>
                         <p>By uploading a video, you agree to the <Link className="text-primary-600 hover:text-primary-900">Terms of Service</Link>.</p>
                     </div>
+                    <input className="block my-4" type="file" name="video" onChange={this.handleFileSelection} />
+                    <button className={Design.button} onClick={this.handleUploadPress}>Upload</button>
                 </div>
                 :
                 <>
