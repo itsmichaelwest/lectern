@@ -1,6 +1,7 @@
 const msRestNodeAuth = require('@azure/ms-rest-nodeauth')
 const { AzureMediaServices } = require('@azure/arm-mediaservices')
 
+/*
 async function list() {
     // Copy the samples.env file and rename it to .env first, then populate it's values with the values obtained 
     // from your Media Services account's API Access page in the Azure portal.
@@ -38,4 +39,4 @@ list().catch((err) => {
 
 module.exports = {
     list
-}
+}*/

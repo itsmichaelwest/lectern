@@ -10,7 +10,6 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const AzureTablesStoreFactory = require('connect-azuretables')(session)
 const cors = require('cors')
-const fileUpload = require('express-fileupload')
 const cookieSettings = require('./config').cookieSettings
 const errorHandlingMiddleware = require('./middleware/error')
 const path = require('path')
@@ -19,10 +18,6 @@ app.use(cookieParser('foo'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('uploads'));
-app.use(fileUpload({
-    createParentPath: true,
-    debug: true
-}))
 app.use(errorHandlingMiddleware())
 
 app.use(morgan('dev'))
@@ -63,10 +58,6 @@ app.use('/api/v1/comments', commentApi)
 // Channel API
 //const channelApi = require('./routes/channel')
 //app.use('/api/v1/channel', channelApi)
-
-// User API
-//const userApi = require('./routes/user')
-//app.use('/api/v1/user', userApi)
 
 // If path not defined in any of the above routes, serve index.html
 // from the build folder.

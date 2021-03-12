@@ -28,9 +28,12 @@ export default function uploadVideo(video) {
         let containerClient = blobClient.getContainerClient('')
         let blockBlobClient = containerClient.getBlockBlobClient(video.name)
 
+        console.log(video.type)
+
         await blockBlobClient.uploadData(video, {
             blockSize: 4 * 1024 * 1024, // 4MB Block size
             concurrency: 20, // 20 concurrent
+            ContentType: video.type,
             onProgress: (ev) => console.log(ev)
         })
     }).catch(err => {
