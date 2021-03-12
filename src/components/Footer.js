@@ -16,7 +16,7 @@ export default class Footer extends Component {
                             <Link to="/privacy" className="mr-4 text-primary-600 hover:text-primary-900">
                                 Privacy policy
                             </Link>
-                            This site is a work in progress. Build {config.version}_{config.branch}.
+                            This site is a work in progress.
                         </p>
                     </div>
                 </div>

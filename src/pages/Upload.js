@@ -4,7 +4,7 @@ import config from '../config'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 import Design from '../designSystem'
-import UploadVideo from '../functions/video/Upload'
+import UploadVideo from '../functions/video/upload'
 export default class Profile extends Component {
     constructor(props) {
         super(props)
