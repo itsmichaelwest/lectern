@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
     }
 } else {
     config = {
-        apiUrl: 'http://localhost:8080',
+        apiUrl: 'https://az-mmp.michaelwe.st',
     }
 }
 
