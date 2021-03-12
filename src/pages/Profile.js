@@ -4,6 +4,7 @@ import config from '../config'
 import { Helmet } from 'react-helmet'
 import ContentLoader from 'react-content-loader'
 import Dialog from '../components/Dialog'
+import design from '../designSystem'
 export default class Profile extends Component {
     constructor (props) {
             super(props)
@@ -66,7 +67,7 @@ export default class Profile extends Component {
                         Delete my data
                     </h4>
                     <p className="my-2">
-                        Delete all your data from CS394? This will remove:
+                        Delete all your data from Lectern? This will remove:
                     </p>
                     <ul className="pl-4 list-disc">
                         <li>Your public profile</li>
@@ -74,10 +75,10 @@ export default class Profile extends Component {
                         <li>Comments you have posted on videos</li>
                     </ul>
                     <p className="my-2">
-                        You will be logged out. You can de-authorize CS394 from your account provider by following these instructions:
+                        You will be logged out. You can de-authorize Lectern from your account provider by following these instructions:
                     </p>
                     <p className="my-2">
-                        an instruction lol
+                        <a className={design.href} href="https://docs.microsoft.com/en-us/azure/active-directory/user-help/my-applications-portal-permissions-saved-accounts">Revoking permissions from Microsoft 365 account</a>
                     </p>
                 </Dialog>
                 {page}
