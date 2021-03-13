@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
+import Design from '../designSystem'
 import AccountButton from './atoms/navigation/AccountButton'
 
 export default class Navigation extends Component {
@@ -14,12 +14,10 @@ export default class Navigation extends Component {
                                 Lectern <span className="text-primary-600 group-hover:text-primary-900 font-bold">β</span>
                             </Link>
                         </div>
-                        <div className="self-center">
-                            <form>
-                                <input type="text" placeholder="Search for videos" id="navSearchBox" className="px-4 py-2 mx-auto text-sm rounded-md border border-gray-300 hover:border-gray-700 focus:border-primary-600 outline-none w-48 sm:w-64 lg:w-96 transition-all text-center hover:text-left focus:text-left hover:bg-gray-50 focus:bg-gray-50" />
-                            </form>
+                        <div className="flex align-middle">
+                            <Link className={"flex-1 mr-2 " + Design.pButton} to="/upload">Upload</Link>
+                            <AccountButton/>
                         </div>
-                        <AccountButton/>
                     </div>
                 </div>
             </header>

@@ -15,8 +15,8 @@ export default class Dialog extends React.Component {
             return null
         }
         return (
-            <div className="absolute inset-0 w-screen h-screen bg-black bg-opacity-60 z-20 items-center flex p-4">
-                <div className="bg-white shadow-2xl max-w-xl w-max max-h-max p-8 rounded-xl mx-auto">
+            <div className="absolute inset-0 w-screen h-screen bg-black bg-opacity-60 z-20 items-center flex sm:p-4">
+                <div className="absolute bottom-0 sm:relative bg-white shadow-2xl sm:max-w-xl sm:w-max max-h-max p-8 sm:rounded-xl mx-auto">
                     <div>{this.props.children}</div>
                     <div className="mt-4 float-right flex">
                         <button className="ml-2 inline-block rounded-md border border-red-500 shadow-sm px-4 py-2 bg-red-600 text-sm font-medium text-gray-100 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500" onClick={e => {this.destroyUser(e);}}>
