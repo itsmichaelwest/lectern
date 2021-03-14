@@ -34,7 +34,6 @@ export default class AccountButton extends React.Component {
         axios
         .get(`${config.apiUrl}/auth/user`, {withCredentials: true})
         .then(response => {
-            console.log(response)
             this.setState({
                 displayName: `${response.data.userName}`,
                 isLogged: true

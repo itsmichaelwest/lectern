@@ -16,7 +16,7 @@ const strategy = new OIDCStrategy(
         validateIssuer: false,
         issuer: null,
         passReqToCallback: true,
-        scope: [ 'email', 'profile', 'offline_access'],
+        scope: [ 'email', 'profile', 'offline_access', 'User.Read' ],
         loggingLevel: 'info',
         nonceLifetime: null,
         nonceMaxAmount: 5,

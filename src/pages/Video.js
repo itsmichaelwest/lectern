@@ -10,9 +10,8 @@ import Hls from 'hls.js'
 export default class Video extends Component {
     constructor (props) {
         super(props)
-
         this.state = {
-            videoId: 'Unauthenticated'
+            videoId: null
         }
     }
 
@@ -24,14 +23,13 @@ export default class Video extends Component {
         axios
         .get(config.apiUrl + '/api/v1/video/' + params.videoId)
         .then(response => {
-            console.log(`**(Video) User is logged...`)
             this.setState({
             videoId: response.data
             })
         })
         .catch(err => {
             console.log(
-            `**(Video) User is not logged.`
+            `[Video] User is not signed in`
             )
         })
 

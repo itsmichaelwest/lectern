@@ -141,6 +141,13 @@ router.get('/user', authCheckMiddleware(), (req, res) => {
     }
 })
 
+// Get user oid, useful for querying 
+router.get('/user/id', authCheckMiddleware(), (req, res) => {
+    if (req.isAuthenticated()) {
+        res.json(req.session.passport.user.oid)
+    }
+})
+
 router.get('/destroy', authCheckMiddleware(), (req, res) => {
     sql.destroyUser(req.session.passport.user.oid, () => {
         req.logOut()

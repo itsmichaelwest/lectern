@@ -7,22 +7,20 @@ import Dialog from '../components/Dialog'
 import design from '../designSystem'
 export default class Profile extends Component {
     constructor (props) {
-            super(props)
-
-            this.state = {
-                auth: false,
-                loginName: null,
-                displayName: null,
-                id: null,
-                showDestroyModal: false
-            }
+        super(props)
+        this.state = {
+            auth: false,
+            loginName: null,
+            displayName: null,
+            id: null,
+            showDestroyModal: false
+        }
     }
 
     componentDidMount () {
         axios
         .get(`${config.apiUrl}/auth/user`, {withCredentials: true})
         .then(response => {
-            console.log(`**(Profile) User is logged...`)
             this.setState({
                 auth: true,
                 loginName: response.data.passport.user._json.email,
@@ -38,7 +36,6 @@ export default class Profile extends Component {
     }
 
     toggleDestroyModal = () => {
-        console.log('Create dialog')
         this.setState({
             showDestroyModal: !this.state.showDestroyModal
         });
