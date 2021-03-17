@@ -13,9 +13,8 @@ export default class Channel extends Component {
 
         this.state = {
             channelId: 'Unauthenticated',
-            channelName: 'Testing Channel',
-            channelDescription: 'This is a test my friend',
-            channelSubscribers: 1234567890
+            channelName: 'Channel Test',
+            channelSubscribers: 200
         }
     }
 
@@ -34,8 +33,6 @@ export default class Channel extends Component {
             console.log(`**(Channel) User is logged...`)
             this.setState({
                 channelId: params.channelId,
-                channelName: 'Logged In Channel',
-                channelDescription: 'Logged in description'
             })
         })
         .catch(err => {
@@ -46,7 +43,7 @@ export default class Channel extends Component {
     }
 
     render () {
-        const { channelName, channelDescription, channelSubscribers } = this.state
+        const { channelName, channelSubscribers } = this.state
 
         return (
             <>
@@ -54,30 +51,29 @@ export default class Channel extends Component {
                 <title>Channel | Lectern</title>
             </Helmet>
             <div>
-                <div className="bg-green-600 rounded">
+                <div className="bg-primary-900 rounded-xl">
                     <div className="flex flex-row items-center relative p-8">
                         <div className="flex flex-row items-center flex-auto">
-                            <div className="flex-initial rounded-full bg-white h-32 w-32 shadow-lg mr-8">
+                            <div className="flex-initial flex-shrink-0 rounded-full bg-white h-32 w-32 shadow-lg mr-8">
                                 {/* put an image here ok */}
                             </div>
                             <div className="flex-auto text-white">
                                 <h1 className="font-bold text-2xl">{channelName}</h1>
-                                <p>{channelDescription}</p>
                             </div>
                         </div>
                         <div className="float-right flex-initial flex flex-row items-center">
                             <div className="mr-4 text-white">
-                                {channelSubscribers}
+                                {channelSubscribers} subscribers
                             </div>
-                            <button className={Design.button}>
+                            <button className={Design.pButton}>
                                 Subscribe
                             </button>
                         </div>
                     </div>
                 </div>
                 <div className="mt-8">
-                    <div className="grid grid-cols-3 gap-4">
-                        <Thumbnail title="Test" description="Test"/>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <Thumbnail id="24" length="06:05" title="About CS381" description="First lecture of CS381 module"/>
                     </div>
                 </div>
             </div>

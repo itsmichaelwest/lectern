@@ -51,21 +51,21 @@ export default class Video extends Component {
         return (
             <>
             <Helmet>
-                <title>{`${videoId} | Lectern`}</title>
+                <title>{`CS38110 Open Source Development Issues: Lecture 1 - Introduction | Lectern`}</title>
             </Helmet>
             <div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
-                    <VideoPlayer/>
+                    <VideoPlayer />
                     <VideoComments/>
                 </div>
                 <VideoInformation 
                     id={videoId}
-                    title="Test" 
-                    description="Test" 
-                    views="1234"
-                    date="1234"
-                    channelName="BOB"
-                    subscribers="2145"
+                    title="CS38110 Open Source Development Issues: Lecture 1 - Introduction" 
+                    description="A short introduction to the CS381 module. We'll talk about the core module content and what to expect from the next few weeks." 
+                    views="16 views"
+                    date="January 10, 2021"
+                    channelName="Test Channel"
+                    subscribers="20"
                 />
             </div>
             </>

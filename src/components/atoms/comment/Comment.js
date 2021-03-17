@@ -8,6 +8,10 @@ export default class Comment extends Component {
         }
     }
 
+    setVideoTime(time) {
+        let video = document.getElementById('video')
+        video.currentTime = time
+    }
     
     render() {
         return (
@@ -19,18 +23,23 @@ export default class Comment extends Component {
                     
                 </div>
                 )}
-                <div className="flex align-middle">
-                    <div className="rounded-full w-5 h-5 bg-primary">
-
-                    </div>
-                    <span className="ml-2 font-semibold text-primary-700">
-                        {this.props.name}
+                <div className="flex">
+                    <span className="flex-initial flex-shrink-0 w-16 font-semibold hover:text-gray-600 cursor-pointer">
+                        {this.props.time}
                     </span>
-                </div>
-                <div className="ml-7">
-                    <p>
-                        {this.props.content}
-                    </p>
+                    <div>
+                        <div className="flex align-middle">
+                            <span className="font-semibold text-primary-700">
+                                {this.props.name}
+                            </span>
+                        </div>
+                        <div>
+                            <p>
+                                {this.props.content}
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         )
