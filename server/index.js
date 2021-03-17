@@ -56,8 +56,8 @@ const commentApi = require('./routes/comment')
 app.use('/api/v1/comments', commentApi)
 
 // Channel API
-//const channelApi = require('./routes/channel')
-//app.use('/api/v1/channel', channelApi)
+const channelApi = require('./routes/channel')
+app.use('/api/v1/channel', channelApi)
 
 // If path not defined in any of the above routes, serve index.html
 // from the build folder.

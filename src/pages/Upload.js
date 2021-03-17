@@ -6,12 +6,14 @@ import { Link } from 'react-router-dom'
 import Design from '../designSystem'
 import UploadVideo from '../functions/video/upload'
 import { Formik, Field, Form } from 'formik'
+import BMF from 'browser-md5-file'
 export default class Profile extends Component {
     constructor(props) {
         super(props)
         this.state = {
             uploadStatus: false,
-            selectedFile: null
+            selectedFile: null,
+            selectedFileMD5: null
         }
     }
 
@@ -30,13 +32,20 @@ export default class Profile extends Component {
         })
     }
 
+    // Generate MD5 and store file when the file picker is changed.
     handleFileSelection = event => {
-        this.setState({
-            selectedFile: event.target.files[0]
-        })
+        new BMF().md5(
+            event.target.files[0],
+            (err, hash) => {
+                //console.error('error', err)
+                this.setState({
+                    selectedFile: event.target.files[0],
+                    selectedFileMD5: hash
+                })
+                console.log(this.state)
+            },
+        )
     }
-
-
 
     render () {
         return (
@@ -58,7 +67,7 @@ export default class Profile extends Component {
                             description: ''
                         }}
                         onSubmit={async (values) => {
-                            await UploadVideo(this.state.selectedFile, values)
+                            await UploadVideo(this.state.selectedFile, this.state.selectedFileMD5, values)
                         }}>
                         <Form>
                             <label className="mr-2 font-semibold" htmlFor="videoFile">Choose file</label>

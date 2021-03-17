@@ -8,7 +8,7 @@ import Login from './pages/Login'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import Video from './pages/Video'
-import Channel from './pages/Channel/Channel'
+import Channel from './pages/Channel'
 import Upload from './pages/Upload'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 

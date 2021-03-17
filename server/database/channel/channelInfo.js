@@ -1,20 +1,20 @@
 const sql = require('mssql')
 const config = require('../sqlConfig')
 
-function getTop10(callback) {
+function getInfo(channelId, callback) {
     sql.connect(config, (err) => {
         if (err) {
             return callback(err)
         } else {
             new sql.Request().query(
                 `
-                SELECT TOP (10) [videoId], [title], [description] FROM [dbo].[videos];
+                SELECT * FROM [dbo].[channel] WHERE channelId='${channelId}';
                 `,
                 (err, result) => {
                     if (err) {
                         return callback(err)
                     } else {
-                        return callback(result.recordset)
+                        return callback(result.recordset[0])
                     }
                 }
             )
@@ -23,5 +23,5 @@ function getTop10(callback) {
 }
 
 module.exports = {
-    getTop10
+    getInfo
 }

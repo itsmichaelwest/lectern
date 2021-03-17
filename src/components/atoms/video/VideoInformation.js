@@ -65,8 +65,8 @@ export default class Video extends Component {
                     </div>
                 </div>
                 <div className="flex justify-between items-center">
-                    <Link className="flex flex-row items-center font-bold" to="/channel/1">
-                        <div className="flex-initial rounded-full bg-white h-8 w-8 mr-2">
+                    <Link className="flex flex-row items-center font-bold" to={'/channel/' + this.props.id}>
+                        <div className="flex-initial rounded-full bg-primary h-8 w-8 mr-2">
                             {/* put an image here ok */}
                         </div>
                         {this.props.channelName}

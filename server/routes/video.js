@@ -1,29 +1,34 @@
 const express = require('express')
 const router = new express.Router()
-const https = require('https')
 const videoApi = require('../api/video')
-const fs = require('fs')
-
-const vDatabase = require('../database/video/upload')
-
 const authCheckMiddleware = require('../middleware/auth-check')
+
+// Database endpoints
+const fetch = require('../database/video/fetch')
+const upload = require('../database/video/upload')
+const { request } = require('express')
+
 
 // Get all videos. Not recommended.
 router.get('/allVideos', authCheckMiddleware(), (req, res) => {
-    res.send(videoApi.all())
+    fetch.getAll((result) => {
+        res.json(result)
+    })
 })
 
+// Get top 10 videos
 router.get('/topVideos', (req, res) => {
-    const top10 = require('../database/video/getTop10')
-    res.json(top10())
+    fetch.getTop10((result) => {
+        res.json(result)
+    })
 })
-
 
 // Get information about the video of [videoId]. 
-router.get('/:videoId', authCheckMiddleware(), (req, res) => {
-    res.send(videoApi.get(req.params.videoId))
+router.get('/:videoId', (req, res) => {
+    fetch.getVideo(req.params.videoId, (result) => {
+        res.json(result)
+    }) 
 })
-
 
 // Download video
 router.get('/download/:videoId', authCheckMiddleware(), (req, res) => {
@@ -31,24 +36,26 @@ router.get('/download/:videoId', authCheckMiddleware(), (req, res) => {
 })
 
 
-router.post('/upload', authCheckMiddleware(), async (req, res) => {
-    console.log(req.body.title)
+router.post('/upload', authCheckMiddleware(), (req, res) => {
+    console.log(req.body)
 
     /*
     const storageUpload = require('../storage/uploadFile')
-    const result = await storageUpload.prepareAssetAndBlockBlob(req.body.fileName)
+    const result = await storageUpload.prepareAssetAndBlockBlob(req.body.fileName)*/
 
-    const databaseUpload = require('../database/video/upload')
-    databaseUpload.insertVideo()*/
+    if (req.isAuthenticated()) {
+        upload.insertVideo(req.body.videoId, req.body.title, req.body.description, req.body.privacy, req.session.passport.user.oid)
+    }
 
     //res.json(result)
 })
 
+// Add streaming URL to the video database entry
 router.post('/upload/:videoId/success', (req, res) => {
-    //vDatabase.addStreamUrl(req.params.videoId, req.body.streamUrl)
-    res.send(true)
+    upload.addStreamUrl(req.params.videoId, req.body.streamUrl, (result) => {
+        res.json(result)
+    })
 })
-
 
 router.post('/:videoId/like', authCheckMiddleware(), (req, res) => {
     res.send(videoApi.like(req.params.videoId))

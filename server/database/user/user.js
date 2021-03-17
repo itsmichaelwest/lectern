@@ -21,6 +21,11 @@ function addUser(profile) {
                                 console.log(err)
                             }
                         });
+                        request.query(`INSERT INTO [dbo].[channel] (channelId, displayName) VALUES ('${profile.oid}', '${profile.displayName}')`, (err) => {
+                            if (err) {
+                                console.error(err)
+                            }
+                        })
                     }
                 }
             })
@@ -81,7 +86,13 @@ function destroyUser(oid, callback) {
                 if (err) {
                     callback(err)
                 } else {
-                    callback(false, true)
+                    request.query(`DELETE FROM [dbo].[channel] WHERE channelId='${oid}'`, (err, res) => {
+                        if (err) {
+                            callback(err)
+                        } else {
+                            callback(false, true)
+                        }
+                    })
                 }
             })
         })

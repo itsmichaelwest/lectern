@@ -4,36 +4,22 @@ import axios from 'axios'
 import url from 'url'
 import { BlobServiceClient, AnonymousCredential } from '@azure/storage-blob'
 
-export default function uploadVideo(video, values) {
-    let body = new FormData()
-    body.append('fileName', video.name)
+export default async function uploadVideo(video, md5, values) {
 
-    new BMF().md5(
-        video,
-        (err, hash) => {
-            //console.error('error', err)
-            body.append('id', hash)
-        },
-    )
-    
-    body.append('title', values.title)
-    body.append('description', values.description)
-    body.append('privacy', values.privacy)
-
-    axios({
-        method: 'get',
-        url: `${config.apiUrl}/auth/user/id`
-    }).then(res => {
-        body.append('uploader', res.data)
-    })
-
-    let uploadSasUrl
 
     axios({
         method: 'post',
         url: `${config.apiUrl}/api/v1/video/upload`,
-        data: body
+        data: {
+            'videoId': md5,
+            'fileName': video.name,
+            'title': values.title,
+            'description': values.description,
+            'privacy': values.privacy,
+            'author': 123
+        }
     }).then(async res => {
+        console.log(res)
         /*
         uploadSasUrl = res.data
 

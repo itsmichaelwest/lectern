@@ -11,7 +11,13 @@ export default class Video extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            videoId: null
+            videoId: null,
+            title: null,
+            description: null,
+            likes: null,
+            dislikes: null,
+            streamUrl: null,
+            author: null
         }
     }
 
@@ -23,35 +29,40 @@ export default class Video extends Component {
         axios
         .get(config.apiUrl + '/api/v1/video/' + params.videoId)
         .then(response => {
+            console.log(response)
             this.setState({
-            videoId: response.data
+                videoId: response.data.videoId,
+                title: response.data.title,
+                description: response.data.description,
+                likes: response.data.likes,
+                dislikes: response.data.dislikes,
+                streamUrl: response.data.streamUrl,
+                author: response.data.author
             })
         })
         .catch(err => {
-            console.log(
-            `[Video] User is not signed in`
-            )
+            console.error(err)
         })
 
         var video = document.getElementById('video')
-        var videoSrc = 'https://aucs39440mediatest-ukso1.streaming.media.azure.net/89710c1a-8226-43cb-a842-c4a29abc0b5a/2BDGpizugSe_mrNe.ism/manifest(format=m3u8-aapl)'
     
+        /*
         if (Hls.isSupported()) {
           var hls = new Hls();
-          hls.loadSource(videoSrc);
+          hls.loadSource(this.state.streamUrl);
           hls.attachMedia(video);
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          video.src = videoSrc
-        }
+          video.src = this.state.streamUrl
+        }*/
     }
 
     render () {
-        const { videoId } = this.state
+        const { title, description, likes, dislikes, author } = this.state
 
         return (
             <>
             <Helmet>
-                <title>{`CS38110 Open Source Development Issues: Lecture 1 - Introduction | Lectern`}</title>
+                <title>{`${title} | Lectern`}</title>
             </Helmet>
             <div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
@@ -59,12 +70,12 @@ export default class Video extends Component {
                     <VideoComments/>
                 </div>
                 <VideoInformation 
-                    id={videoId}
-                    title="CS38110 Open Source Development Issues: Lecture 1 - Introduction" 
-                    description="A short introduction to the CS381 module. We'll talk about the core module content and what to expect from the next few weeks." 
+                    id={author}
+                    title={title} 
+                    description={description}
                     views="16 views"
                     date="January 10, 2021"
-                    channelName="Test Channel"
+                    channelName={author}
                     subscribers="20"
                 />
             </div>

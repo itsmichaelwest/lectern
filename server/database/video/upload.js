@@ -2,7 +2,7 @@ const sql = require('mssql')
 const config = require('../sqlConfig')
 
 // Add video to database
-function insertVideo(id, name, description, privacy) {
+function insertVideo(id, name, description, privacy, author) {
     sql.connect(config, (err) => {
         if (err) {
             console.log(err)
@@ -10,17 +10,17 @@ function insertVideo(id, name, description, privacy) {
         } else {
             new sql.Request().query(
                 `
-                INSERT INTO [dbo].[video] 
-                (id, name, description, privacy)
+                INSERT INTO [dbo].[videos] 
+                (videoId, title, description, privacy, author)
                 VALUES
-                ('${id}', '${name}', '${description}', '${privacy}');
+                ('${id}', '${name}', '${description}', '${privacy}', '${author}');
                 `, 
                 (err, result) => {
                 if (err) {
                     console.error(err)
                     throw err
                 } else {
-                    config.log(result)
+                    console.log(result)
                     return result
                 }
             })
@@ -30,11 +30,10 @@ function insertVideo(id, name, description, privacy) {
 
 // Updates video record with streaming url from azure, once it's been
 // transcoded.
-function addStreamUrl(id, url) {
+function addStreamUrl(id, url, callback) {
     sql.connect(config, (err) => {
         if (err) {
-            console.log(err)
-            throw err
+            return callback(err)
         } else {
             new sql.Request().query(
                 `
@@ -44,18 +43,15 @@ function addStreamUrl(id, url) {
                 `,
                 (err, result) => {
                     if (err) {
-                        console.log(err)
-                        throw err
+                        return callback(err)
                     } else {
-                        console.log(result)
-                        return result
+                        return callback(result)
                     }
                 }
             )
         }
     })
 }
-
 
 module.exports = {
     insertVideo,
