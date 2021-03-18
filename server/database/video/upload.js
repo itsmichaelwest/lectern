@@ -11,9 +11,9 @@ function insertVideo(id, name, description, privacy, author) {
             new sql.Request().query(
                 `
                 INSERT INTO [dbo].[videos] 
-                (videoId, title, description, privacy, author)
+                (videoId, title, description, privacy, author, views)
                 VALUES
-                ('${id}', '${name}', '${description}', '${privacy}', '${author}');
+                ('${id}', '${name}', '${description}', '${privacy}', '${author}', 0);
                 `, 
                 (err, result) => {
                 if (err) {

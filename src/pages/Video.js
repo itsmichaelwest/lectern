@@ -12,37 +12,43 @@ export default class Video extends Component {
         super(props)
         this.state = {
             videoId: null,
-            title: null,
+            title: '',
             description: null,
             likes: null,
             dislikes: null,
             streamUrl: null,
-            author: null
+            author: null,
+            views: null,
+            authorDisplayName: null
         }
     }
 
     componentDidMount () {
-        console.log(`**(Video) Loading video details from the server...`)
-
         const params = this.props.match.params
 
+        // Get all video information
         axios
         .get(config.apiUrl + '/api/v1/video/' + params.videoId)
         .then(response => {
             console.log(response)
             this.setState({
-                videoId: response.data.videoId,
-                title: response.data.title,
-                description: response.data.description,
-                likes: response.data.likes,
-                dislikes: response.data.dislikes,
-                streamUrl: response.data.streamUrl,
-                author: response.data.author
+                videoId: response.data[0].videoId,
+                title: response.data[0].title,
+                description: response.data[0].description,
+                likes: response.data[0].likes,
+                dislikes: response.data[0].dislikes,
+                streamUrl: response.data[0].streamUrl,
+                author: response.data[0].author,
+                views: response.data[0].views,
+                authorDisplayName: response.data[1].displayName
             })
         })
         .catch(err => {
             console.error(err)
         })
+
+        // Adds a view to the video
+        axios.post(`${config.apiUrl}/api/v1/video/${params.videoId}/view`)
 
         var video = document.getElementById('video')
     
@@ -57,7 +63,7 @@ export default class Video extends Component {
     }
 
     render () {
-        const { title, description, likes, dislikes, author } = this.state
+        const { title, description, likes, dislikes, author, views, authorDisplayName } = this.state
 
         return (
             <>
@@ -66,18 +72,22 @@ export default class Video extends Component {
             </Helmet>
             <div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
-                    <VideoPlayer />
+                    <VideoPlayer className="sticky" />
                     <VideoComments/>
                 </div>
-                <VideoInformation 
-                    id={author}
-                    title={title} 
-                    description={description}
-                    views="16 views"
-                    date="January 10, 2021"
-                    channelName={author}
-                    subscribers="20"
-                />
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
+                    <VideoInformation 
+                        id={author}
+                        title={title} 
+                        description={description}
+                        views={views}
+                        date="January 10, 2021"
+                        likes={likes}
+                        dislikes={dislikes}
+                        channelName={authorDisplayName}
+                        subscribers="20"
+                    />
+                </div>
             </div>
             </>
         )

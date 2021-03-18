@@ -6,7 +6,7 @@ const authCheckMiddleware = require('../middleware/auth-check')
 // Database endpoints
 const fetch = require('../database/video/fetch')
 const upload = require('../database/video/upload')
-const { request } = require('express')
+const videoViewsLikes = require('../database/video/videoViewsLikes')
 
 
 // Get all videos. Not recommended.
@@ -58,11 +58,23 @@ router.post('/upload/:videoId/success', (req, res) => {
 })
 
 router.post('/:videoId/like', authCheckMiddleware(), (req, res) => {
-    res.send(videoApi.like(req.params.videoId))
+    videoViewsLikes.addLike(req.params.videoId)
 })
 
 router.delete('/:videoId/like', authCheckMiddleware(), (req, res) => {
-    res.send(videoApi.unlike(req.params.videoId))
+    videoViewsLikes.removeLike(req.params.videoId)
+})
+
+router.post('/:videoId/unlike', authCheckMiddleware(), (req, res) => {
+    videoViewsLikes.addDislike(req.params.videoId)
+})
+
+router.delete('/:videoId/unlike', authCheckMiddleware(), (req, res) => {
+    videoViewsLikes.removeDislike(req.params.videoId)
+})
+
+router.post('/:videoId/view', (req, res) => {
+    videoViewsLikes.addView(req.params.videoId)
 })
 
 module.exports = router

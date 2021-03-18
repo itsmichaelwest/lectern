@@ -44,6 +44,8 @@ function getTop10(callback) {
 }
 
 function getVideo(videoId, callback) {
+    let response = []
+
     sql.connect(config, (err) => {
         if (err) {
             return callback(err)
@@ -56,7 +58,20 @@ function getVideo(videoId, callback) {
                     if (err) {
                         return callback(err)
                     } else {
-                        return callback(result.recordset[0])
+                        response.push(result.recordset[0])
+                        new sql.Request().query(
+                            `
+                            SELECT * FROM [dbo].[channel] WHERE channelId='${result.recordset[0].author}'
+                            `,
+                            (err, result) => {
+                                if (err) {
+                                    return callback(err)
+                                } else {
+                                    response.push(result.recordset[0])
+                                    return callback(response)
+                                }
+                            }
+                        )
                     }
                 }
             )

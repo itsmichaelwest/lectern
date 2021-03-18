@@ -12,7 +12,7 @@ export default class Channel extends Component {
         super(props)
         this.state = {
             channelId: this.props.match.params.channelId,
-            channelName: null,
+            channelName: '',
             channelSubscribers: null,
             videos: null
         }
@@ -53,7 +53,7 @@ export default class Channel extends Component {
         return (
             <>
             <Helmet>
-                <title>Channel | Lectern</title>
+                <title>{`${channelName} | Lectern`}</title>
             </Helmet>
             <div>
                 <div className="bg-primary-900 rounded-xl">
@@ -81,7 +81,7 @@ export default class Channel extends Component {
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {videos.map(video => {
                             return (
-                                <Thumbnail key={video.videoId} id={video.videoId} length="06:05" title={video.title} description={video.description} />
+                                <Thumbnail key={video.videoId} id={video.videoId} length="" title={video.title} description={video.description} />
                             )
                         })}
                         </div>
