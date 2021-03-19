@@ -5,7 +5,21 @@ import url from 'url'
 import { BlobServiceClient, AnonymousCredential } from '@azure/storage-blob'
 
 export default async function uploadVideo(video, md5, values) {
+    // Validate inputs
+    if (!video) {
+        console.error('[UploadVideo] Video file missing!')
+        return
+    }
 
+    if (!md5) {
+        console.error('[UploadVideo] MD5 missing!')
+        return
+    }
+
+    if (!values.title || !values.description || !values.privacy) {
+        console.error('[UploadVideo] Values missing!')
+        return
+    }
 
     axios({
         method: 'post',

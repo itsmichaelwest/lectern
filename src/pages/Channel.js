@@ -7,6 +7,8 @@ import Design from '../designSystem'
 import Thumbnail from '../components/atoms/video/Thumbnail'
 import { Helmet } from 'react-helmet'
 
+import ContentLoader from 'react-content-loader'
+
 export default class Channel extends Component {
     constructor (props) {
         super(props)
@@ -56,14 +58,18 @@ export default class Channel extends Component {
                 <title>{`${channelName} | Lectern`}</title>
             </Helmet>
             <div>
+                <ContentLoader style={{ width: '100%', height: '100vh' }}>
+                    <rect x="0" y="0" rx="12" ry="12" width={"100vw"} height={"192px"} />
+                    <rect x="0" y="224" rx="8" ry="8" width={"calc(100vw / 3)"} height={"260px"} />
+                </ContentLoader>
                 <div className="bg-primary-900 rounded-xl">
-                    <div className="flex flex-row items-center relative p-8">
-                        <div className="flex flex-row items-center flex-auto">
+                    <div className="flex flex-col lg:flex-row items-center relative p-8">
+                        <div className="flex flex-col lg:flex-row items-center flex-auto">
                             <div className="flex-initial flex-shrink-0 rounded-full bg-white h-32 w-32 shadow-lg mr-8">
                                 {/* put an image here ok */}
                             </div>
                             <div className="flex-auto text-white">
-                                <h1 className="font-bold text-2xl">{channelName}</h1>
+                                <h1 className="font-bold text-2xl my-4 lg:my-0">{channelName}</h1>
                             </div>
                         </div>
                         <div className="float-right flex-initial flex flex-row items-center">

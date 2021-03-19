@@ -37,8 +37,6 @@ router.get('/download/:videoId', authCheckMiddleware(), (req, res) => {
 
 
 router.post('/upload', authCheckMiddleware(), (req, res) => {
-    console.log(req.body)
-
     /*
     const storageUpload = require('../storage/uploadFile')
     const result = await storageUpload.prepareAssetAndBlockBlob(req.body.fileName)*/
