@@ -6,7 +6,6 @@ import VideoComments from '../components/atoms/video/VideoComments'
 import VideoInformation from '../components/atoms/video/VideoInformation'
 import { Helmet } from 'react-helmet'
 import Hls from 'hls.js'
-import ContentLoader from 'react-content-loader'
 
 export default class Video extends Component {
     constructor (props) {
@@ -97,26 +96,24 @@ export default class Video extends Component {
                 :
                 <>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
-                    <div className="w-full h-0 rounded bg-gray-200" style={{ paddingBottom: '56.25%' }}></div> 
-                    <div className="w-full h-0 rounded bg-gray-200" style={{ paddingBottom: '56.25%' }}></div>
+                    <div className="shimmer w-full h-0 rounded" style={{ paddingBottom: '56.25%' }}></div> 
+                    <div className="shimmer w-full h-0 rounded" style={{ paddingBottom: '56.25%' }}></div>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
                     <div className="w-full">
-                        <div className="w-4/5 rounded bg-gray-200" style={{ height: '28px' }}></div>
-                        <div className="w-full h-12 mt-4 rounded bg-gray-200"></div>
+                        <div className="shimmer w-4/5 rounded" style={{ height: '28px' }}></div>
+                        <div className="shimmer w-full h-12 mt-4 rounded"></div>
                         <div className="flex justify-between my-8">
-                            <div className="w-2/5 h-12 rounded bg-gray-200"></div>
+                            <div className="shimmer w-2/5 h-12 rounded"></div>
                             <div className="flex">
-                                <div className="w-16 h-10 rounded bg-gray-200"></div>
-                                <div className="w-16 h-10 ml-2 rounded bg-gray-200"></div>
+                                <div className="shimmer w-16 h-10 rounded"></div>
                             </div>
                         </div>
                         <div className="flex flex-row items-center justify-between">
                             <div className="flex w-3/5 items-center">
-                                <div className="flex-initial rounded-full bg-gray-200 h-8 w-8 mr-2"></div>
-                                <div className="w-2/5 h-4 rounded bg-gray-200"></div>
+                                <div className="shimmer flex-initial rounded-full h-8 w-8 mr-2"></div>
+                                <div className="shimmer w-2/5 h-4 rounded"></div>
                             </div>
-                            <div className="w-32 h-10 rounded bg-gray-200"></div>
                         </div>
                     </div>
                 </div>

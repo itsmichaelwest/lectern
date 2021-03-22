@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import config from '../config'
 import { Helmet } from 'react-helmet'
-import ContentLoader from 'react-content-loader'
 import Dialog from '../components/Dialog'
 import design from '../designSystem'
 export default class Profile extends Component {
@@ -13,7 +12,8 @@ export default class Profile extends Component {
             loginName: null,
             displayName: null,
             id: null,
-            showDestroyModal: false
+            showDestroyModal: false,
+            videos: null
         }
     }
 
@@ -89,13 +89,6 @@ function LoggedOut(props) {
     return (
         <>
         <h1 className="text-2xl font-bold mb-8">User Profile</h1>
-        <ContentLoader className="h-64">
-            <rect x="0" y="2" width="300" height="20" />
-            <rect x="0" y="26" width="300" height="20" />
-            <rect x="0" y="50" width="300" height="20" />
-            <rect x="0" y="74" width="300" height="20" />
-            <rect x="0" y="116" width="96" height="42" />
-        </ContentLoader>
         </>
     )
 }

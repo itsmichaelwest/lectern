@@ -35,15 +35,67 @@ export default class Home extends Component {
                 <title>Lectern</title>
             </Helmet>
             <div>
-            {popular &&
+            <h1 className="text-4xl font-bold mb-8">Popular on Lectern</h1>
+            {popular ?
                 <>
-                <h1 className="text-4xl font-bold mb-8">Popular on Lectern</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">                    
                     {popular.map(video => {
                         return (
                             <Thumbnail key={video.videoId} id={video.videoId} title={video.title} description={video.description} />
                         )
                     })}
+                </div>
+                </>
+                :
+                <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
+                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
+                        <div className="shimmer rounded w-4/5 h-5"></div>
+                    </div>
+                    <div>
+                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
+                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
+                        <div className="shimmer rounded w-4/5 h-5"></div>
+                    </div>
+                    <div>
+                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
+                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
+                        <div className="shimmer rounded w-4/5 h-5"></div>
+                    </div>
+                </div>
+                </>
+            }
+            <h1 className="text-4xl font-bold mb-8 mt-32">Latest videos</h1>
+            {popular ?
+                <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">                    
+                    {popular.map(video => {
+                        return (
+                            <Thumbnail key={video.videoId} id={video.videoId} title={video.title} description={video.description} />
+                        )
+                    })}
+                </div>
+                </>
+                :
+                <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
+                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
+                        <div className="shimmer rounded w-4/5 h-5"></div>
+                    </div>
+                    <div>
+                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
+                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
+                        <div className="shimmer rounded w-4/5 h-5"></div>
+                    </div>
+                    <div>
+                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
+                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
+                        <div className="shimmer rounded w-4/5 h-5"></div>
+                    </div>
                 </div>
                 </>
             }

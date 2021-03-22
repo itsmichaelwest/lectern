@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import config from '../config'
 import { Helmet } from 'react-helmet'
 import MSFTSignInButton from '../vectors/msft-sign-in.svg'
 
