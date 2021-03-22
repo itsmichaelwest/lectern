@@ -3,3 +3,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes shimmerBackground {
+    0% {background-color: rgb(243, 244, 246)}
+    50% {background-color: rgb(229, 231, 235)}
+    100% {background-color: rgb(243, 244, 246)}
+}
+
+.shimmer {
+    background-color: rgb(243, 244, 246);
+    animation: shimmerBackground 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmerBackgroundDarker {
+    0% {background-color: rgb(229, 231, 235)}
+    50% {background-color: rgb(209, 213, 219)}
+    100% {background-color: rgb(229, 231, 235)}
+}
+
+.shimmer-darker {
+    background-color: rgb(229, 231, 235);
+    animation: shimmerBackgroundDarker 1.5s ease-in-out infinite;
+}
