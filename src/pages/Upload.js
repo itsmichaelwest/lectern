@@ -87,7 +87,7 @@ export default class Upload extends Component {
                         onSubmit={async (values) => {
                             await UploadVideo(this.state.selectedFile, values)
                         }}>
-                        <Form className="lg:w-3/6 md:w-4/6 w-full mx-auto">
+                        <Form className="lg:w-3/6 md:w-4/6 w-full mx-auto" autoComplete="off">
                             {
                                 this.state.selectedFile 
                                 ?
