@@ -3,6 +3,8 @@
 This project focuses on creating a video platform with timestamped comments and potentially other interactive media. 
 It is in an early stage, with most work focusing on scaffolding the basic UI components.
 
+Please see the Wiki for API documentation and current user stories. This documentation is set to evolve over time and may relocate to new locations. This README will be updated in the event that happens.
+
 ## Getting started
 
 You'll need [Node.js](https://nodejs.org/download/) installed.

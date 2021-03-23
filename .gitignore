@@ -24,4 +24,15 @@ yarn-error.log*
 
 # env
 .env
-server/.env
+.env
+
+#vscode
+.vscode
+.deployment
+/docs
+
+#webstorm
+.idea
+
+server/uploads
+server/storage/addToBlob.js

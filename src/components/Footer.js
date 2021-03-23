@@ -1,19 +1,24 @@
 import { React, Component } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import config from '../config'
 
 export default class Footer extends Component {
     render() {
         return (
             <>
-            <footer className="absolute inset-x-0 bottom-0 bg-white mt-8">
-                <div className="max-w-7xl mx-auto my-8">
-                    <div className="flex">
-                        <p>
-                            Copyright 2021
+            <footer>
+                <div className="container max-w-7xl mx-auto px-4 sm:px-6 mt-24 pb-16">
+                    <div className="text-xs text-gray-400">
+                        <p className="float-left">
+                            © 2021
+                        </p>
+                        <p className="float-right">
+                            <Link to="/privacy" className="mr-4 text-primary-600 hover:text-primary-900">
+                                Privacy policy
+                            </Link>
+                            This site is a work in progress.
                         </p>
                     </div>
-
                 </div>
             </footer>
             </>

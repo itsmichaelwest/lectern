@@ -1,21 +1,106 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import Sidebar from '../components/sidebar/Sidebar'
-
+import axios from 'axios'
+import Helmet from 'react-helmet'
+import Thumbnail from '../components/atoms/video/Thumbnail'
+import config from '../config'
 export default class Home extends Component {
-  render () {
-    return (
-      <div>
-        <div class="flex flex-row">
-          <div className="flex-initial">
-            <Sidebar/>
-          </div>
-          <div>
-             <h3 className="text-2xl font-bold mb-2">Home</h3>
-            <Link className="text-yellow-600 hover:text-yellow-900" to='/profile'>Your profile (should only work if logged)</Link>
-          </div>
-        </div>
-      </div>
-    )
-  }
+    constructor(props) {
+        super(props)
+        this.state = {
+            popular: null
+        }
+    }
+
+    componentDidMount() {
+        axios
+            .get(`${config.apiUrl}/api/v1/video/topVideos`)
+            .then(response => {
+                console.log('[Home] Got top 10 videos from database')
+                console.log(response)
+                this.setState({
+                    popular: response.data
+                })
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+
+    render () {
+        const { popular } = this.state
+
+        return (
+            <>
+            <Helmet>
+                <title>Lectern</title>
+            </Helmet>
+            <div>
+            <h1 className="text-4xl font-bold mb-8">Popular on Lectern</h1>
+            {popular ?
+                <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">                    
+                    {popular.map(video => {
+                        return (
+                            <Thumbnail key={video.videoId} id={video.videoId} title={video.title} description={video.description} />
+                        )
+                    })}
+                </div>
+                </>
+                :
+                <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
+                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
+                        <div className="shimmer rounded w-4/5 h-5"></div>
+                    </div>
+                    <div>
+                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
+                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
+                        <div className="shimmer rounded w-4/5 h-5"></div>
+                    </div>
+                    <div>
+                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
+                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
+                        <div className="shimmer rounded w-4/5 h-5"></div>
+                    </div>
+                </div>
+                </>
+            }
+            <h1 className="text-4xl font-bold mb-8 mt-32">Latest videos</h1>
+            {popular ?
+                <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">                    
+                    {popular.map(video => {
+                        return (
+                            <Thumbnail key={video.videoId} id={video.videoId} title={video.title} description={video.description} />
+                        )
+                    })}
+                </div>
+                </>
+                :
+                <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
+                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
+                        <div className="shimmer rounded w-4/5 h-5"></div>
+                    </div>
+                    <div>
+                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
+                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
+                        <div className="shimmer rounded w-4/5 h-5"></div>
+                    </div>
+                    <div>
+                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
+                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
+                        <div className="shimmer rounded w-4/5 h-5"></div>
+                    </div>
+                </div>
+                </>
+            }
+            </div>
+            </>
+        )
+    }
 }
