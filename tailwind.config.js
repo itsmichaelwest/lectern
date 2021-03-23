@@ -39,9 +39,11 @@ module.exports = {
   variants: {
     extend: {
       textAlign: ['hover', 'focus'],
+      backgroundColor: ['checked']
     },
   },
   plugins: [
     require('@tailwindcss/typography'),
+    require('@tailwindcss/forms')
   ],
 }
