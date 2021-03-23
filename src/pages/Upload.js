@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet'
 import Design from '../designSystem'
 import UploadVideo from '../functions/video/upload'
 import { Formik, Field, Form } from 'formik'
-import { Link } from 'react-router-dom'
+import { Link, Prompt } from 'react-router-dom'
 import UploadSkeleton from './skeletons/UploadSkeleton'
 import FileDropper from '../components/atoms/upload/FileDropper'
 import FileInfo from '../components/atoms/upload/FileInfo'
@@ -44,6 +44,15 @@ export default class Upload extends Component {
         })
     }
 
+    // Warn user that their changes won't be
+    componentDidUpdate = () => {
+        if (this.state.selectedFile) {
+            window.onbeforeunload = () => true
+        } else {
+            window.onbeforeunload = undefined
+        }
+    }
+
     handleFileSelection(file) {
         this.setState({
             selectedFile: file[0],
@@ -55,6 +64,9 @@ export default class Upload extends Component {
     render () {
         return (
             <>
+            <Prompt
+                when={this.state.selectedFile}
+                message='Leave page? This video won&apos;t be uploaded' />
             <Helmet>
                 <title>Upload Video | Lectern</title>
             </Helmet>
