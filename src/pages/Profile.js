@@ -3,7 +3,7 @@ import axios from 'axios'
 import config from '../config'
 import { Helmet } from 'react-helmet'
 import Dialog from '../components/Dialog'
-import design from '../designSystem'
+import Design from '../Design'
 export default class Profile extends Component {
     constructor (props) {
         super(props)
@@ -59,7 +59,15 @@ export default class Profile extends Component {
                 <title>Your Profile | Lectern</title>
             </Helmet>
             <div>
-                <Dialog onClose={this.toggleDestroyModal} show={this.state.showDestroyModal} destroyUser={this.destroyUser}>
+                <Dialog 
+                    show={this.state.showDestroyModal} 
+                    onPrimary={this.destroyUser}
+                    onClose={this.toggleDestroyModal}
+                    primaryStyle={Design.ButtonDestructive}
+                    primary="Delete data"
+                    secondary="Cancel"
+                    secondaryStyle={Design.Button}
+                >
                     <h4 className="font-bold text-lg">
                         Delete my data
                     </h4>
@@ -75,7 +83,7 @@ export default class Profile extends Component {
                         You will be logged out. You can de-authorize Lectern from your account provider by following these instructions:
                     </p>
                     <p className="my-2">
-                        <a className={design.href} href="https://docs.microsoft.com/en-us/azure/active-directory/user-help/my-applications-portal-permissions-saved-accounts">Revoking permissions from Microsoft 365 account</a>
+                        <a className={Design.URL} href="https://docs.microsoft.com/en-us/azure/active-directory/user-help/my-applications-portal-permissions-saved-accounts">Revoking permissions from Microsoft 365 account</a>
                     </p>
                 </Dialog>
                 {page}
@@ -103,7 +111,7 @@ function LoggedIn(state, toggleDestroyModal) {
                 E-mail: {state.loginName}
             </p>
             <div className="mt-4 mx-auto w-max">
-                <button onClick={toggleDestroyModal} className="ml-2 inline-block rounded-md border border-red-500 shadow-sm px-4 py-2 bg-red-600 text-sm font-medium text-gray-100 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500">
+                <button onClick={toggleDestroyModal} className={Design.ButtonDestructive}>
                     Delete my data
                 </button>
             </div>

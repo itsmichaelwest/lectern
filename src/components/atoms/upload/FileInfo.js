@@ -1,5 +1,5 @@
 import React from 'react'
-import Design from '../../../designSystem'
+import Design from '../../../Design'
 import Filesize from 'filesize'
 
 export default function FileInfo(props) {
