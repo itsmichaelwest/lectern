@@ -2,31 +2,9 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import config from '../../../config'
 import { Link } from 'react-router-dom'
-import Design from '../../../designSystem'
+import Design from '../../../Design'
 
 export default class Video extends Component {
-    likeVideo = () => {
-        axios
-        .post(`${config.apiUrl}/api/v1/video/${this.props.id}/like`)
-        .catch(err => {
-            console.log(
-                `**(Video) User is not logged.`
-            )
-        })
-    }
-
-
-    unlikeVideo = () => {
-        axios
-        .delete(`${config.apiUrl}/api/v1/video/${this.props.id}/like`)
-        .catch(err => {
-            console.log(
-                `**(Video) User is not logged.`
-            )
-        })
-    }
-
-
     render () {
         return (
             <div>
@@ -38,7 +16,7 @@ export default class Video extends Component {
                         <p>{this.props.date}</p>
                     </div>
                     <div>
-                        <button className={Design.pButton} onClick={this.likeVideo}>
+                        <button className={Design.Button} onClick={this.likeVideo}>
                             {this.props.likes}
                             Favorite
                         </button>

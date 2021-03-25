@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class VideoPlayer extends Component {
-    render () {
-        return (
-            <video controls autoPlay id="video" className="w-full bg-black rounded">
-                <source src={this.props.mp4} type="video/mp4" />
-            </video>
-        )
-    }
+export default function VideoPlayer(props) {
+    return (
+        <video controls autoPlay id="video" className="w-full bg-black rounded">
+            <source src={props.mp4} type="video/mp4" />
+        </video>
+    )
 }

@@ -3,6 +3,7 @@ import axios from 'axios'
 import config from '../config'
 import Thumbnail from '../components/atoms/video/Thumbnail'
 import { Helmet } from 'react-helmet'
+import ChannelSkeleton from '../components/skeletons/ChannelSkeleton'
 
 export default class Channel extends Component {
     constructor (props) {
@@ -67,33 +68,7 @@ export default class Channel extends Component {
                     </div>
                 </div>
                 :
-                <>
-                <div className="shimmer rounded-xl">
-                    <div className="flex flex-col lg:flex-row items-center relative p-8">
-                        <div className="flex flex-col lg:flex-row items-center flex-auto">
-                            <div className="shimmer-darker flex-initial flex-shrink-0 rounded-full h-32 w-32 lg:mr-8"></div>
-                            <div className="shimmer-darker flex-initial my-4 lg:my-0 max-w-64 w-64 h-8 rounded"></div>
-                        </div>
-                    </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-                    <div>
-                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
-                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
-                        <div className="shimmer rounded w-4/5 h-5"></div>
-                    </div>
-                    <div>
-                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
-                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
-                        <div className="shimmer rounded w-4/5 h-5"></div>
-                    </div>
-                    <div>
-                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
-                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
-                        <div className="shimmer rounded w-4/5 h-5"></div>
-                    </div>
-                </div>
-                </>
+                <ChannelSkeleton/>
                 }
                 { videos &&
                     <div className="mt-8">
