@@ -6,7 +6,7 @@ import Design from '../designSystem'
 import UploadVideo from '../functions/video/upload'
 import { Formik, Field, Form } from 'formik'
 import { Link, Prompt } from 'react-router-dom'
-import UploadSkeleton from './skeletons/UploadSkeleton'
+import UploadSkeleton from '../components/skeletons/UploadSkeleton'
 import FileDropper from '../components/atoms/upload/FileDropper'
 import FileInfo from '../components/atoms/upload/FileInfo'
 
