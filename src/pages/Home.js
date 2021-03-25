@@ -3,6 +3,7 @@ import axios from 'axios'
 import Helmet from 'react-helmet'
 import Thumbnail from '../components/atoms/video/Thumbnail'
 import config from '../config'
+import { HomeSkeleton } from '../components/skeletons/HomeSkeleton'
 export default class Home extends Component {
     constructor(props) {
         super(props)
@@ -47,25 +48,7 @@ export default class Home extends Component {
                 </div>
                 </>
                 :
-                <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div>
-                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
-                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
-                        <div className="shimmer rounded w-4/5 h-5"></div>
-                    </div>
-                    <div>
-                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
-                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
-                        <div className="shimmer rounded w-4/5 h-5"></div>
-                    </div>
-                    <div>
-                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
-                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
-                        <div className="shimmer rounded w-4/5 h-5"></div>
-                    </div>
-                </div>
-                </>
+                <HomeSkeleton/>
             }
             <h1 className="text-4xl font-bold mb-8 mt-32">Latest videos</h1>
             {popular ?
@@ -79,25 +62,7 @@ export default class Home extends Component {
                 </div>
                 </>
                 :
-                <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div>
-                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
-                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
-                        <div className="shimmer rounded w-4/5 h-5"></div>
-                    </div>
-                    <div>
-                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
-                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
-                        <div className="shimmer rounded w-4/5 h-5"></div>
-                    </div>
-                    <div>
-                        <div className="shimmer rounded-lg mb-2" style={{ height: 0, paddingBottom: '56.25%' }}></div>
-                        <div className="shimmer rounded w-3/5 my-1" style={{ height: '18px' }}></div>
-                        <div className="shimmer rounded w-4/5 h-5"></div>
-                    </div>
-                </div>
-                </>
+                <HomeSkeleton/>
             }
             </div>
             </>
