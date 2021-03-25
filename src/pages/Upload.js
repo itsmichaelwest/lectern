@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import config from '../config'
 import { Helmet } from 'react-helmet'
-import Design from '../designSystem'
+import Design from '../Design'
 import UploadVideo from '../functions/video/upload'
 import { Formik, Field, Form } from 'formik'
 import { Link, Prompt } from 'react-router-dom'
@@ -127,7 +127,7 @@ export default class Upload extends Component {
                                     </Link>
                                 </div>
                                 <div className="mt-7">
-                                    <button className={Design.PrimaryButton} type="submit">Upload</button>
+                                    <button className={Design.ButtonPrimary} type="submit">Upload</button>
                                 </div>
                             </div>
                         </Form>

@@ -3,7 +3,7 @@ import axios from 'axios'
 import config from '../config'
 import { Helmet } from 'react-helmet'
 import Dialog from '../components/Dialog'
-import design from '../designSystem'
+import Design from '../Design'
 import ProfileSkeleton from '../components/skeletons/ProfileSkeleton'
 export default class Profile extends Component {
     constructor (props) {
@@ -55,7 +55,15 @@ export default class Profile extends Component {
             <div>
                 {displayName ?
                     <>
-                    <Dialog onClose={this.toggleDestroyModal} show={this.state.showDestroyModal} destroyUser={this.destroyUser}>
+                    <Dialog 
+                        show={this.state.showDestroyModal} 
+                        onPrimary={this.destroyUser}
+                        onClose={this.toggleDestroyModal}
+                        primaryStyle={Design.ButtonDestructive}
+                        primary="Delete data"
+                        secondary="Cancel"
+                        secondaryStyle={Design.Button}
+                    >
                         <h4 className="font-bold text-lg">
                             Delete my data
                         </h4>
@@ -71,7 +79,7 @@ export default class Profile extends Component {
                             You will be logged out. You can de-authorize Lectern from your account provider by following these instructions:
                         </p>
                         <p className="my-2">
-                            <a className={design.href} href="https://docs.microsoft.com/en-us/azure/active-directory/user-help/my-applications-portal-permissions-saved-accounts">Revoking permissions from Microsoft 365 account</a>
+                            <a className={Design.URL} href="https://docs.microsoft.com/en-us/azure/active-directory/user-help/my-applications-portal-permissions-saved-accounts">Revoking permissions from Microsoft 365 account</a>
                         </p>
                     </Dialog>
                     <h1 className="text-3xl font-bold mb-4 text-center">

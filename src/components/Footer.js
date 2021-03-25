@@ -1,27 +1,25 @@
-import { React, Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import config from '../config'
+import Design from '../Design'
 
-export default class Footer extends Component {
-    render() {
-        return (
-            <>
-            <footer>
-                <div className="container max-w-7xl mx-auto px-4 sm:px-6 mt-24 pb-16">
-                    <div className="text-xs text-gray-400">
-                        <p className="float-left">
-                            © 2021
-                        </p>
-                        <p className="float-right">
-                            <Link to="/privacy" className="mr-4 text-primary-600 hover:text-primary-900">
-                                Privacy policy
-                            </Link>
+export default function Footer() {
+    return (
+        <footer>
+            <div className="container max-w-7xl mx-auto px-4 sm:px-6 mt-24 pb-16">
+                <div className="text-xs text-gray-400">
+                    <p className="float-left">
+                        © 2021
+                    </p>
+                    <div className="float-right">
+                        <Link to="/privacy" className={Design.URL}>
+                            Privacy policy
+                        </Link>
+                        <p className="ml-4 inline">
                             This site is a work in progress.
                         </p>
                     </div>
                 </div>
-            </footer>
-            </>
-        )
-    }
+            </div>
+        </footer>
+    )
 }
