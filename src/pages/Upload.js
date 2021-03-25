@@ -34,7 +34,7 @@ export default class Upload extends Component {
         .get(`${config.apiUrl}/auth/user`, {withCredentials: true})
         .then(() => {
             this.setState({
-                //auth: true
+                auth: true
             })
         })
         .catch(err => {
