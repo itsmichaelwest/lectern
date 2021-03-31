@@ -11,6 +11,7 @@ import Video from './pages/Video'
 import Channel from './pages/Channel'
 import Upload from './pages/Upload'
 import PrivacyPolicy from './pages/PrivacyPolicy'
+import CommunityStandards from './pages/CommunityStandards'
 
 export default class App extends Component {
     render () {
@@ -26,6 +27,7 @@ export default class App extends Component {
                         <Route path="/channel/:channelId" component={Channel} />
                         <Route path="/upload" component={Upload} />
                         <Route path="/privacy" component={PrivacyPolicy} />
+                        <Route path="/community-standards" component={CommunityStandards} />
                         <Route component={NotFound} />
                     </Switch>
                 </div>
