@@ -1,7 +1,6 @@
 import config from '../../config'
-import BMF from 'browser-md5-file'
 import axios from 'axios'
-import url from 'url'
+//import url from 'url'
 import { BlobServiceClient, AnonymousCredential } from '@azure/storage-blob'
 
 export default async function uploadVideo(video, md5, values) {
