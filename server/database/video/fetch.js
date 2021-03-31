@@ -29,7 +29,28 @@ function getTop10(callback) {
         } else {
             new sql.Request().query(
                 `
-                SELECT TOP (10) [videoId], [title], [description] FROM [dbo].[videos];
+                SELECT TOP (10) [videoId], [title], [author], [views] FROM [dbo].[videos] ORDER BY views DESC;
+                `,
+                (err, result) => {
+                    if (err) {
+                        return callback(err)
+                    } else {
+                        return callback(result.recordset)
+                    }
+                }
+            )
+        }
+    })
+}
+
+function getRecently(callback) {
+    sql.connect(config, (err) => {
+        if (err) {
+            return callback(err)
+        } else {
+            new sql.Request().query(
+                `
+                SELECT TOP (10) [videoId], [title], [author], [views] FROM [dbo].[videos];
                 `,
                 (err, result) => {
                     if (err) {
@@ -103,6 +124,7 @@ function getChannelVideos(channelId, callback) {
 module.exports = {
     getAll,
     getTop10,
+    getRecently,
     getVideo,
     getChannelVideos
 }

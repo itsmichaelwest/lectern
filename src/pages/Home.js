@@ -4,11 +4,13 @@ import Helmet from 'react-helmet'
 import Thumbnail from '../components/atoms/video/Thumbnail'
 import config from '../config'
 import { HomeSkeleton } from '../components/skeletons/HomeSkeleton'
+
 export default class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            popular: null
+            popular: null,
+            recent: null
         }
     }
 
@@ -16,10 +18,19 @@ export default class Home extends Component {
         axios
             .get(`${config.apiUrl}/api/v1/video/topVideos`)
             .then(response => {
-                console.log('[Home] Got top 10 videos from database')
-                console.log(response)
                 this.setState({
                     popular: response.data
+                })
+            })
+            .catch(error => {
+                console.error(error)
+            })
+
+        axios
+            .get(`${config.apiUrl}/api/v1/video/recentVideos`)
+            .then(response => {
+                this.setState({
+                    recent: response.data
                 })
             })
             .catch(error => {
@@ -28,7 +39,7 @@ export default class Home extends Component {
     }
 
     render () {
-        const { popular } = this.state
+        const { popular, recent } = this.state
 
         return (
             <>
@@ -42,7 +53,12 @@ export default class Home extends Component {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">                    
                     {popular.map(video => {
                         return (
-                            <Thumbnail key={video.videoId} id={video.videoId} title={video.title} description={video.description} />
+                            <Thumbnail 
+                                key={video.videoId} 
+                                id={video.videoId} 
+                                title={video.title} 
+                                description={video.author} 
+                            />
                         )
                     })}
                 </div>
@@ -51,12 +67,17 @@ export default class Home extends Component {
                 <HomeSkeleton/>
             }
             <h1 className="text-4xl font-bold mb-8 mt-32">Latest videos</h1>
-            {popular ?
+            {recent ?
                 <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">                    
-                    {popular.map(video => {
+                    {recent.map(video => {
                         return (
-                            <Thumbnail key={video.videoId} id={video.videoId} title={video.title} description={video.description} />
+                            <Thumbnail 
+                                key={video.videoId} 
+                                id={video.videoId} 
+                                title={video.title} 
+                                description={video.author} 
+                            />
                         )
                     })}
                 </div>

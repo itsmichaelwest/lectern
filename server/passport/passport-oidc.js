@@ -2,7 +2,7 @@ const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
 const user = require('../database/user/user')
 const request = require('request')
 
-const url = process.env.AUTH_REDIRECT_URL || 'https://az-mmp.michaelwe.st'
+const url = process.env.AUTH_REDIRECT_URL || 'https://lectern.video'
 
 const strategy = new OIDCStrategy(
     {
