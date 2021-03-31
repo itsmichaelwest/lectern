@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
     }
 } else {
     config = {
-        apiUrl: 'https://az-mmp.michaelwe.st',
+        apiUrl: 'https://lectern.video',
     }
 }
 

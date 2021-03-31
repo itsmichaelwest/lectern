@@ -5,6 +5,8 @@ import { Helmet } from 'react-helmet'
 import Dialog from '../components/Dialog'
 import Design from '../Design'
 import ProfileSkeleton from '../components/skeletons/ProfileSkeleton'
+import Thumbnail from '../components/atoms/video/Thumbnail'
+import VideoRowSkeleton from '../components/skeletons/VideoRowSkeleton'
 export default class Profile extends Component {
     constructor (props) {
         super(props)
@@ -25,6 +27,16 @@ export default class Profile extends Component {
                 loginName: response.data.passport.user._json.email,
                 displayName: response.data.passport.user.displayName,
                 id: response.data.passport.user.oid
+            })
+            axios
+            .get(`${config.apiUrl}/api/v1/channel/${response.data.passport.user.oid}/videos`)
+            .then(response => {
+                this.setState({
+                    videos: response.data
+                })
+            })
+            .catch(err => {
+                console.error(err)
             })
         })
         .catch(err => {
@@ -53,7 +65,8 @@ export default class Profile extends Component {
                 <title>Your Profile | Lectern</title>
             </Helmet>
             <div>
-                {displayName ?
+                {
+                    displayName ?
                     <>
                     <Dialog 
                         show={this.state.showDestroyModal} 
@@ -89,7 +102,7 @@ export default class Profile extends Component {
                         E-mail: {loginName}
                     </p>
                     <div className="mt-4 mx-auto w-max">
-                        <button onClick={this.toggleDestroyModal} className="ml-2 inline-block rounded-md border border-red-500 shadow-sm px-4 py-2 bg-red-600 text-sm font-medium text-gray-100 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500">
+                        <button onClick={this.toggleDestroyModal} className={Design.ButtonDestructive}>
                             Delete my data
                         </button>
                     </div>
@@ -97,6 +110,28 @@ export default class Profile extends Component {
                     :
                     <ProfileSkeleton/>
                 }
+                <div className="mt-8">
+                    <h2 className="font-bold text-lg">
+                        Your videos
+                    </h2>
+                    {
+                        this.state.videos ?
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">                    
+                            {this.state.videos.map(video => {
+                                return (
+                                    <Thumbnail 
+                                        key={video.videoId} 
+                                        id={video.videoId} 
+                                        title={video.title} 
+                                        description={video.description} 
+                                    />
+                                )
+                            })}
+                        </div>
+                        :
+                        <VideoRowSkeleton/>
+                    }
+                </div>
             </div>
             </>
         )

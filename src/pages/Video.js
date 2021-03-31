@@ -6,6 +6,7 @@ import VideoComments from '../components/atoms/video/VideoComments'
 import VideoInformation from '../components/atoms/video/VideoInformation'
 import { Helmet } from 'react-helmet'
 import Hls from 'hls.js'
+import VideoSkeleton from '../components/skeletons/VideoSkeleton'
 
 export default class Video extends Component {
     constructor (props) {
@@ -15,8 +16,6 @@ export default class Video extends Component {
             videoId: null,
             title: '',
             description: null,
-            likes: null,
-            dislikes: null,
             streamUrl: null,
             author: null,
             views: null,
@@ -44,6 +43,15 @@ export default class Video extends Component {
                 views: response.data[0].views,
                 authorDisplayName: response.data[1].displayName
             })
+            axios
+            .get(`${config.apiUrl}/auth/user/id`)
+            .then(response => {
+                if (response.data === this.state.author) {
+                    this.setState({
+                        isCreator: true
+                    })
+                }
+            })
         })
         .catch(err => {
             console.error(err)
@@ -65,7 +73,7 @@ export default class Video extends Component {
     }
 
     render () {
-        const { isLoaded, title, description, likes, dislikes, author, views, authorDisplayName } = this.state
+        const { isLoaded, title, description, likes, dislikes, author, views, authorDisplayName, isCreator } = this.state
 
         return (
             <>
@@ -86,38 +94,14 @@ export default class Video extends Component {
                         description={description}
                         views={views}
                         date="January 10, 2021"
-                        likes={likes}
-                        dislikes={dislikes}
                         channelName={authorDisplayName}
                         subscribers="20"
+                        isCreator={isCreator}
                     />
                 </div>
                 </>
                 :
-                <>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
-                    <div className="shimmer w-full h-0 rounded" style={{ paddingBottom: '56.25%' }}></div> 
-                    <div className="shimmer w-full h-0 rounded" style={{ paddingBottom: '56.25%' }}></div>
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
-                    <div className="w-full">
-                        <div className="shimmer w-4/5 rounded" style={{ height: '28px' }}></div>
-                        <div className="shimmer w-full h-12 mt-4 rounded"></div>
-                        <div className="flex justify-between my-8">
-                            <div className="shimmer w-2/5 h-12 rounded"></div>
-                            <div className="flex">
-                                <div className="shimmer w-16 h-10 rounded"></div>
-                            </div>
-                        </div>
-                        <div className="flex flex-row items-center justify-between">
-                            <div className="flex w-3/5 items-center">
-                                <div className="shimmer flex-initial rounded-full h-8 w-8 mr-2"></div>
-                                <div className="shimmer w-2/5 h-4 rounded"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </>
+                <VideoSkeleton/>
                 }
             </div>
             </>
