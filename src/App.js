@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
 import Login from './pages/Login'
+import ScrollToTop from './components/ScrollToTop'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import Video from './pages/Video'
@@ -12,12 +13,14 @@ import Channel from './pages/Channel'
 import Upload from './pages/Upload'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import CommunityStandards from './pages/CommunityStandards'
+import APIDocsHome from './components/api-docs/APIHome'
 import APIDocs from './pages/APIDocs'
 
 export default class App extends Component {
     render () {
         return (
             <BrowserRouter>
+                <ScrollToTop/>
                 <Navigation/>
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6 text-sm">
                     <Switch>
@@ -30,6 +33,7 @@ export default class App extends Component {
                         <Route path="/privacy" component={PrivacyPolicy} />
                         <Route path="/community-standards" component={CommunityStandards} />
                         <Route path="/api/:apiType" component={APIDocs} />
+                        <Route path="/api" component={APIDocsHome} />
                         <Route component={NotFound} />
                     </Switch>
                 </div>

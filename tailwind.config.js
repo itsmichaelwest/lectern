@@ -20,7 +20,21 @@ module.exports = {
           100: '#e2edc6',
           50: '#f4f8e8'
         }
-      }
+      },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            a: {
+              color: theme('colors.primary.600'),
+              textDecoration: 'none',
+              "&:hover": {
+                color: theme('colors.primary.900'),
+                textDecoration: 'none',
+              },
+            },
+          },
+        },
+      }),
     },
   },
   variants: {

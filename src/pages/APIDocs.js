@@ -1,9 +1,9 @@
 import React from 'react'
-import AuthAPIDocs from '../components/api-docs/auth'
-import ChannelAPIDocs from '../components/api-docs/channel'
-import CommentAPIDocs from '../components/api-docs/comment'
-import VideoAPIDocs from '../components/api-docs/video'
-import NotFound from '../pages/NotFound'
+import AuthAPIDocs from '../components/api-docs/APIAuth'
+import ChannelAPIDocs from '../components/api-docs/APIChannel'
+import CommentAPIDocs from '../components/api-docs/APIComment'
+import VideoAPIDocs from '../components/api-docs/APIVideo'
+import NotFound from './NotFound'
 
 export default function APIDocs(props) {
     const params = props.match.params
