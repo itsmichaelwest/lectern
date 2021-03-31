@@ -9,21 +9,21 @@ const videoViewsLikes = require('../database/video/videoViewsLikes')
 
 
 // Get all videos. Not recommended.
-router.get('/allVideos', authCheckMiddleware(), (req, res) => {
+router.get('/all', authCheckMiddleware(), (req, res) => {
     fetch.getAll((result) => {
         res.json(result)
     })
 })
 
 // Get top 10 videos sorted by view count
-router.get('/topVideos', (req, res) => {
+router.get('/top', (req, res) => {
     fetch.getTop10((result) => {
         res.json(result)
     })
 })
 
 // Get top 10 most recently uploaded videos
-router.get('/recentVideos', (req, res) => {
+router.get('/recent', (req, res) => {
     fetch.getRecently((result) => {
         res.json(result)
     })
@@ -41,8 +41,8 @@ router.get('/:videoId', (req, res) => {
 })
 
 // Download video
-router.get('/download/:videoId', authCheckMiddleware(), (req, res) => {
-    res.download(`./server/uploads/${req.params.videoId}`)
+router.get('/:videoId/download', authCheckMiddleware(), (req, res) => {
+    res.download("test")
 })
 
 

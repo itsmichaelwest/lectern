@@ -1,6 +1,5 @@
 const express = require('express')
 const router = new express.Router()
-const authCheckMiddleware = require('../middleware/auth-check')
 
 // Channel info API
 const channelInfo = require('../database/channel/channelInfo')

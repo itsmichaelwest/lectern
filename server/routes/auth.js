@@ -6,12 +6,6 @@ const sql = require('../database/user/user')
 const querystring = require('querystring')
 const request = require('request')
 
-// Get login request
-router.get('/login', (req, res) => {
-    res.json({ message: 'Request login' })
-})
-
-
 // Get login MSFT
 router.get('/microsoft', (req, res, next) => {
     passport.authenticate('azuread-openidconnect',
@@ -138,13 +132,6 @@ function getAccessToken(req, callback) {
 router.get('/user', authCheckMiddleware(), (req, res) => {
     if (req.isAuthenticated()) {
         res.json(req.session)
-    }
-})
-
-// Get user oid, useful for querying 
-router.get('/user/id', authCheckMiddleware(), (req, res) => {
-    if (req.isAuthenticated()) {
-        res.json(req.session.passport.user.oid)
     }
 })
 

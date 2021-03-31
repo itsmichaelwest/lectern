@@ -16,7 +16,7 @@ export default class Home extends Component {
 
     componentDidMount() {
         axios
-            .get(`${config.apiUrl}/api/v1/video/topVideos`)
+            .get(`${config.apiUrl}/api/v1/video/top`)
             .then(response => {
                 this.setState({
                     popular: response.data
@@ -27,7 +27,7 @@ export default class Home extends Component {
             })
 
         axios
-            .get(`${config.apiUrl}/api/v1/video/recentVideos`)
+            .get(`${config.apiUrl}/api/v1/video/recent`)
             .then(response => {
                 this.setState({
                     recent: response.data
