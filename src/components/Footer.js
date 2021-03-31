@@ -11,8 +11,11 @@ export default function Footer() {
                         © 2021
                     </p>
                     <div className="float-right">
+                        <Link to="/community-standards" className={Design.URL + " mr-4"}>
+                            Community Standards
+                        </Link>
                         <Link to="/privacy" className={Design.URL}>
-                            Privacy policy
+                            Privacy Policy
                         </Link>
                         <p className="ml-4 inline">
                             This site is a work in progress.
