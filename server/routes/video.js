@@ -1,6 +1,5 @@
 const express = require('express')
 const router = new express.Router()
-const videoApi = require('../api/video')
 const authCheckMiddleware = require('../middleware/auth-check')
 
 // Database endpoints
@@ -33,7 +32,11 @@ router.get('/recentVideos', (req, res) => {
 // Get information about the video of [videoId]. 
 router.get('/:videoId', (req, res) => {
     fetch.getVideo(req.params.videoId, (result) => {
-        res.json(result)
+        if (result !== false) {
+            res.json(result)
+        } else {
+            res.status(404).json("No video with that ID could be found")
+        }
     }) 
 })
 
@@ -49,7 +52,12 @@ router.post('/upload', authCheckMiddleware(), (req, res) => {
     const result = await storageUpload.prepareAssetAndBlockBlob(req.body.fileName)*/
 
     if (req.isAuthenticated()) {
-        upload.insertVideo(req.body.videoId, req.body.title, req.body.description, req.body.privacy, req.session.passport.user.oid)
+        upload.insertVideo(
+            req.body.title, 
+            req.body.description, 
+            req.body.privacy, 
+            req.session.passport.user.oid
+        )
     }
 
     //res.json(result)
@@ -60,22 +68,6 @@ router.post('/upload/:videoId/success', (req, res) => {
     upload.addStreamUrl(req.params.videoId, req.body.streamUrl, (result) => {
         res.json(result)
     })
-})
-
-router.post('/:videoId/like', authCheckMiddleware(), (req, res) => {
-    videoViewsLikes.addLike(req.params.videoId)
-})
-
-router.delete('/:videoId/like', authCheckMiddleware(), (req, res) => {
-    videoViewsLikes.removeLike(req.params.videoId)
-})
-
-router.post('/:videoId/unlike', authCheckMiddleware(), (req, res) => {
-    videoViewsLikes.addDislike(req.params.videoId)
-})
-
-router.delete('/:videoId/unlike', authCheckMiddleware(), (req, res) => {
-    videoViewsLikes.removeDislike(req.params.videoId)
 })
 
 router.post('/:videoId/view', (req, res) => {

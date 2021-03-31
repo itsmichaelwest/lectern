@@ -30,14 +30,11 @@ export default class Video extends Component {
         axios
         .get(config.apiUrl + '/api/v1/video/' + params.videoId)
         .then(response => {
-            console.log(response)
             this.setState({
                 isLoaded: true,
                 videoId: response.data[0].videoId,
                 title: response.data[0].title,
                 description: response.data[0].description,
-                likes: response.data[0].likes,
-                dislikes: response.data[0].dislikes,
                 streamUrl: response.data[0].streamUrl,
                 author: response.data[0].author,
                 views: response.data[0].views,

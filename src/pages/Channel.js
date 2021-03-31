@@ -20,24 +20,12 @@ export default class Channel extends Component {
         const params = this.props.match.params
 
         axios
-        .get(`${config.apiUrl}/api/v1/channel/${params.channelId}`)
+        .get(`${config.apiUrl}/api/v1/channel/${params.channelId}/all`)
         .then(response => {
-            console.log(response)
             this.setState({
-                channelName: response.data.displayName,
-                channelSubscribers: response.data.followers
-            })
-        })
-        .catch(err => {
-            console.error(err)
-        })
-
-        axios
-        .get(`${config.apiUrl}/api/v1/channel/${params.channelId}/videos`)
-        .then(response => {
-            console.log(response)
-            this.setState({
-                videos: response.data
+                channelName: response.data[0].displayName,
+                channelSubscribers: response.data[0].followers,
+                videos: response.data[1]
             })
         })
         .catch(err => {

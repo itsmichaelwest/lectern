@@ -2,12 +2,7 @@ const sql = require('mssql')
 const config = require('../sqlConfig')
 
 // Add video to database
-function insertVideo(id, name, description, privacy, author) {
-    if (id.length !== 32) {
-        console.error('[Server] Video ID is not in correct form!')
-        return
-    }
-
+function insertVideo(name, description, privacy, author) {
     if (name.length > 256) {
         console.error('[Server] Video title is too long!')
         return
