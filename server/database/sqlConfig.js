@@ -1,8 +1,8 @@
 const config = {
-    user: `${process.env.AZ_DATABASE_USERNAME}`,
-    password: `${process.env.AZ_DATABASE_PASSWORD}`,
-    server: `${process.env.AZ_DATABASE_URL}`,
-    database: `${process.env.AZ_DATABASE_DB}`,
+    user: `${process.env.DB_USERNAME}`,
+    password: `${process.env.DB_PASSWORD}`,
+    server: `${process.env.DB_SERVER}`,
+    database: `${process.env.DB_DATABASE}`,
 }
 
 module.exports = config
