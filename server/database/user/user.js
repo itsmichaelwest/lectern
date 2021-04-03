@@ -1,7 +1,7 @@
 const sql = require('mssql')
 const config = require('../sqlConfig')
 
-function addUser(profile) {
+function addUser(profile, displayName) {
     sql.connect(config, (err) => {
         if (err) {
             console.log(err)
@@ -16,12 +16,12 @@ function addUser(profile) {
                 } else {
                     // Check if user is in the database, query will be undefined if not present.
                     if (typeof result.recordset[0] === 'undefined') {
-                        request.query(`INSERT INTO [dbo].[users] (userId, userName, userEmail) VALUES ('${profile.oid}', '${profile.displayName}', '${profile._json.email}')`, (err) => {
+                        request.query(`INSERT INTO [dbo].[users] (userId, userName, userEmail) VALUES ('${profile.oid}', '${displayName}', '${profile._json.email}')`, (err) => {
                             if (err) {
                                 console.log(err)
                             }
                         });
-                        request.query(`INSERT INTO [dbo].[channel] (channelId, displayName) VALUES ('${profile.oid}', '${profile.displayName}')`, (err) => {
+                        request.query(`INSERT INTO [dbo].[channels] (channelId, displayName) VALUES ('${profile.oid}', '${displayName}')`, (err) => {
                             if (err) {
                                 console.error(err)
                             }

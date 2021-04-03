@@ -8,7 +8,7 @@ function getInfo(channelId, callback) {
         } else {
             new sql.Request().query(
                 `
-                SELECT * FROM [dbo].[channel] WHERE channelId='${channelId}';
+                SELECT * FROM [dbo].[channels] WHERE channelId='${channelId}';
                 `,
                 (err, result) => {
                     if (err) {
@@ -35,7 +35,7 @@ function getInfoVideos(channelId, callback) {
         } else {
             new sql.Request().query(
                 `
-                SELECT * FROM [dbo].[channel] WHERE channelId='${channelId}';
+                SELECT * FROM [dbo].[channels] WHERE channelId='${channelId}';
                 `,
                 (err, result) => {
                     if (err) {

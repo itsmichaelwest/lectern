@@ -4,7 +4,7 @@ const passport = require('passport')
 const authCheckMiddleware = require('../middleware/auth-check')
 const sql = require('../database/user/user')
 const querystring = require('querystring')
-const request = require('request')
+const request = require('request').defaults({ encoding: null })
 
 // Get login MSFT
 router.get('/microsoft', (req, res, next) => {
@@ -84,14 +84,14 @@ router.get('/microsoft/avatar', authCheckMiddleware(), (req, res) => {
     getAccessToken(req, (err, token) => {
         request({
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'image/jpeg'
             },
-            uri: 'https://graph.microsoft.com/v1.0/me/photo/$value',
+            uri: 'https://graph.microsoft.com/v1.0/me/photos/48x48/$value',
             method: 'GET'
         }, (err, subRes, body) => {
             if (err) {
-                console.error(err)
-                throw err
+                res.status(500)
             } else {
                 res.send(body)
             }

@@ -5,7 +5,7 @@ const authCheckMiddleware = require('../middleware/auth-check')
 // Database endpoints
 const fetch = require('../database/video/fetch')
 const upload = require('../database/video/upload')
-const videoViewsLikes = require('../database/video/videoViewsLikes')
+const views = require('../database/video/setViews')
 
 
 // Get all videos. Not recommended.
@@ -71,7 +71,7 @@ router.post('/upload/:videoId/success', (req, res) => {
 })
 
 router.post('/:videoId/view', (req, res) => {
-    videoViewsLikes.addView(req.params.videoId)
+    views.addView(req.params.videoId)
 })
 
 module.exports = router

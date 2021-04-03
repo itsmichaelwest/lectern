@@ -85,7 +85,7 @@ function getVideo(videoId, callback) {
                             response.push(result.recordset[0])
                             new sql.Request().query(
                                 `
-                                SELECT * FROM [dbo].[channel] WHERE channelId='${result.recordset[0].author}'
+                                SELECT * FROM [dbo].[channels] WHERE channelId='${result.recordset[0].author}'
                                 `,
                                 (err, result) => {
                                     if (err) {

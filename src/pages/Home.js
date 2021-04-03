@@ -17,9 +17,9 @@ export default class Home extends Component {
     componentDidMount() {
         axios
             .get(`${config.apiUrl}/api/v1/video/top`)
-            .then(response => {
+            .then(res => {
                 this.setState({
-                    popular: response.data
+                    popular: res.data
                 })
             })
             .catch(error => {
@@ -28,9 +28,9 @@ export default class Home extends Component {
 
         axios
             .get(`${config.apiUrl}/api/v1/video/recent`)
-            .then(response => {
+            .then(res => {
                 this.setState({
-                    recent: response.data
+                    recent: res.data
                 })
             })
             .catch(error => {

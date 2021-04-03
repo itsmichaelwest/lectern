@@ -1,5 +1,6 @@
 const sql = require('mssql')
 const config = require('../sqlConfig')
+const { v4: uuidv4 } = require('uuid')
 
 // Add video to database
 function insertVideo(name, description, privacy, author) {
@@ -13,7 +14,8 @@ function insertVideo(name, description, privacy, author) {
         return
     }
 
-    /*
+    const videoId = uuidv4()
+
     sql.connect(config, (err) => {
         if (err) {
             console.log(err)
@@ -24,7 +26,7 @@ function insertVideo(name, description, privacy, author) {
                 INSERT INTO [dbo].[videos] 
                 (videoId, title, description, privacy, author, views)
                 VALUES
-                ('${id}', '${name}', '${description}', '${privacy}', '${author}', 0);
+                ('${videoId}', '${name}', '${description}', '${privacy}', '${author}', 0);
                 `, 
                 (err, result) => {
                 if (err) {
@@ -36,7 +38,7 @@ function insertVideo(name, description, privacy, author) {
                 }
             })
         }
-    })*/
+    })
 }
 
 // Updates video record with streaming url from azure, once it's been
