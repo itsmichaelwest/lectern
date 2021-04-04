@@ -1,7 +1,7 @@
 import config from '../../config'
 import axios from 'axios'
 
-export default async function addComment(videoId, commentBody) {
+export default async function addComment(videoId, commentBody, callback) {
     console.log(commentBody)
 
     axios({
@@ -10,7 +10,11 @@ export default async function addComment(videoId, commentBody) {
         data: {
             'comment': `${commentBody}`,
         }
-    }).then(async res => {
-        console.log(res)
+    })
+    .then(async res => {
+        return callback(true)
+    })
+    .catch(err => {
+        return callback(false)
     })
 }

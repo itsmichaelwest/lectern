@@ -6,11 +6,13 @@ import { Formik, Field, Form } from 'formik'
 import Design from '../../../Design'
 import addComment from '../../../functions/comment/addComment'
 import SurveySVG from '../../../vectors/undraw-survey.svg'
+import SignInChallenge from '../../SignInChallenge'
 
 export default function VideoComments(props) {
     const [isFetched, setIsFetched] = useState(false)
     const [comments, setComments] = useState(null)
     const [userId, setUserId] = useState(null)
+    const [signInChallenge, setSignInChallenge] = useState(false)
 
     useEffect(() => {
         fetchComments()
@@ -24,7 +26,6 @@ export default function VideoComments(props) {
         axios
         .get(`${config.apiUrl}/api/v1/comment/${props.videoId}`)
         .then(res => {
-            console.log(res)
             setIsFetched(true)
             setComments(res.data)
         })
@@ -39,21 +40,26 @@ export default function VideoComments(props) {
         .then(res => {
             setUserId(res.data.passport.user.oid)
         })
-        .catch(err => {
-            console.error(err)
-        })
     }
 
     function deleteComment(commentId) {
         axios
         .delete(`${config.apiUrl}/api/v1/comment/${props.videoId}/${commentId}`)
         .then(res => {
-            console.log(res)
             fetchComments()
         })
     }
 
+    function toggleSignInChallenge() {
+        setSignInChallenge(!signInChallenge)
+    }
+
     return (
+        <>
+        <SignInChallenge
+            show={signInChallenge}
+            onClose={toggleSignInChallenge}
+        />
         <div className="flex flex-col border rounded-xl shadow-sm divide-y overflow-hidden">
             <div className="h-full max-h-96 overflow-y-scroll">
                 {comments ?
@@ -100,13 +106,19 @@ export default function VideoComments(props) {
                         comment: ''
                     }}
                     onSubmit={async (values, { resetForm }) => {
-                        console.log(values)
                         addComment(
                             props.videoId,
-                            values.comment
+                            values.comment,
+                            (res) => {
+                                if (res === false) {
+                                    console.error('[VideoComments] issue lol')
+                                    setSignInChallenge(true)
+                                } else {
+                                    setIsFetched(false)
+                                    resetForm({ values: '' })
+                                }
+                            }
                         )
-                        setIsFetched(false)
-                        resetForm({ values: '' })
                     }}>
                     <Form className="w-full flex space-x-2" autoComplete="off">
                         <Field 
@@ -126,5 +138,6 @@ export default function VideoComments(props) {
                 </Formik>
             </div>
         </div>
+        </>
     )
 }
