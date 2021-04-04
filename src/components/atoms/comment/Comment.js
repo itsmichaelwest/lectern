@@ -26,8 +26,10 @@ export default function Comment(props) {
             </div>
             )}
             <div className="flex">
-                <span className="flex-initial flex-shrink-0 w-16 font-semibold hover:text-gray-600 cursor-pointer">
-                    {props.time}
+                <span className="flex-initial flex-shrink-0 w-16 max-h-5">
+                    <span className="font-semibold hover:text-gray-600 cursor-pointer">
+                        {props.time}
+                    </span>
                 </span>
                 <div>
                     <div className="flex align-middle">
