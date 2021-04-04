@@ -112,7 +112,7 @@ export default class Profile extends Component {
                     <ProfileSkeleton/>
                 }
                 <div className="mt-8">
-                    <h2 className="font-bold text-lg">
+                    <h2 className="font-bold font-header text-lg">
                         Your videos
                     </h2>
                     {

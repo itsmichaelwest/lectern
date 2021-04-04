@@ -14,8 +14,8 @@ export default function Video(props) {
 
     return (
         <div>
-            <h1 className="text-xl font-bold font-header">{props.title}</h1>
-            <p className="text-gray-600 mt-4">{props.description}</p>
+            <h1 className="text-xl font-bold font-header" style={{ overflowWrap: 'word' }}>{props.title}</h1>
+            <p className="text-gray-600 mt-4" style={{ overflowWrap: 'word' }}>{props.description}</p>
             <div className="flex justify-between items-center my-8">
                 <div>
                     <p>{props.views} views</p>

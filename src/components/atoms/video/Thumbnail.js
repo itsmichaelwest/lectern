@@ -15,8 +15,8 @@ export default function Thumbnail(props) {
                     <></>
                     }
                 </div>
-                <h5 className="font-semibold">{props.title}</h5>
-                <p className="text-gray-600">{props.description}</p>
+                <h5 className="font-semibold whitespace-nowrap truncate">{props.title}</h5>
+                <p className="text-gray-600 whitespace-nowrap truncate">{props.description}</p>
             </div>
         </Link>
         </>

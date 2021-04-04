@@ -5,6 +5,8 @@ import Thumbnail from '../components/atoms/video/Thumbnail'
 import { Helmet } from 'react-helmet'
 import ChannelSkeleton from '../components/skeletons/ChannelSkeleton'
 import NotFound from '../pages/NotFound'
+import VideoRowSkeleton from '../components/skeletons/VideoRowSkeleton'
+import Comment from '../components/atoms/comment/Comment'
 
 export default class Channel extends Component {
     constructor (props) {
@@ -12,8 +14,8 @@ export default class Channel extends Component {
         this.state = {
             channelId: this.props.match.params.channelId,
             channelName: '',
-            channelSubscribers: null,
-            videos: null
+            videos: [],
+            comments: []
         }
     }
 
@@ -22,11 +24,12 @@ export default class Channel extends Component {
 
         axios
         .get(`${config.apiUrl}/api/v1/channel/${params.channelId}/all`)
-        .then(response => {
+        .then(res => {
             this.setState({
-                channelName: response.data[0].displayName,
-                channelSubscribers: response.data[0].followers,
-                videos: response.data[1]
+                channelName: res.data[0].displayName,
+                channelSubscribers: res.data[0].followers,
+                videos: res.data[1],
+                comments: res.data[2]
             })
         })
         .catch(err => {
@@ -38,7 +41,7 @@ export default class Channel extends Component {
     }
 
     render () {
-        const { channelName, videos } = this.state
+        const { channelName, videos, comments } = this.state
 
         if (!this.state.notFound) {
             return (
@@ -63,23 +66,43 @@ export default class Channel extends Component {
                     :
                     <ChannelSkeleton/>
                     }
-                    { videos ?
-                        <div className="mt-8">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {videos.map(video => {
+                    <div className="mt-8">
+                        <h2 className="font-bold font-header text-lg mb-4">
+                            Videos
+                        </h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {videos.map(video => {
+                            return (
+                                <Thumbnail 
+                                    key={video.videoId} 
+                                    id={video.videoId} 
+                                    length="" 
+                                    title={video.title} 
+                                    description={video.description} />
+                            )
+                        })}
+                        </div>
+                    </div>
+                    <div className="mt-16">
+                        <h2 className="font-bold font-header text-lg mb-4">
+                            Recent comments
+                        </h2>
+                        <div className="flex flex-col border rounded-xl shadow-sm divide-y overflow-hidden">
+                            <div className="h-full max-h-96 overflow-y-scroll">
+                            {comments.map(comment => {
                                 return (
-                                    <Thumbnail key={video.videoId} id={video.videoId} length="" title={video.title} description={video.description} />
+                                    <Comment
+                                        key={comment.commentId}
+                                        time="00:00"
+                                        author={comment.author}
+                                        name={comment.authorDisplayName}
+                                        content={comment.comment}
+                                    />
                                 )
                             })}
                             </div>
                         </div>
-                        :
-                        <div className="mt-8">
-                            <p className="font-bold font-header text-2xl">
-                                It looks like {channelName} hasn't uploaded any videos yet...
-                            </p>
-                        </div>
-                    }
+                    </div>
                 </div>
                 </>
             )

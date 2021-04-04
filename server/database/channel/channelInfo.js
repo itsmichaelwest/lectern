@@ -35,12 +35,19 @@ function getInfoVideos(channelId, callback) {
                         .input('channelId', sql.VarChar, channelId)
                         .query('SELECT [videoId], [title], [description] FROM [dbo].[videos] WHERE author=@channelId')
                         .then((res) => {
-                            if (res.recordset.length > 0) { 
-                                response.push(res.recordset)
-                                return callback(response)
-                            } else {
-                                return callback(false)
-                            }
+                            response.push(res.recordset)
+                            
+                            pool.request()
+                                .input('channelId', sql.VarChar, channelId)
+                                .query('SELECT TOP (10) * FROM [dbo].[comments] WHERE author=@channelId ORDER BY timestamp DESC')
+                                .then((res) => {
+                                    response.push(res.recordset)
+                                    return callback(response)
+                                })
+                                .catch(err => {
+                                    console.error(err)
+                                    return callback(err)
+                                })
                         })
                         .catch(err => {
                             console.error(err)
