@@ -14,7 +14,7 @@ export default function Video(props) {
 
     return (
         <div>
-            <h1 className="text-xl font-bold">{props.title}</h1>
+            <h1 className="text-xl font-bold font-header">{props.title}</h1>
             <p className="text-gray-600 mt-4">{props.description}</p>
             <div className="flex justify-between items-center my-8">
                 <div>

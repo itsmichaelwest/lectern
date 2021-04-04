@@ -8,7 +8,7 @@ function getAll(callback) {
         } else {
             new sql.Request().query(
                 `
-                SELECT [videoId], [title], [description] FROM [dbo].[videos] WHERE privacy=0;
+                SELECT * FROM [dbo].[videos] WHERE privacy=0;
                 `,
                 (err, result) => {
                     if (err) {
@@ -29,7 +29,7 @@ function getTop10(callback) {
         } else {
             new sql.Request().query(
                 `
-                SELECT TOP (10) [videoId], [title], [author], [views] FROM [dbo].[videos] WHERE privacy=0 ORDER BY views DESC;
+                SELECT TOP (9) [videoId], [title], [authorDisplayName], [views] FROM [dbo].[videos] WHERE privacy=0 ORDER BY views DESC;
                 `,
                 (err, result) => {
                     if (err) {
@@ -50,7 +50,7 @@ function getRecently(callback) {
         } else {
             new sql.Request().query(
                 `
-                SELECT TOP (10) [videoId], [title], [author], [views] FROM [dbo].[videos];
+                SELECT TOP (9) [videoId], [title], [authorDisplayName], [uploaded] FROM [dbo].[videos] ORDER BY uploaded DESC;
                 `,
                 (err, result) => {
                     if (err) {

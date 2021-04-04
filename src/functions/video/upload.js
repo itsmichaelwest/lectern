@@ -3,7 +3,7 @@ import axios from 'axios'
 //import url from 'url'
 import { BlobServiceClient, AnonymousCredential } from '@azure/storage-blob'
 
-export default async function uploadVideo(video, values) {
+export default async function uploadVideo(video, values, callback) {
     // Validate inputs
     /*
     if (!video) {
@@ -11,24 +11,22 @@ export default async function uploadVideo(video, values) {
         return
     }*/
 
-    console.log(values)
-
-    if (values.title === undefined || !values.description === undefined || !values.privacy === undefined) {
+    if (values.title === "" || !values.description === "") {
         console.error('[UploadVideo] Values missing!')
-        return
+        return callback(false)
     }
 
     axios({
         method: 'post',
         url: `${config.apiUrl}/api/v1/video/upload`,
         data: {
-            //'fileName': video.name,
             'title': values.title,
             'description': values.description,
             'privacy': values.privacy
         }
     }).then(async res => {
         console.log(res)
+        return callback(true)
         /*
         uploadSasUrl = res.data
 
@@ -57,5 +55,6 @@ export default async function uploadVideo(video, values) {
         
     }).catch(err => {
         console.error(err)
+        return callback(false)
     })
 }

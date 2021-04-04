@@ -48,14 +48,14 @@ export default class Channel extends Component {
                 </Helmet>
                 <div>
                     {channelName ?
-                    <div className="bg-primary-900 rounded-xl">
+                    <div className="bg-primary-100 rounded-xl">
                         <div className="flex flex-col lg:flex-row items-center relative p-8">
                             <div className="flex flex-col lg:flex-row items-center flex-auto">
-                                <div className="flex-initial flex-shrink-0 rounded-full bg-white h-32 w-32 shadow-lg lg:mr-8">
+                                <div className="flex-initial flex-shrink-0 rounded-full bg-primary h-32 w-32 shadow-lg lg:mr-8">
                                     {/* put an image here ok */}
                                 </div>
-                                <div className="flex-auto text-white">
-                                    <h1 className="font-bold text-2xl my-4 lg:my-0">{channelName}</h1>
+                                <div className="flex-auto">
+                                    <h1 className="font-bold font-header text-3xl my-4 lg:my-0">{channelName}</h1>
                                 </div>
                             </div>
                         </div>

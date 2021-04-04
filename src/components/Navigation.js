@@ -8,14 +8,16 @@ import AccountButton from './atoms/navigation/AccountButton'
 export default function Navigation() {
     return (
         <>
-        <BetaDisclaimer/>
-        <header className="sticky top-0 bg-white bg-opacity-90 mb-8 shadow-sm z-10" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
+        <header className="sticky top-0 bg-white bg-opacity-70 mb-8 shadow-sm z-10" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}> 
             <div className="container max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="flex justify-between items-center py-4 md:space-x-10">
                     <div className="flex-initial justify-start">
-                        <Link to="/" className="group text-base font-bold">
+                        <Link to="/" className="group text-base font-header font-bold flex">
                             <img className="inline-block mr-2" src={Logo} alt="Lectern icon" />
                             Lectern
+                            <span className="bg-primary text-white text-xs font-mono ml-2 px-2 py-1 rounded align-baseline">
+                                BETA
+                            </span>
                         </Link>
                     </div>
                     <div className="flex align-middle">

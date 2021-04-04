@@ -17,6 +17,7 @@ router.post('/:videoId', authCheckMiddleware(), (req, res) => {
     addComment(
         req.params.videoId,
         req.session.passport.user.oid,
+        req.session.userName,
         req.body.comment,
         (result) => {
             if (result !== 0) {

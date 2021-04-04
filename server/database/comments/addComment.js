@@ -2,7 +2,7 @@ const sql = require('mssql')
 const config = require('../sqlConfig')
 const { v4: uuidv4 } = require('uuid')
 
-function addComment(videoId, author, comment, callback) {
+function addComment(videoId, author, displayName, comment, callback) {
     const commentId = uuidv4()
     const timestamp = new Date().toISOString()
 
@@ -13,9 +13,9 @@ function addComment(videoId, author, comment, callback) {
             new sql.Request().query(
                 `
                 INSERT INTO [dbo].[comments]
-                (commentId, videoId, timestamp, author, comment, reported)
+                (commentId, videoId, timestamp, author, authorDisplayName, comment, reported)
                 VALUES
-                ('${commentId}', '${videoId}', '${timestamp}', '${author}', '${comment}', 0)
+                ('${commentId}', '${videoId}', '${timestamp}', '${author}', '${displayName}', '${comment}', 0)
                 `,
                 (err, res) => {
                     if (err) {

@@ -86,10 +86,7 @@ export default class Video extends Component {
                 <div>
                     {isLoaded ? 
                     <>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
-                        <VideoPlayer className="sticky" />
-                        <VideoComments videoId={videoId}/>
-                    </div>
+                    <VideoPlayer />
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
                         <VideoInformation 
                             id={author}
@@ -101,6 +98,7 @@ export default class Video extends Component {
                             subscribers="20"
                             isCreator={isCreator}
                         />
+                        <VideoComments videoId={videoId}/>
                     </div>
                     </>
                     :

@@ -37,7 +37,7 @@ export default function CommunityStandards() {
         <div>
             <img src={Hiking} className="h-96 mx-auto" alt='An illustration of someone hiking' />
             <div className="text-center">
-                <h1 className="text-6xl font-bold mt-16 mb-8">
+                <h1 className="text-6xl font-bold font-header mt-16 mb-8">
                     Community Standards
                 </h1>
                 <div className="prose mx-auto">

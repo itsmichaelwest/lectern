@@ -2,10 +2,7 @@ import React from 'react'
 
 export const VideoSkeleton = () => (
     <>
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
-        <div className="shimmer w-full h-0 rounded" style={{ paddingBottom: '56.25%' }}></div> 
-        <div className="shimmer w-full h-0 rounded" style={{ paddingBottom: '56.25%' }}></div>
-    </div>
+    <div className="shimmer w-full h-0 rounded" style={{ paddingBottom: '56.25%' }}></div>
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
         <div className="w-full">
             <div className="shimmer w-4/5 rounded" style={{ height: '28px' }}></div>
@@ -23,6 +20,7 @@ export const VideoSkeleton = () => (
                 </div>
             </div>
         </div>
+        <div className="shimmer w-full h-0 rounded" style={{ paddingBottom: '56.25%' }}></div>
     </div>
     </>
 )

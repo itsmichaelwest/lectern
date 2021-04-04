@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import Design from '../../../Design'
 
 export default class Comment extends Component {
     constructor(props) {
@@ -29,8 +31,10 @@ export default class Comment extends Component {
                     </span>
                     <div>
                         <div className="flex align-middle">
-                            <span className="font-semibold text-primary-700">
-                                {this.props.name}
+                            <span className={Design.URL + " font-semibold"}>
+                                <Link to={`/channel/${this.props.author}`}>
+                                    {this.props.name}
+                                </Link>
                             </span>
                         </div>
                         <div>

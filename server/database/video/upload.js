@@ -3,7 +3,7 @@ const config = require('../sqlConfig')
 const { v4: uuidv4 } = require('uuid')
 
 // Add video to database
-function insertVideo(name, description, privacy, author) {
+function insertVideo(name, description, privacy, author, displayName) {
     if (name.length > 256) {
         console.error('[Server] Video title is too long!')
         return
@@ -17,8 +17,6 @@ function insertVideo(name, description, privacy, author) {
     const videoId = uuidv4()
     const uploaded = new Date().toISOString()
 
-    console.log(uploaded)
-
     sql.connect(config, (err) => {
         if (err) {
             console.error(err)
@@ -27,16 +25,15 @@ function insertVideo(name, description, privacy, author) {
             new sql.Request().query(
                 `
                 INSERT INTO [dbo].[videos] 
-                (videoId, title, description, privacy, author, uploaded, views)
+                (videoId, title, description, privacy, author, authorDisplayName, uploaded, views)
                 VALUES
-                ('${videoId}', '${name}', '${description}', '${privacy}', '${author}', '${uploaded}', 0)
+                ('${videoId}', '${name}', '${description}', '${privacy}', '${author}', '${displayName}', '${uploaded}', 0)
                 `, 
                 (err, result) => {
                 if (err) {
                     console.error(err)
                     throw err
                 } else {
-                    console.log(result)
                     return result
                 }
             })

@@ -8,10 +8,10 @@ export default function BetaDisclaimer() {
                     <div className="flex-auto">
                         <div className="flex flex-row items-center">
                             <span className="bg-primary text-white px-2 py-1 rounded mr-2 flex-grow-0">
-                                ALPHA
+                                BETA
                             </span>
                             <div>
-                                This service is in alpha. Some functionality may be broken or missing.
+                                This service is in beta. Commenting and video playback functionality may be unreliable.
                             </div>
                         </div>
                     </div>

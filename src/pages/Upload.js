@@ -75,7 +75,7 @@ export default class Upload extends Component {
                 ?
                 <div>
                     <div className="text-center mb-16">
-                        <h1 className="text-6xl font-bold mt-16 mb-8">Upload Video</h1>
+                        <h1 className="text-6xl font-bold font-header mt-16 mb-8">Upload Video</h1>
                         <p>By uploading a video, you agree to our <Link to="/community-standards" className={Design.URL}>Community Standards</Link>.</p>
                     </div>
                     <Formik
@@ -85,7 +85,13 @@ export default class Upload extends Component {
                             privacy: 0
                         }}
                         onSubmit={async (values) => {
-                            await UploadVideo(this.state.selectedFile, values)
+                            await UploadVideo(this.state.selectedFile, values, (callback) => {
+                                if (callback === true) {
+                                    alert("Video was uploaded, you can navigate away now!")
+                                } else {
+                                    alert("Video wasn't uploaded, something went wrong")
+                                }
+                            })
                         }}>
                         <Form className="lg:w-3/6 md:w-4/6 w-full mx-auto" autoComplete="off">
                             {

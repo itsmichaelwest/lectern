@@ -56,7 +56,8 @@ router.post('/upload', authCheckMiddleware(), (req, res) => {
             req.body.title, 
             req.body.description, 
             req.body.privacy, 
-            req.session.passport.user.oid
+            req.session.passport.user.oid,
+            req.session.userName
         )
     }
 

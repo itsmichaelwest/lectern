@@ -9,7 +9,7 @@ export const APIHome = () => (
         <div>
             <img src={InProgressSVG} className="h-96 mx-auto" alt="Illustration of someone with gears." />
             <div className="text-center max-w-2xl mx-auto">
-                <h1 className="text-6xl font-bold mt-16 mb-8">
+                <h1 className="text-6xl font-bold font-header mt-16 mb-8">
                     Lectern API
                 </h1>
                 <div className="prose mx-auto">
