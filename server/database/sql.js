@@ -1,3 +1,5 @@
+const sql = require('mssql')
+
 const config = {
     user: `${process.env.DB_USERNAME}`,
     password: `${process.env.DB_PASSWORD}`,
@@ -5,4 +7,6 @@ const config = {
     database: `${process.env.DB_DATABASE}`,
 }
 
-module.exports = config
+const pool = new sql.ConnectionPool(config)
+
+module.exports = pool

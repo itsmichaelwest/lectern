@@ -1,135 +1,120 @@
 const sql = require('mssql')
-const config = require('../sqlConfig')
+const pool = require('../sql')
 
 function getAll(callback) {
-    sql.connect(config, (err) => {
-        if (err) {
-            return callback(err)
-        } else {
-            new sql.Request().query(
-                `
-                SELECT * FROM [dbo].[videos] WHERE privacy=0;
-                `,
-                (err, result) => {
-                    if (err) {
-                        return callback(err)
-                    } else {
-                        return callback(result.recordset)
-                    }
+    pool.connect().then((pool) => {
+        pool.request()
+            .query('SELECT * FROM [dbo].[videos] WHERE privacy=0')
+            .then(res => {
+                if (res.recordset.length > 0) {
+                    return callback(res.recordset)
+                } else {
+                    return callback(false)
                 }
-            )
-        }
+            })
+            .catch(err => {
+                console.error(err)
+                return callback(err)
+            })
     })
 }
 
-function getTop10(callback) {
-    sql.connect(config, (err) => {
-        if (err) {
-            return callback(err)
-        } else {
-            new sql.Request().query(
-                `
-                SELECT TOP (9) [videoId], [title], [authorDisplayName], [views] FROM [dbo].[videos] WHERE privacy=0 ORDER BY views DESC;
-                `,
-                (err, result) => {
-                    if (err) {
-                        return callback(err)
-                    } else {
-                        return callback(result.recordset)
-                    }
+function getTop9(callback) {
+    pool.connect().then((pool) => {
+        pool.request()
+            .query('SELECT TOP (9) * FROM [dbo].[videos] WHERE privacy=0 ORDER BY views DESC')
+            .then(res => {
+                if (res.recordset.length > 0) {
+                    return callback(res.recordset)
+                } else {
+                    return callback(false)
                 }
-            )
-        }
+            })
+            .catch(err => {
+                console.error(err)
+                return callback(err)
+            })
     })
 }
 
 function getRecently(callback) {
-    sql.connect(config, (err) => {
-        if (err) {
-            return callback(err)
-        } else {
-            new sql.Request().query(
-                `
-                SELECT TOP (9) [videoId], [title], [authorDisplayName], [uploaded] FROM [dbo].[videos] ORDER BY uploaded DESC;
-                `,
-                (err, result) => {
-                    if (err) {
-                        return callback(err)
-                    } else {
-                        return callback(result.recordset)
-                    }
+    pool.connect().then((pool) => {
+        pool.request()
+            .query('SELECT TOP (9) * FROM [dbo].[videos] WHERE privacy=0 ORDER BY uploaded DESC')
+            .then(res => {
+                if (res.recordset.length > 0) {
+                    return callback(res.recordset)
+                } else {
+                    return callback(false)
                 }
-            )
-        }
+            })
+            .catch(err => {
+                console.error(err)
+                return callback(err)
+            })
     })
 }
 
 function getVideo(videoId, callback) {
     let response = []
 
-    sql.connect(config, (err) => {
-        if (err) {
-            return callback(err)
-        } else {
-            new sql.Request().query(
-                `
-                SELECT * FROM [dbo].[videos] WHERE videoId='${videoId}';
-                `,
-                (err, result) => {
-                    if (err) {
-                        return callback(err)
-                    } else {
-                        // If the result is empty then the next query will fail,
-                        // we return false which tells the server to send a 404.
-                        if (result.recordset.length > 0) {
-                            response.push(result.recordset[0])
-                            new sql.Request().query(
-                                `
-                                SELECT * FROM [dbo].[channels] WHERE channelId='${result.recordset[0].author}'
-                                `,
-                                (err, result) => {
-                                    if (err) {
-                                        return callback(err)
-                                    } else {
-                                        response.push(result.recordset[0])
-                                        return callback(response)
-                                    }
-                                }
-                            )
-                        } else {
-                            return callback(false)
-                        }
-                    }
+    pool.connect().then((pool) => {
+        pool.request()
+            .input('videoId', sql.VarChar, videoId)
+            .query('SELECT * FROM [dbo].[videos] WHERE videoId=@videoId')
+            .then(res => {
+                if (res.recordset.length > 0) {
+                    response.push(res.recordset[0])
+
+                    pool.request()
+                        .input('channelId', sql.VarChar, res.recordset[0].author)
+                        .query('SELECT * FROM [dbo].[channels] WHERE channelId=@channelId')
+                        .then(res => {
+                            if (res.recordset.length > 0) {
+                                response.push(res.recordset[0])
+                                return callback(response)
+                            } else {
+                                return callback(false)
+                            }
+                        })
+                        .catch(err => {
+                            console.error(err)
+                            return callback(err)
+                        })
+
+                } else {
+                    return callback(false)
                 }
-            )
-        }
+            })
+            .catch(err => {
+                console.error(err)
+                return callback(err)
+            })
     })
 }
 
 function getChannelVideos(channelId, callback) {
-    sql.connect(config, (err) => {
-        if (err) {
-            return callback(err)
-        } else {
-            new sql.Request().query(
-                `
-                SELECT [videoId], [title], [description] FROM [dbo].[videos] WHERE author='${channelId}'
-                `,
-                (err, result) => {
-                    if (err) {
-                        return callback(err)
-                    } else {
-                        return callback(result.recordset)
-                    }
+    pool.connect().then((pool) => {
+        pool.request()
+            .input('channelId', sql.VarChar, channelId)
+            .query('SELECT * FROM [dbo].[videos] WHERE privacy=0 AND author=@channelId')
+            .then(res => {
+                if (res.recordset.length > 0) {
+                    return callback(res.recordset)
+                } else {
+                    return callback(false)
                 }
-            )
-        }
+            })
+            .catch(err => {
+                console.error(err)
+                return callback(err)
+            })
     })
 }
 
 module.exports = {
     getAll,
-    getTop10,
+    getTop9,
     getRecently,
     getVideo,
     getChannelVideos

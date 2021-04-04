@@ -1,25 +1,25 @@
 const sql = require('mssql')
-const config = require('../sqlConfig')
+const pool = require('../sql')
 
 function reportComment(commentId) {
-    sql.connect(config, (err) => {
-        if (err) {
-            console.error(err)
-            throw err
-        } else {
-            new sql.Request().query(`UPDATE [dbo].[comments] SET reported = 1 WHERE commentId='${commentId}'`)
-        }
+    pool.connect().then((pool) => {
+        pool.request()
+            .input('commentId', sql.VarChar, commentId)
+            .query('UPDATE [dbo].[comments] SET reported = 1 WHERE commentId=@commentId')
+            .catch(err => {
+                console.error(err)
+            })
     })
 }
 
 function unreportComment(commentId) {
-    sql.connect(config, (err) => {
-        if (err) {
-            console.error(err)
-            throw err
-        } else {
-            new sql.Request().query(`UPDATE [dbo].[comments] SET reported = 0 WHERE commentId='${commentId}'`)
-        }
+    pool.connect().then((pool) => {
+        pool.request()
+            .input('commentId', sql.VarChar, commentId)
+            .query('UPDATE [dbo].[comments] SET reported = 0 WHERE commentId=@commentId')
+            .catch(err => {
+                console.error(err)
+            })
     })
 }
 

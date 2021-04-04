@@ -1,25 +1,25 @@
 const sql = require('mssql')
-const config = require('../sqlConfig')
+const pool = require('../sql')
 
 function addView(videoId) {
-    sql.connect(config, (err) => {
-        if (err) {
-            console.error(err)
-            throw err
-        } else {
-            new sql.Request().query(`UPDATE [dbo].[videos] SET views=views+1 WHERE videoID = '${videoId}'`)
-        }
+    pool.connect().then((pool) => {
+        pool.request()
+            .input('videoId', sql.VarChar, videoId)
+            .query('UPDATE [dbo].[videos] SET views = views+1 WHERE videoId=@videoId')
+            .catch(err => {
+                console.error(err)
+            })
     })
 }
 
 function removeView(videoId) {
-    sql.connect(config, (err) => {
-        if (err) {
-            console.error(err)
-            throw err
-        } else {
-            new sql.Request().query(`UPDATE [dbo].[videos] SET views=views-1 WHERE videoID = '${videoId}'`)
-        }
+    pool.connect().then((pool) => {
+        pool.request()
+            .input('videoId', sql.VarChar, videoId)
+            .query('UPDATE [dbo].[videos] SET views = views-1 WHERE videoId=@videoId')
+            .catch(err => {
+                console.error(err)
+            })
     })
 }
 

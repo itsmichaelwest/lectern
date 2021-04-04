@@ -1,5 +1,5 @@
 const sql = require('mssql')
-const config = require('../sqlConfig')
+const pool = require('../sql')
 const { v4: uuidv4 } = require('uuid')
 
 // Add video to database
@@ -17,52 +17,41 @@ function insertVideo(name, description, privacy, author, displayName) {
     const videoId = uuidv4()
     const uploaded = new Date().toISOString()
 
-    sql.connect(config, (err) => {
-        if (err) {
-            console.error(err)
-            throw err
-        } else {
-            new sql.Request().query(
-                `
-                INSERT INTO [dbo].[videos] 
-                (videoId, title, description, privacy, author, authorDisplayName, uploaded, views)
-                VALUES
-                ('${videoId}', '${name}', '${description}', '${privacy}', '${author}', '${displayName}', '${uploaded}', 0)
-                `, 
-                (err, result) => {
-                if (err) {
-                    console.error(err)
-                    throw err
-                } else {
-                    return result
-                }
+    pool.connect().then((pool) => {
+        pool.request()
+            .input('videoId', sql.VarChar, videoId)
+            .input('name', sql.VarChar, name)
+            .input('description', sql.VarChar, description)
+            .input('privacy', sql.Numeric, privacy)
+            .input('author', sql.VarChar, author)
+            .input('authorDisplayName', sql.VarChar, displayName)
+            .input('uploaded', sql.DateTime2, uploaded)
+            .query('INSERT INTO [dbo].[videos] (videoId, title, description, privacy, author, authorDisplayName, uploaded, views) VALUES (@videoId, @name, @description, @privacy, @author, @authorDisplayName, @uploaded, 0)')
+            .then(res => {
+                return res
             })
-        }
+            .catch(err => {
+                console.error(err)
+                throw err
+            })
     })
 }
 
 // Updates video record with streaming url from azure, once it's been
 // transcoded.
-function addStreamUrl(id, url, callback) {
-    sql.connect(config, (err) => {
-        if (err) {
-            return callback(err)
-        } else {
-            new sql.Request().query(
-                `
-                UPDATE [dbo].[video]
-                SET url = '${url}'
-                WHERE id = '${id}';
-                `,
-                (err, result) => {
-                    if (err) {
-                        return callback(err)
-                    } else {
-                        return callback(result)
-                    }
-                }
-            )
-        }
+function addStreamUrl(videoId, url, callback) {
+    pool.connect().then((pool) => {
+        pool.request()
+            .input('videoId', sql.VarChar, videoId)
+            .input('streamUrl', sql.VarChar, url)
+            .query('UPDATE [dbo].[videos] SET streamUrl=@streamUrl WHERE videoId=@videoId')
+            .then(res => {
+                return callback(res)
+            })
+            .catch(err => {
+                console.error(err)
+                return callback(err)
+            })
     })
 }
 

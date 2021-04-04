@@ -1,40 +1,27 @@
 const sql = require('mssql')
-const config = require('../sqlConfig')
+const pool = require('../sql')
 
 function deleteComment(videoId, commentId, authorId, callback) {
-    sql.connect(config, (err) => {
-        if (err) {
-            return callback(2)
-        } else {
-            new sql.Request().query(
-                `
-                SELECT * FROM [dbo].[comments] WHERE commentId='${commentId}' AND author='${authorId}'
-                `,
-                (err, res) => {
-                    if (err) {
-                        return callback(err)
-                    } else {
-                        if (res.recordset.length > 0) {
-                            new sql.Request().query(
-                                `
-                                DELETE FROM [dbo].[comments] WHERE videoId='${videoId}' AND commentId='${commentId}'
-                                `,
-                                (err, res) => {
-                                    if (err) {
-                                        return callback(err)
-                                    } else {
-                                        return callback(0)
-                                    }
-                                }
-                            )
-                        } else {
-                            return callback(1)
-                        }
-                    
-                    }
-                }
-            )
-        }
+    pool.connect().then((pool) => {
+        pool.request()
+            .input('commentId', sql.VarChar, commentId)
+            .input('authorId', sql.VarChar, authorId)
+            .query('SELECT * FROM [dbo].[comments] WHERE commentId=@commentId AND author=@authorId')
+    }).then(() => {
+        pool.request()
+            .input('videoId', sql.VarChar, videoId)
+            .input('commentId', sql.VarChar, commentId)
+            .query('DELETE FROM [dbo].[comments] WHERE videoId=@videoId AND commentId=@commentId')
+            .then(() => {
+                return callback(0)
+            })
+            .catch(err => {
+                console.error(err)
+                return callback(err)
+            })
+    }).catch(err => {
+        console.error(err)
+        return callback(1)
     })
 }
 

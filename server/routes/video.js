@@ -15,14 +15,14 @@ router.get('/all', authCheckMiddleware(), (req, res) => {
     })
 })
 
-// Get top 10 videos sorted by view count
+// Get top 9 videos sorted by view count
 router.get('/top', (req, res) => {
-    fetch.getTop10((result) => {
+    fetch.getTop9((result) => {
         res.json(result)
     })
 })
 
-// Get top 10 most recently uploaded videos
+// Get top 9 most recently uploaded videos
 router.get('/recent', (req, res) => {
     fetch.getRecently((result) => {
         res.json(result)

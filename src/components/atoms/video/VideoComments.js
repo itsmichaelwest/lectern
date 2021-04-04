@@ -24,6 +24,7 @@ export default function VideoComments(props) {
         axios
         .get(`${config.apiUrl}/api/v1/comment/${props.videoId}`)
         .then(res => {
+            console.log(res)
             setIsFetched(true)
             setComments(res.data)
         })

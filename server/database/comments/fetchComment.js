@@ -1,49 +1,45 @@
 const sql = require('mssql')
-const config = require('../sqlConfig')
+const pool = require('../sql')
 
 function getAllComments(videoId, callback) {
-    sql.connect(config, (err) => {
-        if (err) {
-            return callback(err)
-        } else {
-            new sql.Request().query(
-                `
-                SELECT * FROM [dbo].[comments] WHERE videoId='${videoId}'
-                `,
-                (err, res) => {
-                    if (err) {
-                        return callback(err)
-                    } else {
-                        return callback(res.recordset)
-                    }
+    pool.connect().then((pool) => {
+        pool.request()
+            .input('videoId', sql.VarChar, videoId)
+            .query('SELECT * FROM [dbo].[comments] WHERE videoId=@videoId')
+            .then(res => {
+                if (res.recordset.length > 0) {
+                    return callback(res.recordset)
+                } else {
+                    return callback(false)
                 }
-            )
-        }
+            })
+            .catch(err => {
+                console.error(err)
+                return callback(err)
+            })
     })
 }
-
 
 function getSingleComment(videoId, commentId, callback) {
-    sql.connect(config, (err) => {
-        if (err) {
-            return callback(err)
-        } else {
-            new sql.Request().query(
-                `
-                SELECT * FROM [dbo].[comments] WHERE videoId='${videoId}' AND commentId='${commentId}'
-                `,
-                (err, res) => {
-                    if (err) {
-                        return callback(err)
-                    } else {
-                        return callback(res.recordset)
-                    }
+    pool.connect().then((pool) => {
+        pool.request()
+            .input('videoId', sql.VarChar, videoId)
+            .input('commentId', sql.VarChar, commentId)
+            .query('SELECT * FROM [dbo].[comments] WHERE videoId=@videoId AND commentId=@commentId')
+            .then(res => {
+                console.log(res)
+                //console.log('RecordSet Length: ' + res.recordset.length)
+                if (res.recordset.length > 0) {
+                    return callback(res.recordset)
+                } else {
+                    return callback(false)
                 }
-            )
-        }
+            }).catch(err => {
+                console.error(err)
+                return callback(err)
+            })
     })
 }
-
 
 module.exports = {
     getAllComments,
