@@ -60,9 +60,9 @@ const strategy = new OIDCStrategy(
                         console.error(err)
                         throw err
                     } else {
-                        const avatar = body
+                        //const avatar = body
 
-                        console.log(body)
+                        //console.log(body)
 
                         user.addUser(profile, req.session.userName)
                     

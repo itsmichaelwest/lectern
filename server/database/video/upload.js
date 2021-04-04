@@ -21,7 +21,7 @@ function insertVideo(name, description, privacy, author) {
 
     sql.connect(config, (err) => {
         if (err) {
-            console.log(err)
+            console.error(err)
             throw err
         } else {
             new sql.Request().query(

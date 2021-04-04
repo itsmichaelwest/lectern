@@ -4,7 +4,7 @@ const config = require('../sqlConfig')
 function addUser(profile, displayName) {
     sql.connect(config, (err) => {
         if (err) {
-            console.log(err)
+            console.error(err)
             throw err
         } else {
             var request = new sql.Request()
@@ -18,7 +18,7 @@ function addUser(profile, displayName) {
                     if (typeof result.recordset[0] === 'undefined') {
                         request.query(`INSERT INTO [dbo].[users] (userId, userName, userEmail) VALUES ('${profile.oid}', '${displayName}', '${profile._json.email}')`, (err) => {
                             if (err) {
-                                console.log(err)
+                                console.error(err)
                             }
                         });
                         request.query(`INSERT INTO [dbo].[channels] (channelId, displayName) VALUES ('${profile.oid}', '${displayName}')`, (err) => {

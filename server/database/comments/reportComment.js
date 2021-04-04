@@ -4,7 +4,7 @@ const config = require('../sqlConfig')
 function reportComment(commentId) {
     sql.connect(config, (err) => {
         if (err) {
-            console.log(err)
+            console.error(err)
             throw err
         } else {
             new sql.Request().query(`UPDATE [dbo].[comments] SET reported = 1 WHERE commentId='${commentId}'`)
@@ -15,7 +15,7 @@ function reportComment(commentId) {
 function unreportComment(commentId) {
     sql.connect(config, (err) => {
         if (err) {
-            console.log(err)
+            console.error(err)
             throw err
         } else {
             new sql.Request().query(`UPDATE [dbo].[comments] SET reported = 0 WHERE commentId='${commentId}'`)

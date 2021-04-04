@@ -14,7 +14,6 @@ function getAllComments(videoId, callback) {
                     if (err) {
                         return callback(err)
                     } else {
-                        console.log(res)
                         return callback(res.recordset)
                     }
                 }
@@ -37,7 +36,6 @@ function getSingleComment(videoId, commentId, callback) {
                     if (err) {
                         return callback(err)
                     } else {
-                        console.log(res)
                         return callback(res.recordset)
                     }
                 }
