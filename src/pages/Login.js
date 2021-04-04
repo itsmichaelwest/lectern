@@ -19,8 +19,8 @@ export default class Login extends Component {
                 <h1 className="text-2xl font-bold mb-4">
                     Sign in to Lectern
                 </h1>
-                <p className="mb-4 text-left">
-                    Use your Microsoft 365 account to sign in. More login providers are coming soon.
+                <p className="mb-4">
+                    Use your Microsoft 365 account to sign in.
                 </p>
                 <button className={Design.Button} onClick={this.loginToADFS.bind(this)}>
                     <img src={MSFTSignInButton} alt='Sign in with Microsoft' />
