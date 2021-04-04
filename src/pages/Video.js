@@ -20,7 +20,8 @@ export default class Video extends Component {
             streamUrl: null,
             author: null,
             views: null,
-            authorDisplayName: null
+            authorDisplayName: null,
+            notFound: false
         }
     }
 
@@ -31,6 +32,7 @@ export default class Video extends Component {
         axios
         .get(config.apiUrl + '/api/v1/video/' + params.videoId)
         .then(response => {
+            console.log(response)
             this.setState({
                 isLoaded: true,
                 videoId: response.data[0].videoId,
@@ -41,15 +43,6 @@ export default class Video extends Component {
                 views: response.data[0].views,
                 date: response.data[0].uploaded,
                 authorDisplayName: response.data[1].displayName
-            })
-            axios
-            .get(`${config.apiUrl}/auth/user/id`)
-            .then(response => {
-                if (response.data === this.state.author) {
-                    this.setState({
-                        isCreator: true
-                    })
-                }
             })
         })
         .catch(err => {
@@ -77,12 +70,12 @@ export default class Video extends Component {
     render () {
         const { videoId, isLoaded, title, description, author, views, date, authorDisplayName, isCreator } = this.state
 
-        if (!this.state.notFound) {
-            return (
-                <>
-                <Helmet>
-                    <title>{`${title} | Lectern`}</title>
-                </Helmet>
+        return (
+            <>
+            <Helmet>
+                <title>{`${title} | Lectern`}</title>
+            </Helmet>
+            {!this.state.notFound ?
                 <div>
                     {isLoaded ? 
                     <>
@@ -105,12 +98,10 @@ export default class Video extends Component {
                     <VideoSkeleton/>
                     }
                 </div>
-                </>
-            )
-        } else {
-            return (
+            :
                 <NotFound/>
-            )
-        }
+            }
+            </>
+        )
     }
 }

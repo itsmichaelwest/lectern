@@ -48,7 +48,7 @@ export default class Channel extends Component {
                 </Helmet>
                 <div>
                     {channelName ?
-                    <div className="bg-primary-100 rounded-xl">
+                    <div className="bg-gray-100 rounded-xl">
                         <div className="flex flex-col lg:flex-row items-center relative p-8">
                             <div className="flex flex-col lg:flex-row items-center flex-auto">
                                 <div className="flex-initial flex-shrink-0 rounded-full bg-primary h-32 w-32 shadow-lg lg:mr-8">
@@ -63,7 +63,7 @@ export default class Channel extends Component {
                     :
                     <ChannelSkeleton/>
                     }
-                    { videos &&
+                    { videos ?
                         <div className="mt-8">
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             {videos.map(video => {
@@ -72,6 +72,12 @@ export default class Channel extends Component {
                                 )
                             })}
                             </div>
+                        </div>
+                        :
+                        <div className="mt-8">
+                            <p className="font-bold font-header text-2xl">
+                                It looks like {channelName} hasn't uploaded any videos yet...
+                            </p>
                         </div>
                     }
                 </div>
