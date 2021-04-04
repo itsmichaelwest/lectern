@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Dialog(props) {
     function onPrimary(e) {
-        props.destroyUser(e);
+        props.onPrimary(e);
     }
 
     function onClose(e) {

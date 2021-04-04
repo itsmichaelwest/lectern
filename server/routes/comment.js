@@ -1,47 +1,58 @@
 const express = require('express')
 const router = new express.Router()
 const authCheckMiddleware = require('../middleware/auth-check')
-/*
-Routes for comment API
- */
 
-// Get comments associated with [videoId].
-// https://gitlab.dcs.aber.ac.uk/maw86/cs39440-project/wikis/02-api/comments#get-apiv1commentsvideoid
-router.get('/:videoId', authCheckMiddleware(), (req, res) => {
-    //res.send(comment.get(req.params.videoId))
+const { getAllComments } = require('../database/comments/fetchComment')
+const addComment = require('../database/comments/addComment')
+const deleteComment = require('../database/comments/deleteComment')
+const { reportComment, unreportComment } = require('../database/comments/reportComment')
+
+router.get('/:videoId', (req, res) => {
+    getAllComments(req.params.videoId, (result) => {
+        res.json(result)
+    })
 })
 
-
-// Adds a comment to a video.
-// https://gitlab.dcs.aber.ac.uk/maw86/cs39440-project/wikis/02-api/comments#get-apiv1commentsvideoid
-router.post('/:videoId', (req, res) => {
-    console.log(req.body)
-    //res.send(comment.post(req.params.videoId, req.body))
+router.post('/:videoId', authCheckMiddleware(), (req, res) => {
+    addComment(
+        req.params.videoId,
+        req.session.passport.user.oid,
+        req.body.comment,
+        (result) => {
+            if (result !== 0) {
+                res.status(200).send('Comment inserted successfully.')
+            } else {
+                res.status(500).send('Unable to insert comment.')
+            }
+        }
+    )
 })
 
-
-// Deletes a comment to a video.
-// https://gitlab.dcs.aber.ac.uk/maw86/cs39440-project/wikis/02-api/comments#delete-apiv1commentsvideoidcommentid
 router.delete('/:videoId/:commentId', authCheckMiddleware(), (req, res) => {
-    console.log(req.params.videoId)
-    console.log(req.params.commentId)
-    res.status(403)
+    deleteComment(
+        req.params.videoId,
+        req.params.commentId,
+        req.session.passport.user.oid,
+        (result) => {
+            if (result === 0) {
+                res.status(200).send(`Comment ${req.params.commentId} successfully deleted.`)
+            } else if (result === 1) {
+                res.status(403).send('Unable to delete comment. User is not author and does not have permission.')
+            } else {
+                res.status(500).send('Unable to delete comment. Unknown server error.')
+            }
+        }
+    )
 })
 
-
-// Adds a report to a comment
-// https://gitlab.dcs.aber.ac.uk/maw86/cs39440-project/wikis/02-api/comments#post-apiv1commentsvideoidcommentidreport
 router.post('/:videoId/:commentId/report', (req, res) => {
-    //comment.report(req.params.videoId, req.params.commentId)
-    res.json("REPORTED")
+    reportComment(req.params.commentId)
+    res.send('Comment reported.')
 })
 
-
-// Removes report to a comment
-// https://gitlab.dcs.aber.ac.uk/maw86/cs39440-project/wikis/02-api/comments#delete-apiv1commentsvideoidcommentidreport
 router.delete('/:videoId/:commentId/report', (req, res) => {
-    //comment.unreport(req.params.videoId, req.params.commentId)
-    res.json("UNREPORTED")
+    unreportComment(req.params.commentId)
+    res.send('Comment unreported.')
 })
 
 module.exports = router

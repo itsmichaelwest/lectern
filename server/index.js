@@ -53,7 +53,7 @@ const videoApi = require('./routes/video')
 app.use('/api/v1/video', videoApi)
 
 const commentApi = require('./routes/comment')
-app.use('/api/v1/comments', commentApi)
+app.use('/api/v1/comment', commentApi)
 
 // Channel API
 const channelApi = require('./routes/channel')

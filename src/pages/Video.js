@@ -7,6 +7,7 @@ import VideoInformation from '../components/atoms/video/VideoInformation'
 import { Helmet } from 'react-helmet'
 import Hls from 'hls.js'
 import VideoSkeleton from '../components/skeletons/VideoSkeleton'
+import NotFound from '../pages/NotFound'
 
 export default class Video extends Component {
     constructor (props) {
@@ -38,6 +39,7 @@ export default class Video extends Component {
                 streamUrl: response.data[0].streamUrl,
                 author: response.data[0].author,
                 views: response.data[0].views,
+                date: response.data[0].uploaded,
                 authorDisplayName: response.data[1].displayName
             })
             axios
@@ -52,6 +54,9 @@ export default class Video extends Component {
         })
         .catch(err => {
             console.error(err)
+            this.setState({
+                notFound: true
+            })
         })
 
         // Adds a view to the video
@@ -70,38 +75,44 @@ export default class Video extends Component {
     }
 
     render () {
-        const { isLoaded, title, description, likes, dislikes, author, views, authorDisplayName, isCreator } = this.state
+        const { videoId, isLoaded, title, description, author, views, date, authorDisplayName, isCreator } = this.state
 
-        return (
-            <>
-            <Helmet>
-                <title>{`${title} | Lectern`}</title>
-            </Helmet>
-            <div>
-                {isLoaded ? 
+        if (!this.state.notFound) {
+            return (
                 <>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
-                    <VideoPlayer className="sticky" />
-                    <VideoComments/>
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
-                    <VideoInformation 
-                        id={author}
-                        title={title} 
-                        description={description}
-                        views={views}
-                        date="January 10, 2021"
-                        channelName={authorDisplayName}
-                        subscribers="20"
-                        isCreator={isCreator}
-                    />
+                <Helmet>
+                    <title>{`${title} | Lectern`}</title>
+                </Helmet>
+                <div>
+                    {isLoaded ? 
+                    <>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
+                        <VideoPlayer className="sticky" />
+                        <VideoComments videoId={videoId}/>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
+                        <VideoInformation 
+                            id={author}
+                            title={title} 
+                            description={description}
+                            views={views}
+                            date={date}
+                            channelName={authorDisplayName}
+                            subscribers="20"
+                            isCreator={isCreator}
+                        />
+                    </div>
+                    </>
+                    :
+                    <VideoSkeleton/>
+                    }
                 </div>
                 </>
-                :
-                <VideoSkeleton/>
-                }
-            </div>
-            </>
-        )
+            )
+        } else {
+            return (
+                <NotFound/>
+            )
+        }
     }
 }

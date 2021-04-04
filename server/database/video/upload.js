@@ -15,6 +15,9 @@ function insertVideo(name, description, privacy, author) {
     }
 
     const videoId = uuidv4()
+    const uploaded = new Date().toISOString()
+
+    console.log(uploaded)
 
     sql.connect(config, (err) => {
         if (err) {
@@ -24,9 +27,9 @@ function insertVideo(name, description, privacy, author) {
             new sql.Request().query(
                 `
                 INSERT INTO [dbo].[videos] 
-                (videoId, title, description, privacy, author, views)
+                (videoId, title, description, privacy, author, uploaded, views)
                 VALUES
-                ('${videoId}', '${name}', '${description}', '${privacy}', '${author}', 0);
+                ('${videoId}', '${name}', '${description}', '${privacy}', '${author}', '${uploaded}', 0)
                 `, 
                 (err, result) => {
                 if (err) {

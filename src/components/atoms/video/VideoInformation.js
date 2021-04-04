@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
-import axios from 'axios'
-import config from '../../../config'
 import { Link } from 'react-router-dom'
 import Design from '../../../Design'
 import Dialog from '../../Dialog'
 
 export default function Video(props) {
+    function formatDate(date) {
+        const d = new Date(date)
+        const options = { year: 'numeric', month: 'long', day: 'numeric' }
+        return (
+            `${d.toLocaleDateString('en-US', options)}`
+        )
+    }
+
     return (
         <div>
             <h1 className="text-xl font-bold">{props.title}</h1>
@@ -13,7 +19,7 @@ export default function Video(props) {
             <div className="flex justify-between items-center my-8">
                 <div>
                     <p>{props.views} views</p>
-                    <p>{props.date}</p>
+                    <p>{formatDate(props.date)}</p>
                 </div>
                 <div>
                     {

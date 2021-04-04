@@ -86,19 +86,31 @@ function destroyUser(oid, callback) {
                 if (err) {
                     callback(err)
                 } else {
-                    request.query(`DELETE FROM [dbo].[channel] WHERE channelId='${oid}'`, (err, res) => {
+                    request.query(`DELETE FROM [dbo].[channels] WHERE channelId='${oid}'`, (err, res) => {
                         if (err) {
                             callback(err)
                         } else {
-                            callback(false, true)
+                            request.query(`DELETE FROM [dbo].[videos] WHERE author='${oid}'`, (err, res) => {
+                                if (err) {
+                                    callback(err)
+                                } else {
+                                    request.query(`DELETE FROM [dbo].[comments] WHERE author='${oid}'`, (err, res) => {
+                                        if (err) {
+                                            callback(err)
+                                        } else {
+                                            callback(false, true)
+                                        }
+                                    })
+                                }
+                            })
                         }
                     })
                 }
             })
         })
-    } catch(error) {
-        console.error(error)
-        callback(error)
+    } catch(err) {
+        console.error(err)
+        callback(err)
     }
 }
 

@@ -22,14 +22,15 @@ export default class Profile extends Component {
     componentDidMount () {
         axios
         .get(`${config.apiUrl}/auth/user`, {withCredentials: true})
-        .then(response => {
+        .then(res => {
+            console.log(res)
             this.setState({
-                loginName: response.data.passport.user._json.email,
-                displayName: response.data.passport.user.displayName,
-                id: response.data.passport.user.oid
+                loginName: res.data.passport.user._json.email,
+                displayName: res.data.userName,
+                id: res.data.passport.user.oid
             })
             axios
-            .get(`${config.apiUrl}/api/v1/channel/${response.data.passport.user.oid}/videos`)
+            .get(`${config.apiUrl}/api/v1/channel/${res.data.passport.user.oid}/videos`)
             .then(response => {
                 this.setState({
                     videos: response.data
