@@ -117,7 +117,7 @@ export default class Profile extends Component {
                     </h2>
                     {
                         this.state.videos ?
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">                    
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">                    
                             {this.state.videos.map(video => {
                                 return (
                                     <Thumbnail 
