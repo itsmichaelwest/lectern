@@ -50,7 +50,7 @@ export default class Profile extends Component {
     toggleDestroyModal = () => {
         this.setState({
             showDestroyModal: !this.state.showDestroyModal
-        });
+        })
     }
 
     destroyUser = () => {
@@ -96,7 +96,7 @@ export default class Profile extends Component {
                             <a className={Design.URL} href="https://docs.microsoft.com/en-us/azure/active-directory/user-help/my-applications-portal-permissions-saved-accounts">Revoking permissions from Microsoft 365 account</a>
                         </p>
                     </Dialog>
-                    <h1 className="text-3xl font-bold font-header mb-4 text-center">
+                    <h1 className="text-3xl font-bold font-header mb-4 mt-16 text-center">
                         Hello, {displayName}
                     </h1>
                     <p className="text-center">
