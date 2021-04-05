@@ -26,6 +26,7 @@ export default function VideoComments(props) {
         axios
         .get(`${config.apiUrl}/api/v1/comment/${props.videoId}`)
         .then(res => {
+            console.log(res.data)
             setIsFetched(true)
             setComments(res.data)
         })
@@ -54,6 +55,23 @@ export default function VideoComments(props) {
         setSignInChallenge(!signInChallenge)
     }
 
+    function getCurrentVideoTime() {
+        let video = document.getElementById('video')
+        return video.currentTime
+    }
+
+    function getHumanReadableTime(time) {
+        let minutes = Math.floor(time / 60)
+        let seconds = time - minutes * 60
+        if (minutes.toString().length === 1) {
+            minutes = `0${minutes}`
+        }
+        if (seconds.toString().length === 1) {
+            seconds = `0${seconds}`
+        }
+        return (`${minutes}:${seconds}`)
+    }
+
     return (
         <>
         <SignInChallenge
@@ -68,11 +86,13 @@ export default function VideoComments(props) {
                             return (
                                 <Comment
                                     key={comment.commentId}
-                                    time="00:00"
+                                    time={getHumanReadableTime(comment.timestamp)}
+                                    timestamp={comment.timestamp}
                                     author={comment.author}
                                     name={comment.authorDisplayName}
                                     content={comment.comment}
                                     isUserAuthor={true}
+                                    commentId={comment.commentId}
                                     onDelete={() => deleteComment(comment.commentId)}
                                 />
                             )
@@ -80,7 +100,8 @@ export default function VideoComments(props) {
                             return (
                                 <Comment
                                     key={comment.commentId}
-                                    time="00:00"
+                                    time={getHumanReadableTime(comment.timestamp)}
+                                    timestamp={comment.timestamp}
                                     author={comment.author}
                                     name={comment.authorDisplayName}
                                     content={comment.comment}
@@ -106,9 +127,11 @@ export default function VideoComments(props) {
                         comment: ''
                     }}
                     onSubmit={async (values, { resetForm }) => {
+                        const currentTime = getCurrentVideoTime()
                         addComment(
                             props.videoId,
                             values.comment,
+                            currentTime,
                             (res) => {
                                 if (res === false) {
                                     console.error('[VideoComments] issue lol')

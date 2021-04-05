@@ -3,7 +3,7 @@ const pool = require('../sql')
 const { v4: uuidv4 } = require('uuid')
 
 // Add video to database
-function insertVideo(name, description, privacy, author, displayName) {
+function insertVideo(videoId, name, description, privacy, author, displayName) {
     if (name.length > 256) {
         console.error('[Server] Video title is too long!')
         return
@@ -14,7 +14,7 @@ function insertVideo(name, description, privacy, author, displayName) {
         return
     }
 
-    const videoId = uuidv4()
+    //const videoId = uuidv4()
     const uploaded = new Date().toISOString()
 
     pool.connect().then((pool) => {
@@ -46,6 +46,7 @@ function addStreamUrl(videoId, url, callback) {
             .input('streamUrl', sql.VarChar, url)
             .query('UPDATE [dbo].[videos] SET streamUrl=@streamUrl WHERE videoId=@videoId')
             .then(res => {
+                console.log(res)
                 return callback(res)
             })
             .catch(err => {

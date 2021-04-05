@@ -2,12 +2,12 @@ const msRestNodeAuth = require('@azure/ms-rest-nodeauth')
 const { AzureMediaServices } = require('@azure/arm-mediaservices')
 
 async function prepareAssetAndBlockBlob(assetName) {
-    const clientId = process.env.AADCLIENTID
-    const secret = process.env.AADSECRET
-    const tenantDomain = process.env.AADTENANTDOMAIN
-    const subscriptionId = process.env.SUBSCRIPTIONID
-    const resourceGroup = process.env.RESOURCEGROUP
-    const accountName = process.env.ACCOUNTNAME
+    const clientId = process.env.AZURE_CLIENT_ID
+    const secret = process.env.AZURE_CLIENT_SECRET
+    const tenantDomain = process.env.AZURE_TENANT_DOMAIN
+    const subscriptionId = process.env.AZURE_SUBSCRIPTION_ID
+    const resourceGroup = process.env.AZURE_RESOURCE_GROUP
+    const accountName = process.env.AZURE_ACCOUNT_NAME
 
     let clientOptions = {
         longRunningOperationRetryTimeout: 5 // set the timeout for retries to 5 seconds
@@ -36,7 +36,6 @@ async function prepareAssetAndBlockBlob(assetName) {
     }
 
     let listContainerSas = await mediaClient.assets.listContainerSas(resourceGroup, accountName, assetName, input)
-
     
     if (listContainerSas.assetContainerSasUrls) {
         uploadSasUrl = listContainerSas.assetContainerSasUrls[0]
@@ -48,6 +47,4 @@ async function prepareAssetAndBlockBlob(assetName) {
     }
 }
 
-module.exports = {
-    prepareAssetAndBlockBlob
-}
+module.exports = prepareAssetAndBlockBlob

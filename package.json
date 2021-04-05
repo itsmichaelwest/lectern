@@ -9,6 +9,7 @@
   "private": true,
   "dependencies": {
     "@azure/arm-mediaservices": "^8.1.0",
+    "@azure/identity": "^1.2.5",
     "@azure/ms-rest-nodeauth": "^3.0.7",
     "@azure/storage-blob": "^12.4.1",
     "@babel/core": "7.12.3",

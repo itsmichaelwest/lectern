@@ -19,6 +19,7 @@ router.post('/:videoId', authCheckMiddleware(), (req, res) => {
         req.session.passport.user.oid,
         req.session.userName,
         req.body.comment,
+        req.body.timestamp,
         (result) => {
             if (result !== 0) {
                 res.status(200).send('Comment inserted successfully.')

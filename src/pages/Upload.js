@@ -87,8 +87,10 @@ export default class Upload extends Component {
                         onSubmit={async (values) => {
                             await UploadVideo(this.state.selectedFile, values, (callback) => {
                                 if (callback === true) {
+                                    console.log('[Upload] The upload was successful')
                                     alert("Video was uploaded, you can navigate away now!")
                                 } else {
+                                    console.error('[Upload] The upload wasn\'t successful')
                                     alert("Video wasn't uploaded, something went wrong")
                                 }
                             })

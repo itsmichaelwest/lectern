@@ -68,7 +68,7 @@ export default class Video extends Component {
     }
 
     render () {
-        const { videoId, isLoaded, title, description, author, views, date, authorDisplayName, isCreator } = this.state
+        const { videoId, isLoaded, title, description, author, views, date, authorDisplayName, isCreator, streamUrl } = this.state
 
         return (
             <>
@@ -79,7 +79,7 @@ export default class Video extends Component {
                 <div>
                     {isLoaded ? 
                     <>
-                    <VideoPlayer />
+                    <VideoPlayer mp4={streamUrl} />
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
                         <VideoInformation 
                             id={author}

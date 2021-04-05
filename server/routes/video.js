@@ -46,22 +46,27 @@ router.get('/:videoId/download', authCheckMiddleware(), (req, res) => {
 })
 
 
-router.post('/upload', authCheckMiddleware(), (req, res) => {
-    /*
-    const storageUpload = require('../storage/uploadFile')
-    const result = await storageUpload.prepareAssetAndBlockBlob(req.body.fileName)*/
-
+router.post('/upload', authCheckMiddleware(), async (req, res) => {
     if (req.isAuthenticated()) {
+        //const storageUpload = require('../storage/uploadFile')
+        //const result = await storageUpload(req.body.videoId)
+
+        const uploadWorse = require('../storage/uploadFileWorse')
+        const result = uploadWorse()
+
         upload.insertVideo(
+            req.body.videoId,
             req.body.title, 
             req.body.description, 
             req.body.privacy, 
             req.session.passport.user.oid,
             req.session.userName
         )
-    }
 
-    //res.json(result)
+        res.json(result)
+    } else {
+        res.status(401)
+    }
 })
 
 // Add streaming URL to the video database entry
