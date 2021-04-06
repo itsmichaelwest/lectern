@@ -1,9 +1,8 @@
 const sql = require('mssql')
 const pool = require('../sql')
-const { v4: uuidv4 } = require('uuid')
 
 // Add video to database
-function insertVideo(videoId, name, description, privacy, author, displayName) {
+function insertVideo(videoId, name, description, privacy, streamUrl, author, displayName) {
     if (name.length > 256) {
         console.error('[Server] Video title is too long!')
         return
@@ -14,7 +13,6 @@ function insertVideo(videoId, name, description, privacy, author, displayName) {
         return
     }
 
-    //const videoId = uuidv4()
     const uploaded = new Date().toISOString()
 
     pool.connect().then((pool) => {
@@ -23,10 +21,11 @@ function insertVideo(videoId, name, description, privacy, author, displayName) {
             .input('name', sql.VarChar, name)
             .input('description', sql.VarChar, description)
             .input('privacy', sql.Numeric, privacy)
+            .input('streamUrl', sql.VarChar, streamUrl)
             .input('author', sql.VarChar, author)
             .input('authorDisplayName', sql.VarChar, displayName)
             .input('uploaded', sql.DateTime2, uploaded)
-            .query('INSERT INTO [dbo].[videos] (videoId, title, description, privacy, author, authorDisplayName, uploaded, views) VALUES (@videoId, @name, @description, @privacy, @author, @authorDisplayName, @uploaded, 0)')
+            .query('INSERT INTO [dbo].[videos] (videoId, title, description, privacy, streamUrl, author, authorDisplayName, uploaded, views) VALUES (@videoId, @name, @description, @privacy, @streamUrl, @author, @authorDisplayName, @uploaded, 0)')
             .then(res => {
                 return res
             })

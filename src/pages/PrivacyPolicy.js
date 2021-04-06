@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
         <Helmet>
             <title>Privacy Policy | Lectern</title>
         </Helmet>
-        <div>
+        <div className="px-4 sm:px-0">
             <img src={PrivacySVG} className="h-96 mx-auto" alt="Illustration of someone with their profile." />
             <div className="text-center">
                 <h1 className="text-6xl font-bold font-header mt-16 mb-8">
@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
                 </div>
             </div>
         </div>
-        <div className="prose-sm mt-16 mx-auto w-full md:w-4/5">
+        <div className="prose-sm mt-16 mx-auto px-4 sm:px-0 w-full md:w-4/5">
             <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in Lectern. This policy is not applicable to any information collected offline or via channels other than this website.</p>
 
             <h2>Consent</h2>

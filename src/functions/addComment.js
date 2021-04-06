@@ -1,4 +1,4 @@
-import config from '../../config'
+import config from '../config'
 import axios from 'axios'
 
 export default async function addComment(videoId, commentBody, timestamp, callback) {

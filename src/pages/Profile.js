@@ -65,7 +65,7 @@ export default class Profile extends Component {
             <Helmet>
                 <title>Your Profile | Lectern</title>
             </Helmet>
-            <div>
+            <div className="px-4 sm:px-0">
                 {
                     displayName ?
                     <>

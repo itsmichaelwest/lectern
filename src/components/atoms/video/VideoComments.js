@@ -4,7 +4,7 @@ import config from '../../../config'
 import Comment from '../comment/Comment'
 import { Formik, Field, Form } from 'formik'
 import Design from '../../../Design'
-import addComment from '../../../functions/comment/addComment'
+import addComment from '../../../functions/addComment'
 import SurveySVG from '../../../vectors/undraw-survey.svg'
 import SignInChallenge from '../../SignInChallenge'
 

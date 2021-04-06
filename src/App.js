@@ -11,6 +11,7 @@ import Footer from './components/Footer'
 import Video from './pages/Video'
 import Channel from './pages/Channel'
 import Upload from './pages/Upload'
+import Search from './pages/Search'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import CommunityStandards from './pages/CommunityStandards'
 import APIDocsHome from './components/api-docs/APIHome'
@@ -22,7 +23,7 @@ export default class App extends Component {
             <BrowserRouter>
                 <ScrollToTop/>
                 <Navigation/>
-                <div className="container max-w-7xl mx-auto px-4 sm:px-6 text-sm">
+                <div className="container max-w-7xl mx-auto sm:px-6 text-sm">
                     <Switch>
                         <Route exact path="/" component={Home} />
                         <Route path="/profile" component={Profile} />
@@ -30,6 +31,7 @@ export default class App extends Component {
                         <Route path="/video/:videoId" component={Video} />
                         <Route path="/channel/:channelId" component={Channel} />
                         <Route path="/upload" component={Upload} />
+                        <Route path="/search" component={Search} />
                         <Route path="/privacy" component={PrivacyPolicy} />
                         <Route path="/community-standards" component={CommunityStandards} />
                         <Route path="/api/:apiType" component={APIDocs} />

@@ -2,8 +2,8 @@ import React from 'react'
 
 export const VideoSkeleton = () => (
     <>
-    <div className="shimmer w-full h-0 rounded" style={{ paddingBottom: '56.25%' }}></div>
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
+    <div className="shimmer w-full h-0 sm:rounded-xl" style={{ paddingBottom: '56.25%' }}></div>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8 px-4 sm:px-0">
         <div className="w-full">
             <div className="shimmer w-4/5 rounded" style={{ height: '28px' }}></div>
             <div className="shimmer w-full h-12 mt-4 rounded"></div>

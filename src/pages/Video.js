@@ -80,7 +80,7 @@ export default class Video extends Component {
                     {isLoaded ? 
                     <>
                     <VideoPlayer mp4={streamUrl} />
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8 px-4 sm:px-0">
                         <VideoInformation 
                             id={author}
                             title={title} 

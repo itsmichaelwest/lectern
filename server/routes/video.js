@@ -6,6 +6,7 @@ const authCheckMiddleware = require('../middleware/auth-check')
 const fetch = require('../database/video/fetch')
 const upload = require('../database/video/upload')
 const views = require('../database/video/setViews')
+const search = require('../database/video/videoSearch')
 
 
 // Get all videos. Not recommended.
@@ -29,41 +30,37 @@ router.get('/recent', (req, res) => {
     })
 })
 
-// Get information about the video of [videoId]. 
-router.get('/:videoId', (req, res) => {
-    fetch.getVideo(req.params.videoId, (result) => {
+router.get('/search/:query', (req, res) => {
+    search.searchTitleDescription(req.params.query, (result) => {
         if (result !== false) {
             res.json(result)
         } else {
-            res.status(404).json("No video with that ID could be found")
+            res.status(404).json("No videos with that search query could be found")
         }
-    }) 
+    })
 })
 
-// Download video
-router.get('/:videoId/download', authCheckMiddleware(), (req, res) => {
-    res.download("test")
+router.get('/sas', authCheckMiddleware(), (req, res) => {
+    if (req.isAuthenticated()) {
+        const getSasToken = require('../storage/storageGetSasToken')
+        res.json(getSasToken())
+    } else {
+        res.status(403)
+    }
 })
-
 
 router.post('/upload', authCheckMiddleware(), async (req, res) => {
     if (req.isAuthenticated()) {
-        //const storageUpload = require('../storage/uploadFile')
-        //const result = await storageUpload(req.body.videoId)
-
-        const uploadWorse = require('../storage/uploadFileWorse')
-        const result = uploadWorse()
-
         upload.insertVideo(
             req.body.videoId,
             req.body.title, 
             req.body.description, 
-            req.body.privacy, 
+            req.body.privacy,
+            req.body.streamUrl,
             req.session.passport.user.oid,
             req.session.userName
         )
-
-        res.json(result)
+        res.status(200)
     } else {
         res.status(401)
     }
@@ -78,6 +75,23 @@ router.post('/upload/:videoId/success', (req, res) => {
 
 router.post('/:videoId/view', (req, res) => {
     views.addView(req.params.videoId)
+})
+
+
+// Get information about the video of [videoId]. 
+router.get('/:videoId', (req, res) => {
+    fetch.getVideo(req.params.videoId, (result) => {
+        if (result !== false) {
+            res.json(result)
+        } else {
+            res.status(404).json("No video with that ID could be found")
+        }
+    }) 
+})
+
+// Download video
+router.get('/:videoId/download', authCheckMiddleware(), (req, res) => {
+    res.download("test")
 })
 
 module.exports = router

@@ -47,7 +47,7 @@ export default class Home extends Component {
             <Helmet>
                 <title>Lectern</title>
             </Helmet>
-            <div>
+            <div className="px-4 sm:px-0">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 rounded-xl w-full bg-gray-100 mb-16 p-16">
                     <div>
                         <img src={NewIdeasSVG} className="max-h-80" />

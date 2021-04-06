@@ -3,7 +3,7 @@ import axios from 'axios'
 import config from '../config'
 import { Helmet } from 'react-helmet'
 import Design from '../Design'
-import UploadVideo from '../functions/video/upload'
+import UploadVideo from '../functions/uploadVideo'
 import { Formik, Field, Form } from 'formik'
 import { Link, Prompt } from 'react-router-dom'
 import UploadSkeleton from '../components/skeletons/UploadSkeleton'
@@ -70,7 +70,7 @@ export default class Upload extends Component {
             <Helmet>
                 <title>Upload Video | Lectern</title>
             </Helmet>
-            <div>
+            <div className="px-4 sm:px-0">
                 {this.state.auth
                 ?
                 <div>

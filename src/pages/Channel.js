@@ -49,7 +49,7 @@ export default class Channel extends Component {
                 <Helmet>
                     <title>{`${channelName} | Lectern`}</title>
                 </Helmet>
-                <div>
+                <div className="px-4 sm:px-0">
                     {channelName ?
                     <div className="bg-gray-100 rounded-xl">
                         <div className="flex flex-col lg:flex-row items-center relative p-8">

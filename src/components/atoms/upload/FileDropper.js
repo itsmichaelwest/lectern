@@ -13,7 +13,7 @@ export default function DropZone(props) {
         isDragActive
     } = useDropzone({
         onDrop,
-        accept: 'video/mp4, video/quicktime, video/webm, video/x-msvideo',
+        accept: 'video/mp4',
         maxFiles: 1,
         maxSize: 4294967296 
     })
@@ -38,7 +38,7 @@ export default function DropZone(props) {
                             Drag and drop a file here to upload or select to open a file picker
                         </p>
                         <p className="text-gray-600">
-                            Acceptable file types: MP4, MOV, WEBM, AVI
+                            Acceptable file types: MP4
                         </p>
                         <p className="text-gray-400 text-xs mt-2">
                             Max file size: 4 GiB
