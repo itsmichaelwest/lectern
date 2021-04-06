@@ -1,9 +1,11 @@
-# CS39440 Major Project
+# Lectern - CS39440 Major Project
 
 This project focuses on creating a video platform with timestamped comments and potentially other interactive media. 
-It is in an early stage, with most work focusing on scaffolding the basic UI components.
+The project is at a fairly advanced state, with most of the UI complete and API stabilized. We still need to implement
+the actual video upload and playback functionality, expect that to come in the next week or so.
 
-Please see the Wiki for API documentation and current user stories. This documentation is set to evolve over time and may relocate to new locations. This README will be updated in the event that happens.
+Please see the Wiki for API documentation and current user stories. This documentation is set to evolve over time and 
+may relocate to new locations. This README will be updated in the event that happens.
 
 ## Getting started
 
@@ -19,17 +21,20 @@ What you'll do next depends on if you want to run the website in development mod
 |Directory|Contains|
 |-|-|
 |config|Configuration files for Webpack and other build processes. The files in this directory are in the process of being cleaned up, they are mostly boilerplate ejected by react-scripts.|
-|docs|Misc docs and info files. Content is WIP and subject to change.|
 |public|Files to be made available by the HTTP server.|
 |scripts|Build scripts. Mostly boilerplate ejected by react-scripts.|
 |server|Server source, can be operated independently.|
-|src|Client source, can be operated independently but relies heavily on server component."|
+|src|Client source, can be operated independently but relies heavily on server component.|
 
 ## Development
 
 The development build utilizes hot reload on both the client and server, facilitating an smoother development workflow. 
 You can also choose to run either side independently, though since the client/server are heavily dependent on each other, 
 I recommend using the combined development mode.
+
+> *Note:* There are some issues developing on Apple M1 devices, where the development process will spontaneously crash. 
+This is likely due to a bug in Node or one of the packages I am using. Keep an eye on your terminal window and just 
+re-run the relevant development command if a crash occurs.
 
 The scripts available are:
 
