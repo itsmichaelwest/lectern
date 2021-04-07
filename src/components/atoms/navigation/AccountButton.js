@@ -83,12 +83,10 @@ export default class AccountButton extends React.Component {
                     <div className="relative inline-block text-left flex-initial" ref={node => this.node = node}>
                         <button type="button" className={Design.Button} id="options-menu" aria-haspopup="true" aria-expanded="true" ref={node => this.node = node} onClick={this.toggleMenu}>
                             <span className="inline md:hidden -mr-2">
-                                <svg className="h-5 w-5" viewBox="0 0 16 20">
-                                    <path d="M6 7C6 5.89543 6.89543 5 8 5C9.10457 5 10 5.89543 10 7C10 8.10457 9.10457 9 8 9C6.89543 9 6 8.10457 6 7ZM5.49998 10L10.5 10C11.3284 10 12 10.6716 12 11.5C12 12.6161 11.541 13.5103 10.7879 14.1148C10.0466 14.7098 9.05308 15 8 15C6.94692 15 5.95342 14.7098 5.21215 14.1148C4.45897 13.5103 4 12.6161 4 11.5C4 10.6716 4.67156 10 5.49998 10ZM8 2C3.58172 2 0 5.58172 0 10C0 14.4183 3.58172 18 8 18C12.4183 18 16 14.4183 16 10C16 5.58172 12.4183 2 8 2ZM1 10C1 6.13401 4.13401 3 8 3C11.866 3 15 6.13401 15 10C15 13.866 11.866 17 8 17C4.13401 17 1 13.866 1 10Z" fill="#374151"/>
-                                </svg>
+                                <img className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 mr-2 border border-gray-200 shadow-sm" src={`data:image/jpeg;base64,${this.state.avatar}`} />
                             </span>
                             <span className="hidden md:inline">
-                                <img className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 mr-2" src={`data:image/jpeg;base64,${this.state.avatar}`} />
+                                <img className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 mr-2 border border-gray-200 shadow-sm" src={`data:image/jpeg;base64,${this.state.avatar}`} />
                                 {this.state.displayName}
                             </span>
                             <svg className="-mr-1 ml-2 h-5 w-5" viewBox="0 0 20 20">
@@ -103,12 +101,10 @@ export default class AccountButton extends React.Component {
                     <div className="relative inline-block text-left flex-initial" ref={node => this.node = node}>
                         <button type="button" className={Design.Button} id="options-menu" aria-haspopup="true" aria-expanded="true" ref={node => this.node = node} onClick={this.toggleMenu}>
                             <span className="inline md:hidden -mr-2">
-                                <svg className="h-5 w-5" viewBox="0 0 16 20">
-                                    <path d="M6 7C6 5.89543 6.89543 5 8 5C9.10457 5 10 5.89543 10 7C10 8.10457 9.10457 9 8 9C6.89543 9 6 8.10457 6 7ZM5.49998 10L10.5 10C11.3284 10 12 10.6716 12 11.5C12 12.6161 11.541 13.5103 10.7879 14.1148C10.0466 14.7098 9.05308 15 8 15C6.94692 15 5.95342 14.7098 5.21215 14.1148C4.45897 13.5103 4 12.6161 4 11.5C4 10.6716 4.67156 10 5.49998 10ZM8 2C3.58172 2 0 5.58172 0 10C0 14.4183 3.58172 18 8 18C12.4183 18 16 14.4183 16 10C16 5.58172 12.4183 2 8 2ZM1 10C1 6.13401 4.13401 3 8 3C11.866 3 15 6.13401 15 10C15 13.866 11.866 17 8 17C4.13401 17 1 13.866 1 10Z" fill="#374151"/>
-                                </svg>
+                                <img className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 mr-2 border border-gray-200 shadow-sm" src={`data:image/jpeg;base64,${this.state.avatar}`} />
                             </span>
                             <span className="hidden md:inline">
-                                <img className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 mr-2" src={`data:image/jpeg;base64,${this.state.avatar}`} />
+                                <img className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 mr-2 border border-gray-200 shadow-sm" src={`data:image/jpeg;base64,${this.state.avatar}`} />
                                 {this.state.displayName}
                             </span>
                             <svg className="-mr-1 ml-2 h-5 w-5" viewBox="0 0 20 20">
