@@ -103,9 +103,9 @@ export default class Profile extends Component {
                         <div className="flex flex-col lg:flex-row items-center relative p-8">
                             <div className="flex flex-col lg:flex-row items-center flex-auto">
                                 <img className="flex-initial flex-shrink-0 rounded-full overflow-hidden bg-gray-200 h-32 w-32 shadow-lg lg:mr-8" src={`data:image/jpeg;base64,${this.state.channelPhoto}`} />
-                                <div className="flex-auto text-center md:text-left">
+                                <div className="flex-auto text-center lg:text-left">
                                     <h1 className="font-bold font-header text-white text-3xl my-4 lg:my-0">{displayName}</h1>
-                                    <button onClick={this.toggleDestroyModal} className={Design.ButtonDestructive + " -mt-2 md:mt-2"}>
+                                    <button onClick={this.toggleDestroyModal} className={Design.ButtonDestructive + " -mt-2 lg:mt-2"}>
                                         Delete my data
                                     </button>
                                 </div>
