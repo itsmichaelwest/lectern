@@ -7,10 +7,11 @@ const fetch = require('../database/video/fetch')
 const upload = require('../database/video/upload')
 const views = require('../database/video/setViews')
 const search = require('../database/video/videoSearch')
+const deleteVideo = require('../database/video/videoDelete')
 
 
 // Get all videos. Not recommended.
-router.get('/all', authCheckMiddleware(), (req, res) => {
+router.get('/all', (req, res) => {
     fetch.getAll((result) => {
         res.json(result)
     })
@@ -60,17 +61,10 @@ router.post('/upload', authCheckMiddleware(), async (req, res) => {
             req.session.passport.user.oid,
             req.session.userName
         )
-        res.status(200)
+        res.status(200).send('Video uploaded successfully!')
     } else {
         res.status(401)
     }
-})
-
-// Add streaming URL to the video database entry
-router.post('/upload/:videoId/success', (req, res) => {
-    upload.addStreamUrl(req.params.videoId, req.body.streamUrl, (result) => {
-        res.json(result)
-    })
 })
 
 router.post('/:videoId/view', (req, res) => {
@@ -91,7 +85,34 @@ router.get('/:videoId', (req, res) => {
 
 // Download video
 router.get('/:videoId/download', authCheckMiddleware(), (req, res) => {
-    res.download("test")
+    fetch.getVideoBlobUrl(req.params.videoId, (result) => {
+        if (result !== false) {
+            res.status(501)
+        } else {
+            res.status(404).json("No video with that ID could be found")
+        }
+    })
+})
+
+// Get information about the video of [videoId]. 
+router.delete('/:videoId', authCheckMiddleware(), (req, res) => {
+    fetch.getVideo(req.params.videoId, video => {
+        if (video !== false) {
+            if (video[0].author === req.session.passport.user.oid) {
+                deleteVideo(req.params.videoId, result => {
+                    if (result === true) {
+                        res.status(200).send('Video deleted successfully!')
+                    } else {
+                        res.status(500).send('Unknown error')
+                    }
+                })
+            } else {
+                res.status(403).send('Not allowed, you are not the uploader of this video.')
+            }
+        } else {
+            res.status(404).send("No video with that ID could be found")
+        }
+    })
 })
 
 module.exports = router

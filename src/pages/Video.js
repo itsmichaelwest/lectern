@@ -32,7 +32,6 @@ export default class Video extends Component {
         axios
         .get(config.apiUrl + '/api/v1/video/' + params.videoId)
         .then(response => {
-            console.log(response)
             this.setState({
                 isLoaded: true,
                 videoId: response.data[0].videoId,
@@ -44,6 +43,18 @@ export default class Video extends Component {
                 date: response.data[0].uploaded,
                 authorDisplayName: response.data[1].displayName
             })
+
+            axios.post(`${config.apiUrl}/api/v1/video/${params.videoId}/view`)
+
+            axios
+            .get(`${config.apiUrl}/auth/user`)
+            .then(res => {
+                if (res.data.passport.user.oid === response.data[0].author) {
+                    this.setState({
+                        isCreator: true
+                    })
+                }
+            })
         })
         .catch(err => {
             console.error(err)
@@ -51,20 +62,6 @@ export default class Video extends Component {
                 notFound: true
             })
         })
-
-        // Adds a view to the video
-        axios.post(`${config.apiUrl}/api/v1/video/${params.videoId}/view`)
-
-        var video = document.getElementById('video')
-    
-        /*
-        if (Hls.isSupported()) {
-          var hls = new Hls();
-          hls.loadSource(this.state.streamUrl);
-          hls.attachMedia(video);
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          video.src = this.state.streamUrl
-        }*/
     }
 
     render () {
@@ -82,6 +79,7 @@ export default class Video extends Component {
                     <VideoPlayer mp4={streamUrl} />
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8 px-4 sm:px-0">
                         <VideoInformation 
+                            videoId={videoId}
                             id={author}
                             title={title} 
                             description={description}

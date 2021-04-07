@@ -15,6 +15,7 @@ module.exports = {
       inset: {
         'nav-height': '4.45rem',
       },
+      display: ['group-hover'],
       colors: {
         primary: {
           DEFAULT: '#8eb339',

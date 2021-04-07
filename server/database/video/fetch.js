@@ -93,6 +93,25 @@ function getVideo(videoId, callback) {
     })
 }
 
+function getVideoBlobUrl(videoId, callback) {
+    pool.connect().then((pool) => {
+        pool.request()
+            .input('videoId', sql.VarChar, videoId)
+            .query('SELECT streamUrl FROM [dbo].[videos] WHERE videoId=@videoId')
+            .then(res => {
+                if (res.recordset.length > 0) {
+                    return callback(res.recordset)
+                } else {
+                    return callback(false)
+                }
+            })
+            .catch(err => {
+                console.error(err)
+                return callback(err)
+            })
+    })
+}
+
 function getChannelVideos(channelId, callback) {
     pool.connect().then((pool) => {
         pool.request()
@@ -117,5 +136,6 @@ module.exports = {
     getTop9,
     getRecently,
     getVideo,
+    getVideoBlobUrl,
     getChannelVideos
 }
