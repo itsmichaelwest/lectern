@@ -88,7 +88,7 @@ export default class AccountButton extends React.Component {
                                 </svg>
                             </span>
                             <span className="hidden md:inline">
-                                <img className="inline h-5 w-5 rounded-full mr-2" src={`data:image/jpeg;base64,${this.state.avatar}`} />
+                                <img className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 mr-2" src={`data:image/jpeg;base64,${this.state.avatar}`} />
                                 {this.state.displayName}
                             </span>
                             <svg className="-mr-1 ml-2 h-5 w-5" viewBox="0 0 20 20">
@@ -108,7 +108,7 @@ export default class AccountButton extends React.Component {
                                 </svg>
                             </span>
                             <span className="hidden md:inline">
-                                <img className="inline h-5 w-5 rounded-full mr-2" src={`data:image/jpeg;base64,${this.state.avatar}`} />
+                                <img className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 mr-2" src={`data:image/jpeg;base64,${this.state.avatar}`} />
                                 {this.state.displayName}
                             </span>
                             <svg className="-mr-1 ml-2 h-5 w-5" viewBox="0 0 20 20">

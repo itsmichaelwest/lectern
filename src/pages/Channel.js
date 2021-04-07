@@ -54,15 +54,16 @@ export default class Channel extends Component {
                 </Helmet>
                 <div className="px-4 sm:px-0">
                     {channelName ?
-                    <div className="bg-gray-100 rounded-xl">
+                    <div className="relative bg-black bg-opacity-40 rounded-xl overflow-hidden">
                         <div className="flex flex-col lg:flex-row items-center relative p-8">
                             <div className="flex flex-col lg:flex-row items-center flex-auto">
-                                <img className="flex-initial flex-shrink-0 rounded-full bg-primary h-32 w-32 shadow-lg lg:mr-8" src={`data:image/jpeg;base64,${this.state.channelPhoto}`} />
+                                <img className="flex-initial flex-shrink-0 rounded-full overflow-hidden bg-gray-200 h-32 w-32 shadow-lg lg:mr-8" src={`data:image/jpeg;base64,${this.state.channelPhoto}`} />
                                 <div className="flex-auto">
-                                    <h1 className="font-bold font-header text-3xl my-4 lg:my-0">{channelName}</h1>
+                                    <h1 className="font-bold font-header text-white text-3xl my-4 lg:my-0">{channelName}</h1>
                                 </div>
                             </div>
                         </div>
+                        <img className="absolute inset-0 bg-gray-100 w-full transform -translate-y-1/2" src={`data:image/jpeg;base64,${this.state.channelPhoto}`} style={{ zIndex: '-1', filter: 'blur(100px)' }} />
                     </div>
                     :
                     <ChannelSkeleton/>

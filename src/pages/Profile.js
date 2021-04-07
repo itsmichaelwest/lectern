@@ -30,10 +30,13 @@ export default class Profile extends Component {
                 id: res.data.passport.user.oid
             })
             axios
-            .get(`${config.apiUrl}/api/v1/channel/${res.data.passport.user.oid}/videos`)
+            .get(`${config.apiUrl}/api/v1/channel/${res.data.passport.user.oid}/all`)
             .then(response => {
+                let buffer = new Buffer(response.data[0].channelPhoto, 'base64')
+                let text = buffer.toString('ascii')
                 this.setState({
-                    videos: response.data
+                    channelPhoto: text,
+                    videos: response.data[1]
                 })
             })
             .catch(err => {
@@ -96,16 +99,19 @@ export default class Profile extends Component {
                             <a className={Design.URL} href="https://docs.microsoft.com/en-us/azure/active-directory/user-help/my-applications-portal-permissions-saved-accounts">Revoking permissions from Microsoft 365 account</a>
                         </p>
                     </Dialog>
-                    <h1 className="text-3xl font-bold font-header mb-4 mt-16 text-center">
-                        Hello, {displayName}
-                    </h1>
-                    <p className="text-center">
-                        E-mail: {loginName}
-                    </p>
-                    <div className="mt-4 mx-auto w-max">
-                        <button onClick={this.toggleDestroyModal} className={Design.ButtonDestructive}>
-                            Delete my data
-                        </button>
+                    <div className="relative bg-black bg-opacity-40 rounded-xl overflow-hidden">
+                        <div className="flex flex-col lg:flex-row items-center relative p-8">
+                            <div className="flex flex-col lg:flex-row items-center flex-auto">
+                                <img className="flex-initial flex-shrink-0 rounded-full overflow-hidden bg-gray-200 h-32 w-32 shadow-lg lg:mr-8" src={`data:image/jpeg;base64,${this.state.channelPhoto}`} />
+                                <div className="flex-auto text-center md:text-left">
+                                    <h1 className="font-bold font-header text-white text-3xl my-4 lg:my-0">{displayName}</h1>
+                                    <button onClick={this.toggleDestroyModal} className={Design.ButtonDestructive + " -mt-2 md:mt-2"}>
+                                        Delete my data
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <img className="absolute inset-0 bg-gray-100 w-full transform -translate-y-1/2" src={`data:image/jpeg;base64,${this.state.channelPhoto}`} style={{ zIndex: '-1', filter: 'blur(100px)' }} />
                     </div>
                     </>
                     :
