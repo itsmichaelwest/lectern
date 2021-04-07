@@ -9,6 +9,7 @@ export default class AccountButton extends React.Component {
         super(props)
         this.state = {
             displayName: null,
+            avatar: null,
             isLogged: false,
             menuSelected: false
         }
@@ -37,6 +38,15 @@ export default class AccountButton extends React.Component {
             this.setState({
                 displayName: `${response.data.userName}`,
                 isLogged: true
+            })
+            axios
+            .get(`${config.apiUrl}/auth/userdb`, {withCredentials: true})
+            .then(res => {
+                let buffer = new Buffer(res.data.userPhoto, 'base64')
+                let text = buffer.toString('ascii')
+                this.setState({
+                    avatar: text
+                })
             })
         })
         .catch(err => {
@@ -78,6 +88,7 @@ export default class AccountButton extends React.Component {
                                 </svg>
                             </span>
                             <span className="hidden md:inline">
+                                <img className="inline h-5 w-5 rounded-full mr-2" src={`data:image/jpeg;base64,${this.state.avatar}`} />
                                 {this.state.displayName}
                             </span>
                             <svg className="-mr-1 ml-2 h-5 w-5" viewBox="0 0 20 20">
@@ -97,6 +108,7 @@ export default class AccountButton extends React.Component {
                                 </svg>
                             </span>
                             <span className="hidden md:inline">
+                                <img className="inline h-5 w-5 rounded-full mr-2" src={`data:image/jpeg;base64,${this.state.avatar}`} />
                                 {this.state.displayName}
                             </span>
                             <svg className="-mr-1 ml-2 h-5 w-5" viewBox="0 0 20 20">

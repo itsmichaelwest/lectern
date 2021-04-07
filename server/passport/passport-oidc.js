@@ -60,11 +60,9 @@ const strategy = new OIDCStrategy(
                         console.error(err)
                         throw err
                     } else {
-                        //const avatar = body
+                        const avatar = new Buffer(body, 'binary').toString('base64')
 
-                        //console.log(body)
-
-                        user.addUser(profile, req.session.userName)
+                        user.addUser(profile, req.session.userName, avatar)
                     
                         return done(null, profile)
                     }  

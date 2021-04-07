@@ -30,10 +30,6 @@ export default function Video(props) {
         .then(() => {
             console.log(history)
             history.goBack()
-            /*
-            history.push({
-                pathname: '/'
-            })*/
         })
     }
 
@@ -69,9 +65,7 @@ export default function Video(props) {
             </div>
             <div className="flex justify-between items-center">
                 <Link className="flex flex-row items-center font-bold" to={'/channel/' + props.id}>
-                    <div className="flex-initial rounded-full bg-primary h-8 w-8 mr-2">
-                        {/* put an image here ok */}
-                    </div>
+                    <img className="flex-initial rounded-full bg-primary shadow h-8 w-8 mr-2" src={`data:image/jpeg;base64,${props.avatar}`} />
                     {props.channelName}
                 </Link>
             </div>

@@ -1,7 +1,7 @@
 const sql = require('mssql')
 const pool = require('../sql')
 
-function addUser(profile, displayName) {
+function addUser(profile, displayName, userPhoto) {
     pool.connect().then((pool) => {
         pool.request()
             .input('userId', sql.VarChar, profile.oid)
@@ -12,7 +12,8 @@ function addUser(profile, displayName) {
                         .input('userId', sql.VarChar, profile.oid)
                         .input('userName', sql.VarChar, displayName)
                         .input('userEmail', sql.VarChar, profile._json.email)
-                        .query('INSERT INTO [dbo].[users] (userId, userName, userEmail) VALUES (@userId, @userName, @userEmail)')
+                        .input('userPhoto', sql.VarBinary, new Buffer(userPhoto))
+                        .query('INSERT INTO [dbo].[users] (userId, userName, userEmail, userPhoto) VALUES (@userId, @userName, @userEmail, @userPhoto)')
                         .catch(err => {
                             console.error(err)
                             throw err
@@ -21,7 +22,8 @@ function addUser(profile, displayName) {
                     pool.request()
                         .input('userId', sql.VarChar, profile.oid)
                         .input('userName', sql.VarChar, displayName)
-                        .query('INSERT INTO [dbo].[channels] (channelId, displayName) VALUES (@userId, @userName)')
+                        .input('channelPhoto', sql.VarBinary, new Buffer(userPhoto))
+                        .query('INSERT INTO [dbo].[channels] (channelId, displayName, channelPhoto) VALUES (@userId, @userName, @channelPhoto)')
                         .catch(err => {
                             console.error(err)
                             throw err
@@ -40,9 +42,9 @@ function getUser(oid, callback) {
     pool.connect().then((pool) => {
         pool.request()
             .input('userId', sql.VarChar, oid)
-            .query('SELECT * FROM FROM [dbo].[users] WHERE userId=@userId')
+            .query('SELECT *  FROM [dbo].[users] WHERE userId=@userId')
             .then(res => {
-                callback(true, res.recordset[0])
+                callback(res.recordset[0])
             })
             .catch(err => {
                 console.error(err)

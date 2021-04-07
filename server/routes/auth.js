@@ -87,13 +87,15 @@ router.get('/microsoft/avatar', authCheckMiddleware(), (req, res) => {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'image/jpeg'
             },
-            uri: 'https://graph.microsoft.com/v1.0/me/photos/48x48/$value',
+            uri: 'https://graph.microsoft.com/v1.0/me/photos/240x240/$value',
             method: 'GET'
         }, (err, subRes, body) => {
             if (err) {
                 res.status(500)
             } else {
-                res.send(body)
+                //console.log(body)
+                const avatar = new Buffer(body, 'binary').toString('base64');
+                res.send(avatar)
             }
         })
     })
@@ -132,6 +134,14 @@ function getAccessToken(req, callback) {
 router.get('/user', authCheckMiddleware(), (req, res) => {
     if (req.isAuthenticated()) {
         res.json(req.session)
+    }
+})
+
+router.get('/userdb', authCheckMiddleware(), (req, res) => {
+    if (req.isAuthenticated()) {
+        sql.getUser(req.session.passport.user.oid, result => {
+            res.json(result)
+        })
     }
 })
 

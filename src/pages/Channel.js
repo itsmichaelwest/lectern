@@ -25,9 +25,12 @@ export default class Channel extends Component {
         axios
         .get(`${config.apiUrl}/api/v1/channel/${params.channelId}/all`)
         .then(res => {
+            let buffer = new Buffer(res.data[0].channelPhoto, 'base64')
+            let text = buffer.toString('ascii')
             this.setState({
                 channelName: res.data[0].displayName,
                 channelSubscribers: res.data[0].followers,
+                channelPhoto: text,
                 videos: res.data[1],
                 comments: res.data[2]
             })
@@ -54,9 +57,7 @@ export default class Channel extends Component {
                     <div className="bg-gray-100 rounded-xl">
                         <div className="flex flex-col lg:flex-row items-center relative p-8">
                             <div className="flex flex-col lg:flex-row items-center flex-auto">
-                                <div className="flex-initial flex-shrink-0 rounded-full bg-primary h-32 w-32 shadow-lg lg:mr-8">
-                                    {/* put an image here ok */}
-                                </div>
+                                <img className="flex-initial flex-shrink-0 rounded-full bg-primary h-32 w-32 shadow-lg lg:mr-8" src={`data:image/jpeg;base64,${this.state.channelPhoto}`} />
                                 <div className="flex-auto">
                                     <h1 className="font-bold font-header text-3xl my-4 lg:my-0">{channelName}</h1>
                                 </div>
