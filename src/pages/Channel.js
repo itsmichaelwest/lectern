@@ -3,36 +3,48 @@ import axios from 'axios'
 import config from '../config'
 import Thumbnail from '../components/atoms/video/Thumbnail'
 import { Helmet } from 'react-helmet'
-import ChannelSkeleton from '../components/skeletons/ChannelSkeleton'
 import NotFound from '../pages/NotFound'
+import ChannelHeader from '../components/atoms/channel/ChannelHeader'
+import { Button, ButtonDestructive, URL } from '../Design'
+import Dialog from '../components/Dialog'
 import VideoRowSkeleton from '../components/skeletons/VideoRowSkeleton'
-import Comment from '../components/atoms/comment/Comment'
 
 export default class Channel extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            channelId: this.props.match.params.channelId,
-            channelName: '',
-            videos: [],
-            comments: []
+            id: this.props.match.params.channelId,
+            name: '',
+            avatar: null,
+            videos: null,
+            notFound: false,
+            isDestroyable: false,
+            showDestroyModal: false
         }
     }
 
     componentDidMount () {
-        const params = this.props.match.params
-
         axios
-        .get(`${config.apiUrl}/api/v1/channel/${params.channelId}/all`)
+        .get(`${config.apiUrl}/api/v1/channel/${this.state.id}/all`)
         .then(res => {
             let buffer = new Buffer(res.data[0].channelPhoto, 'base64')
-            let text = buffer.toString('ascii')
+            let imgBase64 = buffer.toString('ascii')
             this.setState({
-                channelName: res.data[0].displayName,
-                channelSubscribers: res.data[0].followers,
-                channelPhoto: text,
+                name: res.data[0].displayName,
+                avatar: imgBase64,
                 videos: res.data[1],
-                comments: res.data[2]
+            })
+
+            // Run an auth check to see if the user can delete their data
+            // from this page.
+            axios
+            .get(`${config.apiUrl}/auth/user`)
+            .then(res => {
+                if (res.data.passport.user.oid === this.state.id) {
+                    this.setState({
+                        isDestroyable: true
+                    })
+                }
             })
         })
         .catch(err => {
@@ -43,68 +55,86 @@ export default class Channel extends Component {
         })
     }
 
+    toggleDestroyModal = () => {
+        this.setState({
+            showDestroyModal: !this.state.showDestroyModal
+        })
+    }
+
+    destroyUser = () => {
+        window.location.replace('/auth/destroy')
+    }
+
     render () {
-        const { channelName, videos, comments } = this.state
+        const { name, avatar, videos, isDestroyable } = this.state
 
         if (!this.state.notFound) {
             return (
                 <>
                 <Helmet>
-                    <title>{`${channelName} | Lectern`}</title>
+                    <title>{`${name} | Lectern`}</title>
                 </Helmet>
+                <Dialog 
+                    show={this.state.showDestroyModal} 
+                    onPrimary={this.destroyUser}
+                    onClose={this.toggleDestroyModal}
+                    primaryStyle={ButtonDestructive}
+                    primary="Delete data"
+                    secondary="Cancel"
+                    secondaryStyle={Button}>
+                    <h4 className="font-bold text-lg">
+                        Delete my data
+                    </h4>
+                    <p className="my-2">
+                        Delete all your data from Lectern? This will remove:
+                    </p>
+                    <ul className="pl-4 list-disc">
+                        <li>Your public profile</li>
+                        <li>Any videos you have uploaded</li>
+                        <li>Comments you have posted on videos</li>
+                    </ul>
+                    <p className="my-2">
+                        You will be logged out. You can de-authorize Lectern from your account provider by following these instructions:
+                    </p>
+                    <p className="my-2">
+                        <a className={URL} href="https://docs.microsoft.com/en-us/azure/active-directory/user-help/my-applications-portal-permissions-saved-accounts">Revoking permissions from Microsoft 365 account</a>
+                    </p>
+                </Dialog>
                 <div className="px-4 sm:px-0">
-                    {channelName ?
-                    <div className="relative bg-black bg-opacity-40 rounded-xl overflow-hidden">
-                        <div className="flex flex-col lg:flex-row items-center relative p-8">
-                            <div className="flex flex-col lg:flex-row items-center flex-auto">
-                                <img className="flex-initial flex-shrink-0 rounded-full overflow-hidden bg-gray-200 h-32 w-32 shadow-lg lg:mr-8" src={`data:image/jpeg;base64,${this.state.channelPhoto}`} />
-                                <div className="flex-auto">
-                                    <h1 className="font-bold font-header text-white text-3xl my-4 lg:my-0">{channelName}</h1>
-                                </div>
+                    <ChannelHeader 
+                        name={name} 
+                        avatar={avatar}
+                        isDestroyable={isDestroyable}
+                        destroyModal={this.toggleDestroyModal} />
+                    { videos 
+                        ? 
+                        <div className="mt-16">
+                            <h2 className="font-bold font-header text-2xl mb-8">
+                                Videos
+                            </h2>
+                            { videos.length >= 1 ?
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {videos.map(video => {
+                                    return (
+                                        <Thumbnail 
+                                            key={video.videoId} 
+                                            id={video.videoId} 
+                                            title={video.title} 
+                                            description={video.description} />
+                                    )
+                                })}
                             </div>
+                            :
+                            <p>
+                                It looks like {name.substr(0, name.indexOf(" "))} hasn't posted any videos yet.
+                            </p>
+                            }
                         </div>
-                        <img className="absolute inset-0 bg-gray-100 w-full transform -translate-y-1/2" src={`data:image/jpeg;base64,${this.state.channelPhoto}`} style={{ zIndex: '-1', filter: 'blur(100px)' }} />
-                    </div>
-                    :
-                    <ChannelSkeleton/>
+                        :
+                        <div>
+                            <VideoRowSkeleton/>
+                        </div>
                     }
-                    <div className="mt-8">
-                        <h2 className="font-bold font-header text-lg mb-4">
-                            Videos
-                        </h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {videos.map(video => {
-                            return (
-                                <Thumbnail 
-                                    key={video.videoId} 
-                                    id={video.videoId} 
-                                    length="" 
-                                    title={video.title} 
-                                    description={video.description} />
-                            )
-                        })}
-                        </div>
-                    </div>
-                    <div className="mt-16">
-                        <h2 className="font-bold font-header text-lg mb-4">
-                            Recent comments
-                        </h2>
-                        <div className="flex flex-col border rounded-xl shadow-sm divide-y overflow-hidden">
-                            <div className="h-full max-h-96 overflow-y-scroll">
-                            {comments.map(comment => {
-                                return (
-                                    <Comment
-                                        key={comment.commentId}
-                                        time="00:00"
-                                        author={comment.author}
-                                        name={comment.authorDisplayName}
-                                        content={comment.comment}
-                                    />
-                                )
-                            })}
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 </>
             )

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Home from './pages/Home'
-import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
 import Login from './pages/Login'
 import ScrollToTop from './components/ScrollToTop'
@@ -26,7 +25,6 @@ export default class App extends Component {
                 <div className="container max-w-7xl mx-auto sm:px-6 text-sm">
                     <Switch>
                         <Route exact path="/" component={Home} />
-                        <Route path="/profile" component={Profile} />
                         <Route path="/login" component={Login} />
                         <Route path="/video/:videoId" component={Video} />
                         <Route path="/channel/:channelId" component={Channel} />
@@ -34,8 +32,8 @@ export default class App extends Component {
                         <Route path="/search" component={Search} />
                         <Route path="/privacy" component={PrivacyPolicy} />
                         <Route path="/community-standards" component={CommunityStandards} />
+                        <Route exact path="/api" component={APIDocsHome} />
                         <Route path="/api/:apiType" component={APIDocs} />
-                        <Route path="/api" component={APIDocsHome} />
                         <Route component={NotFound} />
                     </Switch>
                 </div>
