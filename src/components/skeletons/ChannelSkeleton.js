@@ -1,5 +1,4 @@
 import React from 'react'
-import VideoRowSkeleton from './VideoRowSkeleton'
 
 export const ChannelSkeleton = () => (
     <>
@@ -11,7 +10,6 @@ export const ChannelSkeleton = () => (
             </div>
         </div>
     </div>
-    <VideoRowSkeleton/>
     </>
 )
 

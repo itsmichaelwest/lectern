@@ -1,5 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import PrivacySVG from '../vectors/undraw-privacy.svg'
 
 export default function PrivacyPolicy() {
     return (
@@ -7,15 +8,26 @@ export default function PrivacyPolicy() {
         <Helmet>
             <title>Privacy Policy | Lectern</title>
         </Helmet>
-        <div className="prose-sm">
-        <h1>Privacy Policy</h1>
-            <p className="italic">
-                Last updated: March 2021
-            </p>
-            <p>At Lectern, accessible from az-mmp.michaelwe.st, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Lectern and how we use it.</p>
-
-            <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
-
+        <div className="px-4 sm:px-0">
+            <img src={PrivacySVG} className="h-96 mx-auto" alt="Illustration of someone with their profile." />
+            <div className="text-center">
+                <h1 className="text-6xl font-bold font-header mt-16 mb-8">
+                    Privacy Policy
+                </h1>
+                <div className="prose mx-auto">
+                    <p>
+                        At <span className="font-bold">Lectern</span> accessible from lectern.video, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Lectern and how we use it.
+                    </p>
+                    <p>
+                        If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.
+                    </p>
+                    <p className="italic">
+                        Last updated: March 2021
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div className="prose-sm mt-16 mx-auto px-4 sm:px-0 w-full md:w-4/5">
             <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in Lectern. This policy is not applicable to any information collected offline or via channels other than this website.</p>
 
             <h2>Consent</h2>
@@ -32,7 +44,7 @@ export default function PrivacyPolicy() {
 
             <p>We use the information we collect in various ways, including to:</p>
 
-            <ul className="list-disc">
+            <ul className="list-disc ml-8">
             <li>Provide, operate, and maintain our webste</li>
             <li>Improve, personalize, and expand our webste</li>
             <li>Understand and analyze how you use our webste</li>
@@ -71,7 +83,7 @@ export default function PrivacyPolicy() {
             <h2>CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
 
             <p>Under the CCPA, among other rights, California consumers have the right to:</p>
-            <ul className="list-disc">
+            <ul className="list-disc ml-8">
             <li>Request that a business that collects a consumer's personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.</li>
             <li>Request that a business delete any personal data about the consumer that a business has collected.</li>
             <li>Request that a business that sells a consumer's personal data, not sell the consumer's personal data.</li>
@@ -81,7 +93,7 @@ export default function PrivacyPolicy() {
             <h2>GDPR Data Protection Rights</h2>
 
             <p>We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:</p>
-            <ul className="list-disc">
+            <ul className="list-disc ml-8">
             <li>The right to access – You have the right to request copies of your personal data. We may charge you a small fee for this service.</li>
             <li>The right to rectification – You have the right to request that we correct any information you believe is inaccurate. You also have the right to request that we complete the information you believe is incomplete.</li>
             <li>The right to erasure – You have the right to request that we erase your personal data, under certain conditions.</li>

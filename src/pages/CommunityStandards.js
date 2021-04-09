@@ -34,10 +34,10 @@ export default function CommunityStandards() {
         <Helmet>
             <title>Community Standards | Lectern</title>
         </Helmet>
-        <div>
+        <div className="px-4 sm:px-0">
             <img src={Hiking} className="h-96 mx-auto" alt='An illustration of someone hiking' />
             <div className="text-center">
-                <h1 className="text-6xl font-bold mt-16 mb-8">
+                <h1 className="text-6xl font-bold font-header mt-16 mb-8">
                     Community Standards
                 </h1>
                 <div className="prose mx-auto">
@@ -53,7 +53,7 @@ export default function CommunityStandards() {
             </div>
         </div>
         <hr className="my-24 mx-auto w-full md:w-4/5" />
-        <div className="prose-sm mx-auto w-full md:w-4/5">
+        <div className="prose-sm mx-auto px-4 sm:px-0 w-full md:w-4/5">
             <div>
                 <h2>
                     Fake Engagement

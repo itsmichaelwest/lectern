@@ -1,6 +1,6 @@
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
 const user = require('../database/user/user')
-const request = require('request')
+const request = require('request').defaults({ encoding: null })
 
 const url = process.env.AUTH_REDIRECT_URL || 'https://lectern.video'
 
@@ -48,9 +48,25 @@ const strategy = new OIDCStrategy(
                 let data = JSON.parse(body);
                 req.session.userName = `${data.givenName} ${data.surname}`
 
-                user.addUser(profile, refreshToken)
-                
-                return done(null, profile);
+                request({
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'image/jpeg'
+                    },
+                    uri: 'https://graph.microsoft.com/v1.0/me/photos/240x240/$value',
+                    method: 'GET'
+                }, (err, subRes, body) => {
+                    if (err) {
+                        console.error(err)
+                        throw err
+                    } else {
+                        const avatar = new Buffer(body, 'binary').toString('base64')
+
+                        user.addUser(profile, req.session.userName, avatar)
+                    
+                        return done(null, profile)
+                    }  
+                })
             }
         })
     }

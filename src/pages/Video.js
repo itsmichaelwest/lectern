@@ -7,6 +7,7 @@ import VideoInformation from '../components/atoms/video/VideoInformation'
 import { Helmet } from 'react-helmet'
 import Hls from 'hls.js'
 import VideoSkeleton from '../components/skeletons/VideoSkeleton'
+import NotFound from '../pages/NotFound'
 
 export default class Video extends Component {
     constructor (props) {
@@ -19,7 +20,8 @@ export default class Video extends Component {
             streamUrl: null,
             author: null,
             views: null,
-            authorDisplayName: null
+            authorDisplayName: null,
+            notFound: false
         }
     }
 
@@ -30,23 +32,28 @@ export default class Video extends Component {
         axios
         .get(config.apiUrl + '/api/v1/video/' + params.videoId)
         .then(response => {
-            console.log(response)
+            let buffer = new Buffer(response.data[1].channelPhoto, 'base64')
+            let text = buffer.toString('ascii')
+
             this.setState({
                 isLoaded: true,
                 videoId: response.data[0].videoId,
                 title: response.data[0].title,
                 description: response.data[0].description,
-                likes: response.data[0].likes,
-                dislikes: response.data[0].dislikes,
                 streamUrl: response.data[0].streamUrl,
                 author: response.data[0].author,
+                avatar: text,
                 views: response.data[0].views,
+                date: response.data[0].uploaded,
                 authorDisplayName: response.data[1].displayName
             })
+
+            axios.post(`${config.apiUrl}/api/v1/video/${params.videoId}/view`)
+
             axios
-            .get(`${config.apiUrl}/auth/user/id`)
-            .then(response => {
-                if (response.data === this.state.author) {
+            .get(`${config.apiUrl}/auth/user`)
+            .then(res => {
+                if (res.data.passport.user.oid === response.data[0].author) {
                     this.setState({
                         isCreator: true
                     })
@@ -55,55 +62,48 @@ export default class Video extends Component {
         })
         .catch(err => {
             console.error(err)
+            this.setState({
+                notFound: true
+            })
         })
-
-        // Adds a view to the video
-        axios.post(`${config.apiUrl}/api/v1/video/${params.videoId}/view`)
-
-        var video = document.getElementById('video')
-    
-        /*
-        if (Hls.isSupported()) {
-          var hls = new Hls();
-          hls.loadSource(this.state.streamUrl);
-          hls.attachMedia(video);
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          video.src = this.state.streamUrl
-        }*/
     }
 
     render () {
-        const { isLoaded, title, description, likes, dislikes, author, views, authorDisplayName, isCreator } = this.state
+        const { videoId, isLoaded, title, description, author, avatar, views, date, authorDisplayName, isCreator, streamUrl } = this.state
 
         return (
             <>
             <Helmet>
                 <title>{`${title} | Lectern`}</title>
             </Helmet>
-            <div>
-                {isLoaded ? 
-                <>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
-                    <VideoPlayer className="sticky" />
-                    <VideoComments/>
+            {!this.state.notFound ?
+                <div>
+                    {isLoaded ? 
+                    <>
+                    <VideoPlayer mp4={streamUrl} />
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8 px-4 sm:px-0">
+                        <VideoInformation 
+                            videoId={videoId}
+                            id={author}
+                            avatar={avatar}
+                            title={title} 
+                            description={description}
+                            views={views}
+                            date={date}
+                            channelName={authorDisplayName}
+                            subscribers="20"
+                            isCreator={isCreator}
+                        />
+                        <VideoComments videoId={videoId}/>
+                    </div>
+                    </>
+                    :
+                    <VideoSkeleton/>
+                    }
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-8">
-                    <VideoInformation 
-                        id={author}
-                        title={title} 
-                        description={description}
-                        views={views}
-                        date="January 10, 2021"
-                        channelName={authorDisplayName}
-                        subscribers="20"
-                        isCreator={isCreator}
-                    />
-                </div>
-                </>
-                :
-                <VideoSkeleton/>
-                }
-            </div>
+            :
+                <NotFound/>
+            }
             </>
         )
     }

@@ -11,7 +11,10 @@ export default function Footer() {
                         © 2021
                     </p>
                     <div className="float-right">
-                        <Link to="/community-standards" className={Design.URL + " mr-4"}>
+                        <Link to="/api" className={Design.URL}>
+                            API
+                        </Link>
+                        <Link to="/community-standards" className={Design.URL + " mx-4"}>
                             Community Standards
                         </Link>
                         <Link to="/privacy" className={Design.URL}>

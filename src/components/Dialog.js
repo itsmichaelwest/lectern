@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Dialog(props) {
     function onPrimary(e) {
-        props.destroyUser(e);
+        props.onPrimary(e);
     }
 
     function onClose(e) {
@@ -12,8 +12,9 @@ export default function Dialog(props) {
     if (!props.show) {
         return null
     }
+    
     return (
-        <div className="absolute inset-0 w-screen h-screen bg-black bg-opacity-60 z-50 items-center flex sm:p-4">
+        <div className="fixed inset-0 w-screen h-screen bg-black bg-opacity-60 z-50 items-center flex sm:p-4">
             <div className="absolute bottom-0 sm:relative bg-white shadow-2xl sm:max-w-xl sm:w-max max-h-max p-8 sm:rounded-xl mx-auto">
                 <div>
                     {props.children}

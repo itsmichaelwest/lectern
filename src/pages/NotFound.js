@@ -10,7 +10,7 @@ export default function NotFound() {
         <Helmet>
             <title>Page not found | Lectern</title>
         </Helmet>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-full my-48 md:px-8 lg:px-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-full my-48 px-4 md:px-8 lg:px-16">
             <div className="mx-8 sm:mx-24 md:mx-0">
                 <img src={Undraw404} alt="" />
             </div>

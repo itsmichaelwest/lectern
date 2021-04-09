@@ -5,7 +5,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = function(app) {
     if (process.env.NODE_ENV !== 'production') {
         app.use(
-            '/api',
+            '/api/v1',
             createProxyMiddleware({
                 target: 'http://[::1]:8080',
                 changeOrigin: true,

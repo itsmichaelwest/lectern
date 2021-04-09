@@ -1,11 +1,21 @@
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  purge: {
+    content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+    options: {
+      keyframes: true,
+    },
+  },
   darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {
+        'header': ['Poppins', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
         'sans': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
       },
+      inset: {
+        'nav-height': '4.45rem',
+      },
+      display: ['group-hover'],
       colors: {
         primary: {
           DEFAULT: '#8eb339',
@@ -20,7 +30,21 @@ module.exports = {
           100: '#e2edc6',
           50: '#f4f8e8'
         }
-      }
+      },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            a: {
+              color: theme('colors.primary.600'),
+              textDecoration: 'none',
+              "&:hover": {
+                color: theme('colors.primary.900'),
+                textDecoration: 'none',
+              },
+            },
+          },
+        },
+      }),
     },
   },
   variants: {

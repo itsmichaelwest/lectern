@@ -4,13 +4,7 @@ const passport = require('passport')
 const authCheckMiddleware = require('../middleware/auth-check')
 const sql = require('../database/user/user')
 const querystring = require('querystring')
-const request = require('request')
-
-// Get login request
-router.get('/login', (req, res) => {
-    res.json({ message: 'Request login' })
-})
-
+const request = require('request').defaults({ encoding: null })
 
 // Get login MSFT
 router.get('/microsoft', (req, res, next) => {
@@ -90,16 +84,18 @@ router.get('/microsoft/avatar', authCheckMiddleware(), (req, res) => {
     getAccessToken(req, (err, token) => {
         request({
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'image/jpeg'
             },
-            uri: 'https://graph.microsoft.com/v1.0/me/photo/$value',
+            uri: 'https://graph.microsoft.com/v1.0/me/photos/240x240/$value',
             method: 'GET'
         }, (err, subRes, body) => {
             if (err) {
-                console.error(err)
-                throw err
+                res.status(500)
             } else {
-                res.send(body)
+                //console.log(body)
+                const avatar = new Buffer(body, 'binary').toString('base64');
+                res.send(avatar)
             }
         })
     })
@@ -141,10 +137,11 @@ router.get('/user', authCheckMiddleware(), (req, res) => {
     }
 })
 
-// Get user oid, useful for querying 
-router.get('/user/id', authCheckMiddleware(), (req, res) => {
+router.get('/userdb', authCheckMiddleware(), (req, res) => {
     if (req.isAuthenticated()) {
-        res.json(req.session.passport.user.oid)
+        sql.getUser(req.session.passport.user.oid, result => {
+            res.json(result)
+        })
     }
 })
 
