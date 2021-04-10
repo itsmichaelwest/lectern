@@ -14,23 +14,36 @@ export default function CommentAPIDocs() {
     {
         "commentId": "123e4567-e89b-12d3-a456-426614174000",
         "videoId": "cf332bd9-b18b-4100-9c82-cc5343217c40",
-        "timestamp": "T00:01:15.000Z",
+        "pubDate": "2021-04-08T11:20:35.208Z",
+        "timestamp": 700,
         "author": "d1b2b6bb-7888-455c-a202-b8659250a2fd",
+        "authorDisplayName": "Alex Smith",
         "comment": "This video is super insightful!",
         "reported": false
+    }
+    `
+
+    const commentPostObject = `
+    {
+        "timestamp": 700,
+        "comment": "This video is super insightful!"
     }
     `
 
     return (
         <div className="max-w-2xl mx-auto">
             <APIPublicPreview/>
-            <h1 className="text-2xl font-bold mb-4">
+            <h1 className="text-3xl text-gray-700 font-header font-bold mb-4">
                 Comment (<span className="font-mono">/api/v1/comments</span>)
             </h1>
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-xl font-header font-bold mb-4">
                 Data model and types
             </h2>
-            <SyntaxHighlighter language="json" style={docco} className="rounded-xl">
+            <SyntaxHighlighter 
+                language="json" 
+                style={docco} 
+                wrapLongLines={true} 
+                className="rounded-xl">
                 {dataObject}            
             </SyntaxHighlighter>
             <table className="w-full table-auto border border-gray-200 mt-8">
@@ -70,13 +83,24 @@ export default function CommentAPIDocs() {
                     </tr>
                     <tr>
                         <td className={cellCode}>
+                            pubDate
+                        </td>
+                        <td className={cellCode}>
+                            date
+                        </td>
+                        <td className={cell}>
+                            Date and time the comment was published, in ISO 8601 representation.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className={cellCode}>
                             timestamp
                         </td>
                         <td className={cellCode}>
-                            string
+                            number
                         </td>
                         <td className={cell}>
-                            Timestamp of the comment in ISO 8601 representation.
+                            Position of the comment in the video in seconds.
                         </td>
                     </tr>
                     <tr>
@@ -87,12 +111,34 @@ export default function CommentAPIDocs() {
                             string
                         </td>
                         <td className={cell}>
-                            Comment string.
+                            UUID of comment author.
                         </td>
                     </tr>
                     <tr>
                         <td className={cellCode}>
-                            isReported
+                            authorDisplayName
+                        </td>
+                        <td className={cellCode}>
+                            string
+                        </td>
+                        <td className={cell}>
+                            Display name of comment author.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className={cellCode}>
+                            comment
+                        </td>
+                        <td className={cellCode}>
+                            string
+                        </td>
+                        <td className={cell}>
+                            Comment body.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className={cellCode}>
+                            reported
                         </td>
                         <td className={cellCode}>
                             boolean
@@ -103,28 +149,25 @@ export default function CommentAPIDocs() {
                     </tr>
                 </tbody>
             </table>
-            <hr className="my-8"/>
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-xl font-header font-bold mt-24 -mb-8">
                 Endpoints
             </h2>
             <APIDescriber method="GET" endpoint="/api/v1/comments/[videoId]">
                 Retrieves all comments associated with the specified video. This returns an array of Comment objects.
             </APIDescriber>
-            <aside className="bg-primary-50 p-2 rounded">
-                Authorization is required for all comment posting, updating, and deletion endpoints. See <Link to="/api/auth" className={Design.URL}>Authentication</Link>.
+            <aside className="bg-primary-50 p-2 rounded -mb-8">
+                Authorization is required for these endpoints. See <Link to="/api/auth" className={Design.URL}>Authentication</Link>.
             </aside>
             <APIDescriber method="POST" endpoint="/api/v1/comments/[videoId]">
-                Adds a comment to a video. The user will POST to the API with the following:
-                <SyntaxHighlighter language="json" style={docco} className="rounded-xl my-4">
-                    {`
-    {
-        "videoId": "cf332bd9-b18b-4100-9c82-cc5343217c40",
-        "author": "123e4567-e89b-12d3-a456-426614174000",
-        "comment": "This video is super insightful!"
-    }
-                    `}
+                Adds a comment to a video. The comment data should be sent in the <span className="font-mono">application/x-www-form-urlencoded</span> format:
+                <SyntaxHighlighter 
+                    language="json"
+                    wrapLongLines={true} 
+                    style={docco} 
+                    className="rounded-xl mt-4">
+                    {commentPostObject}
                 </SyntaxHighlighter>
-                <table className="w-full table-auto border border-gray-200">
+                <table className="w-full table-auto border border-gray-200 my-4">
                     <thead>
                         <th className={cell}>
                             Field
@@ -139,24 +182,13 @@ export default function CommentAPIDocs() {
                     <tbody>
                         <tr>
                             <td className={cellCode}>
-                                videoId
+                                timestamp
                             </td>
                             <td className={cellCode}>
-                                string
+                                number
                             </td>
                             <td className={cell}>
-                                UUID of video the comment is posted on.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className={cellCode}>
-                                author
-                            </td>
-                            <td className={cellCode}>
-                                string
-                            </td>
-                            <td className={cell}>
-                                UUID of the comment's author.
+                                Position of the comment in the video in seconds.
                             </td>
                         </tr>
                         <tr>
@@ -167,20 +199,19 @@ export default function CommentAPIDocs() {
                                 string
                             </td>
                             <td className={cell}>
-                                Comment string.
+                                Comment body.
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                If the comment insertion was successful, a HTTP 200 response
+                will be issued. Otherwise, a HTTP 500 response will be issued.
             </APIDescriber>
             <APIDescriber method="DELETE" endpoint="/api/v1/channel/[videoId]/[commentId]">
-                Deletes comment from video. This can only be called by the comment author or the video uploader, other calls will result in a 403 Forbidden being returned.
+                Deletes comment from video. If successful, a HTTP 200 response will be issued. This endpoint can only be called by the comment author or the video uploader, other calls will result in a HTTP 403 Forbidden being returned.
             </APIDescriber>
             <APIDescriber method="POST" endpoint="/api/v1/comments/[videoId]/[commentId]/report">
-                Used to report comment as inappropriate for the video. Returns true if the report was posted successfully. Will switch the value of reported to true. Subsequent reports will passively fail, we'll tell the user the comment was reported for their own satisfaction, but not actually alter any data since the report flag has been flipped.
-            </APIDescriber>
-            <APIDescriber method="DELETE" endpoint="/api/v1/comments/[videoId]/[commentId]/report">
-                Resets the reported flag, essentially "unreporting" the comment.
+                Used to report comment as inappropriate for the video. Responds with HTTP 200 if the comment is successfully reported. Will switch the value of reported to true. Subsequent reports will passively fail, we'll tell the user the comment was reported for their own satisfaction, but not actually alter any data since the report flag has been flipped.
             </APIDescriber>
         </div>
     )

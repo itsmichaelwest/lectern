@@ -6,10 +6,10 @@ export default class Search extends React.Component {
     render() {
         let query = queryString.parse(this.props.location.search)
         return (
-            <div>
+            <div className="px-4 sm:px-0">
             {query.find ? 
                 <div>
-                    <h1 className="text-6xl font-bold font-header my-16">
+                    <h1 className="text-3xl md:text-6xl font-bold font-header my-16">
                         Results for "{query.find}"
                     </h1>
                     {this.props.location.state.results ?

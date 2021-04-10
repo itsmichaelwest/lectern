@@ -12,12 +12,12 @@ export default function ChannelHeader(props) {
                             src={`data:image/jpeg;base64,${props.avatar}`} 
                             alt={props.name + " avatar"} />
                         <div className="flex-auto text-center lg:text-left">
-                            <h1 className="font-bold font-header text-white text-3xl my-4 lg:my-0">
+                            <h1 className="font-bold font-header text-white text-3xl mt-4 lg:my-0">
                                 {props.name}
                             </h1>
                             {
                                 props.isDestroyable &&
-                                <button onClick={props.destroyModal} className={ButtonDestructive + " -mt-2 lg:mt-2"}>
+                                <button onClick={props.destroyModal} className={ButtonDestructive + " mt-2"}>
                                     Delete my data
                                 </button>
                             }

@@ -53,6 +53,9 @@ export default class Video extends Component {
             axios
             .get(`${config.apiUrl}/auth/user`)
             .then(res => {
+                this.setState({
+                    name: res.data.userName
+                })
                 if (res.data.passport.user.oid === response.data[0].author) {
                     this.setState({
                         isCreator: true
@@ -69,7 +72,7 @@ export default class Video extends Component {
     }
 
     render () {
-        const { videoId, isLoaded, title, description, author, avatar, views, date, authorDisplayName, isCreator, streamUrl } = this.state
+        const { videoId, isLoaded, title, description, author, avatar, views, date, authorDisplayName, isCreator, streamUrl, name } = this.state
 
         return (
             <>
@@ -94,7 +97,10 @@ export default class Video extends Component {
                             subscribers="20"
                             isCreator={isCreator}
                         />
-                        <VideoComments videoId={videoId}/>
+                        <VideoComments 
+                            videoId={videoId}
+                            name={name}
+                            isCreator={isCreator}/>
                     </div>
                     </>
                     :

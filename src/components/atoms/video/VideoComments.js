@@ -5,8 +5,9 @@ import Comment from '../comment/Comment'
 import { Formik, Field, Form } from 'formik'
 import Design from '../../../Design'
 import addComment from '../../../functions/addComment'
-import SurveySVG from '../../../vectors/undraw-survey.svg'
+import { ReactComponent as SurveySVG } from '../../../vectors/undraw-survey.svg'
 import SignInChallenge from '../../SignInChallenge'
+import { ReactComponent as SendIcon } from '@fluentui/svg-icons/icons/send_20_regular.svg'
 
 export default function VideoComments(props) {
     const [isFetched, setIsFetched] = useState(false)
@@ -29,9 +30,6 @@ export default function VideoComments(props) {
             setIsFetched(true)
             setComments(res.data)
         })
-        .catch(err => {
-            console.error(err)
-        })
     }
 
     function fetchUserId() {
@@ -45,7 +43,7 @@ export default function VideoComments(props) {
     function deleteComment(commentId) {
         axios
         .delete(`${config.apiUrl}/api/v1/comment/${props.videoId}/${commentId}`)
-        .then(res => {
+        .then(() => {
             fetchComments()
         })
     }
@@ -59,6 +57,8 @@ export default function VideoComments(props) {
         return video.currentTime
     }
 
+    // Little helper function to convert the seconds value into a human
+    // readable time format.
     function getHumanReadableTime(time) {
         let minutes = Math.floor(time / 60)
         let seconds = time - minutes * 60
@@ -81,7 +81,7 @@ export default function VideoComments(props) {
             <div className="h-full max-h-96 overflow-y-scroll">
                 {comments ?
                     comments.map(comment => {
-                        if (comment.author === userId) {
+                        if (comment.author === userId || props.isCreator) {
                             return (
                                 <Comment
                                     key={comment.commentId}
@@ -90,7 +90,7 @@ export default function VideoComments(props) {
                                     author={comment.author}
                                     name={comment.authorDisplayName}
                                     content={comment.comment}
-                                    isUserAuthor={true}
+                                    canBeDeleted={true}
                                     commentId={comment.commentId}
                                     onDelete={() => deleteComment(comment.commentId)}
                                 />
@@ -110,8 +110,10 @@ export default function VideoComments(props) {
                     })
                 :
                     <div className="w-full text-center p-16">
-                        <img src={SurveySVG} className="mx-auto mb-4" style={{ maxWidth: '16rem' }} />
-                        <h4 className="text-2xl font-semibold font-header">
+                        <SurveySVG 
+                            className="mx-auto mb-4" 
+                            style={{ maxWidth: '16rem' }}/>
+                        <h4 className="text-2xl font-semibold font-header mb-1">
                             No comments, yet
                         </h4>
                         <p>
@@ -146,14 +148,14 @@ export default function VideoComments(props) {
                         <Field 
                             id="comment" 
                             name="comment" 
-                            placeholder="Write a comment..."
+                            placeholder={`Comment publicly as ${props.name}`}
                             type="text" 
                             className={Design.Input + " flex-grow"}
                         />
                         <button className={Design.ButtonPrimary} type="submit">
-                            <svg className="h-5 w-4 mr-2" viewBox="0 0 16 20" >
-                                <path d="M0.721126 2.05149L16.0756 9.61746C16.3233 9.73952 16.4252 10.0393 16.3031 10.287C16.2544 10.3858 16.1744 10.4658 16.0756 10.5145L0.721442 18.0803C0.473739 18.2023 0.173989 18.1005 0.0519328 17.8528C-0.00143915 17.7445 -0.0138112 17.6205 0.0171017 17.5038L1.9858 10.0701L0.016755 2.62789C-0.0538755 2.36093 0.105278 2.08726 0.372235 2.01663C0.488927 1.98576 0.61285 1.99814 0.721126 2.05149ZM1.26445 3.43403L2.87357 9.51612L2.93555 9.50412L3 9.5H10C10.2761 9.5 10.5 9.72386 10.5 10C10.5 10.2455 10.3231 10.4496 10.0899 10.4919L10 10.5H3C2.9686 10.5 2.93787 10.4971 2.90807 10.4916L1.26508 16.6976L14.7234 10.066L1.26445 3.43403Z" fill="#ffffff"/>
-                            </svg>
+                            <SendIcon 
+                                className="-ml-1 mr-2"
+                                fill="white"/>
                             Post
                         </button>
                     </Form>

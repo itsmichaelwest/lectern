@@ -1,6 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const authCheckMiddleware = require('../middleware/auth-check')
+const fs = require('fs')
 
 // Database endpoints
 const fetch = require('../database/video/fetch')

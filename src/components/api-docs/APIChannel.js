@@ -12,23 +12,52 @@ export default function ChannelAPIDocs() {
 
     const dataObject = `
     {
-        "id": "d1b2b6bb-7888-455c-a202-b8659250a2fd",
+        "channelId": "d1b2b6bb-7888-455c-a202-b8659250a2fd",
         "displayName": "Alex Smith",
+        "channelPhoto": {
+            type: "Buffer",
+            data: {
+                [...]
+            }
+        },
         "reported": false,
         "suspended": false
     }
     `
 
+    const videosReturnObject = `
+    [
+        {
+            "videoID": "c50aec0b-2f86-4a6c-a3a0-a61671bbe4f1",
+            "streamUrl": "https://cs394lecternvideos.blob.core.windows.net/videos/c50aec0b-2f86-4a6c-a3a0-a61671bbe4f1",
+            "privacy": 0,
+            "author": "d1b2b6bb-7888-455c-a202-b8659250a2fd",
+            "authorDisplayName": "Alex Smith",
+            "uploaded": "2021-04-07T22:34:49.915Z",
+            "title": "Sample Video",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras auctor sodales lorem, eget consectetur massa malesuada a. Proin viverra sed tellus at finibus.",
+            "length": null,
+            "views": 28,
+            "thumbnail": null
+        },
+        {...}
+    ]
+    `
+
     return (
         <div className="max-w-2xl mx-auto">
             <APIPublicPreview/>
-            <h1 className="text-2xl font-bold mb-4">
+            <h1 className="text-3xl text-gray-700 font-header font-bold mb-4">
                 Channel (<span className="font-mono">/api/v1/channel</span>)
             </h1>
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-xl font-header font-bold mb-4">
                 Data model and types
             </h2>
-            <SyntaxHighlighter language="json" style={docco} className="rounded-xl">
+            <SyntaxHighlighter 
+                language="json"
+                wrapLongLines={true} 
+                style={docco} 
+                className="rounded-xl">
                 {dataObject}            
             </SyntaxHighlighter>
             <table className="w-full table-auto border border-gray-200 mt-8">
@@ -68,6 +97,17 @@ export default function ChannelAPIDocs() {
                     </tr>
                     <tr>
                         <td className={cellCode}>
+                            channelPhoto
+                        </td>
+                        <td className={cellCode}>
+                            buffer
+                        </td>
+                        <td className={cell}>
+                            Channel photo in base64 format.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className={cellCode}>
                             reported
                         </td>
                         <td className={cellCode}>
@@ -90,27 +130,33 @@ export default function ChannelAPIDocs() {
                     </tr>
                 </tbody>
             </table>
-            <hr className="my-8"/>
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-xl font-header font-bold mt-24 -mb-8">
                 Endpoints
             </h2>
             <APIDescriber method="GET" endpoint="/api/v1/channel/[channelId]">
-                Returns information about the specified channel. Does not return a list of videos, this would bloat the return in the event we only need basic channel information.
+                Returns a Channel data object containing information about the
+                specified channel.
             </APIDescriber>
             <APIDescriber method="GET" endpoint="/api/v1/channel/[channelId]/videos">
-                Returns an array of video objects associated with the channel.
+                Returns an array of Video objects associated with the channel:
+                <SyntaxHighlighter 
+                    language="json"
+                    wrapLongLines={true} 
+                    style={docco} 
+                    className="rounded-xl mt-4">
+                    {videosReturnObject}            
+                </SyntaxHighlighter>
             </APIDescriber>
             <APIDescriber method="GET" endpoint="/api/v1/channel/[channelId]/all">
-                Returns an array containing both the information about the specified channel and a further array of the channel's videos.
+                Returns an array containing both the main Channel data object,
+                and an array containing the Video objects associated with the
+                channel.
             </APIDescriber>
-            <aside className="bg-primary-50 p-2 rounded">
-                Authorization is required for most video upload or deletion endpoints. See <Link to="/api/auth" className={Design.URL}>Authentication</Link>.
+            <aside className="bg-primary-50 p-2 rounded -mb-8">
+                Authorization is required for these endpoints. See <Link to="/api/auth" className={Design.URL}>Authentication</Link>.
             </aside>
             <APIDescriber method="POST" endpoint="/api/v1/channel/[channelId]/report">
-                Reports channel, flips the reported flag.
-            </APIDescriber>
-            <APIDescriber method="DELETE" endpoint="/api/v1/channel/[channelId]/report">
-                Reverses reported flag.
+                Reports channel, this will set <span className="font-mono">reported</span> to <span className="font-mono">true</span>.
             </APIDescriber>
         </div>
     )

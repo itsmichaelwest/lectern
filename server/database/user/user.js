@@ -23,7 +23,9 @@ function addUser(profile, displayName, userPhoto) {
                         .input('userId', sql.VarChar, profile.oid)
                         .input('userName', sql.VarChar, displayName)
                         .input('channelPhoto', sql.VarBinary, new Buffer(userPhoto))
-                        .query('INSERT INTO [dbo].[channels] (channelId, displayName, channelPhoto) VALUES (@userId, @userName, @channelPhoto)')
+                        .input('reported', sql.Bit, 0)
+                        .input('suspended', sql.Bit, 0)
+                        .query('INSERT INTO [dbo].[channels] (channelId, displayName, channelPhoto, reported, suspended) VALUES (@userId, @userName, @channelPhoto, @reported, @suspended)')
                         .catch(err => {
                             console.error(err)
                             throw err

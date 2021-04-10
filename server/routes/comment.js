@@ -47,14 +47,14 @@ router.delete('/:videoId/:commentId', authCheckMiddleware(), (req, res) => {
     )
 })
 
-router.post('/:videoId/:commentId/report', (req, res) => {
+router.post('/:videoId/:commentId/report', authCheckMiddleware(), (req, res) => {
     reportComment(req.params.commentId)
-    res.send('Comment reported.')
+    res.status(200).send('Comment reported.')
 })
 
-router.delete('/:videoId/:commentId/report', (req, res) => {
+router.delete('/:videoId/:commentId/report', authCheckMiddleware(), (req, res) => {
     unreportComment(req.params.commentId)
-    res.send('Comment unreported.')
+    res.status(200).send('Comment unreported.')
 })
 
 module.exports = router
