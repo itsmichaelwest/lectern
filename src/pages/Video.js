@@ -5,7 +5,6 @@ import VideoPlayer from '../components/atoms/video/VideoPlayer'
 import VideoComments from '../components/atoms/video/VideoComments'
 import VideoInformation from '../components/atoms/video/VideoInformation'
 import { Helmet } from 'react-helmet'
-import Hls from 'hls.js'
 import VideoSkeleton from '../components/skeletons/VideoSkeleton'
 import NotFound from '../pages/NotFound'
 

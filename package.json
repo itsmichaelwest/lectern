@@ -4,11 +4,10 @@
     "name": "Michael West",
     "email": "maw86@aber.ac.uk"
   },
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@azure/ms-rest-nodeauth": "^3.0.7",
     "@azure/storage-blob": "^12.4.1",
     "@babel/core": "7.12.3",
     "@craco/craco": "^6.1.1",
@@ -35,7 +34,6 @@
     "filesize": "^6.1.0",
     "formik": "^2.2.6",
     "fs-extra": "^9.0.1",
-    "hls.js": "^0.14.17",
     "html-webpack-plugin": "4.5.0",
     "http-proxy-middleware": "^1.0.6",
     "mini-css-extract-plugin": "0.11.3",
@@ -78,7 +76,6 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "devDependencies": {
-    "@svgr/webpack": "^5.5.0",
     "concurrently": "^3.5.1",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
@@ -92,8 +89,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^3.9.2",
     "eslint-webpack-plugin": "^2.1.0",
-    "nodemon": "^1.12.1",
-    "svg-inline-loader": "^0.8.2"
+    "nodemon": "^1.12.1"
   },
   "scripts": {
     "start": "yarn run build && (node ./server/index.js)",
