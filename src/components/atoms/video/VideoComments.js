@@ -7,7 +7,7 @@ import Design from '../../../Design'
 import addComment from '../../../functions/addComment'
 import { ReactComponent as SurveySVG } from '../../../vectors/undraw-survey.svg'
 import SignInChallenge from '../../SignInChallenge'
-import { ReactComponent as SendIcon } from '@fluentui/svg-icons/icons/send_20_regular.svg'
+import { ReactComponent as SendIcon } from '../../../icons/send.svg'
 
 export default function VideoComments(props) {
     const [isFetched, setIsFetched] = useState(false)
@@ -150,12 +150,9 @@ export default function VideoComments(props) {
                             name="comment" 
                             placeholder={`Comment publicly as ${props.name}`}
                             type="text" 
-                            className={Design.Input + " flex-grow"}
-                        />
+                            className={Design.Input + " flex-grow"}/>
                         <button className={Design.ButtonPrimary} type="submit">
-                            <SendIcon 
-                                className="-ml-1 mr-2"
-                                fill="white"/>
+                            <SendIcon className="-ml-1 mr-2 fill-current"/>
                             Post
                         </button>
                     </Form>

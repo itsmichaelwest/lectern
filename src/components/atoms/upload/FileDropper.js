@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { ReactComponent as VideoIcon } from '@fluentui/svg-icons/icons/video_28_regular.svg'
+
+import { ReactComponent as VideoIcon } from '../../../icons/video_28_regular.svg'
 
 export default function DropZone(props) {
     // Send the accepted files back

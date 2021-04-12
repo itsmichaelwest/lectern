@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Design from '../../../Design'
 
-import { ReactComponent as ReportIcon } from '@fluentui/svg-icons/icons/shield_error_20_regular.svg'
-import { ReactComponent as DeleteIcon } from '@fluentui/svg-icons/icons/delete_20_regular.svg'
+import { ReactComponent as ReportIcon } from '../../../icons/report.svg'
+import { ReactComponent as DeleteIcon } from '../../../icons/delete.svg'
 
 export default function Comment(props) {
     const [showButtons, setShowButtons] = useState(false)
@@ -42,9 +42,7 @@ export default function Comment(props) {
                         <button 
                             className={Design.ButtonDestructive + " mr-1"} 
                             onClick={() => props.onDelete(props.commentId)}>
-                            <DeleteIcon 
-                                fill="white"
-                                className="-ml-1 mr-2"/>
+                            <DeleteIcon className="-ml-1 mr-2 fill-current"/>
                             Delete
                         </button>
                         <button className={Design.Button} onClick={() => setShowDeleteBanner(false)}>
@@ -56,13 +54,13 @@ export default function Comment(props) {
             {showButtons &&
                 <div className="absolute right-0 mr-4 items-center">
                     <button className={Design.Button}>
-                        <ReportIcon/>
+                        <ReportIcon className="fill-current"/>
                     </button>
                     {props.canBeDeleted && 
                         <button 
                             className={Design.ButtonDestructive + " ml-1"} 
                             onClick={() => setShowDeleteBanner(true)}>
-                            <DeleteIcon fill="white"/>
+                            <DeleteIcon className="fill-current"/>
                         </button>
                     }
                 </div>

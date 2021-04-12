@@ -5,8 +5,8 @@ import config from '../../../config'
 import Design from '../../../Design'
 
 import { ReactComponent as DropdownIcon } from '../../../vectors/dropdown.svg'
-import { ReactComponent as ProfileIcon } from '@fluentui/svg-icons/icons/person_circle_20_regular.svg'
-import { ReactComponent as SignOutIcon } from '@fluentui/svg-icons/icons/sign_out_20_regular.svg'
+import { ReactComponent as ProfileIcon } from '../../../icons/person_circle.svg'
+import { ReactComponent as SignOutIcon } from '../../../icons/sign_out.svg'
 
 export default class AccountButton extends React.Component {
     constructor (props) {
@@ -128,11 +128,11 @@ export default class AccountButton extends React.Component {
                         <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" ref={node => this.node = node}>
                             <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                                 <Link to={"/channel/" + this.state.id} className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" onClick={this.hideMenu}>
-                                    <ProfileIcon className="mr-2"/>
+                                    <ProfileIcon className="mr-2 fill-current"/>
                                     Your profile
                                 </Link>
                                 <a href="/auth/logout" className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
-                                    <SignOutIcon className="mr-2"/>
+                                    <SignOutIcon className="mr-2 fill-current"/>
                                     Sign out
                                 </a>
                             </div>

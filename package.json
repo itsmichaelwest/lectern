@@ -11,7 +11,6 @@
     "@azure/storage-blob": "^12.4.1",
     "@babel/core": "7.12.3",
     "@craco/craco": "^6.1.1",
-    "@fluentui/svg-icons": "^1.1.117",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
     "@tailwindcss/forms": "^0.2.1",
     "@tailwindcss/typography": "^0.4.0",

@@ -5,9 +5,9 @@ import SearchBar from './atoms/navigation/SearchBar'
 import AccountButton from './atoms/navigation/AccountButton'
 
 import { ReactComponent as LecternLogo } from '../vectors/logo.svg'
-import { ReactComponent as DismissIcon } from '@fluentui/svg-icons/icons/dismiss_20_regular.svg'
-import { ReactComponent as SearchIcon} from '@fluentui/svg-icons/icons/search_20_regular.svg'
-import { ReactComponent as UploadIcon } from '@fluentui/svg-icons/icons/arrow_upload_20_regular.svg'
+import { ReactComponent as DismissIcon } from '../icons/dismiss.svg'
+import { ReactComponent as SearchIcon} from '../icons/search.svg'
+import { ReactComponent as UploadIcon } from '../icons/upload.svg'
 
 export default function Navigation() {
     const [showMobileSearch, setShowMobileSearch] = useState(false)
@@ -34,20 +34,20 @@ export default function Navigation() {
                             <SearchBar/>
                             <button className="w-8 h-8" onClick={() => setShowMobileSearch(!showMobileSearch)}>
                                 <DismissIcon 
-                                    className="mx-auto"
+                                    className="mx-auto fill-current"
                                     alt="Close search box"/>
                             </button>
                         </div>
                         :
                         <button className={"flex-1 mr-2 " + Design.Button} onClick={() => setShowMobileSearch(!showMobileSearch)}>
-                            <SearchIcon className="-ml-1"/>
+                            <SearchIcon className="-ml-1 fill-current"/>
                             <span className="ml-2 hidden md:inline">
                                 Search
                             </span>
                         </button>
                         }
                         <Link className={"flex-1 mr-2 " + Design.Button} to="/upload">
-                            <UploadIcon className="-ml-1"/>
+                            <UploadIcon className="-ml-1 fill-current"/>
                             <span className="ml-2 hidden md:inline">
                                 Upload
                             </span>
