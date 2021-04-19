@@ -40,14 +40,14 @@ export default function Navigation() {
                         </div>
                         :
                         <button className={"flex-1 mr-2 " + Design.Button} onClick={() => setShowMobileSearch(!showMobileSearch)}>
-                            <SearchIcon className="-ml-1 fill-current"/>
+                            <SearchIcon className="md:-ml-1 fill-current"/>
                             <span className="ml-2 hidden md:inline">
                                 Search
                             </span>
                         </button>
                         }
                         <Link className={"flex-1 mr-2 " + Design.Button} to="/upload">
-                            <UploadIcon className="-ml-1 fill-current"/>
+                            <UploadIcon className="md:-ml-1 fill-current"/>
                             <span className="ml-2 hidden md:inline">
                                 Upload
                             </span>
