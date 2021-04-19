@@ -75,6 +75,8 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
     "concurrently": "^3.5.1",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
@@ -88,7 +90,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^3.9.2",
     "eslint-webpack-plugin": "^2.1.0",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "react-test-renderer": "^17.0.2"
   },
   "scripts": {
     "start": "yarn run build && (node ./server/index.js)",
