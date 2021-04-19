@@ -68,6 +68,7 @@ router.post('/upload', authCheckMiddleware(), async (req, res) => {
     }
 })
 
+
 router.post('/:videoId/view', (req, res) => {
     views.addView(req.params.videoId)
 })
