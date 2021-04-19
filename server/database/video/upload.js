@@ -23,9 +23,9 @@ function insertVideo(videoId, name, description, privacy, streamUrl, author, dis
             .input('privacy', sql.Numeric, privacy)
             .input('streamUrl', sql.VarChar, streamUrl)
             .input('author', sql.VarChar, author)
-            .input('authorDisplayName', sql.VarChar, displayName)
+            //.input('authorDisplayName', sql.VarChar, displayName)
             .input('uploaded', sql.DateTime2, uploaded)
-            .query('INSERT INTO [dbo].[videos] (videoId, title, description, privacy, streamUrl, author, authorDisplayName, uploaded, views) VALUES (@videoId, @name, @description, @privacy, @streamUrl, @author, @authorDisplayName, @uploaded, 0)')
+            .query('INSERT INTO [dbo].[videos] (videoId, title, description, privacy, streamUrl, author, uploaded, views) VALUES (@videoId, @name, @description, @privacy, @streamUrl, @author, @uploaded, 0)')
             .then(res => {
                 return res
             })
@@ -36,26 +36,4 @@ function insertVideo(videoId, name, description, privacy, streamUrl, author, dis
     })
 }
 
-// Updates video record with streaming url from azure, once it's been
-// transcoded.
-function addStreamUrl(videoId, url, callback) {
-    pool.connect().then((pool) => {
-        pool.request()
-            .input('videoId', sql.VarChar, videoId)
-            .input('streamUrl', sql.VarChar, url)
-            .query('UPDATE [dbo].[videos] SET streamUrl=@streamUrl WHERE videoId=@videoId')
-            .then(res => {
-                console.log(res)
-                return callback(res)
-            })
-            .catch(err => {
-                console.error(err)
-                return callback(err)
-            })
-    })
-}
-
-module.exports = {
-    insertVideo,
-    addStreamUrl
-}
+module.exports = insertVideo

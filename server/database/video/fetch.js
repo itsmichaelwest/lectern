@@ -4,7 +4,7 @@ const pool = require('../sql')
 function getAll(callback) {
     pool.connect().then((pool) => {
         pool.request()
-            .query('SELECT * FROM [dbo].[videos] WHERE privacy=0')
+            .query('SELECT * FROM [dbo].[videos] AS video INNER JOIN [dbo].[channels] AS channel ON video.author=channel.channelId WHERE privacy=0')
             .then(res => {
                 if (res.recordset.length > 0) {
                     return callback(res.recordset)
@@ -22,7 +22,7 @@ function getAll(callback) {
 function getTop9(callback) {
     pool.connect().then((pool) => {
         pool.request()
-            .query('SELECT TOP (9) * FROM [dbo].[videos] WHERE privacy=0 ORDER BY views DESC')
+            .query('SELECT TOP (9) * FROM [dbo].[videos] AS video INNER JOIN [dbo].[channels] AS channel ON video.author=channel.channelId WHERE privacy=0 ORDER BY views DESC')
             .then(res => {
                 if (res.recordset.length > 0) {
                     return callback(res.recordset)
@@ -40,7 +40,7 @@ function getTop9(callback) {
 function getRecently(callback) {
     pool.connect().then((pool) => {
         pool.request()
-            .query('SELECT TOP (9) * FROM [dbo].[videos] WHERE privacy=0 ORDER BY uploaded DESC')
+            .query('SELECT TOP (9) * FROM [dbo].[videos] AS video INNER JOIN [dbo].[channels] AS channel ON video.author=channel.channelId WHERE privacy=0 ORDER BY uploaded DESC')
             .then(res => {
                 if (res.recordset.length > 0) {
                     return callback(res.recordset)
@@ -56,32 +56,13 @@ function getRecently(callback) {
 }
 
 function getVideo(videoId, callback) {
-    let response = []
-
     pool.connect().then((pool) => {
         pool.request()
             .input('videoId', sql.VarChar, videoId)
-            .query('SELECT * FROM [dbo].[videos] WHERE videoId=@videoId')
+            .query('SELECT * FROM [dbo].[videos] AS video INNER JOIN [dbo].[channels] AS channel ON video.author=channel.channelId WHERE videoId=@videoId')
             .then(res => {
                 if (res.recordset.length > 0) {
-                    response.push(res.recordset[0])
-
-                    pool.request()
-                        .input('channelId', sql.VarChar, res.recordset[0].author)
-                        .query('SELECT * FROM [dbo].[channels] WHERE channelId=@channelId')
-                        .then(res => {
-                            if (res.recordset.length > 0) {
-                                response.push(res.recordset[0])
-                                return callback(response)
-                            } else {
-                                return callback(false)
-                            }
-                        })
-                        .catch(err => {
-                            console.error(err)
-                            return callback(err)
-                        })
-
+                    return callback(res.recordset[0])
                 } else {
                     return callback(false)
                 }

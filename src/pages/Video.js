@@ -30,23 +30,23 @@ export default class Video extends Component {
         // Get all video information
         axios
         .get(config.apiUrl + '/api/v1/video/' + params.videoId)
-        .then(response => {
-            let buffer = new Buffer(response.data[1].channelPhoto, 'base64')
+        .then(res => {
+            let buffer = new Buffer(res.data.channelPhoto, 'base64')
             let text = buffer.toString('ascii')
 
             this.setState({
                 isLoaded: true,
-                videoId: response.data[0].videoId,
-                title: response.data[0].title,
-                description: response.data[0].description,
-                streamUrl: response.data[0].streamUrl,
-                author: response.data[0].author,
+                videoId: res.data.videoId,
+                title: res.data.title,
+                description: res.data.description,
+                streamUrl: res.data.streamUrl,
+                author: res.data.author,
                 avatar: text,
-                views: response.data[0].views,
-                date: response.data[0].uploaded,
-                authorDisplayName: response.data[1].displayName
+                views: res.data.views,
+                date: res.data.uploaded,
+                authorDisplayName: res.data.displayName
             })
-
+            
             axios.post(`${config.apiUrl}/api/v1/video/${params.videoId}/view`)
 
             axios
@@ -55,7 +55,7 @@ export default class Video extends Component {
                 this.setState({
                     name: res.data.userName
                 })
-                if (res.data.passport.user.oid === response.data[0].author) {
+                if (res.data.passport.user.oid === res.data.author) {
                     this.setState({
                         isCreator: true
                     })

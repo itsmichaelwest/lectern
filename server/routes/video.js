@@ -53,7 +53,7 @@ router.get('/sas', authCheckMiddleware(), (req, res) => {
 
 router.post('/upload', authCheckMiddleware(), async (req, res) => {
     if (req.isAuthenticated()) {
-        upload.insertVideo(
+        upload(
             req.body.videoId,
             req.body.title, 
             req.body.description, 

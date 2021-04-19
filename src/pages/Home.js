@@ -75,7 +75,7 @@ export default class Home extends Component {
                                     key={video.videoId} 
                                     id={video.videoId} 
                                     title={video.title} 
-                                    description={video.authorDisplayName} 
+                                    description={video.displayName} 
                                     length={video.length}
                                 />
                             )
@@ -95,7 +95,7 @@ export default class Home extends Component {
                                     key={video.videoId} 
                                     id={video.videoId} 
                                     title={video.title} 
-                                    description={video.authorDisplayName} 
+                                    description={video.displayName} 
                                     length={video.length}
                                 />
                             )

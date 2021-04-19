@@ -61,39 +61,12 @@ function destroyUser(oid, callback) {
             .input('userId', sql.VarChar, oid)
             .query('DELETE FROM [dbo].[users] WHERE userId=@userId')
             .then(() => {
-                pool.request()
-                    .input('userId', sql.VarChar, oid)
-                    .query('DELETE FROM [dbo].[channels] WHERE channelId=@userId')
-                    .then(() => {
-                        pool.request()
-                            .input('userId', sql.VarChar, oid)
-                            .query('DELETE FROM [dbo].[videos] WHERE author=@userId')
-                            .then(() => {
-                                pool.request()
-                                    .input('userId', sql.VarChar, oid)
-                                    .query('DELETE FROM [dbo].[comments] WHERE author=@userId')
-                                    .then(() => {
-                                        callback(false, true)
-                                    })
-                                    .catch(err => {
-                                        console.error(err)
-                                        callback(err)
-                                    })
-                            })
-                            .catch(err => {
-                                console.error(err)
-                                callback(err)
-                            })
-                    })
-                    .catch(err => {
-                        console.error(err)
-                        callback(err)
-                    })
+                callback(false, true)
             })
             .catch(err => {
                 console.error(err)
                 callback(err)
-            })
+            })  
     })
 }
 

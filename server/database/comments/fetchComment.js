@@ -5,7 +5,7 @@ function getAllComments(videoId, callback) {
     pool.connect().then((pool) => {
         pool.request()
             .input('videoId', sql.VarChar, videoId)
-            .query('SELECT * FROM [dbo].[comments] WHERE videoId=@videoId ORDER BY timestamp ASC')
+            .query('SELECT * FROM [dbo].[comments] AS comment INNER JOIN [dbo].[users] AS users ON comment.author=users.userId WHERE videoId=@videoId ORDER BY timestamp ASC')
             .then(res => {
                 if (res.recordset.length > 0) {
                     return callback(res.recordset)
