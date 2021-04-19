@@ -14,12 +14,10 @@ export default async function addComment(videoId, commentBody, timestamp, callba
             'timestamp': timestamp
         }
     })
-    .then(async res => {
-        console.log(res)
+    .then(async () => {
         return callback(true)
     })
-    .catch(err => {
-        console.log(err)
+    .catch(() => {
         return callback(false)
     })
 }

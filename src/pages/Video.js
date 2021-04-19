@@ -55,7 +55,7 @@ export default class Video extends Component {
                 this.setState({
                     name: res.data.userName
                 })
-                if (res.data.passport.user.oid === res.data.author) {
+                if (res.data.passport.user.oid === this.state.author) {
                     this.setState({
                         isCreator: true
                     })

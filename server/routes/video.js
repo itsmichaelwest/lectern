@@ -100,7 +100,7 @@ router.get('/:videoId/download', authCheckMiddleware(), (req, res) => {
 router.delete('/:videoId', authCheckMiddleware(), (req, res) => {
     fetch.getVideo(req.params.videoId, video => {
         if (video !== false) {
-            if (video[0].author === req.session.passport.user.oid) {
+            if (video.author === req.session.passport.user.oid) {
                 deleteVideo(req.params.videoId, result => {
                     if (result === true) {
                         res.status(200).send('Video deleted successfully!')
