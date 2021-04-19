@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import config from '../../../config'
-import Design from '../../../Design'
+import { Button, ButtonDestructive } from '../../../Design'
 import Dialog from '../../Dialog'
 
 import { ReactComponent as DeleteIcon } from '../../../icons/delete.svg'
@@ -12,6 +12,8 @@ import { ReactComponent as StarIcon } from '../../../icons/star.svg'
 
 export default function Video(props) {
     let history = useHistory()
+    const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false)
+
 
     function formatDate(date) {
         const d = new Date(date)
@@ -29,6 +31,10 @@ export default function Video(props) {
         })
     }
 
+    function toggleDeleteDialog() {
+        setIsDeleteDialogShown(!isDeleteDialogShown)
+    }
+
     function deleteVideo() {
         axios
         .delete(`${config.apiUrl}/api/v1/video/${props.videoId}`)
@@ -40,6 +46,21 @@ export default function Video(props) {
 
     return (
         <div>
+            <Dialog 
+                show={isDeleteDialogShown} 
+                onPrimary={deleteVideo}
+                onClose={toggleDeleteDialog}
+                primaryStyle={ButtonDestructive}
+                primary="Delete video"
+                secondary="Cancel"
+                secondaryStyle={Button}>
+                <h4 className="font-bold text-lg">
+                    Delete video
+                </h4>
+                <p className="my-2">
+                    Are you sure you want to delete this video? All comments will be lost.
+                </p>
+            </Dialog>
             <h1 className="text-xl font-bold font-header break-words" style={{ overflowWrap: 'word' }}>{props.title}</h1>
             <p className="text-gray-600 mt-4 break-words" style={{ overflowWrap: 'word' }}>{props.description}</p>
             <div className="flex justify-between items-center my-8">
@@ -50,14 +71,14 @@ export default function Video(props) {
                 <div className="flex align-middle">
                     {
                         props.isCreator &&
-                        <button className={Design.ButtonDestructive + " mr-2"} onClick={deleteVideo}>
+                        <button className={ButtonDestructive + " mr-2"} onClick={toggleDeleteDialog}>
                             <DeleteIcon className="fill-current"/>
                         </button>
                     }
-                    <button className={Design.Button + " mr-2"} onClick={downloadVideo}>
+                    <button className={Button + " mr-2"} onClick={downloadVideo}>
                         <DownloadIcon className="fill-current"/>
                     </button>
-                    <button className={Design.Button}>
+                    <button className={Button}>
                         <StarIcon className="fill-current"/>
                     </button>
                 </div>
