@@ -17,8 +17,11 @@ export default function Footer() {
                         <Link to="/community-standards" className={Design.URL + " mx-4"}>
                             Community Standards
                         </Link>
-                        <Link to="/privacy" className={Design.URL}>
-                            Privacy Policy
+                        <Link to="/participation" className={Design.URL}>
+                            Participation Agreement
+                        </Link>
+                        <Link to="/privacy" className={Design.URL + " ml-4"}>
+                            Privacy
                         </Link>
                         <p className="ml-4 inline">
                             This site is a work in progress.

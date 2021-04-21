@@ -12,6 +12,7 @@ import Channel from './pages/Channel'
 import Upload from './pages/Upload'
 import Search from './pages/Search'
 import PrivacyPolicy from './pages/PrivacyPolicy'
+import ParticipationAgreement from './pages/ParticipationAgreement'
 import CommunityStandards from './pages/CommunityStandards'
 import APIDocsHome from './components/api-docs/APIHome'
 import APIDocs from './pages/APIDocs'
@@ -31,6 +32,7 @@ export default class App extends Component {
                         <Route path="/upload" component={Upload} />
                         <Route path="/search" component={Search} />
                         <Route path="/privacy" component={PrivacyPolicy} />
+                        <Route path="/participation" component={ParticipationAgreement} />
                         <Route path="/community-standards" component={CommunityStandards} />
                         <Route exact path="/api" component={APIDocsHome} />
                         <Route path="/api/:apiType" component={APIDocs} />
