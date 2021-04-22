@@ -48,11 +48,12 @@ export default class AccountButton extends React.Component {
             axios
             .get(`${config.apiUrl}/auth/userdb`, {withCredentials: true})
             .then(res => {
-                let buffer = new Buffer(res.data.userPhoto, 'base64')
-                let text = buffer.toString('ascii')
-                this.setState({
-                    avatar: text
-                })
+                if (res.data.userPhoto) {
+                    let avatarBase64 = new Buffer.from(res.data.userPhoto, 'base64').toString('ascii')
+                    this.setState({
+                        avatar: avatarBase64
+                    })
+                }
             })
         })
         .catch(err => {
@@ -84,47 +85,26 @@ export default class AccountButton extends React.Component {
                 </div>
             )
         } else {
-            if (!this.state.menuSelected) {
-                return (
-                    <div className="relative inline-block text-left flex-initial" ref={node => this.node = node}>
-                        <button type="button" className={Design.Button} id="options-menu" aria-haspopup="true" aria-expanded="true" ref={node => this.node = node} onClick={this.toggleMenu}>
-                            <span className="inline md:hidden -mr-2">
+            return (
+                <div className="relative inline-block text-left flex-initial" ref={node => this.node = node}>
+                    <button type="button" className={Design.Button} id="options-menu" aria-haspopup="true" aria-expanded="true" ref={node => this.node = node} onClick={this.toggleMenu}>
+                        {
+                            this.state.avatar ? 
+                            <span className="mr-2">
                                 <img 
-                                    className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 mr-2 border border-gray-200 shadow-sm" 
+                                    className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 border border-gray-200 shadow-sm" 
                                     src={`data:image/jpeg;base64,${this.state.avatar}`}
                                     alt={this.state.name + " avatar"} />
                             </span>
-                            <span className="hidden md:inline">
-                                <img 
-                                    className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 mr-2 border border-gray-200 shadow-sm" 
-                                    src={`data:image/jpeg;base64,${this.state.avatar}`}
-                                    alt={this.state.name + " avatar"} />
-                                {this.state.name}
-                            </span>
-                            <DropdownIcon/>
-                        </button>
-                    </div>
-                )
-            } else if (this.state.menuSelected) {
-                return (
-                    <>
-                    <div className="relative inline-block text-left flex-initial" ref={node => this.node = node}>
-                        <button type="button" className={Design.Button} id="options-menu" aria-haspopup="true" aria-expanded="true" ref={node => this.node = node} onClick={this.toggleMenu}>
-                            <span className="inline md:hidden -mr-2">
-                                <img 
-                                    className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 mr-2 border border-gray-200 shadow-sm" 
-                                    src={`data:image/jpeg;base64,${this.state.avatar}`}
-                                    alt={this.state.name + " avatar"} />
-                            </span>
-                            <span className="hidden md:inline">
-                                <img 
-                                    className="inline h-5 w-5 rounded-full overflow-hidden bg-gray-100 mr-2 border border-gray-200 shadow-sm" 
-                                    src={`data:image/jpeg;base64,${this.state.avatar}`}
-                                    alt={this.state.name + " avatar"} />
-                                {this.state.name}
-                            </span>
-                            <DropdownIcon/>
-                        </button>
+                            :
+                            <ProfileIcon className="mr-2 fill-current"/>
+                        }
+                        <span className="hidden md:inline">
+                            {this.state.name}
+                        </span>
+                        <DropdownIcon/>
+                    </button>
+                    { this.state.menuSelected && 
                         <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" ref={node => this.node = node}>
                             <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                                 <Link to={"/channel/" + this.state.id} className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" onClick={this.hideMenu}>
@@ -137,11 +117,9 @@ export default class AccountButton extends React.Component {
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    </>
-
-                )
-            }
+                    }
+                </div>
+            )
         }
     }
 }

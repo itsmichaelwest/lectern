@@ -21,7 +21,8 @@ export default class Video extends Component {
             views: null,
             authorDisplayName: null,
             notFound: false,
-            name: null
+            name: null,
+            avatar: null
         }
     }
 
@@ -32,8 +33,12 @@ export default class Video extends Component {
         axios
         .get(config.apiUrl + '/api/v1/video/' + params.videoId)
         .then(res => {
-            let buffer = new Buffer(res.data.channelPhoto, 'base64')
-            let text = buffer.toString('ascii')
+            if (res.data.channelPhoto) {
+                let avatarBase64 = new Buffer.from(res.data[0].channelPhoto, 'base64').toString('ascii')
+                this.setState({
+                    avatar: avatarBase64
+                })
+            }
 
             this.setState({
                 isLoaded: true,
@@ -42,7 +47,6 @@ export default class Video extends Component {
                 description: res.data.description,
                 streamUrl: res.data.streamUrl,
                 author: res.data.author,
-                avatar: text,
                 views: res.data.views,
                 date: res.data.uploaded,
                 authorDisplayName: res.data.displayName

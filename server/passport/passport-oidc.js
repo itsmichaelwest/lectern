@@ -50,8 +50,7 @@ const strategy = new OIDCStrategy(
 
                 request({
                     headers: {
-                        'Authorization': `Bearer ${accessToken}`,
-                        'Content-Type': 'image/jpeg'
+                        'Authorization': `Bearer ${accessToken}`
                     },
                     uri: 'https://graph.microsoft.com/v1.0/me/photos/240x240/$value',
                     method: 'GET'
@@ -61,7 +60,7 @@ const strategy = new OIDCStrategy(
                         throw err
                     } else {
                         const avatar = new Buffer(body, 'binary').toString('base64')
-
+                        
                         user.addUser(profile, req.session.userName, avatar)
                     
                         return done(null, profile)

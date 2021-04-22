@@ -7,10 +7,15 @@ export default function ChannelHeader(props) {
             <div className="relative bg-black bg-opacity-40 rounded-xl overflow-hidden">
                 <div className="flex flex-col lg:flex-row items-center relative p-8">
                     <div className="flex flex-col lg:flex-row items-center flex-auto">
-                        <img 
-                            className="flex-initial flex-shrink-0 rounded-full overflow-hidden bg-gray-200 h-32 w-32 shadow-lg lg:mr-8" 
-                            src={`data:image/jpeg;base64,${props.avatar}`} 
-                            alt={props.name + " avatar"} />
+                        {
+                            props.avatar ?
+                            <img 
+                                className="flex-initial flex-shrink-0 rounded-full overflow-hidden bg-gray-200 h-32 w-32 shadow-lg lg:mr-8" 
+                                src={`data:image/jpeg;base64,${props.avatar}`} 
+                                alt={props.name + " avatar"} />
+                            :
+                            <span className="block flex-initial flex-shrink-0 rounded-full overflow-hidden bg-primary-200 h-32 w-32 shadow-lg lg:mr-8"/>
+                        }
                         <div className="flex-auto text-center lg:text-left">
                             <h1 className="font-bold font-header text-white text-3xl mt-4 lg:my-0">
                                 {props.name}
