@@ -3,9 +3,20 @@ const router = new express.Router()
 
 // Channel info API
 const channelInfo = require('../database/channel/channelInfo')
+const channelSearch = require('../database/channel/channelSearch')
 
 // Video fetch API
 const fetch = require('../database/video/fetch')
+
+router.get('/search/:query', (req, res) => {
+    channelSearch(req.params.query, (result) => {
+        if (result !== false) {
+            res.json(result)
+        } else {
+            res.status(404).json("No channel with that ID could be found")
+        }
+    })
+})
 
 router.get('/:channelId', (req, res) => {
     channelInfo.getInfo(req.params.channelId, (result) => {

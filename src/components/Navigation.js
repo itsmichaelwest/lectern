@@ -30,7 +30,7 @@ export default function Navigation() {
                     </div>
                     <div className="flex align-middle">
                         { showMobileSearch ? 
-                        <div className="absolute inset-0 px-4 sm:px-6 flex items-center w-full z-40 bg-white">
+                        <div className="absolute inset-0 container max-w-7xl mx-auto px-4 sm:px-6 flex items-center w-full z-40 bg-white">
                             <SearchBar/>
                             <button className="w-8 h-8" onClick={() => setShowMobileSearch(!showMobileSearch)}>
                                 <DismissIcon 
@@ -40,14 +40,14 @@ export default function Navigation() {
                         </div>
                         :
                         <button className={"flex-1 mr-2 " + Design.Button} onClick={() => setShowMobileSearch(!showMobileSearch)}>
-                            <SearchIcon className="md:-ml-1 fill-current"/>
+                            <SearchIcon className="-mx-2 md:-mx-0 md:-ml-1 fill-current"/>
                             <span className="ml-2 hidden md:inline">
                                 Search
                             </span>
                         </button>
                         }
                         <Link className={"flex-1 mr-2 " + Design.Button} to="/upload">
-                            <UploadIcon className="md:-ml-1 fill-current"/>
+                            <UploadIcon className="-mx-2 md:-mx-0 md:-ml-1 fill-current"/>
                             <span className="ml-2 hidden md:inline">
                                 Upload
                             </span>

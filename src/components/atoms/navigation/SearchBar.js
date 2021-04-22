@@ -20,7 +20,7 @@ export default function SearchBar() {
                 search: `?find=${query}`,
                 state: { 
                     query: query,
-                    results: res.data
+                    results: res
                 }
             })
         })
@@ -32,7 +32,7 @@ export default function SearchBar() {
             onSubmit={handleSearch}>
             <input 
                 type="text" 
-                placeholder="Search videos"
+                placeholder="Search videos and channels"
                 value={query}
                 onChange={handleChange}
                 className={Design.Input + " w-full"} />

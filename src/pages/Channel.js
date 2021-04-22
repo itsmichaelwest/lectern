@@ -27,7 +27,6 @@ export default class Channel extends Component {
         axios
         .get(`${config.apiUrl}/api/v1/channel/${this.state.id}/all`)
         .then(res => {
-            console.log(res)
             if (res.data[0].channelPhoto) {
                 let avatarBase64 = new Buffer.from(res.data[0].channelPhoto, 'base64').toString('ascii')
                 this.setState({

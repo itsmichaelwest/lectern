@@ -58,6 +58,12 @@ export default function VideoComments(props) {
         return video.currentTime
     }
 
+    function validateComment(value) {
+        if (!value) {
+            return 'Please enter a comment'
+        }
+    }
+
     return (
         <>
         <SignInChallenge
@@ -114,6 +120,7 @@ export default function VideoComments(props) {
                     initialValues={{
                         comment: ''
                     }}
+                    
                     onSubmit={async (values, { resetForm }) => {
                         const currentTime = getCurrentVideoTime()
                         addComment(
@@ -137,6 +144,7 @@ export default function VideoComments(props) {
                             name="comment" 
                             placeholder={`Comment publicly ${props.name}`}
                             type="text" 
+                            validate={validateComment}
                             className={Design.Input + " flex-grow"}/>
                         <button className={Design.ButtonPrimary} type="submit">
                             <SendIcon className="-ml-1 mr-2 fill-current"/>
