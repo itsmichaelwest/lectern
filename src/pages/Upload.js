@@ -56,6 +56,9 @@ export default class Upload extends Component {
     }
 
     handleFileSelection(file) {
+        const videoObj = URL.createObjectURL(file[0])
+        let videoTempContainer = document.getElementById('tempVideo')
+        videoTempContainer.src = videoObj
         this.setState({
             selectedFile: file[0],
         })
@@ -175,6 +178,10 @@ export default class Upload extends Component {
                 :
                 <UploadSkeleton />
                 }
+            </div>
+            <div className="fixed top-0 left-0 invisible">
+                {/* hidden div used to */}
+                <video id="tempVideo"/>
             </div>
             </>
         )

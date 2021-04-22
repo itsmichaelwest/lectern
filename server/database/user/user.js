@@ -1,4 +1,5 @@
 const sql = require('mssql')
+const storageDeleteBlob = require('../../storage/storageDeleteBlob')
 const pool = require('../sql')
 
 function addUser(profile, displayName, userPhoto) {
@@ -58,15 +59,25 @@ function getUser(oid, callback) {
 function destroyUser(oid, callback) {
     pool.connect().then((pool) => {
         pool.request()
-            .input('userId', sql.VarChar, oid)
-            .query('DELETE FROM [dbo].[users] WHERE userId=@userId')
-            .then(() => {
-                callback(false, true)
+            .input('author', sql.VarChar, oid)
+            .query('SELECT * FROM [dbo].[videos] WHERE author=@author')
+            .then(res => {
+                if (res.recordset.length > 0) {
+                    res.recordset.forEach(video => {
+                        storageDeleteBlob(video.videoId)
+                    })
+                }
+                pool.request()
+                .input('userId', sql.VarChar, oid)
+                .query('DELETE FROM [dbo].[users] WHERE userId=@userId')
+                .then(() => {
+                    callback(false, true)
+                })
+                .catch(err => {
+                    console.error(err)
+                    callback(err)
+                })
             })
-            .catch(err => {
-                console.error(err)
-                callback(err)
-            })  
     })
 }
 

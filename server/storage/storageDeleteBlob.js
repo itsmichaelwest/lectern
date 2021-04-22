@@ -12,11 +12,15 @@ function storageDeleteBlob(videoId) {
         `https://${account}.blob.core.windows.net`, sharedKeyCredential
     )
 
-    const containerClient = blobServiceClient.getContainerClient('videos')
-    const blockBlobClient = containerClient.getBlockBlobClient(videoId)
-    const blockBlobDeleteResponse = blockBlobClient.delete()
+    const videoContainerClient = blobServiceClient.getContainerClient('videos')
+    const videoBlockBlobClient = videoContainerClient.getBlockBlobClient(videoId)
+    const videoBlockBlobDeleteResponse = videoBlockBlobClient.delete()
 
-    return blockBlobDeleteResponse
+    const thumbnailContainerClient = blobServiceClient.getContainerClient('thumbnails')
+    const thumbnailBlockBlobClient = thumbnailContainerClient.getBlockBlobClient(videoId)
+    const thumbnailBlockBlobDeleteResponse = thumbnailBlockBlobClient.delete()
+
+    return videoBlockBlobDeleteResponse
 }
 
 module.exports = storageDeleteBlob

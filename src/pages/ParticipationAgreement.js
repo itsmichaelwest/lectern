@@ -1,6 +1,5 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import PrivacySVG from '../vectors/undraw-privacy.svg'
 
 export default function ParticipationAgreement() {
     return (
@@ -10,7 +9,7 @@ export default function ParticipationAgreement() {
         </Helmet>
         <div className="px-4 sm:px-0">
             <div className="text-center">
-                <h1 className="text-6xl font-bold font-header mt-16 mb-8">
+                <h1 className="text-4xl md:text-6xl font-bold font-header mt-16 mb-8">
                     Participation Agreement
                 </h1>
                 <div className="prose mx-auto">

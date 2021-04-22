@@ -20,7 +20,8 @@ export default class Video extends Component {
             author: null,
             views: null,
             authorDisplayName: null,
-            notFound: false
+            notFound: false,
+            name: null
         }
     }
 
@@ -98,7 +99,7 @@ export default class Video extends Component {
                         />
                         <VideoComments 
                             videoId={videoId}
-                            name={name}
+                            name={ name ? 'as ' + name : ''}
                             isCreator={isCreator}/>
                     </div>
                     </>

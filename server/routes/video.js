@@ -60,7 +60,8 @@ router.post('/upload', authCheckMiddleware(), async (req, res) => {
             req.body.privacy,
             req.body.streamUrl,
             req.session.passport.user.oid,
-            req.session.userName
+            req.body.vidLength,
+            req.body.thumbnail
         )
         res.status(200).send('Video uploaded successfully!')
     } else {

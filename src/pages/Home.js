@@ -77,6 +77,7 @@ export default class Home extends Component {
                                     title={video.title} 
                                     description={video.displayName} 
                                     length={video.length}
+                                    thumb={video.thumbnail}
                                 />
                             )
                         })}
@@ -97,6 +98,7 @@ export default class Home extends Component {
                                     title={video.title} 
                                     description={video.displayName} 
                                     length={video.length}
+                                    thumb={video.thumbnail}
                                 />
                             )
                         })}

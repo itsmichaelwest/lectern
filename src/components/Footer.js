@@ -23,9 +23,6 @@ export default function Footer() {
                         <Link to="/privacy" className={Design.URL + " ml-4"}>
                             Privacy
                         </Link>
-                        <p className="ml-4 inline">
-                            This site is a work in progress.
-                        </p>
                     </div>
                 </div>
             </div>

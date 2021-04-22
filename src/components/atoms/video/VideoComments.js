@@ -8,6 +8,7 @@ import addComment from '../../../functions/addComment'
 import { ReactComponent as SurveySVG } from '../../../vectors/undraw-survey.svg'
 import SignInChallenge from '../../SignInChallenge'
 import { ReactComponent as SendIcon } from '../../../icons/send.svg'
+import getHumanReadableTime from '../../../functions/getHumanReadableTime'
 
 export default function VideoComments(props) {
     const [isFetched, setIsFetched] = useState(false)
@@ -55,20 +56,6 @@ export default function VideoComments(props) {
     function getCurrentVideoTime() {
         let video = document.getElementById('video')
         return video.currentTime
-    }
-
-    // Little helper function to convert the seconds value into a human
-    // readable time format.
-    function getHumanReadableTime(time) {
-        let minutes = Math.floor(time / 60)
-        let seconds = time - minutes * 60
-        if (minutes.toString().length === 1) {
-            minutes = `0${minutes}`
-        }
-        if (seconds.toString().length === 1) {
-            seconds = `0${seconds}`
-        }
-        return (`${minutes}:${seconds}`)
     }
 
     return (
@@ -148,7 +135,7 @@ export default function VideoComments(props) {
                         <Field 
                             id="comment" 
                             name="comment" 
-                            placeholder={`Comment publicly as ${props.name}`}
+                            placeholder={`Comment publicly ${props.name}`}
                             type="text" 
                             className={Design.Input + " flex-grow"}/>
                         <button className={Design.ButtonPrimary} type="submit">

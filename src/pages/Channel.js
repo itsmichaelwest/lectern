@@ -120,7 +120,10 @@ export default class Channel extends Component {
                                             key={video.videoId} 
                                             id={video.videoId} 
                                             title={video.title} 
-                                            description={video.description} />
+                                            description={video.description}
+                                            length={video.length}
+                                            thumb={video.thumbnail}
+                                        />
                                     )
                                 })}
                             </div>

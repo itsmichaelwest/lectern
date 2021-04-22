@@ -75,11 +75,8 @@ export default function Video(props) {
                             <DeleteIcon className="fill-current"/>
                         </button>
                     }
-                    <button className={Button + " mr-2"} onClick={downloadVideo}>
+                    <button className={Button} onClick={downloadVideo}>
                         <DownloadIcon className="fill-current"/>
-                    </button>
-                    <button className={Button}>
-                        <StarIcon className="fill-current"/>
                     </button>
                 </div>
             </div>
