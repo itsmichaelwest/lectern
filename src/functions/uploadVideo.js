@@ -30,8 +30,6 @@ export default async function uploadVideo(video, values, callback, progress) {
         const videoLength = document.getElementById('tempVideo').duration
         const thumbnail = createThumbnail(document.getElementById('tempVideo'))
 
-        console.log(thumbnail.src)
-
         const videoId = uuidv4()
         const storageAccountName = 'cs394lecternvideos'
         const videoContainerName = 'videos'

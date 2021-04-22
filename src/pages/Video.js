@@ -34,7 +34,7 @@ export default class Video extends Component {
         .get(config.apiUrl + '/api/v1/video/' + params.videoId)
         .then(res => {
             if (res.data.channelPhoto) {
-                let avatarBase64 = new Buffer.from(res.data[0].channelPhoto, 'base64').toString('ascii')
+                let avatarBase64 = new Buffer.from(res.data.channelPhoto, 'base64').toString('ascii')
                 this.setState({
                     avatar: avatarBase64
                 })
