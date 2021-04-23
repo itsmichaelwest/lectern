@@ -7,7 +7,5 @@ export default function createThumbnail(videoElement) {
     const thumbnail = new Image()
     thumbnail.src = canvas.toDataURL()
 
-    console.log(thumbnail)
-
     return thumbnail
 }

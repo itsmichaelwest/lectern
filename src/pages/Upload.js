@@ -9,6 +9,7 @@ import { Link, Prompt } from 'react-router-dom'
 import UploadSkeleton from '../components/skeletons/UploadSkeleton'
 import FileDropper from '../components/atoms/upload/FileDropper'
 import FileInfo from '../components/atoms/upload/FileInfo'
+import Thumbnail from '../components/atoms/video/Thumbnail'
 
 export default class Upload extends Component {
     constructor(props) {
@@ -56,12 +57,14 @@ export default class Upload extends Component {
     }
 
     handleFileSelection(file) {
-        const videoObj = URL.createObjectURL(file[0])
-        let videoTempContainer = document.getElementById('tempVideo')
-        videoTempContainer.src = videoObj
-        this.setState({
-            selectedFile: file[0],
-        })
+        if (file.length > 0) {
+            const videoObj = URL.createObjectURL(file[0])
+            let videoTempContainer = document.getElementById('tempVideo')
+            videoTempContainer.src = videoObj
+            this.setState({
+                selectedFile: file[0],
+            })
+        }
     }
 
     handleFileRemoval() { this.resetState() }
@@ -103,10 +106,10 @@ export default class Upload extends Component {
                                 this.state.selectedFile, 
                                 values, 
                                 callback => {
-                                if (callback === true) {
+                                if (callback !== null) {
                                     this.setState({
                                         selectedFile: null,
-                                        uploadStatus: true
+                                        uploadStatus: callback
                                     })
                                 } else {
                                     console.error('[Upload] The upload wasn\'t successful')
@@ -133,7 +136,7 @@ export default class Upload extends Component {
                             <div className="my-8">
                                 <label className="font-semibold" htmlFor="title">Title</label>
                                 <div className="mt-2">
-                                    <Field id="title" name="title" type="text" className={Design.Input + " w-full"} />
+                                    <Field id="title" name="title" type="text" className={Design.Input + " w-full"} disabled={this.state.isLoadingBytes} />
                                 </div>
                                 <span className="text-xs text-gray-600">Max 500 characters</span>
                             </div>
@@ -141,7 +144,7 @@ export default class Upload extends Component {
                             <div className="my-8">
                                 <label className="font-semibold" htmlFor="description">Description</label>
                                 <div className="mt-2">
-                                    <Field id="description" name="description" as="textarea" className={Design.Input + " w-full"} style={{ resize: 'none' }} />
+                                    <Field id="description" name="description" as="textarea" className={Design.Input + " w-full"} style={{ resize: 'none' }} disabled={this.state.isLoadingBytes} />
                                 </div>
                                 <span className="text-xs text-gray-600">Max 4000 characters</span>
                             </div>
@@ -150,7 +153,7 @@ export default class Upload extends Component {
                                 <div className="h-0">
                                     <label className="font-semibold" htmlFor="privacy">Privacy</label>
                                     <div className="my-2">
-                                        <Field as="select" id="privacy" name="privacy" className={Design.InputDropdown + " w-32"}>
+                                        <Field as="select" id="privacy" name="privacy" className={Design.InputDropdown + " w-32"} disabled={this.state.isLoadingBytes}>
                                             <option value="0" label="Public" />
                                             <option value="1" label="Unlisted" />
                                         </Field>
@@ -166,11 +169,18 @@ export default class Upload extends Component {
                     </Formik>
                     :
                     <div className="text-center">
-                        <p className="font-header text-xl">
+                        <div className="lg:w-3/6 md:w-4/6 w-full mx-auto">
+                            <Thumbnail 
+                                key={this.state.uploadStatus.videoId} 
+                                id={this.state.uploadStatus.videoId} 
+                                title={this.state.uploadStatus.title} 
+                                description={this.state.uploadStatus.description}
+                                length={this.state.uploadStatus.vidLength}
+                                thumb={this.state.uploadStatus.thumbnail}
+                            />
+                        </div>
+                        <p className="text-xl mt-8">
                             🎉 Your video was successfully uploaded! ✨
-                        </p>
-                        <p>
-                            You can safely navigate away from this page now.
                         </p>
                     </div>
                     }

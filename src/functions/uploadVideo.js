@@ -67,7 +67,7 @@ export default async function uploadVideo(video, values, callback, progress) {
             }).then(() => {
                 axios.post(`${apiUrl}/api/v1/video/upload`, body)
                 .then(() => {
-                    return callback(true)
+                    return callback(body)
                 })
                 .catch(err => {
                     console.error(err)

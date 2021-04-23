@@ -1,12 +1,19 @@
-import React, { useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import { ReactComponent as VideoIcon } from '../../../icons/video_28_regular.svg'
 
 export default function DropZone(props) {
+    const [fileError, setFileError] = useState(false)
+
     // Send the accepted files back
     const onDrop = useCallback(acceptedFiles => {
-        props.onDrop(acceptedFiles)
+        if (acceptedFiles.length > 0) {
+            setFileError(false)
+            props.onDrop(acceptedFiles)
+        } else {
+            setFileError(true)
+        }
     }, [props])
 
     const {
@@ -42,15 +49,21 @@ export default function DropZone(props) {
                         <p className="my-2">
                             Drag and drop or click/tap to choose a file
                         </p>
-                        <p className="text-gray-600">
-                            Acceptable video formats: MP4
-                        </p>
+                        {
+                            fileError ?
+                            <p className="text-red-600 font-semibold">
+                                That video format cannot be uploaded, please select an MP4 file
+                            </p>
+                            :
+                            <p className="text-gray-600">
+                                Acceptable video formats: MP4
+                            </p>
+                        }
                         <p className="text-gray-400 text-xs mt-2">
                             Maximum file size: 4 GB
                         </p>
                     </div>
                 }
-
             </div>
         </div>
     )
