@@ -32,11 +32,8 @@
     "react-scripts": "^4.0.2",
     "react-syntax-highlighter": "^15.4.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "url-loader": "4.1.1",
     "uuid": "^8.3.2",
-    "web-vitals": "^1.0.1",
-    "webpack": "4.44.2",
-    "webpack-manifest-plugin": "2.2.0"
+    "web-vitals": "^1.0.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.10",
