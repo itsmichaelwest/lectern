@@ -5,7 +5,6 @@ const app = express()
 const passport = require('passport')
 require('./passport/passport')(passport)
 const morgan = require('morgan')
-const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const AzureTablesStoreFactory = require('connect-azuretables')(session)
@@ -14,10 +13,8 @@ const cookieSettings = require('./config').cookieSettings
 const errorHandlingMiddleware = require('./middleware/error')
 const path = require('path')
 
-app.use(cookieParser('foo'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static('uploads'));
 app.use(errorHandlingMiddleware())
 
 app.use(morgan('dev'))
