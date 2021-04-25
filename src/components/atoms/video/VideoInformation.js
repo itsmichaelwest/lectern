@@ -7,8 +7,6 @@ import Dialog from '../../Dialog'
 
 import { ReactComponent as DeleteIcon } from '../../../icons/delete.svg'
 import { ReactComponent as DownloadIcon } from '../../../icons/download.svg'
-import { ReactComponent as StarIcon } from '../../../icons/star.svg'
-
 
 export default function Video(props) {
     let history = useHistory()

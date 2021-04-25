@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import axios from 'axios'
 import config from '../../../config'
 import Comment from '../comment/Comment'
@@ -16,22 +16,22 @@ export default function VideoComments(props) {
     const [userId, setUserId] = useState(null)
     const [signInChallenge, setSignInChallenge] = useState(false)
 
-    useEffect(() => {
-        fetchComments()
-    }, [isFetched])
-
-    useEffect(() => {
-        fetchUserId()
-    }, [isFetched])
-
-    function fetchComments() {
+    const fetchComments = useCallback(() => {
         axios
         .get(`${config.apiUrl}/api/v1/comment/${props.videoId}`)
         .then(res => {
             setIsFetched(true)
             setComments(res.data)
         })
-    }
+    }, [props.videoId])
+
+    useEffect(() => {
+        fetchComments()
+    }, [fetchComments, isFetched])
+
+    useEffect(() => {
+        fetchUserId()
+    }, [isFetched])
 
     function fetchUserId() {
         axios
