@@ -2,8 +2,7 @@ import React from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import APIDescriber from './APIDescriber'
-import { Link } from 'react-router-dom'
-import Design from '../../Design'
+import { Helmet } from 'react-helmet'
 import APIPublicPreview from './APIPublicPreview'
 
 export default function ChannelAPIDocs() {
@@ -44,6 +43,10 @@ export default function ChannelAPIDocs() {
     `
 
     return (
+        <>
+        <Helmet>
+            <title>Channel - API | Lectern</title>
+        </Helmet>
         <div className="max-w-2xl mx-auto">
             <APIPublicPreview/>
             <h1 className="text-3xl text-gray-700 font-header font-bold mb-4">
@@ -152,5 +155,6 @@ export default function ChannelAPIDocs() {
                 channel.
             </APIDescriber>
         </div>
+        </>
     )
 }

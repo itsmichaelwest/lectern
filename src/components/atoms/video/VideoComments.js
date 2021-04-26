@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import axios from 'axios'
 import config from '../../../config'
 import Comment from '../comment/Comment'
-import { Formik, Field, Form } from 'formik'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
 import Design from '../../../Design'
 import addComment from '../../../functions/addComment'
 import { ReactComponent as SurveySVG } from '../../../vectors/undraw-survey.svg'
@@ -120,7 +120,6 @@ export default function VideoComments(props) {
                     initialValues={{
                         comment: ''
                     }}
-                    
                     onSubmit={async (values, { resetForm }) => {
                         const currentTime = getCurrentVideoTime()
                         addComment(
@@ -129,8 +128,8 @@ export default function VideoComments(props) {
                             currentTime,
                             (res) => {
                                 if (res === false) {
-                                    console.error('[VideoComments] issue lol')
                                     setSignInChallenge(true)
+                                    console.log(signInChallenge)
                                 } else {
                                     setIsFetched(false)
                                     resetForm({ values: '' })
@@ -138,15 +137,20 @@ export default function VideoComments(props) {
                             }
                         )
                     }}>
-                    <Form className="w-full flex space-x-2" autoComplete="off">
-                        <Field 
-                            id="comment" 
-                            name="comment" 
-                            placeholder={`Comment publicly ${props.name}`}
-                            type="text" 
-                            validate={validateComment}
-                            className={Design.Input + " flex-grow"}/>
-                        <button className={Design.ButtonPrimary} type="submit">
+                    <Form className="w-full flex space-x-2 -mb-1" autoComplete="off">
+                        <div className="w-full flex flex-col">
+                            <Field 
+                                id="comment" 
+                                name="comment" 
+                                placeholder={`Comment publicly ${props.name}`}
+                                type="text" 
+                                validate={validateComment}
+                                className={Design.Input + " flex-grow"}/>
+                            <div className="text-red-600 mt-1 ml-1">
+                                <ErrorMessage name="comment"/>
+                            </div>
+                        </div>
+                        <button className={Design.ButtonPrimary + " h-full"} type="submit">
                             <SendIcon className="-ml-1 mr-2 fill-current"/>
                             Post
                         </button>

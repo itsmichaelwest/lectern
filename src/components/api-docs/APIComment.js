@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import APIPublicPreview from './APIPublicPreview'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs'
@@ -39,6 +40,10 @@ export default function CommentAPIDocs() {
     `
 
     return (
+        <>
+        <Helmet>
+            <title>Comment - API | Lectern</title>
+        </Helmet>
         <div className="max-w-2xl mx-auto">
             <APIPublicPreview/>
             <h1 className="text-3xl text-gray-700 font-header font-bold mb-4">
@@ -263,5 +268,6 @@ export default function CommentAPIDocs() {
                 Deletes comment from video. If successful, a HTTP 200 response will be issued. This endpoint can only be called by the comment author or the video uploader, other calls will result in a HTTP 403 Forbidden being returned.
             </APIDescriber>
         </div>
+        </>
     )
 }

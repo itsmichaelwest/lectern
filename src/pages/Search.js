@@ -2,11 +2,16 @@ import React from 'react'
 import queryString from 'query-string'
 import Thumbnail from '../components/atoms/video/Thumbnail'
 import ChannelLink from '../components/atoms/channel/ChannelLink'
+import { Helmet } from 'react-helmet'
 
 export default class Search extends React.Component {
     render() {
         let query = queryString.parse(this.props.location.search)
         return (
+            <>
+            <Helmet>
+                <title>Search results for "{query.find}" | Lectern</title>
+            </Helmet>
             <div className="px-4 sm:px-0">
             {query.find ? 
                 <div>
@@ -66,6 +71,7 @@ export default class Search extends React.Component {
             </div>
             }
             </div>
+            </>
         )
     }
 }

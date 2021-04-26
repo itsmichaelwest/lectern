@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import APIPublicPreview from './APIPublicPreview'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs'
@@ -35,6 +36,10 @@ export default function VideoAPIDocs() {
     `
 
     return (
+        <>
+        <Helmet>
+            <title>Video - API | Lectern</title>
+        </Helmet>
         <div className="max-w-2xl mx-auto">
             <APIPublicPreview/>
             <h1 className="text-2xl font-bold mb-4">
@@ -251,5 +256,6 @@ export default function VideoAPIDocs() {
                 Removes a video. Will also delete all associated comments. Can only be called by the video uploader, otherwise will return 403 Forbidden.
             </APIDescriber>
         </div>
+        </>
     )
 }

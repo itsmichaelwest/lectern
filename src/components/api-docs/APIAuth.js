@@ -1,8 +1,13 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import APIDescriber from './APIDescriber'
 
 export default function AuthAPIDocs() {
     return (
+        <>
+        <Helmet>
+            <title>Authentication - API | Lectern</title>
+        </Helmet>
         <div className="max-w-2xl mx-auto">
             <h1 className="text-3xl text-gray-700 font-header font-bold mb-4">
                 Authentication (<span className="font-mono">/auth</span>)
@@ -35,5 +40,6 @@ export default function AuthAPIDocs() {
                 Callback URL for Microsoft 365 authentication.
             </APIDescriber>
         </div>
+        </>
     )
 }
