@@ -5,16 +5,20 @@ const pool = require('../sql')
 function addUser(profile, displayName, avatar) {
     let uploadedUserPhoto
 
-    const avatarResponse = Buffer.from(avatar, 'base64').toString('utf-8')
+    if (avatar !== null) {
+        const avatarResponse = Buffer.from(avatar, 'base64').toString('utf-8')
 
-    try{ 
-        if (!JSON.parse(avatarResponse).error) {
+        try{ 
+            if (!JSON.parse(avatarResponse).error) {
+                uploadedUserPhoto = new Buffer.from(avatar)
+            } else {
+                uploadedUserPhoto = null
+            }
+        } catch {
             uploadedUserPhoto = new Buffer.from(avatar)
-        } else {
-            uploadedUserPhoto = null
         }
-    } catch {
-        uploadedUserPhoto = new Buffer.from(avatar)
+    } else {
+        uploadedUserPhoto = null
     }
 
     pool.connect().then((pool) => {
@@ -23,8 +27,6 @@ function addUser(profile, displayName, avatar) {
             .query('SELECT * FROM [dbo].[users] WHERE userId=@userId')
             .then(res => {
                 if (typeof res.recordset[0] === 'undefined') {
-                    console.log('Create User DB')
-
                     pool.request()
                         .input('userId', sql.VarChar, profile.oid)
                         .input('userName', sql.VarChar, displayName)
@@ -32,8 +34,6 @@ function addUser(profile, displayName, avatar) {
                         .input('userPhoto', sql.VarBinary, uploadedUserPhoto)
                         .query('INSERT INTO [dbo].[users] (userId, userName, userEmail, userPhoto) VALUES (@userId, @userName, @userEmail, @userPhoto)')
                         .then(() => {
-                            console.log('Create Channel DB')
-
                             pool.request()
                             .input('userId', sql.VarChar, profile.oid)
                             .input('userName', sql.VarChar, displayName)
@@ -41,9 +41,6 @@ function addUser(profile, displayName, avatar) {
                             .input('reported', sql.Bit, 0)
                             .input('suspended', sql.Bit, 0)
                             .query('INSERT INTO [dbo].[channels] (channelId, displayName, channelPhoto, reported, suspended) VALUES (@userId, @userName, @channelPhoto, @reported, @suspended)')
-                            .then(res => {
-                                console.log(res)
-                            })
                             .catch(err => {
                                 console.error(err)
                                 throw err
@@ -57,7 +54,6 @@ function addUser(profile, displayName, avatar) {
                 
             })
             .catch(err => {
-                console.error(err)
                 throw err
             })
     })
@@ -72,13 +68,12 @@ function getUser(oid, callback) {
                 callback(res.recordset[0])
             })
             .catch(err => {
-                console.error(err)
                 callback(err)
             })
     })
 }
 
-function destroyUser(oid, callback) {
+function destroyUser(oid) {
     pool.connect().then((pool) => {
         pool.request()
             .input('author', sql.VarChar, oid)
@@ -93,11 +88,10 @@ function destroyUser(oid, callback) {
                     .input('userId', sql.VarChar, oid)
                     .query('DELETE FROM [dbo].[users] WHERE userId=@userId')
                     .then(() => {
-                        callback(false, true)
+                        return
                     })
                     .catch(err => {
-                        console.error(err)
-                        callback(err)
+                        throw err
                     })
             })
     })

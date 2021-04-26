@@ -81,7 +81,7 @@ export default function VideoComments(props) {
                                     time={getHumanReadableTime(comment.timestamp)}
                                     timestamp={comment.timestamp}
                                     author={comment.author}
-                                    name={comment.userName}
+                                    name={comment.displayName}
                                     content={comment.comment}
                                     canBeDeleted={true}
                                     commentId={comment.commentId}
@@ -95,7 +95,7 @@ export default function VideoComments(props) {
                                     time={getHumanReadableTime(comment.timestamp)}
                                     timestamp={comment.timestamp}
                                     author={comment.author}
-                                    name={comment.userName}
+                                    name={comment.displayName}
                                     content={comment.comment}
                                 />
                             )

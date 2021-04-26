@@ -1,7 +1,6 @@
 const express = require('express')
 const router = new express.Router()
 const authCheckMiddleware = require('../middleware/auth-check')
-const fs = require('fs')
 
 // Database endpoints
 const fetch = require('../database/video/fetch')
@@ -11,27 +10,28 @@ const search = require('../database/video/videoSearch')
 const deleteVideo = require('../database/video/videoDelete')
 
 
-// Get all videos. Not recommended.
+// Get all videos. Could return a large number of objects.
 router.get('/all', (req, res) => {
     fetch.getAll((result) => {
         res.json(result)
     })
 })
 
-// Get top 9 videos sorted by view count
+// Get top 9 videos sorted by view count.
 router.get('/top', (req, res) => {
     fetch.getTop9((result) => {
         res.json(result)
     })
 })
 
-// Get top 9 most recently uploaded videos
+// Get the 9 most recently uploaded videos.
 router.get('/recent', (req, res) => {
     fetch.getRecently((result) => {
         res.json(result)
     })
 })
 
+// Retrieve videos based on a search query.
 router.get('/search/:query', (req, res) => {
     search.searchTitleDescription(req.params.query, (result) => {
         if (result !== false) {
@@ -42,7 +42,8 @@ router.get('/search/:query', (req, res) => {
     })
 })
 
-router.get('/sas', authCheckMiddleware(), (req, res) => {
+// Get an upload token for use with Azure Storage.
+router.get('/upload/sas', authCheckMiddleware(), (req, res) => {
     if (req.isAuthenticated()) {
         const getSasToken = require('../storage/storageGetSasToken')
         res.json(getSasToken())
@@ -51,6 +52,7 @@ router.get('/sas', authCheckMiddleware(), (req, res) => {
     }
 })
 
+// Add video information to the database.
 router.post('/upload', authCheckMiddleware(), async (req, res) => {
     if (req.isAuthenticated()) {
         upload(
@@ -69,13 +71,12 @@ router.post('/upload', authCheckMiddleware(), async (req, res) => {
     }
 })
 
-
+// Add a view to a video.
 router.post('/:videoId/view', (req, res) => {
     views.addView(req.params.videoId)
 })
 
-
-// Get information about the video of [videoId]. 
+// Get information about a specific video.
 router.get('/:videoId', (req, res) => {
     fetch.getVideo(req.params.videoId, (result) => {
         if (result !== false) {
@@ -97,7 +98,7 @@ router.get('/:videoId/download', authCheckMiddleware(), (req, res) => {
     })
 })
 
-// Get information about the video of [videoId]. 
+// Delete a specific video, check if the requester is the uploader first.
 router.delete('/:videoId', authCheckMiddleware(), (req, res) => {
     fetch.getVideo(req.params.videoId, video => {
         if (video !== false) {
@@ -113,7 +114,7 @@ router.delete('/:videoId', authCheckMiddleware(), (req, res) => {
                 res.status(403).send('Not allowed, you are not the uploader of this video.')
             }
         } else {
-            res.status(404).send("No video with that ID could be found")
+            res.status(404).send('No video with that ID could be found')
         }
     })
 })

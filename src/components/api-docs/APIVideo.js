@@ -99,7 +99,7 @@ export default function VideoAPIDocs() {
                             uploaded
                         </td>
                         <td className={cellCode}>
-                            string
+                            date
                         </td>
                         <td className={cell}>
                             Upload time of the video in ISO 8601 representation.

@@ -8,12 +8,14 @@ import { ReactComponent as LecternLogo } from '../vectors/logo.svg'
 import { ReactComponent as DismissIcon } from '../icons/dismiss.svg'
 import { ReactComponent as SearchIcon} from '../icons/search.svg'
 import { ReactComponent as UploadIcon } from '../icons/upload.svg'
+import TestingBanner from './atoms/navigation/TestingBanner'
 
 export default function Navigation() {
     const [showMobileSearch, setShowMobileSearch] = useState(false)
 
     return (
         <>
+        <TestingBanner/>
         <header className="sticky top-0 bg-white bg-opacity-70 mb-8 shadow-sm z-50" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}> 
             <div className="container max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="flex justify-between items-center py-4 md:space-x-10">

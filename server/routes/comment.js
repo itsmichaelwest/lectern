@@ -7,12 +7,14 @@ const addComment = require('../database/comments/addComment')
 const deleteComment = require('../database/comments/deleteComment')
 const { reportComment, unreportComment } = require('../database/comments/reportComment')
 
+// Get all comments associated with a specific video.
 router.get('/:videoId', (req, res) => {
     getAllComments(req.params.videoId, (result) => {
         res.json(result)
     })
 })
 
+// Add a comment to a video.
 router.post('/:videoId', authCheckMiddleware(), (req, res) => {
     addComment(
         req.params.videoId,
@@ -29,6 +31,7 @@ router.post('/:videoId', authCheckMiddleware(), (req, res) => {
     )
 })
 
+// Delete a comment from a video.
 router.delete('/:videoId/:commentId', authCheckMiddleware(), (req, res) => {
     deleteComment(
         req.params.videoId,
@@ -46,11 +49,13 @@ router.delete('/:videoId/:commentId', authCheckMiddleware(), (req, res) => {
     )
 })
 
+// Report a comment as inappropriate.
 router.post('/:videoId/:commentId/report', authCheckMiddleware(), (req, res) => {
     reportComment(req.params.commentId)
     res.status(200).send('Comment reported.')
 })
 
+// Remove a report from a comment.
 router.delete('/:videoId/:commentId/report', authCheckMiddleware(), (req, res) => {
     unreportComment(req.params.commentId)
     res.status(200).send('Comment unreported.')
