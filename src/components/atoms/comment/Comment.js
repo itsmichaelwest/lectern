@@ -34,7 +34,7 @@ export default function Comment(props) {
             onMouseEnter={() => setShowActionButtons(true)}
             onMouseLeave={() => setShowActionButtons(false)}>
             {showDeleteDialog && (
-                <div className="absolute p-4 flex items-center justify-between h-full w-full inset-0 z-10" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
+                <div className="absolute p-4 flex items-center justify-between h-full w-full inset-0 z-10 bg-white bg-opacity-70" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
                     <p className="font-semibold ml-2">
                         Delete this comment?
                     </p>
