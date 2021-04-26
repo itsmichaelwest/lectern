@@ -198,7 +198,7 @@ export default function CommunityStandards() {
                 </h2>
                 <p>
                     Lectern does not allow content that endangers the emotional and/or physical wellbeing of minors. A 
-                    minor is defined as someone who is under the legal age of majority â usually anyone younger than 
+                    minor is defined as someone who is under the legal age of majority  - usually anyone younger than 
                     18 years old in most countries/regions.
                 </p>
                 <p>
@@ -338,14 +338,14 @@ export default function CommunityStandards() {
                         <a className={URL} href="https://www.selfinjury.com/">
                             www.selfinjury.com
                         </a>
-                        &nbsp;â S.A.F.E Alternatives is a network and educational resource base committed to helping 
+                        &nbsp; - S.A.F.E Alternatives is a network and educational resource base committed to helping 
                         end self-harming behavior.
                     </li>
                     <li>
                         <a className={URL} href="https://www.sioutreach.org/">
                             www.sioutreach.org
                         </a>
-                        &nbsp;â SiOS is an outreach initiative providing information and resources about self-harm to 
+                        &nbsp; - SiOS is an outreach initiative providing information and resources about self-harm to 
                         those who self-harm, those who have recovered, and those who want to help.
                     </li>
                 </ul>
@@ -389,7 +389,7 @@ export default function CommunityStandards() {
                     </li>
                     <li>
                         Content uploaded with the intent to shame, deceive, or insult a minor. A minor is defined as 
-                        someone who is under the legal age of majority â usually anyone younger than 18 years old in 
+                        someone who is under the legal age of majority  - usually anyone younger than 18 years old in 
                         most countries/regions.
                     </li>
                     <li>
@@ -782,9 +782,10 @@ export default function CommunityStandards() {
                     </li>
                 </ul>
                 <p>
-                    <span className="font-bold">There is no educational, documentary, scientific, or artistic content 
-                    exception for this policy.</span> Even if content is posted with the express purpose to condemn or 
-                    dispute misinformation, we will still consider this a violation of policy and remove the video.
+                    Educational, documentary, and scientific exclusions apply to this policy. If you are making a video
+                    providing legitimate, science-backed information about COVID-19 that does not violate the above
+                    guidelines, it will be allowed. If you post content design to condemn or dispute misinformation, 
+                    please ensure that it is clear which parts are critique and which parts are legitimate facts.
                 </p>
                 {PolicyNotExhaustive}
             </div>

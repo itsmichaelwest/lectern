@@ -49,7 +49,9 @@ export default class Home extends Component {
             </Helmet>
             <div className="px-4 sm:px-0">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 rounded-xl w-full bg-gray-100 mb-16 p-16">
-                    <NewIdeasSVG className="max-h-80" />
+                    <div className="max-h-80">
+                        <NewIdeasSVG className="h-full w-full" />
+                    </div>
                     <div className="flex h-full items-center">
                         <div>
                             <h1 className="text-4xl text-primary font-bold font-header mb-4">

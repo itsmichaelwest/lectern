@@ -11,9 +11,11 @@ export default function Footer() {
                         © 2021
                     </p>
                     <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+                        { process.env.REACT_APP_TESTING &&
                         <a href="https://forms.office.com/r/dTwt11mxn7" className={URL}>
                             Send Feedback
                         </a>
+                        }
                         <Link to="/api" className={URL}>
                             API
                         </Link>
