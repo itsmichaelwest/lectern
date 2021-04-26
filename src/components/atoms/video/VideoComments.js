@@ -146,7 +146,7 @@ export default function VideoComments(props) {
                                 type="text" 
                                 validate={validateComment}
                                 className={Design.Input + " flex-grow"}/>
-                            <div className="text-red-600 mt-1 ml-1">
+                            <div className="text-xs text-red-600 mt-1 ml-1">
                                 <ErrorMessage name="comment"/>
                             </div>
                         </div>

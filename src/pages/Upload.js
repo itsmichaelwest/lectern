@@ -4,7 +4,7 @@ import config from '../config'
 import { Helmet } from 'react-helmet'
 import Design from '../Design'
 import UploadVideo from '../functions/uploadVideo'
-import { Formik, Field, Form } from 'formik'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { Link, Prompt } from 'react-router-dom'
 import UploadSkeleton from '../components/skeletons/UploadSkeleton'
 import FileDropper from '../components/atoms/upload/FileDropper'
@@ -76,6 +76,12 @@ export default class Upload extends Component {
         })
     }
 
+    validateField(value) {
+        if (!value) {
+            return 'Please fill out this field'
+        }
+    }
+
     render () {
         return (
             <>
@@ -136,7 +142,16 @@ export default class Upload extends Component {
                             <div className="my-8">
                                 <label className="font-semibold" htmlFor="title">Title</label>
                                 <div className="mt-2">
-                                    <Field id="title" name="title" type="text" className={Design.Input + " w-full"} disabled={this.state.isLoadingBytes} />
+                                    <Field 
+                                        id="title" 
+                                        name="title" 
+                                        type="text" 
+                                        className={Design.Input + " w-full"} 
+                                        disabled={this.state.isLoadingBytes}
+                                        validate={this.validateField} />
+                                    <div className="text-xs text-red-600 my-2">
+                                        <ErrorMessage name="title"/>
+                                    </div>
                                 </div>
                                 <span className="text-xs text-gray-600">Max 500 characters</span>
                             </div>
@@ -144,7 +159,17 @@ export default class Upload extends Component {
                             <div className="my-8">
                                 <label className="font-semibold" htmlFor="description">Description</label>
                                 <div className="mt-2">
-                                    <Field id="description" name="description" as="textarea" className={Design.Input + " w-full"} style={{ resize: 'none' }} disabled={this.state.isLoadingBytes} />
+                                    <Field 
+                                        id="description" 
+                                        name="description" 
+                                        as="textarea" 
+                                        className={Design.Input + " w-full"} 
+                                        style={{ resize: 'none' }} 
+                                        disabled={this.state.isLoadingBytes} 
+                                        validate={this.validateField} />
+                                    <div className="text-xs text-red-600 my-2">
+                                        <ErrorMessage name="description"/>
+                                    </div>
                                 </div>
                                 <span className="text-xs text-gray-600">Max 4000 characters</span>
                             </div>
