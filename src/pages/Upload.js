@@ -171,7 +171,7 @@ export default class Upload extends Component {
                                         <ErrorMessage name="description"/>
                                     </div>
                                 </div>
-                                <span className="text-xs text-gray-600">Max 4000 characters</span>
+                                <span className="text-xs text-gray-600">Max 2000 characters</span>
                             </div>
 
                             <div className="flex justify-between">
