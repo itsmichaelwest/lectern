@@ -20,7 +20,6 @@ export default function ChannelAPIDocs() {
                 [...]
             }
         },
-        "reported": false,
         "suspended": false
     }
     `
@@ -151,12 +150,6 @@ export default function ChannelAPIDocs() {
                 Returns an array containing both the main Channel data object,
                 and an array containing the Video objects associated with the
                 channel.
-            </APIDescriber>
-            <aside className="bg-primary-50 p-2 rounded -mb-8">
-                Authorization is required for these endpoints. See <Link to="/api/auth" className={Design.URL}>Authentication</Link>.
-            </aside>
-            <APIDescriber method="POST" endpoint="/api/v1/channel/[channelId]/report">
-                Reports channel, this will set <span className="font-mono">reported</span> to <span className="font-mono">true</span>.
             </APIDescriber>
         </div>
     )

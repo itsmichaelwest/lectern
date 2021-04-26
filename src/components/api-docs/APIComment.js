@@ -17,9 +17,17 @@ export default function CommentAPIDocs() {
         "pubDate": "2021-04-08T11:20:35.208Z",
         "timestamp": 700,
         "author": "d1b2b6bb-7888-455c-a202-b8659250a2fd",
-        "authorDisplayName": "Alex Smith",
         "comment": "This video is super insightful!",
-        "reported": false
+        "reported": false,
+        "channelId": "d1b2b6bb-7888-455c-a202-b8659250a2fd",
+        "displayName": "Alex Smith",
+        "channelPhoto": {
+            type: "Buffer",
+            data: {
+                [...]
+            }
+        },
+        "suspended": false
     }
     `
 
@@ -147,6 +155,50 @@ export default function CommentAPIDocs() {
                             If this comment has been reported, it will also be hidden awaiting judgement.
                         </td>
                     </tr>
+                    <tr>
+                        <td className={cellCode}>
+                            channelId
+                        </td>
+                        <td className={cellCode}>
+                            string
+                        </td>
+                        <td className={cell}>
+                            UUID of channel.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className={cellCode}>
+                            displayName
+                        </td>
+                        <td className={cellCode}>
+                            string
+                        </td>
+                        <td className={cell}>
+                            Channel's user-facing display name.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className={cellCode}>
+                            channelPhoto
+                        </td>
+                        <td className={cellCode}>
+                            buffer
+                        </td>
+                        <td className={cell}>
+                            Channel photo in base64 format.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className={cellCode}>
+                            reported
+                        </td>
+                        <td className={cellCode}>
+                            boolean
+                        </td>
+                        <td className={cell}>
+                            If this channel has been reported or not.
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <h2 className="text-xl font-header font-bold mt-24 -mb-8">
@@ -209,9 +261,6 @@ export default function CommentAPIDocs() {
             </APIDescriber>
             <APIDescriber method="DELETE" endpoint="/api/v1/channel/[videoId]/[commentId]">
                 Deletes comment from video. If successful, a HTTP 200 response will be issued. This endpoint can only be called by the comment author or the video uploader, other calls will result in a HTTP 403 Forbidden being returned.
-            </APIDescriber>
-            <APIDescriber method="POST" endpoint="/api/v1/comments/[videoId]/[commentId]/report">
-                Used to report comment as inappropriate for the video. Responds with HTTP 200 if the comment is successfully reported. Will switch the value of reported to true. Subsequent reports will passively fail, we'll tell the user the comment was reported for their own satisfaction, but not actually alter any data since the report flag has been flipped.
             </APIDescriber>
         </div>
     )

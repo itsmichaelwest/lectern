@@ -13,7 +13,7 @@ export default function VideoAPIDocs() {
     const dataObject = `
     {
         "videoId": "cf332bd9-b18b-4100-9c82-cc5343217c40",
-        "streamUrl": "https://storage.lectern.video/video/file.mp4",
+        "streamUrl": "https://cs394lecternvideos.blob.core.windows.net/videos/cf332bd9-b18b-4100-9c82-cc5343217c40",
         "privacy": 0,
         "author": "d1b2b6bb-7888-455c-a202-b8659250a2fd", 
         "uploaded": "2021-01-01T12:00:00.000Z",
@@ -21,7 +21,16 @@ export default function VideoAPIDocs() {
         "description": "This is a sample video. Lorem ipsum dolor etc etc.",
         "length": 270,
         "views": 500,
-        "thumbnail": "https://storage.lectern.video/thumbs/file.png"
+        "thumbnail": "https://cs394lecternvideos.blob.core.windows.net/thumbnails/cf332bd9-b18b-4100-9c82-cc5343217c40",
+        "channelId": "d1b2b6bb-7888-455c-a202-b8659250a2fd",
+        "displayName": "Alex Smith",
+        "channelPhoto": {
+            type: "Buffer",
+            data: {
+                [...]
+            }
+        },
+        "suspended": false
     }
     `
 
@@ -160,6 +169,51 @@ export default function VideoAPIDocs() {
                             URL pointing to the video's thumbnail image.
                         </td>
                     </tr>
+                    <tr>
+                        <td className={cellCode}>
+                            channelId
+                        </td>
+                        <td className={cellCode}>
+                            string
+                        </td>
+                        <td className={cell}>
+                            UUID of channel.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className={cellCode}>
+                            displayName
+                        </td>
+                        <td className={cellCode}>
+                            string
+                        </td>
+                        <td className={cell}>
+                            Channel's user-facing display name.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className={cellCode}>
+                            channelPhoto
+                        </td>
+                        <td className={cellCode}>
+                            buffer
+                        </td>
+                        <td className={cell}>
+                            Channel photo in base64 format.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className={cellCode}>
+                            reported
+                        </td>
+                        <td className={cellCode}>
+                            boolean
+                        </td>
+                        <td className={cell}>
+                            If this channel has been reported or not.
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
             <hr className="my-8"/>
@@ -184,11 +238,11 @@ export default function VideoAPIDocs() {
             <aside className="bg-primary-50 p-2 rounded">
                 Authorization is required for most video upload or deletion endpoints. See <Link to="/api/auth" className={Design.URL}>Authentication</Link>.
             </aside>
+            <APIDescriber method="GET" endpoint="/api/v1/video/upload/sas">
+                Retrieve an <a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview" className={Design.URL}>Azure Shared Access Signature</a> for use when uploading a video or thumbnail file to the storage container.
+            </APIDescriber>
             <APIDescriber method="POST" endpoint="/api/v1/video/upload">
                 Insert a new video. Uses JSON object similar to GET /api/v1/video/[videoId]. Requires the video file to have been uploaded beforehand, though storage APIs.
-            </APIDescriber>
-            <APIDescriber method="POST" endpoint="/api/v1/video/upload/[videoId]/success">
-                Adds a stream URL to a video once the file had been processed by the encoder.
             </APIDescriber>
             <APIDescriber method="POST" endpoint="/api/v1/video/[videoId]/view">
                 Adds a single view to the video.
