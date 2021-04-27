@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const APIPublicPreview = () => (
-    <div className="bg-primary-50 p-6 rounded-xl mb-8">
+    <div className="bg-primary-50 dark:bg-gray-900 p-6 rounded-xl mb-8 dark:text-white">
         <h4 className="font-bold mb-2">
             Important
         </h4>

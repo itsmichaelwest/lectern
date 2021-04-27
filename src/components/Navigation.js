@@ -18,11 +18,11 @@ export default function Navigation() {
         { process.env.REACT_APP_TESTING && 
         <TestingBanner/>
         }
-        <header className="sticky top-0 bg-white bg-opacity-70 mb-8 shadow-sm z-50" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}> 
+        <header className="sticky top-0 bg-white dark:bg-gray-dm-bg bg-opacity-70 mb-8 shadow-sm z-50" style={{ backdropFilter: 'blur(30px) saturate(150%)', WebkitBackdropFilter: 'blur(30px) saturate(150%)' }}> 
             <div className="container max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="flex justify-between items-center py-4 md:space-x-10">
                     <div className="flex-initial justify-start">
-                        <Link to="/" className="group text-base font-header font-bold flex">
+                        <Link to="/" className="group text-base dark:text-white font-header font-bold flex">
                             <LecternLogo
                                 className="mr-2"
                                 alt="Lectern logo"/>
@@ -34,9 +34,9 @@ export default function Navigation() {
                     </div>
                     <div className="flex align-middle">
                         { showMobileSearch ? 
-                        <div className="absolute inset-0 container max-w-7xl mx-auto px-4 sm:px-6 flex items-center w-full z-40 bg-white">
+                        <div className="absolute inset-0 container max-w-7xl mx-auto px-4 sm:px-6 flex items-center w-full z-40 bg-white dark:bg-gray-dm-bg">
                             <SearchBar/>
-                            <button className="w-8 h-8" onClick={() => setShowMobileSearch(!showMobileSearch)}>
+                            <button className="w-8 h-8 dark:text-white" onClick={() => setShowMobileSearch(!showMobileSearch)}>
                                 <DismissIcon 
                                     className="mx-auto fill-current"
                                     alt="Close search box"/>

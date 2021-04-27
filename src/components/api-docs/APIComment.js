@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Design from '../../Design'
 
 export default function CommentAPIDocs() {
-    const cell = 'border border-gray-200 text-sm p-2 align-top'
+    const cell = 'border border-gray-200 text-sm p-2 align-top dark:text-white'
     const cellCode = cell + ' font-mono'
 
     const dataObject = `
@@ -46,10 +46,10 @@ export default function CommentAPIDocs() {
         </Helmet>
         <div className="max-w-2xl mx-auto">
             <APIPublicPreview/>
-            <h1 className="text-3xl text-gray-700 font-header font-bold mb-4">
+            <h1 className="text-3xl text-gray-700 dark:text-gray-200 font-header font-bold mb-4">
                 Comment (<span className="font-mono">/api/v1/comments</span>)
             </h1>
-            <h2 className="text-xl font-header font-bold mb-4">
+            <h2 className="text-xl font-header font-bold dark:text-white mb-4">
                 Data model and types
             </h2>
             <SyntaxHighlighter 
@@ -206,13 +206,13 @@ export default function CommentAPIDocs() {
                     </tr>
                 </tbody>
             </table>
-            <h2 className="text-xl font-header font-bold mt-24 -mb-8">
+            <h2 className="text-xl font-header dark:text-white font-bold mt-24 -mb-8">
                 Endpoints
             </h2>
             <APIDescriber method="GET" endpoint="/api/v1/comments/[videoId]">
                 Retrieves all comments associated with the specified video. This returns an array of Comment objects.
             </APIDescriber>
-            <aside className="bg-primary-50 p-2 rounded -mb-8">
+            <aside className="bg-primary-50 dark:bg-gray-900 dark:text-white p-2 rounded -mb-8">
                 Authorization is required for these endpoints. See <Link to="/api/auth" className={Design.URL}>Authentication</Link>.
             </aside>
             <APIDescriber method="POST" endpoint="/api/v1/comments/[videoId]">

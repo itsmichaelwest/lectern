@@ -32,6 +32,19 @@ module.exports = {
           200: '#cfe1a2',
           100: '#e2edc6',
           50: '#f4f8e8'
+        },
+        gray: {
+          900: '#212121',
+          800: '#333333',
+          700: '#3c3c3c',
+          600: '#666666',
+          500: '#A6A6A6',
+          400: '#c8c8c8',
+          300: '#d0d0d0',
+          200: '#dadada',
+          100: '#eaeaea',
+          50: '#f4f4f4',
+          'dm-bg': '#111111'
         }
       },
       typography: (theme) => ({
@@ -47,13 +60,30 @@ module.exports = {
             },
           },
         },
+        dark: {
+          css: {
+            color: theme('colors.gray.100'),
+            a: {
+              color: theme('colors.primary.700'),
+              textDecoration: 'none',
+              "&:hover": {
+                color: theme('colors.primary.300'),
+                textDecoration: 'none',
+              },
+            },
+            h4: {
+              color: theme('colors.white')
+            }
+          }
+        }
       }),
     },
   },
   variants: {
     extend: {
       textAlign: ['hover', 'focus'],
-      backgroundColor: ['checked']
+      backgroundColor: ['checked'],
+      typography: ['dark'],
     },
   },
   plugins: [

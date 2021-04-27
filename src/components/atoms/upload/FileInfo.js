@@ -6,13 +6,13 @@ import { ReactComponent as DeleteIcon } from '../../../icons/delete.svg'
 
 export default function FileInfo(props) {
     return (
-        <div className="relative rounded-xl border border-gray-300 w-full p-4 overflow-hidden">
+        <div className="relative rounded-xl border border-gray-300 dark:border-gray-800 w-full p-4 overflow-hidden">
             <div className="flex justify-between">
                 <div className="flex flex-col">
-                    <span className="inline-block align-middle font-semibold leading-relaxed">
+                    <span className="inline-block align-middle font-semibold dark:text-white leading-relaxed">
                         {props.name}
                     </span>
-                    <span className="text-xs text-gray-600">
+                    <span className="text-xs text-gray-600 dark:text-gray-400">
                         { !props.isLoading 
                             ?
                             Filesize(props.size)

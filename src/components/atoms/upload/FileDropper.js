@@ -28,7 +28,7 @@ export default function DropZone(props) {
     })
 
     return (
-        <div className="rounded-xl border border-dashed border-gray-300 hover:border-primary hover:bg-gray-50 w-full cursor-pointer">
+        <div className="rounded-xl border border-dashed border-gray-300 dark:border-gray-700 hover:border-primary dark:hover:border-primary-700 hover:bg-gray-50 dark:hover:bg-gray-900 w-full cursor-pointer">
             <div className="w-full h-full text-center outline-none" {...getRootProps()}>
                 <input {...getInputProps()} />
                 {
@@ -39,27 +39,27 @@ export default function DropZone(props) {
                             paddingTop: 'calc(6rem + 44px)',
                             paddingBottom: 'calc(6rem + 44px)',
                         }}>
-                        <p className="text-gray-600">
+                        <p className="text-gray-600 dark:text-gray-400">
                             Drop here to upload
                         </p>
                     </div>
                     :
                     <div className="py-24 px-16">
                         <VideoIcon className="mx-auto" fill="#8eb339" />
-                        <p className="my-2">
+                        <p className="my-2 dark:text-white">
                             Drag and drop or click/tap to choose a file
                         </p>
                         {
                             fileError ?
-                            <p className="text-red-600 font-semibold">
+                            <p className="text-red-600 dark:text-red-400 font-semibold">
                                 That video format cannot be uploaded, please select an MP4 file
                             </p>
                             :
-                            <p className="text-gray-600">
+                            <p className="text-gray-600 dark:text-gray-400">
                                 Acceptable video formats: MP4
                             </p>
                         }
-                        <p className="text-gray-400 text-xs mt-2">
+                        <p className="text-gray-400 dark:text-gray-600 text-xs mt-2">
                             Maximum file size: 4 GB
                         </p>
                     </div>

@@ -96,8 +96,8 @@ export default class Upload extends Component {
                 ?
                 <div>
                     <div className="text-center mb-16">
-                        <h1 className="text-6xl font-bold font-header mt-16 mb-8">Upload Video</h1>
-                        <p>By uploading a video, you agree to our <Link to="/community-standards" className={Design.URL}>Community Standards</Link>.</p>
+                        <h1 className="text-6xl dark:text-white font-bold font-header mt-16 mb-8">Upload Video</h1>
+                        <p className="dark:text-gray-100">By uploading a video, you agree to our <Link to="/community-standards" className={Design.URL}>Community Standards</Link>.</p>
                     </div>
                     { !this.state.uploadStatus 
                     ? 
@@ -140,7 +140,7 @@ export default class Upload extends Component {
                             }
 
                             <div className="my-8">
-                                <label className="font-semibold" htmlFor="title">Title</label>
+                                <label className="font-semibold dark:text-white" htmlFor="title">Title</label>
                                 <div className="mt-2">
                                     <Field 
                                         id="title" 
@@ -157,7 +157,7 @@ export default class Upload extends Component {
                             </div>
 
                             <div className="my-8">
-                                <label className="font-semibold" htmlFor="description">Description</label>
+                                <label className="font-semibold dark:text-white" htmlFor="description">Description</label>
                                 <div className="mt-2">
                                     <Field 
                                         id="description" 
@@ -176,7 +176,7 @@ export default class Upload extends Component {
 
                             <div className="flex justify-between">
                                 <div className="h-0">
-                                    <label className="font-semibold" htmlFor="privacy">Privacy</label>
+                                    <label className="font-semibold dark:text-white" htmlFor="privacy">Privacy</label>
                                     <div className="my-2">
                                         <Field as="select" id="privacy" name="privacy" className={Design.InputDropdown + " w-32"} disabled={this.state.isLoadingBytes}>
                                             <option value="0" label="Public" />

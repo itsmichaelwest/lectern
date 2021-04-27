@@ -70,7 +70,7 @@ export default function VideoComments(props) {
             show={signInChallenge}
             onClose={toggleSignInChallenge}
         />
-        <div className="flex flex-col border rounded-xl shadow-sm divide-y overflow-hidden">
+        <div className="flex flex-col border dark:border-gray-700 rounded-xl shadow-sm divide-y dark:divide-gray-700 dark:bg-black overflow-hidden">
             <div className="h-full max-h-96 overflow-y-scroll">
                 {comments ?
                     comments.map(comment => {

@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import APIPublicPreview from './APIPublicPreview'
 
 export default function ChannelAPIDocs() {
-    const cell = 'border border-gray-200 text-sm p-2 align-top'
+    const cell = 'border border-gray-200 text-sm p-2 align-top dark:text-white'
     const cellCode = cell + ' font-mono'
 
     const dataObject = `
@@ -49,10 +49,10 @@ export default function ChannelAPIDocs() {
         </Helmet>
         <div className="max-w-2xl mx-auto">
             <APIPublicPreview/>
-            <h1 className="text-3xl text-gray-700 font-header font-bold mb-4">
+            <h1 className="text-3xl text-gray-700 dark:text-gray-200 font-header font-bold mb-4">
                 Channel (<span className="font-mono">/api/v1/channel</span>)
             </h1>
-            <h2 className="text-xl font-header font-bold mb-4">
+            <h2 className="text-xl font-header font-bold dark:text-white mb-4">
                 Data model and types
             </h2>
             <SyntaxHighlighter 
@@ -132,7 +132,7 @@ export default function ChannelAPIDocs() {
                     </tr>
                 </tbody>
             </table>
-            <h2 className="text-xl font-header font-bold mt-24 -mb-8">
+            <h2 className="text-xl font-header font-bold dark:text-white mt-24 -mb-8">
                 Endpoints
             </h2>
             <APIDescriber method="GET" endpoint="/api/v1/channel/[channelId]">

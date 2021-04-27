@@ -14,7 +14,6 @@ export const UploadSkeleton = () => (
                 <div>
                     <div className="shimmer w-24 h-5 rounded mt-8"></div>
                     <div className="shimmer w-32 h-12 rounded-md my-2"></div>
-                    <div className="shimmer w-40 h-4 rounded"></div>
                 </div>
                 <div>
                     <div className="shimmer w-24 h-12 rounded-md mt-16"></div>

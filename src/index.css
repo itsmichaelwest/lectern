@@ -6,24 +6,62 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes shimmerBackground {
-    0% {background-color: rgb(243, 244, 246)}
-    50% {background-color: rgb(229, 231, 235)}
-    100% {background-color: rgb(243, 244, 246)}
+@media (prefers-color-scheme: light) {
+    @keyframes shimmerBackground {
+        0% {background-color: #f4f4f4}
+        50% {background-color: #eaeaea}
+        100% {background-color: #f4f4f4}
+    }
+    
+    .shimmer {
+        background-color: #f4f4f4;
+        animation: shimmerBackground 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes shimmerBackgroundDarker {
+        0% {background-color: #eaeaea}
+        50% {background-color: #dadada}
+        100% {background-color: #eaeaea}
+    }
+    
+    .shimmer-darker {
+        background-color: #eaeaea;
+        animation: shimmerBackgroundDarker 1.5s ease-in-out infinite;
+    }
+
+    html, body, #root {
+        background-color: #fff;
+    }
 }
 
-.shimmer {
-    background-color: rgb(243, 244, 246);
-    animation: shimmerBackground 1.5s ease-in-out infinite;
-}
+@media (prefers-color-scheme: dark) {
+    @keyframes shimmerBackground {
+        0% {background-color: #212121}
+        50% {background-color: #333333}
+        100% {background-color: #212121}
+    }
+    
+    .shimmer {
+        background-color: #212121;
+        animation: shimmerBackground 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes shimmerBackgroundDarker {
+        0% {background-color: #333333}
+        50% {background-color: #3c3c3c}
+        100% {background-color: #333333}
+    }
+    
+    .shimmer-darker {
+        background-color: #333333;
+        animation: shimmerBackgroundDarker 1.5s ease-in-out infinite;
+    }
 
-@keyframes shimmerBackgroundDarker {
-    0% {background-color: rgb(229, 231, 235)}
-    50% {background-color: rgb(209, 213, 219)}
-    100% {background-color: rgb(229, 231, 235)}
-}
-
-.shimmer-darker {
-    background-color: rgb(229, 231, 235);
-    animation: shimmerBackgroundDarker 1.5s ease-in-out infinite;
+    html, body, #root {
+        background-color: #111;
+    }
+    
+    #MSSignInButton > path {
+        fill: #fff;
+    }
 }

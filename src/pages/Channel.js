@@ -112,7 +112,7 @@ export default class Channel extends Component {
                     { videos 
                         ? 
                         <div className="mt-16">
-                            <h2 className="font-bold font-header text-2xl mb-8">
+                            <h2 className="font-bold dark:text-white font-header text-2xl mb-8">
                                 Videos
                             </h2>
                             { videos.length >= 1 ?

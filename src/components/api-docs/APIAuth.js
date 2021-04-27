@@ -9,10 +9,10 @@ export default function AuthAPIDocs() {
             <title>Authentication - API | Lectern</title>
         </Helmet>
         <div className="max-w-2xl mx-auto">
-            <h1 className="text-3xl text-gray-700 font-header font-bold mb-4">
+            <h1 className="text-3xl text-gray-700 dark:text-gray-200 font-header font-bold mb-4">
                 Authentication (<span className="font-mono">/auth</span>)
             </h1>
-            <h2 className="text-xl font-header font-bold mt-24 -mb-8">
+            <h2 className="text-xl font-header font-bold dark:text-white mt-24 -mb-8">
                 Endpoints
             </h2>
             <APIDescriber method="GET" endpoint="/auth/microsoft">

@@ -59,9 +59,9 @@ export default function Video(props) {
                     Are you sure you want to delete this video? All comments will be lost.
                 </p>
             </Dialog>
-            <h1 className="text-xl font-bold font-header break-words" style={{ overflowWrap: 'word' }}>{props.title}</h1>
-            <p className="text-gray-600 mt-4 break-words" style={{ overflowWrap: 'word' }}>{props.description}</p>
-            <div className="flex justify-between items-center my-8">
+            <h1 className="text-xl font-bold dark:text-white font-header break-words" style={{ overflowWrap: 'word' }}>{props.title}</h1>
+            <p className="text-gray-600 dark:text-gray-500 mt-4 break-words" style={{ overflowWrap: 'word' }}>{props.description}</p>
+            <div className="flex justify-between items-center my-8 dark:text-white">
                 <div>
                     <p>{props.views} views</p>
                     <p>{formatDate(props.date)}</p>
@@ -79,7 +79,7 @@ export default function Video(props) {
                 </div>
             </div>
             <div className="flex justify-between items-center">
-                <Link className="flex flex-row items-center font-bold" to={'/channel/' + props.id}>
+                <Link className="flex flex-row items-center font-bold dark:text-white" to={'/channel/' + props.id}>
                     {
                         props.avatar ?
                         <img 
@@ -87,7 +87,7 @@ export default function Video(props) {
                             src={`data:image/jpeg;base64,${props.avatar}`}
                             alt={props.channelName + " avatar"}/>
                         :
-                        <span className="block flex-initial rounded-full overflow-hidden bg-primary-200 shadow h-8 w-8 mr-2" />
+                        <span className="block flex-initial rounded-full overflow-hidden bg-primary-200 dark:bg-primary-800 shadow h-8 w-8 mr-2" />
                     }
                     {props.channelName}
                 </Link>

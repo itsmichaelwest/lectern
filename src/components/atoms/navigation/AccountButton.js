@@ -105,13 +105,13 @@ export default class AccountButton extends React.Component {
                         <DropdownIcon/>
                     </button>
                     { this.state.menuSelected && 
-                        <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" ref={node => this.node = node}>
+                        <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-900 ring-1 ring-black ring-opacity-5" ref={node => this.node = node}>
                             <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                <a href={"/channel/" + this.state.id} className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" onClick={this.hideMenu}>
+                                <a href={"/channel/" + this.state.id} className="flex px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100" role="menuitem" onClick={this.hideMenu}>
                                     <ProfileIcon className="mr-2 fill-current"/>
                                     Your profile
                                 </a>
-                                <a href="/auth/logout" className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                                <a href="/auth/logout" className="flex px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100" role="menuitem">
                                     <SignOutIcon className="mr-2 fill-current"/>
                                     Sign out
                                 </a>

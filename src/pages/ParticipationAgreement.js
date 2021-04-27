@@ -9,17 +9,17 @@ export default function ParticipationAgreement() {
         </Helmet>
         <div className="px-4 sm:px-0">
             <div className="text-center">
-                <h1 className="text-4xl md:text-6xl font-bold font-header mt-16 mb-8">
+                <h1 className="text-4xl md:text-6xl font-bold font-header dark:text-white mt-16 mb-8">
                     Participation Agreement
                 </h1>
-                <div className="prose mx-auto">
+                <div className="prose dark:prose-dark mx-auto">
                     <p>
                         To get in contact about the contents of this Participation Agreement, please email <a href="mailto:maw86@aber.ac.uk">maw86@aber.ac.uk</a>
                     </p>
                 </div>
             </div>
         </div>
-        <div className="prose-sm mt-16 mx-auto px-4 sm:px-0 w-full md:w-4/5">
+        <div className="prose-sm dark:prose-dark mt-16 mx-auto px-4 sm:px-0 w-full md:w-4/5">
             <h1>
                 Usability Study Participation Agreement: FORM B
             </h1>

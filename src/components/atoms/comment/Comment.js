@@ -30,12 +30,12 @@ export default function Comment(props) {
     
     
     return (
-        <div className="relative p-4 hover:bg-gray-50"
+        <div className="relative p-4 hover:bg-gray-50 dark:hover:bg-gray-900"
             onMouseEnter={() => setShowActionButtons(true)}
             onMouseLeave={() => setShowActionButtons(false)}>
             {showDeleteDialog && (
-                <div className="absolute p-4 flex items-center justify-between h-full w-full inset-0 z-10 bg-white bg-opacity-70" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
-                    <p className="font-semibold ml-2">
+                <div className="absolute p-4 flex items-center justify-between h-full w-full inset-0 z-10 bg-white dark:bg-gray-900 bg-opacity-70" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
+                    <p className="font-semibold ml-2 dark:text-white">
                         Delete this comment?
                     </p>
                     <div className="inline-flex">
@@ -65,9 +65,9 @@ export default function Comment(props) {
                     }
                 </div>
             }
-            <div className="flex">
+            <div className="flex cursor-pointer" onClick={navigateVideoToTimestamp}>
                 <span className="flex-initial flex-shrink-0 w-16 max-h-5">
-                    <span className="font-semibold hover:text-gray-600 cursor-pointer" onClick={navigateVideoToTimestamp}>
+                    <span className="font-semibold dark:text-gray-100">
                         {props.time}
                     </span>
                 </span>
@@ -80,7 +80,7 @@ export default function Comment(props) {
                         </span>
                     </div>
                     <div>
-                        <p style={{ overflowWrap: 'anywhere' }}>
+                        <p className="dark:text-white" style={{ overflowWrap: 'anywhere' }}>
                             {props.content}
                         </p>
                     </div>

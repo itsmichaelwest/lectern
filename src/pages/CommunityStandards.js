@@ -13,7 +13,7 @@ export default function CommunityStandards() {
 
     const WhatDoesThisMean = (
         <>
-        <h4 className="font-bold text-primary-900">
+        <h4 className="font-bold text-primary-900 dark:text-primary-400">
             What does this mean for you?
         </h4>
         <p>
@@ -37,10 +37,10 @@ export default function CommunityStandards() {
         <div className="px-4 sm:px-0">
             <Hiking className="h-48 md:h-96 mx-auto" alt='An illustration of someone hiking' />
             <div className="text-center">
-                <h1 className="text-4xl md:text-6xl font-bold font-header mt-8 mb-8">
+                <h1 className="text-4xl md:text-6xl dark:text-white font-bold font-header mt-8 mb-8">
                     Community Standards
                 </h1>
-                <div className="prose mx-auto">
+                <div className="prose dark:prose-dark mx-auto">
                     <p>
                         <span className="font-bold">Welcome to Lectern!</span> We're a place for people to discover, 
                         watch, and share videos, and provides a forum for people to connect, inform, and inspire others.
@@ -53,7 +53,7 @@ export default function CommunityStandards() {
             </div>
         </div>
         <hr className="my-16 mx-auto w-full md:w-4/5" />
-        <div className="prose-sm mx-auto px-4 sm:px-0 w-full md:w-4/5">
+        <div className="prose-sm dark:prose-dark mx-auto px-4 sm:px-0 w-full md:w-4/5">
             <div>
                 <h2>
                     Fake Engagement

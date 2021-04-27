@@ -15,12 +15,12 @@ export default class Search extends React.Component {
             <div className="px-4 sm:px-0">
             {query.find ? 
                 <div>
-                    <h1 className="text-4xl md:text-6xl font-bold font-header mt-16">
+                    <h1 className="text-4xl md:text-6xl font-bold dark:text-white font-header mt-16">
                         Results for "{query.find}"
                     </h1>
                     {this.props.location.state.results[0].length > 0 ?
                         <>
-                        <h2 className="text-2xl font-bold font-header mt-24 mb-4">
+                        <h2 className="text-2xl dark:text-white font-bold font-header mt-24 mb-4">
                             Videos
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">                    
@@ -43,7 +43,7 @@ export default class Search extends React.Component {
                     }
                     {this.props.location.state.results[1].length > 0 ?
                         <>
-                        <h2 className="text-2xl font-bold font-header mt-16 mb-4">
+                        <h2 className="text-2xl dark:text-white font-bold font-header mt-16 mb-4">
                             Channels
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">                    

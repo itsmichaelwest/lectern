@@ -12,10 +12,10 @@ export default function PrivacyPolicy() {
         <div className="px-4 sm:px-0">
             <PrivacySVG className="h-48 md:h-96 mx-auto" alt="Illustration of someone with their profile." />
             <div className="text-center">
-                <h1 className="text-4xl md:text-6xl font-bold font-header mt-8 mb-8">
+                <h1 className="text-4xl md:text-6xl font-bold font-header dark:text-white mt-8 mb-8">
                     Privacy Policy
                 </h1>
-                <div className="prose mx-auto">
+                <div className="prose dark:prose-dark mx-auto">
                     <p className="italic">
                         Last updated: April 2021
                     </p>
@@ -25,7 +25,7 @@ export default function PrivacyPolicy() {
                 </div>
             </div>
         </div>
-        <div className="prose-sm mt-16 mx-auto px-4 sm:px-0 w-full md:w-4/5">
+        <div className="prose-sm dark:prose-dark mt-16 mx-auto px-4 sm:px-0 w-full md:w-4/5">
             <p>
                 At <strong>Lectern</strong> accessible from lectern.video, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Lectern and how we use it.
             </p>

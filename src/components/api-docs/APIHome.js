@@ -13,10 +13,10 @@ export const APIHome = () => (
     <div className="px-4 sm:px-0">
         <InProgressSVG className="h-48 md:h-96 mx-auto" alt="Illustration of someone with gears." />
         <div className="text-center max-w-2xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold font-header mt-8 mb-8">
+            <h1 className="text-4xl md:text-6xl font-bold font-header dark:text-white mt-8 mb-8">
                 Lectern API
             </h1>
-            <div className="prose mx-auto">
+            <div className="prose dark:prose-dark mx-auto">
                 <p>
                     Want to get started building your own app to access Lectern? You're in the right place, use
                     our API documentation to understand how to access Lectern resources.

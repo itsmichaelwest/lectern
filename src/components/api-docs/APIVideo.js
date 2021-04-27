@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Design from '../../Design'
 
 export default function VideoAPIDocs() {
-    const cell = 'border border-gray-200 text-sm p-2 align-top'
+    const cell = 'border border-gray-200 text-sm p-2 align-top dark:text-white'
     const cellCode = cell + ' font-mono'
 
     const dataObject = `
@@ -42,10 +42,10 @@ export default function VideoAPIDocs() {
         </Helmet>
         <div className="max-w-2xl mx-auto">
             <APIPublicPreview/>
-            <h1 className="text-2xl font-bold mb-4">
+            <h1 className="text-3xl text-gray-700 dark:text-gray-200 font-header font-bold mb-4">
                 Video (<span className="font-mono">/api/v1/video</span>)
             </h1>
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-xl font-bold dark:text-white mb-4">
                 Data model and types
             </h2>
             <SyntaxHighlighter language="json" style={docco} className="rounded-xl">
@@ -222,7 +222,7 @@ export default function VideoAPIDocs() {
                 </tbody>
             </table>
             <hr className="my-8"/>
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-xl font-bold dark:text-white mb-4">
                 Endpoints
             </h2>
             <APIDescriber method="GET" endpoint="/api/v1/video/all">
@@ -240,7 +240,7 @@ export default function VideoAPIDocs() {
             <APIDescriber method="GET" endpoint="/api/v1/video/[videoId]/download">
                 Downloads the encoded video file from the server. The file will have no metadata, as we strip that during the encoding process.
             </APIDescriber>
-            <aside className="bg-primary-50 p-2 rounded">
+            <aside className="bg-primary-50 dark:bg-gray-900 dark:text-white p-2 rounded">
                 Authorization is required for most video upload or deletion endpoints. See <Link to="/api/auth" className={Design.URL}>Authentication</Link>.
             </aside>
             <APIDescriber method="GET" endpoint="/api/v1/video/upload/sas">

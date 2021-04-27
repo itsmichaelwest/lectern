@@ -8,7 +8,7 @@ export default function Thumbnail(props) {
 
     return (
         <>
-        <Link className="flex items-center p-4 hover:bg-gray-100 rounded-xl transition-all" to={`/channel/${props.id}`}>
+        <Link className="flex items-center p-4 hover:bg-gray-100 hover:bg-gray-900 rounded-xl transition-all" to={`/channel/${props.id}`}>
             {
                 props.avatar ?
                 <img 
@@ -16,9 +16,9 @@ export default function Thumbnail(props) {
                     src={`data:image/jpeg;base64,${decodeAvatar(props.avatar)}`} 
                     alt={props.name + " avatar"} />
                 :
-                <span className="block flex-initial flex-shrink-0 rounded-full overflow-hidden bg-primary-200 h-10 w-10 shadow-lg mr-3"/>
+                <span className="block flex-initial flex-shrink-0 rounded-full overflow-hidden bg-primary-200 dark:bg-primary-800 h-10 w-10 shadow-lg mr-3"/>
             }
-            <h2 className="font-semibold text-xl whitespace-nowrap truncate">{props.name}</h2>
+            <h2 className="font-semibold text-xl whitespace-nowrap truncate dark:text-white">{props.name}</h2>
         </Link>
         </>
     )

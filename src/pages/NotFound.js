@@ -15,8 +15,8 @@ export default function NotFound() {
                 <img src={Undraw404} alt="" />
             </div>
             <div className="my-auto">
-                <h1 className="text-2xl font-bold mb-2">Well this is embarrassing</h1>
-                <p className="mb-2">It looks like you hit a page that doesn't exist.</p>
+                <h1 className="text-2xl dark:text-white font-bold mb-2">Well this is embarrassing</h1>
+                <p className="mb-2 dark:text-white">It looks like you hit a page that doesn't exist.</p>
                 <Link className={Design.URL} to='/'>Go back to the homepage</Link>
                 <p className="text-xs mt-2 text-gray-400">Contacting a support person? Let them know that this was the page you were trying to visit: <strong>{window.location.href}</strong></p>
                 <p className="text-xs mt-2 text-gray-400">HTTP 404</p>

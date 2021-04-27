@@ -17,16 +17,16 @@ export default class Login extends Component {
                 <title>Sign in | Lectern</title>
             </Helmet>
             <div className="max-w-md mx-auto my-auto text-center">
-                <h1 className="text-2xl font-bold mb-4">
+                <h1 className="text-2xl dark:text-white font-bold mb-4">
                     Sign in to Lectern
                 </h1>
-                <p>
+                <p className="text-gray-900 dark:text-gray-100">
                     Use your Microsoft 365 account to sign in.
                 </p>
                 <button className={Design.Button + " my-4"} onClick={this.loginToADFS.bind(this)}>
-                    <MSFTSignInButton alt="Sign in with Microsoft" />
+                    <MSFTSignInButton alt="Sign in with Microsoft" id="MSSignInButton" />
                 </button>
-                <p>
+                <p className="text-gray-900 dark:text-gray-100">
                     By signing in, you agree to the <Link to="/privacy" className={Design.URL}>Privacy Policy</Link> and <Link to="/participation" className={Design.URL}>Participation Agreement</Link>.
                 </p>
             </div>

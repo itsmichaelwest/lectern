@@ -48,16 +48,16 @@ export default class Home extends Component {
                 <title>Lectern</title>
             </Helmet>
             <div className="px-4 sm:px-0">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 rounded-xl w-full bg-gray-100 mb-16 p-16">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 rounded-xl w-full bg-gray-100 dark:bg-gray-900 mb-16 p-16">
                     <div className="max-h-80">
                         <NewIdeasSVG className="h-full w-full" />
                     </div>
                     <div className="flex h-full items-center">
                         <div>
-                            <h1 className="text-4xl text-primary font-bold font-header mb-4">
+                            <h1 className="text-4xl text-primary dark:text-primary-700 font-bold font-header mb-4">
                                 Welcome to Lectern!
                             </h1>
-                            <p className="prose">
+                            <p className="prose dark:prose-dark">
                                 We're excited for you to start watching, learning,
                                 and engaging. Check out popular and latest videos below.
                             </p>
@@ -65,7 +65,7 @@ export default class Home extends Component {
                     </div>
 
                 </div>
-                <h1 className="text-4xl font-bold font-header mb-8">
+                <h1 className="text-4xl dark:text-white font-bold font-header mb-8">
                     Popular
                 </h1>
                 {popular ?
@@ -88,7 +88,7 @@ export default class Home extends Component {
                     :
                     <HomeSkeleton/>
                 }
-                <h1 className="text-4xl font-bold font-header mb-8 mt-32">Latest videos</h1>
+                <h1 className="text-4xl dark:text-white font-bold font-header mb-8 mt-32">Latest videos</h1>
                 {recent ?
                     <>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">                    
