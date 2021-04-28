@@ -1,15 +1,10 @@
 # Lectern - CS39440 Major Project
 
-This project focuses on creating a video platform with timestamped comments and potentially other interactive media. 
-The project is at a fairly advanced state, with most of the UI complete and API stabilized. We still need to implement
-the actual video upload and playback functionality, expect that to come in the next week or so.
-
-Please see the Wiki for API documentation and current user stories. This documentation is set to evolve over time and 
-may relocate to new locations. This README will be updated in the event that happens.
+This project focuses on creating a video platform with timestamped comments and potentially other interactive media.
 
 ## Getting started
 
-You'll need [Node.js](https://nodejs.org/download/) installed.
+You'll need [Node.js](https://nodejs.org/download/) and [Yarn](https://classic.yarnpkg.com/lang/en/) installed.
 
 1. Clone this repository.
 2. Run `yarn` to install dependencies.
@@ -20,9 +15,7 @@ What you'll do next depends on if you want to run the website in development mod
 
 |Directory|Contains|
 |-|-|
-|config|Configuration files for Webpack and other build processes. The files in this directory are in the process of being cleaned up, they are mostly boilerplate ejected by react-scripts.|
-|public|Files to be made available by the HTTP server.|
-|scripts|Build scripts. Mostly boilerplate ejected by react-scripts.|
+|public|Files to be made available by the HTTP server. Nothing in here is compiled, the files are served as-is.|
 |server|Server source, can be operated independently.|
 |src|Client source, can be operated independently but relies heavily on server component.|
 
