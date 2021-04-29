@@ -100,6 +100,7 @@ export default class Video extends Component {
                             channelName={authorDisplayName}
                             subscribers="20"
                             isCreator={isCreator}
+                            mp4={streamUrl}
                         />
                         <VideoComments 
                             videoId={videoId}

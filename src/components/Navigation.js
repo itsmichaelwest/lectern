@@ -26,7 +26,9 @@ export default function Navigation() {
                             <LecternLogo
                                 className="mr-2"
                                 alt="Lectern logo"/>
-                            Lectern
+                            <span data-testid="home-name">
+                                Lectern
+                            </span>
                             <span className="bg-primary text-white text-xs font-mono ml-2 px-2 py-1 rounded align-baseline">
                                 BETA
                             </span>

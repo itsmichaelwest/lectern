@@ -21,14 +21,6 @@ export default function Video(props) {
         )
     }
 
-    function downloadVideo() {
-        axios
-        .get(`${config.apiUrl}/api/v1/video/${props.videoId}/download`)
-        .then(res => {
-            console.log(res)
-        })
-    }
-
     function toggleDeleteDialog() {
         setIsDeleteDialogShown(!isDeleteDialogShown)
     }
@@ -73,9 +65,9 @@ export default function Video(props) {
                             <DeleteIcon className="fill-current"/>
                         </button>
                     }
-                    <button className={Button} onClick={downloadVideo}>
+                    <a className={Button} href={props.mp4} target="_blank" rel="noreferrer" download>
                         <DownloadIcon className="fill-current"/>
-                    </button>
+                    </a>
                 </div>
             </div>
             <div className="flex justify-between items-center">

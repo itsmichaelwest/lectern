@@ -13,5 +13,5 @@ test('Renders navigation', () => {
         </BrowserRouter>
     )
 
-    expect(screen.getByText(/Lectern/i)).toBeInTheDocument()
+    expect(screen.getByTestId('home-name').textContent).toBe('Lectern')
 })
