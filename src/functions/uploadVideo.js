@@ -23,7 +23,7 @@ export default async function uploadVideo(video, values, callback, progress) {
     }
 
     axios
-    .get(`${apiUrl}/api/v1/video/sas`)
+    .get(`${apiUrl}/api/v1/video/upload/sas`)
     .then(async res => {
         const sasToken = res.data
 

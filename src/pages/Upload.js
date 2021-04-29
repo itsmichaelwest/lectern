@@ -86,7 +86,7 @@ export default class Upload extends Component {
         return (
             <>
             <Prompt
-                when={this.state.selectedFile}
+                when={this.state.selectedFile !== null}
                 message='Leave page? This video won&apos;t be uploaded' />
             <Helmet>
                 <title>Upload Video | Lectern</title>
