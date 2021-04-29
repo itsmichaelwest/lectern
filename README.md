@@ -4,7 +4,7 @@ This project focuses on creating a video platform with timestamped comments and 
 The website is available at [lectern.video](https://lectern.video).
 
 > **IMPORTRANT:** This project requires certain secret keys/variables to be set for development. See the
-> [Azure deployment guide](./AZURE.MD) for instructions on generating these yourself, or send an email to
+> [Azure deployment guide](./AZURE.md) for instructions on generating these yourself, or send an email to
 > [maw86@aber.ac.uk](mailto:maw86@aber.ac.uk) to obtain a prebuilt `.env` file. Keys are not included in this repository
 > for security reasons. Many aspects of this project cannot be run locally without setting these variables. You can 
 > always access Lectern on the web at [lectern.video](https://lectern.video).
@@ -15,7 +15,7 @@ You'll need [Node.js](https://nodejs.org/download/) and [Yarn](https://classic.y
 
 1. Clone this repository.
 2. Run `yarn` to install dependencies.
-3. Refer to the [Azure deployment guide](./AZURE.MD).
+3. Refer to the [Azure deployment guide](./AZURE.md).
 
 What you'll do next depends on if you want to run the website in development mode or server a production build.
 
