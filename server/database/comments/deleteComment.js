@@ -16,11 +16,9 @@ function deleteComment(videoId, commentId, authorId, callback) {
                 return callback(0)
             })
             .catch(err => {
-                console.error(err)
                 return callback(err)
             })
     }).catch(err => {
-        console.error(err)
         return callback(1)
     })
 }

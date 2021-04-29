@@ -94,9 +94,10 @@ router.get('/userdb', authCheckMiddleware(), (req, res) => {
 
 // Remove all user information from the database and log the user out.
 router.get('/destroy', authCheckMiddleware(), (req, res) => {
-    sql.destroyUser(req.session.passport.user.oid)
-    req.logOut()
-    res.redirect('/')
+    sql.destroyUser(req.session.passport.user.oid, () => {
+        req.logOut()
+        res.redirect('/')
+    })
 })
 
 // Logout, check the user is actually logged in first though.

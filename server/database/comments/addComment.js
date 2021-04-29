@@ -17,10 +17,8 @@ function addComment(videoId, author, comment, timestamp, callback) {
             .input('reported', sql.Bit, 0)
             .query('INSERT INTO [dbo].[comments] (commentId, videoId, pubDate, timestamp, author, comment, reported) VALUES (@commentId, @videoId, @pubDate, @timestamp, @author, @comment, @reported)')
     }).then(res => {
-        console.log(res)
         return callback(true)
     }).catch(err => {
-        console.error(err)
         return callback(err)
     })
 }

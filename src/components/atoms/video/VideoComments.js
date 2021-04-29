@@ -8,7 +8,6 @@ import addComment from '../../../functions/addComment'
 import { ReactComponent as SurveySVG } from '../../../vectors/undraw-survey.svg'
 import SignInChallenge from '../../SignInChallenge'
 import { ReactComponent as SendIcon } from '../../../icons/send.svg'
-import getHumanReadableTime from '../../../functions/getHumanReadableTime'
 
 export default function VideoComments(props) {
     const [isFetched, setIsFetched] = useState(false)
@@ -78,7 +77,7 @@ export default function VideoComments(props) {
                             return (
                                 <Comment
                                     key={comment.commentId}
-                                    time={getHumanReadableTime(comment.timestamp)}
+                                    time={comment.timestamp}
                                     timestamp={comment.timestamp}
                                     author={comment.author}
                                     name={comment.displayName}
@@ -92,7 +91,7 @@ export default function VideoComments(props) {
                             return (
                                 <Comment
                                     key={comment.commentId}
-                                    time={getHumanReadableTime(comment.timestamp)}
+                                    time={comment.timestamp}
                                     timestamp={comment.timestamp}
                                     author={comment.author}
                                     name={comment.displayName}

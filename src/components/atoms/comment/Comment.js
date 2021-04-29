@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Design from '../../../Design'
+import getHumanReadableTime from '../../../functions/getHumanReadableTime'
 
 import { ReactComponent as ReportIcon } from '../../../icons/report.svg'
 import { ReactComponent as DeleteIcon } from '../../../icons/delete.svg'
@@ -30,9 +31,10 @@ export default function Comment(props) {
     
     
     return (
-        <div className="relative p-4 hover:bg-gray-50 dark:hover:bg-gray-900"
+        <div className="relative hover:bg-gray-50 dark:hover:bg-gray-900"
             onMouseEnter={() => setShowActionButtons(true)}
-            onMouseLeave={() => setShowActionButtons(false)}>
+            onMouseLeave={() => setShowActionButtons(false)}
+            data-testid="comment-container">
             {showDeleteDialog && (
                 <div className="absolute p-4 flex items-center justify-between h-full w-full inset-0 z-10 bg-white dark:bg-gray-900 bg-opacity-70" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
                     <p className="font-semibold ml-2 dark:text-white">
@@ -52,7 +54,7 @@ export default function Comment(props) {
                 </div>
             )}
             {showButtons &&
-                <div className="absolute right-0 mr-4 items-center">
+                <div className="absolute right-0 p-4 items-center" data-testid="buttons">
                     <button className={Design.Button}>
                         <ReportIcon className="fill-current"/>
                     </button>
@@ -65,22 +67,22 @@ export default function Comment(props) {
                     }
                 </div>
             }
-            <div className="flex cursor-pointer" onClick={navigateVideoToTimestamp}>
+            <div className="flex p-4 cursor-pointer" onClick={navigateVideoToTimestamp}>
                 <span className="flex-initial flex-shrink-0 w-16 max-h-5">
-                    <span className="font-semibold dark:text-gray-100">
-                        {props.time}
+                    <span id="timestamp" className="font-semibold dark:text-gray-100" data-testid="timestamp">
+                        {getHumanReadableTime(props.time)}
                     </span>
                 </span>
                 <div>
                     <div className="flex align-middle">
                         <span className={Design.URL + " font-semibold"}>
-                            <Link to={`/channel/${props.author}`}>
+                            <Link id="name" to={`/channel/${props.author}`} data-testid="name">
                                 {props.name}
                             </Link>
                         </span>
                     </div>
                     <div>
-                        <p className="dark:text-white" style={{ overflowWrap: 'anywhere' }}>
+                        <p className="dark:text-white" style={{ overflowWrap: 'anywhere' }} data-testid="comment">
                             {props.content}
                         </p>
                     </div>

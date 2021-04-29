@@ -2,15 +2,10 @@ const sql = require('mssql')
 const pool = require('../sql')
 
 // Add video to database
-function insertVideo(videoId, name, description, privacy, streamUrl, author, length, thumbnail) {
-    if (name.length > 256) {
-        console.error('[Server] Video title is too long!')
-        return
-    }
-
-    if (description.length > 1024) {
-        console.error('[Server] Video description is too long')
-        return
+function insertVideo(videoId, name, description, privacy, streamUrl, author, length, thumbnail, callback) {
+    // Return false (i.e. error) callback if video name or description are too long.
+    if (name.length > 1000 || description.length > 2000) {
+        return callback(false)
     }
 
     const uploaded = new Date().toISOString()
@@ -27,11 +22,10 @@ function insertVideo(videoId, name, description, privacy, streamUrl, author, len
             .input('thumbnail', sql.VarChar, thumbnail)
             .input('uploaded', sql.DateTime2, uploaded)
             .query('INSERT INTO [dbo].[videos] (videoId, title, description, privacy, streamUrl, author, uploaded, views, length, thumbnail) VALUES (@videoId, @name, @description, @privacy, @streamUrl, @author, @uploaded, 0, @length, @thumbnail)')
-            .then(res => {
-                return res
+            .then(() => {
+                return callback(true)
             })
             .catch(err => {
-                console.error(err)
                 throw err
             })
     })

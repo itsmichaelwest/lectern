@@ -14,7 +14,6 @@ function getAllComments(videoId, callback) {
                 }
             })
             .catch(err => {
-                console.error(err)
                 return callback(err)
             })
     })
@@ -35,7 +34,6 @@ function getSingleComment(videoId, commentId, callback) {
                     return callback(false)
                 }
             }).catch(err => {
-                console.error(err)
                 return callback(err)
             })
     })

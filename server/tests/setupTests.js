@@ -1,38 +1,25 @@
 const { addUser, destroyUser } = require('../database/user/user')
-const uploadVideo = require('../database/video/upload')
 
-const guid = '00000000-0000-0000-0000-000000000000'
-
-function init() {
-    destroyUser(guid)
-
+async function init() {
     const profile = {
-        oid: guid,
+        oid: '00000000-0000-0000-0000-000000000000',
         _json: {
             email: 'example@example.com'
         }
     }
+
+    console.log('Add user/channel')
     
-    addUser (
+    await addUser (
         profile,
         'Joe Bloggs',
         null
     )
-    
-    uploadVideo(
-        guid,
-        'Test Video',
-        'This video is being uploaded as a test of the Video API.',
-        0,
-        'https://example.com',
-        guid,
-        100,
-        'https://example.com'
-    )    
 }
 
-function teardown() {
-    destroyUser(guid)
+async function teardown() {
+    console.log('Destroy user')
+    await destroyUser('00000000-0000-0000-0000-000000000000')
 }
 
 module.exports = {

@@ -54,6 +54,5 @@ CREATE TABLE comments(
     author VARCHAR(128) NOT NULL,
     comment NVARCHAR(1024) NOT NULL,
     reported BIT,
-    CONSTRAINT fkCommentsAuthor FOREIGN KEY (author) REFERENCES users(userId) ON DELETE NO ACTION,
     CONSTRAINT fkCommentsVideo FOREIGN KEY (videoId) REFERENCES videos(videoId) ON DELETE CASCADE
 )

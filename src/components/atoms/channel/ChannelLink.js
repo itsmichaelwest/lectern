@@ -8,7 +8,7 @@ export default function Thumbnail(props) {
 
     return (
         <>
-        <Link className="flex items-center p-4 hover:bg-gray-100 hover:bg-gray-900 rounded-xl transition-all" to={`/channel/${props.id}`}>
+        <Link className="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-xl transition-all" to={`/channel/${props.id}`}>
             {
                 props.avatar ?
                 <img 

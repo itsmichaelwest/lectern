@@ -2,7 +2,7 @@ const sql = require('mssql')
 const storageDeleteBlob = require('../../storage/storageDeleteBlob')
 const pool = require('../sql')
 
-function addUser(profile, displayName, avatar) {
+function addUser(profile, displayName, avatar, callback) {
     let uploadedUserPhoto
 
     if (avatar !== null) {
@@ -41,6 +41,9 @@ function addUser(profile, displayName, avatar) {
                             .input('reported', sql.Bit, 0)
                             .input('suspended', sql.Bit, 0)
                             .query('INSERT INTO [dbo].[channels] (channelId, displayName, channelPhoto, reported, suspended) VALUES (@userId, @userName, @channelPhoto, @reported, @suspended)')
+                            .then(() => {
+                                return callback(true)
+                            })
                             .catch(err => {
                                 console.error(err)
                                 throw err
@@ -73,7 +76,7 @@ function getUser(oid, callback) {
     })
 }
 
-function destroyUser(oid) {
+function destroyUser(oid, callback) {
     pool.connect().then((pool) => {
         pool.request()
             .input('author', sql.VarChar, oid)
@@ -88,7 +91,16 @@ function destroyUser(oid) {
                     .input('userId', sql.VarChar, oid)
                     .query('DELETE FROM [dbo].[users] WHERE userId=@userId')
                     .then(() => {
-                        return
+                        // We have to delete comments separately because of some...errors
+                        pool.request()
+                            .input('userId', sql.VarChar, oid)
+                            .query('DELETE FROM [dbo].[comments] WHERE author=@userId')
+                            .then(() => {
+                                return callback(true)
+                            })
+                            .catch(err => {
+                                throw err
+                            })
                     })
                     .catch(err => {
                         throw err

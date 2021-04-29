@@ -63,9 +63,13 @@ router.post('/upload', authCheckMiddleware(), async (req, res) => {
             req.body.streamUrl,
             req.session.passport.user.oid,
             req.body.vidLength,
-            req.body.thumbnail
+            req.body.thumbnail,
+            result => {
+                if (result) {
+                    res.status(200).send('Video uploaded successfully!')
+                }
+            }
         )
-        res.status(200).send('Video uploaded successfully!')
     } else {
         res.status(401)
     }
@@ -73,7 +77,9 @@ router.post('/upload', authCheckMiddleware(), async (req, res) => {
 
 // Add a view to a video.
 router.post('/:videoId/view', (req, res) => {
-    views.addView(req.params.videoId)
+    views.addView(req.params.videoId, () => {
+        res.status(200)
+    })
 })
 
 // Get information about a specific video.
