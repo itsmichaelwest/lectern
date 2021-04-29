@@ -22,8 +22,8 @@ const strategy = new OIDCStrategy(
         nonceMaxAmount: 5,
         useCookieInsteadOfSession: true,
         cookieEncryptionKeys: [ 
-            { 'key': '12345678901234567890123456789012', 'iv': '123456789012' },
-            { 'key': 'abcdefghijklmnopqrstuvwxyzabcdef', 'iv': 'abcdefghijkl' }
+            { 'key': process.env.COOKIE_KEY_1 || '12345678901234567890123456789012', 'iv': process.env.COOKIE_IV_1 || '123456789012' },
+            { 'key': process.env.COOKIE_KEY_2 ||  'abcdefghijklmnopqrstuvwxyzabcdef', 'iv': process.env.COOKIE_IV_2 || 'abcdefghijkl' }
         ],  
         clockSkew: null
     },

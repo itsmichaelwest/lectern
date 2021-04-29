@@ -15,7 +15,7 @@ const path = require('path')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cookieParser('foo'))
+app.use(cookieParser(process.env.COOKIE_SECRET || 'foo'))
 app.use(errorHandlingMiddleware())
 
 app.use(morgan('dev'))
@@ -29,9 +29,9 @@ app.use(express.static("public"));
 app.use(express.static('./server/static/'))
 
 app.use(session({ 
-    secret: 'keyboard cat', 
+    secret: process.env.SESSION_SECRET || 'foo', 
     cookie: {
-        maxAge: 2592000000
+        maxAge: 604800000
     },
     resave: true, 
     saveUninitialized: true,

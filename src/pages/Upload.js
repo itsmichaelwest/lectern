@@ -7,7 +7,6 @@ import { Link, Prompt } from 'react-router-dom'
 import UploadSkeleton from '../components/skeletons/UploadSkeleton'
 import Thumbnail from '../components/atoms/video/Thumbnail'
 import UploadForm from '../components/UploadForm'
-import getHumanReadableTime from '../functions/getHumanReadableTime'
 
 export default class Upload extends React.Component {
     constructor(props) {
