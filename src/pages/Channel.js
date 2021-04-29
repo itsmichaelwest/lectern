@@ -100,7 +100,9 @@ export default class Channel extends Component {
                         You will be logged out. You can de-authorize Lectern from your account provider by following these instructions:
                     </p>
                     <p className="my-2">
-                        <a className={URL} href="https://docs.microsoft.com/en-us/azure/active-directory/user-help/my-applications-portal-permissions-saved-accounts">Revoking permissions from Microsoft 365 account</a>
+                        <a className={URL} href="https://docs.microsoft.com/en-us/azure/active-directory/user-help/my-applications-portal-permissions-saved-accounts">
+                            Click here for information on removing permissions from your Microsoft 365 account
+                        </a>
                     </p>
                 </Dialog>
                 <div className="px-4 sm:px-0">
