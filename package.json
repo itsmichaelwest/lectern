@@ -58,13 +58,12 @@
   "scripts": {
     "start": "yarn run build && (node ./server/index.js)",
     "dev": "concurrently --kill-others \"yarn server-dev\" \"yarn client-dev\"",
-    "dev-no-server-refresh": "concurrently \"yarn server\" \"yarn client-dev\"",
-    "server": "node ./server/index.js",
-    "server-dev": "nodemon ./server/index.js",
-    "client-dev": "craco start",
+    "dev-server": "nodemon ./server/index.js",
+    "dev-client": "craco start",
     "build": "craco build",
+    "test": "yarn run test-client && yarn run test-server",
     "test-client": "craco test",
-    "test-server": "jest ./server --setupFiles dotenv/config --watch --runInBand --detectOpenHandles"
+    "test-server": "jest ./server --setupFiles dotenv/config --verbose true"
   },
   "eslintConfig": {
     "extends": [
