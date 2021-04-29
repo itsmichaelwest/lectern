@@ -10,7 +10,6 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const AzureTablesStoreFactory = require('connect-azuretables')(session)
 const cors = require('cors')
-const cookieSettings = require('./config').cookieSettings
 const errorHandlingMiddleware = require('./middleware/error')
 const path = require('path')
 
@@ -31,7 +30,9 @@ app.use(express.static('./server/static/'))
 
 app.use(session({ 
     secret: 'keyboard cat', 
-    cookie: cookieSettings, 
+    cookie: {
+        maxAge: 2592000000
+    },
     resave: true, 
     saveUninitialized: true,
     store: AzureTablesStoreFactory.create({
@@ -41,8 +42,6 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
-
-
 
 // Routes
 const authRoutes = require('./routes/auth')
