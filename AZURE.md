@@ -176,7 +176,7 @@ with the value of `600`. This is used to prevent Azure from timing out the warmu
 of the code container, which can happen on lower tier app service plans. Save the
 variables.
 
-Next, go to the **General settings** tab and switch **Always on** to *On**. This
+Next, go to the **General settings** tab and switch **Always on** to **On**. This
 stops Azure from putting the web app to sleep if it is inactive.
 
 There are multiple ways to deploy to an Azure web

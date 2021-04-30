@@ -33,7 +33,7 @@ The development build utilizes hot reload on both the client and server, facilit
 You can also choose to run either side independently, though since the client/server are heavily dependent on each other, 
 I recommend using the combined development mode.
 
-You **must** create a `.env` file with the variables described in the [Azure deployment guide](./AZURE.MD).
+You **must** create a `.env` file with the variables described in the [Azure deployment guide](./AZURE.md).
 
 > *Note:* There are some issues developing on Apple M1 devices, where the development process will spontaneously crash. 
 > This is likely due to a bug in Node or one of the packages I am using. Keep an eye on your terminal window and just 
