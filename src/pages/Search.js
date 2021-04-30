@@ -4,6 +4,7 @@ import Thumbnail from '../components/atoms/video/Thumbnail'
 import ChannelLink from '../components/atoms/channel/ChannelLink'
 import { Helmet } from 'react-helmet'
 
+// Search page, displays video and channel results.
 export default function Search(props) {
     let query = queryString.parse(props.location.search)
 

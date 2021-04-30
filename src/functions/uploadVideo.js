@@ -4,21 +4,16 @@ import { v4 as uuidv4 } from 'uuid'
 import { BlobServiceClient } from '@azure/storage-blob'
 import createThumbnail from './createThumbnail'
 
-// REFERENCE THIS MICHAEL, IT'S HOW YOU GOT THE THUMBNAIL TO WORK
-// https://stackoverflow.com/questions/23745988/get-an-image-from-the-video/44325898
-
-// REFERENCE THIS TOO
-// https://stackoverflow.com/questions/35940290/how-to-convert-base64-string-to-javascript-file-object-like-as-from-file-input-f
-
+// Upload the video and thumbnail files to Microsoft Azure, then send a POST request
+// to the API to insert the video into the database.
 export default async function uploadVideo(video, values, callback, progress) {
-    // Validate inputs
+    // Validate file input
     if (!video) {
-        console.error('[UploadVideo] Video file missing!')
         return callback(false)
     }
 
+    // Validate form input
     if (values.title === "" || !values.description === "") {
-        console.error('[UploadVideo] Values missing!')
         return callback(false)
     }
 

@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 const express = require('express')
 const app = express()
 const passport = require('passport')
@@ -18,8 +16,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser(process.env.COOKIE_SECRET || 'foo'))
 app.use(errorHandlingMiddleware())
 
+// Use logging
 app.use(morgan('dev'))
 
+// If running in development environment, use cors to resolve cross-origin
+// errors.
 if (process.env.NODE_ENV === 'development') {
     app.use(cors({origin: 'http://localhost:8080' , credentials :  true}))
 }
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
 app.use(express.static('./server/static/'))
 
+// Session storage configuration.
 app.use(session({ 
     secret: process.env.SESSION_SECRET || 'foo', 
     cookie: {
@@ -40,20 +42,17 @@ app.use(session({
     })
 }))
 
+// Configure and use passport.js.
 app.use(passport.initialize())
 app.use(passport.session())
 
 // Routes
 const authRoutes = require('./routes/auth')
 app.use('/auth', authRoutes)
-
 const videoApi = require('./routes/video')
 app.use('/api/v1/video', videoApi)
-
 const commentApi = require('./routes/comment')
 app.use('/api/v1/comment', commentApi)
-
-// Channel API
 const channelApi = require('./routes/channel')
 app.use('/api/v1/channel', channelApi)
 

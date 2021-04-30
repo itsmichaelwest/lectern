@@ -2,6 +2,8 @@ const sql = require('mssql')
 const storageDeleteBlob = require('../../storage/storageDeleteBlob')
 const pool = require('../sql')
 
+// Add new user to the database, creating entries in the users and channels
+// tables. Only completes if the user does not exist in the database.
 function addUser(profile, displayName, avatar, callback) {
     let uploadedUserPhoto
 
@@ -62,6 +64,7 @@ function addUser(profile, displayName, avatar, callback) {
     })
 }
 
+// Get the user's information from the database
 function getUser(oid, callback) {
     pool.connect().then((pool) => {
         pool.request()
@@ -76,6 +79,9 @@ function getUser(oid, callback) {
     })
 }
 
+// Remove the user and their content. We first select their videos and remove
+// them from Azure, then we'll remove their actual data from the database. We
+// have to remove comments separately due to a foreign key constraint issue.
 function destroyUser(oid, callback) {
     pool.connect().then((pool) => {
         pool.request()

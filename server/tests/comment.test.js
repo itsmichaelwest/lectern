@@ -1,13 +1,12 @@
 const addComment = require('../database/comments/addComment')
-const deleteComment = require('../database/comments/deleteComment')
 const fetchComment = require('../database/comments/fetchComment')
-const reportComment = require('../database/comments/reportComment')
 
 const { addUser, destroyUser } = require('../database/user/user')
 const uploadVideo = require('../database/video/upload')
 
 const sql = require('../database/sql')
 
+// Set up fake user
 beforeAll(done => {
     const profile = {
         oid: '00000000-0000-0000-0000-000000000000',
@@ -26,6 +25,7 @@ beforeAll(done => {
     )
 })
 
+// Test fetching comments
 describe('Test fetch', () => {
     beforeAll(done => {
         uploadVideo(
@@ -59,6 +59,7 @@ describe('Test fetch', () => {
     })
 })
 
+// Test inserting a comment
 describe('Test insert', () => {
     test('Insert single comment', done => {
         addComment(
@@ -73,6 +74,7 @@ describe('Test insert', () => {
     })
 })
 
+// Remove fake user
 afterAll(done => {
     destroyUser('00000000-0000-0000-0000-000000000000', () => {
         // We need to close the database connection or Jest will hang!

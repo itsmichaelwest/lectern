@@ -9,12 +9,14 @@ import { ReactComponent as SurveySVG } from '../../../vectors/undraw-survey.svg'
 import SignInChallenge from '../../SignInChallenge'
 import { ReactComponent as SendIcon } from '../../../icons/send.svg'
 
+// VideoComments component, renders all the comments on a video.
 export default function VideoComments(props) {
     const [isFetched, setIsFetched] = useState(false)
     const [comments, setComments] = useState(null)
     const [userId, setUserId] = useState(null)
     const [signInChallenge, setSignInChallenge] = useState(false)
 
+    // Fetch the comments from the API endpoint.
     const fetchComments = useCallback(() => {
         axios
         .get(`${config.apiUrl}/api/v1/comment/${props.videoId}`)
@@ -24,14 +26,18 @@ export default function VideoComments(props) {
         })
     }, [props.videoId])
 
+    // Fetch comments when the variable isFetched is false.
     useEffect(() => {
         fetchComments()
     }, [fetchComments, isFetched])
 
+    // Fetch the user's ID when the variable isFetched is false.
     useEffect(() => {
         fetchUserId()
     }, [isFetched])
 
+    // Fetch the user's ID from the API endpoint, we use this to check if the
+    // user is the author of any comments.
     function fetchUserId() {
         axios
         .get(`${config.apiUrl}/auth/user`)
@@ -40,6 +46,7 @@ export default function VideoComments(props) {
         })
     }
 
+    // Delete a comment and then reload the comments view.
     function deleteComment(commentId) {
         axios
         .delete(`${config.apiUrl}/api/v1/comment/${props.videoId}/${commentId}`)
@@ -48,15 +55,18 @@ export default function VideoComments(props) {
         })
     }
 
+    // Display a sign in dialog if the user isn't signed in.
     function toggleSignInChallenge() {
         setSignInChallenge(!signInChallenge)
     }
 
+    // Get the current timestamp of the video in seconds.
     function getCurrentVideoTime() {
         let video = document.getElementById('video')
         return video.currentTime
     }
 
+    // Check the comment form is not empty.
     function validateComment(value) {
         if (!value) {
             return 'Please enter a comment'
@@ -105,10 +115,10 @@ export default function VideoComments(props) {
                         <SurveySVG 
                             className="mx-auto mb-4" 
                             style={{ maxWidth: '16rem' }}/>
-                        <h4 className="text-2xl font-semibold font-header mb-1">
+                        <h4 className="text-2xl dark:text-white font-semibold font-header mb-1">
                             No comments, yet
                         </h4>
-                        <p>
+                        <p className="dark:text-white">
                             Start a discussion!
                         </p>
                     </div>

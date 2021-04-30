@@ -1,6 +1,7 @@
 const sql = require('mssql')
 const pool = require('../sql')
 
+// Search channels by name
 function searchChannels(queryString, callback) {
     pool.connect().then((pool) => {
         pool.request()

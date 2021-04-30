@@ -10,25 +10,27 @@ export default function Comment(props) {
     const [showButtons, setShowButtons] = useState(false)
     const [showDeleteDialog, setShowDeleteDialog] = useState(false)
 
+    // Navigate the active video on the page to the selected timestamp.
     function navigateVideoToTimestamp() {
         let video = document.getElementById('video')
         video.currentTime = props.timestamp
         video.play()
     }
 
-    function setShowActionButtons(val) {
+    // Show the delete and report buttons on hover.
+    function setShowActionButtons(value) {
         if (showDeleteDialog) {
             setShowButtons(false)
         } else {
-            setShowButtons(val)
+            setShowButtons(value)
         }
     }
 
-    function setShowDeleteBanner(val) {
+    // Hide the action buttons when the delete banner is opened.
+    function setShowDeleteBanner(value) {
         setShowButtons(false)
-        setShowDeleteDialog(val)
+        setShowDeleteDialog(value)
     }
-    
     
     return (
         <div className="relative hover:bg-gray-50 dark:hover:bg-gray-900"

@@ -9,6 +9,7 @@ import { Button, ButtonDestructive, URL } from '../Design'
 import Dialog from '../components/Dialog'
 import VideoRowSkeleton from '../components/skeletons/VideoRowSkeleton'
 
+// Channel page
 export default class Channel extends Component {
     constructor (props) {
         super(props)
@@ -23,6 +24,7 @@ export default class Channel extends Component {
         }
     }
 
+    // Get channel information and videos from the API.
     componentDidMount () {
         axios
         .get(`${config.apiUrl}/api/v1/channel/${this.state.id}/all`)
@@ -58,12 +60,14 @@ export default class Channel extends Component {
         })
     }
 
+    // Toggle the delete data dialog.
     toggleDestroyModal = () => {
         this.setState({
             showDestroyModal: !this.state.showDestroyModal
         })
     }
 
+    // Delete the user's data.
     destroyUser = () => {
         window.location.replace('/auth/destroy')
     }

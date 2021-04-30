@@ -1,6 +1,7 @@
 const sql = require('mssql')
 const pool = require('../sql')
 
+// Delete comment from the database
 function deleteComment(videoId, commentId, authorId, callback) {
     pool.connect().then((pool) => {
         pool.request()

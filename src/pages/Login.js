@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 import Design from '../Design'
 import { ReactComponent as MSFTSignInButton } from '../vectors/msft-sign-in.svg'
 
-export default class Login extends Component {    
-    loginToADFS (e) {
-        e.preventDefault()
+// Login page
+export default class Login extends React.Component {
+    // Redirect to Microsoft 365 authentication.
+    loginToADFS (event) {
+        event.preventDefault()
         window.location = '/auth/microsoft'
     }
 

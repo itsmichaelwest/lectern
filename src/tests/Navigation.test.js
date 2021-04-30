@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import React from 'react'
+// We need Router present because there are <Link/> elements in this component.
 import { BrowserRouter } from 'react-router-dom'
 
 import Navigation from '../components/Navigation'

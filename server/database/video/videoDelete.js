@@ -2,6 +2,8 @@ const sql = require('mssql')
 const pool = require('../sql')
 const storageDeleteBlob = require('../../storage/storageDeleteBlob')
 
+// Delete video from the database and then delete the video file/thumbnail from
+// Azure storage
 function deleteVideo(videoId, callback) {
     pool.connect().then((pool) => {
         pool.request()

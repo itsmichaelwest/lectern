@@ -8,6 +8,7 @@ import UploadSkeleton from '../components/skeletons/UploadSkeleton'
 import Thumbnail from '../components/atoms/video/Thumbnail'
 import UploadForm from '../components/UploadForm'
 
+// Upload page, uses the UploadForm component.
 export default class Upload extends React.Component {
     constructor(props) {
         super(props)
@@ -17,6 +18,8 @@ export default class Upload extends React.Component {
         })
     }
 
+    // Check the user is authenticated, if not then redirect them to the login
+    // page.
     componentDidMount () {
         axios
         .get(`${config.apiUrl}/auth/user`, {withCredentials: true})
@@ -32,7 +35,7 @@ export default class Upload extends React.Component {
         })
     }
 
-    // Warn user that their changes won't be
+    // Warn user that their changes won't be saved
     componentDidUpdate = () => {
         if (this.state.selectedFile) {
             window.onbeforeunload = () => true
@@ -83,7 +86,7 @@ export default class Upload extends React.Component {
                                 thumb={this.state.uploadStatus.thumbnail}
                             />
                         </div>
-                        <p className="text-xl mt-8">
+                        <p className="text-xl mt-8 dark:text-white">
                             🎉 Your video was successfully uploaded! ✨
                         </p>
                     </div>

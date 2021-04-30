@@ -1,6 +1,8 @@
 import config from '../config'
 import axios from 'axios'
 
+// Search for videos and channels by performing the relevant GET queries against
+// the API.
 export default async function searchVideo(query, callback) {
     let response = []
 

@@ -11,6 +11,7 @@ export default function SearchBar() {
         setQuery(event.target.value)
     }
 
+    // Perform the search and then navigate to the results page
     function handleSearch(event) {
         event.preventDefault()
         searchVideo(query, (res) => {

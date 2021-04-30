@@ -1,6 +1,7 @@
 const sql = require('mssql')
 const pool = require('../sql')
 
+// Increment views by 1
 function addView(videoId, callback) {
     pool.connect().then((pool) => {
         pool.request()
@@ -15,6 +16,7 @@ function addView(videoId, callback) {
     })
 }
 
+// Decrement views by 1 (unsure why we'd ever want to do this...)
 function removeView(videoId, callback) {
     pool.connect().then((pool) => {
         pool.request()

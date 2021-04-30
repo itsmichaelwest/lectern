@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Thumbnail(props) {
+// ChannelLink component, used in search results.
+export default function ChannelLink(props) {
     function decodeAvatar(avatar) {
         return new Buffer.from(avatar, 'base64').toString('ascii')
     }
 
     return (
-        <>
         <Link className="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-xl transition-all" to={`/channel/${props.id}`}>
             {
                 props.avatar ?
@@ -20,6 +20,5 @@ export default function Thumbnail(props) {
             }
             <h2 className="font-semibold text-xl whitespace-nowrap truncate dark:text-white">{props.name}</h2>
         </Link>
-        </>
     )
 }

@@ -2,6 +2,7 @@ const sql = require('mssql')
 const pool = require('../sql')
 const { v4: uuidv4 } = require('uuid')
 
+// Insert a new comment to the database
 function addComment(videoId, author, comment, timestamp, callback) {
     const commentId = uuidv4()
     const pubDate = new Date().toISOString()

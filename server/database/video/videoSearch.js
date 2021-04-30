@@ -1,6 +1,7 @@
 const sql = require('mssql')
 const pool = require('../sql')
 
+// Search videos by title and description
 function searchTitleDescription(queryString, callback) {
     pool.connect().then((pool) => {
         pool.request()

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { Input, InputDropdown, ButtonPrimary } from '../Design'
-import UploadVideo from '../functions/uploadVideo'
+import uploadVideo from '../functions/uploadVideo'
 import FileDropper from './atoms/upload/FileDropper'
 import FileInfo from './atoms/upload/FileInfo'
 
-
+// UploadForm component, accepts a file using the FileDropper and values such as
+// video title, description, and privacy. Passes these values to the uploadVideo
+// function.
 export default function UploadForm(props) {
     const [isLoadingBytes, setIsLoadingBytes] = useState(false)
     const [loadedBytes, setLoadedBytes] = useState(0)
@@ -45,7 +47,7 @@ export default function UploadForm(props) {
                 if (props.onSubmit) {
                     await props.onSubmit(values)
                 } else {
-                    await UploadVideo(
+                    await uploadVideo(
                         props.selectedFile, 
                         values, 
                         callback => {

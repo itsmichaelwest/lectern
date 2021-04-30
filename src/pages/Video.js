@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet'
 import VideoSkeleton from '../components/skeletons/VideoSkeleton'
 import NotFound from '../pages/NotFound'
 
+// Video page
 export default class Video extends Component {
     constructor (props) {
         super(props)
@@ -26,10 +27,10 @@ export default class Video extends Component {
         }
     }
 
+    // Get all video information
     componentDidMount () {
         const params = this.props.match.params
 
-        // Get all video information
         axios
         .get(config.apiUrl + '/api/v1/video/' + params.videoId)
         .then(res => {
@@ -52,8 +53,11 @@ export default class Video extends Component {
                 authorDisplayName: res.data.displayName
             })
             
+            // Add a view to the video
             axios.post(`${config.apiUrl}/api/v1/video/${params.videoId}/view`)
 
+            // Get the user's profile information so we can populate the comment
+            // field with their name and check if they can delete the video.
             axios
             .get(`${config.apiUrl}/auth/user`)
             .then(res => {

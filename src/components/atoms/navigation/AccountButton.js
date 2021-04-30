@@ -8,6 +8,7 @@ import { ReactComponent as DropdownIcon } from '../../../vectors/dropdown.svg'
 import { ReactComponent as ProfileIcon } from '../../../icons/person_circle.svg'
 import { ReactComponent as SignOutIcon } from '../../../icons/sign_out.svg'
 
+// AccountButton component, renders the sign in/account menu
 export default class AccountButton extends React.Component {
     constructor (props) {
         super(props)
@@ -29,6 +30,7 @@ export default class AccountButton extends React.Component {
         document.addEventListener('mousedown', this.handleClick, false)
     }
 
+    // Hide menu if we click outside the menu's container
     handleClick = (e) => {
         if (this.node.contains(e.target)) {
             return
@@ -36,6 +38,7 @@ export default class AccountButton extends React.Component {
         this.hideMenu()
     }
 
+    // Check the user's login status and fetch the appropriate information.
     checkLogin() {
         axios
         .get(`${config.apiUrl}/auth/user`, {withCredentials: true})

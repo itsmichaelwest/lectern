@@ -1,14 +1,18 @@
 import React from 'react'
 
+// Basic Dialog component with two buttons.
 export default function Dialog(props) {
+    // Primary action
     function onPrimary(e) {
         props.onPrimary(e);
     }
 
+    // Secondary/dismissive action
     function onClose(e) {
         props.onClose && props.onClose(e);
     }
 
+    // Do not show the dialog if the show variable is false
     if (!props.show) {
         return null
     }

@@ -4,6 +4,7 @@ const request = require('request').defaults({ encoding: null })
 
 const url = process.env.AUTH_REDIRECT_URL || 'https://lectern.video'
 
+// Set up Azure AD strategy
 const strategy = new OIDCStrategy(
     {
         identityMetadata: 'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
@@ -34,6 +35,7 @@ const strategy = new OIDCStrategy(
 
         req.session.refreshToken = refreshToken
 
+        // Get user information from the Microsoft Graph
         request({
             headers: {
                 'Authorization': `Bearer ${accessToken}`
@@ -48,6 +50,7 @@ const strategy = new OIDCStrategy(
                 let data = JSON.parse(body);
                 req.session.userName = `${data.givenName} ${data.surname}`
 
+                // Get 240x240 user photo from Microsoft Graph
                 request({
                     headers: {
                         'Authorization': `Bearer ${accessToken}`

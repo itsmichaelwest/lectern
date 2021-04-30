@@ -6,6 +6,7 @@ const uploadVideo = require('../database/video/upload')
 
 const sql = require('../database/sql')
 
+// Set up fake user
 beforeAll(done => {
     const profile = {
         oid: '00000000-0000-0000-0000-000000000000',
@@ -24,6 +25,7 @@ beforeAll(done => {
     )
 })
 
+// Test fetching channel data
 describe('Test fetch', () => {
     beforeAll(done => {
         uploadVideo(
@@ -55,6 +57,7 @@ describe('Test fetch', () => {
     })
 })
 
+// Test searching for a channel
 describe('Search channel', () => {
     test('Search channel by name', done => {
         channelSearch('Joe Bloggs', res => {
@@ -64,6 +67,7 @@ describe('Search channel', () => {
     })
 })
 
+// Remove fake user
 afterAll(done => {
     destroyUser('00000000-0000-0000-0000-000000000000', () => {
         // We need to close the database connection or Jest will hang!

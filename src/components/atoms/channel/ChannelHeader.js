@@ -1,6 +1,8 @@
 import { ButtonDestructive } from '../../../Design'
 import ChannelSkeleton from '../../skeletons/ChannelSkeleton'
 
+// ChannelHeader component, renders user's avatar and name. Optionally contains
+// button to allow them to delete their profile.
 export default function ChannelHeader(props) {
     if (props.name) {
         return (

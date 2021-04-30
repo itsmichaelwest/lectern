@@ -1,6 +1,7 @@
 const sql = require('mssql')
 const pool = require('../sql')
 
+// Flip the reported flag on a comment
 function reportComment(commentId) {
     pool.connect().then((pool) => {
         pool.request()
@@ -12,6 +13,7 @@ function reportComment(commentId) {
     })
 }
 
+// Revert the reported flag on a comment
 function unreportComment(commentId) {
     pool.connect().then((pool) => {
         pool.request()

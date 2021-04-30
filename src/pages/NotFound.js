@@ -4,6 +4,7 @@ import Undraw404 from '../vectors/undraw-404.svg'
 import { Link } from 'react-router-dom'
 import Design from '../Design'
 
+// 404 page
 export default function NotFound() {
     return (
         <>

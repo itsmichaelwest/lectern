@@ -6,6 +6,7 @@ import config from '../config'
 import { HomeSkeleton } from '../components/skeletons/HomeSkeleton'
 import { ReactComponent as NewIdeasSVG } from '../vectors/undraw-newideas.svg'
 
+// Homepage
 export default class Home extends Component {
     constructor(props) {
         super(props)
@@ -15,28 +16,29 @@ export default class Home extends Component {
         }
     }
 
+    // Get top and most recent videos.
     componentDidMount() {
         axios
-            .get(`${config.apiUrl}/api/v1/video/top`)
-            .then(res => {
-                this.setState({
-                    popular: res.data
-                })
+        .get(`${config.apiUrl}/api/v1/video/top`)
+        .then(res => {
+            this.setState({
+                popular: res.data
             })
-            .catch(error => {
-                console.error(error)
-            })
+        })
+        .catch(error => {
+            console.error(error)
+        })
 
         axios
-            .get(`${config.apiUrl}/api/v1/video/recent`)
-            .then(res => {
-                this.setState({
-                    recent: res.data
-                })
+        .get(`${config.apiUrl}/api/v1/video/recent`)
+        .then(res => {
+            this.setState({
+                recent: res.data
             })
-            .catch(error => {
-                console.error(error)
-            })
+        })
+        .catch(error => {
+            console.error(error)
+        })
     }
 
     render () {

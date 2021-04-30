@@ -3,7 +3,10 @@ import { useDropzone } from 'react-dropzone'
 
 import { ReactComponent as VideoIcon } from '../../../icons/video_28_regular.svg'
 
-export default function DropZone(props) {
+// FileDropper component, based on react-dropzone. Accepts a file on drag-drop or
+// by clicking to open a file browser. Will send the accepted file back to the
+// parent component.
+export default function FileDropper(props) {
     const [fileError, setFileError] = useState(false)
 
     // Send the accepted files back

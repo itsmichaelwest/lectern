@@ -4,6 +4,8 @@ import Filesize from 'filesize'
 
 import { ReactComponent as DeleteIcon } from '../../../icons/delete.svg'
 
+// FileInfo component, displays basic information about a video file, including
+// name and size, and provides a button to allow the user to remove the file.
 export default function FileInfo(props) {
     return (
         <div className="relative rounded-xl border border-gray-300 dark:border-gray-800 w-full p-4 overflow-hidden">
@@ -29,7 +31,6 @@ export default function FileInfo(props) {
                 </button>
                 }
             </div>
-
             { props.isLoading &&
             <>
             <div className="absolute inset-0 bg-primary-100 dark:bg-gray-700 transition-all z-10" style={{ width: `${((100 / props.size) * props.loadedBytes)}%` }} />

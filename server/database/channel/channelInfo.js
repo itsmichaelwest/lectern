@@ -1,6 +1,7 @@
 const sql = require('mssql')
 const pool = require('../sql')
 
+// Retrieve channel info
 function getInfo(channelId, callback) {
     pool.connect().then((pool) => {
         pool.request()
@@ -20,6 +21,7 @@ function getInfo(channelId, callback) {
     })
 }
 
+// Retrieve channel info and channel videos
 function getInfoVideos(channelId, callback) {
     let response = []
 

@@ -8,6 +8,7 @@ const { addUser, destroyUser } = require('../database/user/user')
 
 const sql = require('../database/sql')
 
+// Set up fake user and make sure fake videos have been deleted
 beforeAll(done => {
     deleteVideo('00000000-0000-0000-0000-000000000000', () => {})
 
@@ -28,6 +29,7 @@ beforeAll(done => {
     )
 })
 
+// Test fetching videos
 describe('Test fetch', () => {
     beforeAll(done => {
         uploadVideo(
@@ -62,6 +64,7 @@ describe('Test fetch', () => {
     })
 })
 
+// Test inserting a valid video and then two invalid videos
 describe('Test upload functions', () => {
     test('Regular upload, returns true', done => {
         uploadVideo(
@@ -119,6 +122,7 @@ describe('Test upload functions', () => {
     })
 })
 
+// Test incrementing and decrementing views
 describe('Test view increments', () => {
     beforeAll(done => {
         uploadVideo(
@@ -157,6 +161,7 @@ describe('Test view increments', () => {
     })
 })
 
+// Test searching for video by title and description.
 describe('Test search', () => {
     // Additional 000 before title and description help prevent large arrays
     // being returned.
@@ -193,6 +198,7 @@ describe('Test search', () => {
     })
 })
 
+// Test deleting a video
 describe('Test delete function', () => {
     beforeAll(done => {
         uploadVideo(
@@ -216,6 +222,7 @@ describe('Test delete function', () => {
     })
 })
 
+// Remove fake user
 afterAll(done => {
     destroyUser('00000000-0000-0000-0000-000000000000', () => {
         // We need to close the database connection or Jest will hang!

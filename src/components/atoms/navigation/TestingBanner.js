@@ -1,6 +1,7 @@
 import React from 'react'
 import { ButtonPrimary } from '../../../Design'
 
+// Banner to inform users they are testing the application and solicit feedback
 export default function TestingBanner() {
     return (
         <div className="bg-primary-100 dark:bg-gray-900 dark:text-gray-100">

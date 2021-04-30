@@ -1,5 +1,6 @@
 const { StorageSharedKeyCredential, BlobServiceClient } = require('@azure/storage-blob')
 
+// Delete video and thumbnail files from Azure storage
 function storageDeleteBlob(videoId) {
     const account = process.env.AZURE_STORAGE_ACCOUNT_NAME
 
@@ -11,8 +12,6 @@ function storageDeleteBlob(videoId) {
     const blobServiceClient = new BlobServiceClient(
         `https://${account}.blob.core.windows.net`, sharedKeyCredential
     )
-
-    
 
     const videoContainerClient = blobServiceClient.getContainerClient('videos')
     const videoBlockBlobClient = videoContainerClient.getBlockBlobClient(videoId)

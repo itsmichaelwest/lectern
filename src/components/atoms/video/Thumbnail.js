@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import getHumanReadableTime from '../../../functions/getHumanReadableTime'
 import axios from 'axios'
 
+// Thumbnail component. Fetches video thumbnail image and then renders it along
+// with the video title, author/description, and length.
 export default function Thumbnail(props) {
     const [thumbnail, setThumbnail] = useState('')
 

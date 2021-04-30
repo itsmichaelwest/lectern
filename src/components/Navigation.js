@@ -10,6 +10,9 @@ import { ReactComponent as SearchIcon} from '../icons/search.svg'
 import { ReactComponent as UploadIcon } from '../icons/upload.svg'
 import TestingBanner from './atoms/navigation/TestingBanner'
 
+
+// Navigation component, contains homepage link, search box, upload button, and
+// account button.
 export default function Navigation() {
     const [showMobileSearch, setShowMobileSearch] = useState(false)
 

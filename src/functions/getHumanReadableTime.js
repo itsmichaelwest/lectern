@@ -1,3 +1,4 @@
+// Helper function to get the "human readable" version of a time from seconds.
 export default function getHumanReadableTime(time) {
     let minutes = Math.floor(time / 60)
     let seconds = time - minutes * 60

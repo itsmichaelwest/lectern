@@ -17,6 +17,7 @@ import CommunityStandards from './pages/CommunityStandards'
 import APIDocsHome from './components/api-docs/APIHome'
 import APIDocs from './pages/APIDocs'
 
+// Core React Router component and website structure.
 export default class App extends Component {
     render () {
         return (

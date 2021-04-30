@@ -8,11 +8,13 @@ import Dialog from '../../Dialog'
 import { ReactComponent as DeleteIcon } from '../../../icons/delete.svg'
 import { ReactComponent as DownloadIcon } from '../../../icons/download.svg'
 
-export default function Video(props) {
+// VideoInformation component, displays basic video info and allows users
+// to delete or download a video.
+export default function VideoInformation(props) {
     let history = useHistory()
     const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false)
 
-
+    // Format the date using en-US encoding.
     function formatDate(date) {
         const d = new Date(date)
         const options = { year: 'numeric', month: 'long', day: 'numeric' }
@@ -21,15 +23,16 @@ export default function Video(props) {
         )
     }
 
+    // Toggle the delete video warning dialog.
     function toggleDeleteDialog() {
         setIsDeleteDialogShown(!isDeleteDialogShown)
     }
 
+    // Delete the video and then go back to the previous page viewed.
     function deleteVideo() {
         axios
         .delete(`${config.apiUrl}/api/v1/video/${props.videoId}`)
         .then(() => {
-            console.log(history)
             history.goBack()
         })
     }

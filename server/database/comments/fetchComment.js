@@ -1,6 +1,7 @@
 const sql = require('mssql')
 const pool = require('../sql')
 
+// Get all comments associated with a video
 function getAllComments(videoId, callback) {
     pool.connect().then((pool) => {
         pool.request()
@@ -19,6 +20,7 @@ function getAllComments(videoId, callback) {
     })
 }
 
+// Get a single comment, if we know its ID
 function getSingleComment(videoId, commentId, callback) {
     pool.connect().then((pool) => {
         pool.request()

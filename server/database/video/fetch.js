@@ -1,6 +1,7 @@
 const sql = require('mssql')
 const pool = require('../sql')
 
+// Get all videos in the database. Risky to call as the result may be length.
 function getAll(callback) {
     pool.connect().then((pool) => {
         pool.request()
@@ -19,6 +20,7 @@ function getAll(callback) {
     })
 }
 
+// Get top 9 videos sorted by views. Used on homepage.
 function getTop9(callback) {
     pool.connect().then((pool) => {
         pool.request()
@@ -37,6 +39,7 @@ function getTop9(callback) {
     })
 }
 
+// Get top 9 videos sorted by upload date. Used on homepage.
 function getRecently(callback) {
     pool.connect().then((pool) => {
         pool.request()
@@ -55,6 +58,7 @@ function getRecently(callback) {
     })
 }
 
+// Get single video information.
 function getVideo(videoId, callback) {
     pool.connect().then((pool) => {
         pool.request()
@@ -74,6 +78,7 @@ function getVideo(videoId, callback) {
     })
 }
 
+// Get video streaming URL
 function getVideoBlobUrl(videoId, callback) {
     pool.connect().then((pool) => {
         pool.request()
@@ -93,6 +98,7 @@ function getVideoBlobUrl(videoId, callback) {
     })
 }
 
+// Get videos from a specific channel
 function getChannelVideos(channelId, callback) {
     pool.connect().then((pool) => {
         pool.request()
